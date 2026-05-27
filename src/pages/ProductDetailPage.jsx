@@ -1,25 +1,275 @@
+// ============================================
+// PRODUCT DETAIL PAGE - MODERN ECOMMERCE STYLE
+// ============================================
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProductById } from "../services/productService";
-import { CATEGORIES, BRANDS, calculateDiscountPercent } from "../constants/productMeta";
+import { getProductById, getProducts } from "../services/productService";
+import { CATEGORIES, BRANDS } from "../constants/productMeta";
 import useCart from "../hooks/useCart";
+import ProductCard from "./home/components/ProductCard";
 
+// ============================================
+// SUB-COMPONENTS
+// ============================================
+
+// Breadcrumbs
+const Breadcrumbs = ({ product, navigate }) => (
+  <nav className="breadcrumbs">
+    <span onClick={() => navigate("/")}>Trang chủ</span>
+    <span className="sep">/</span>
+    <span onClick={() => navigate("/products")}>Sản phẩm</span>
+    <span className="sep">/</span>
+    <span className="current">{product.name}</span>
+  </nav>
+);
+
+// Product Gallery
+const ProductGallery = ({ images, selectedImage, setSelectedImage, discountPercent }) => {
+  const allImages = images.length > 0 ? images : [];
+
+  return (
+    <div className="product-gallery">
+      {/* Main Image */}
+      <div className="main-image-container">
+        <img
+          src={allImages[selectedImage] || allImages[0]}
+          alt="Product"
+          className="main-image"
+        />
+        {discountPercent > 0 && (
+          <div className="discount-badge">-{discountPercent}%</div>
+        )}
+      </div>
+
+      {/* Thumbnails */}
+      {allImages.length > 1 && (
+        <div className="thumbnail-list">
+          {allImages.map((img, index) => (
+            <button
+              key={index}
+              className={`thumbnail ${selectedImage === index ? "active" : ""}`}
+              onClick={() => setSelectedImage(index)}
+            >
+              <img src={img} alt={`Thumbnail ${index + 1}`} />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Product Info
+const ProductInfo = ({ product, discountPercent, getBrandName, getCategoryName }) => {
+  const hasDiscount = product.discountPrice > 0 && product.discountPrice < product.price;
+
+  return (
+    <div className="product-info">
+      {/* Brand */}
+      <div className="product-brand">{getBrandName(product.brand)}</div>
+
+      {/* Title */}
+      <h1 className="product-title">{product.name}</h1>
+
+      {/* Badges */}
+      {(product.bestSeller || product.newProduct || product.featured) && (
+        <div className="product-badges">
+          {product.bestSeller && <span className="badge badge-hot">🔥 Bán chạy</span>}
+          {product.newProduct && <span className="badge badge-new">✨ Mới</span>}
+          {product.featured && <span className="badge badge-featured">⭐ Nổi bật</span>}
+        </div>
+      )}
+
+      {/* Rating */}
+      {product.rating > 0 && (
+        <div className="product-rating">
+          <div className="stars">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span key={i} className={i < Math.round(product.rating) ? "star filled" : "star"}>★</span>
+            ))}
+          </div>
+          <span className="rating-text">
+            {Number(product.rating).toFixed(1)} ({product.ratingCount || 0} đánh giá)
+          </span>
+        </div>
+      )}
+
+      {/* Price */}
+      <div className="price-section">
+        <span className="current-price">
+          {Number(hasDiscount ? product.discountPrice : product.price).toLocaleString()}đ
+        </span>
+        {hasDiscount && (
+          <>
+            <span className="original-price">
+              {Number(product.price).toLocaleString()}đ
+            </span>
+            <span className="discount-tag">-{discountPercent}%</span>
+          </>
+        )}
+      </div>
+
+      {/* Stock & Sold */}
+      <div className="stock-info">
+        {product.stock > 0 ? (
+          <span className="in-stock">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+            Còn hàng ({product.stock} sản phẩm)
+          </span>
+        ) : (
+          <span className="out-of-stock">Hết hàng</span>
+        )}
+        {product.sold > 0 && (
+          <span className="sold-count">| Đã bán: {product.sold}</span>
+        )}
+      </div>
+
+      {/* Short Description */}
+      {product.shortDescription && (
+        <p className="short-description">{product.shortDescription}</p>
+      )}
+
+      {/* Tags */}
+      {product.tags?.length > 0 && (
+        <div className="product-tags">
+          {product.tags.map((tag, index) => (
+            <span key={index} className="tag">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Product Meta Grid
+const ProductMeta = ({ product, getCategoryName, getBrandName }) => (
+  <div className="meta-grid">
+    <div className="meta-item">
+      <span className="meta-label">Danh mục</span>
+      <span className="meta-value">{getCategoryName(product.category)}</span>
+    </div>
+    <div className="meta-item">
+      <span className="meta-label">Thương hiệu</span>
+      <span className="meta-value">{getBrandName(product.brand)}</span>
+    </div>
+    <div className="meta-item">
+      <span className="meta-label">SKU</span>
+      <span className="meta-value">{product.sku || "N/A"}</span>
+    </div>
+    <div className="meta-item">
+      <span className="meta-label">Tình trạng</span>
+      <span className={`meta-value ${product.stock > 0 ? "in-stock" : "out-stock"}`}>
+        {product.stock > 0 ? "Còn hàng" : "Hết hàng"}
+      </span>
+    </div>
+  </div>
+);
+
+// Action Buttons
+const ProductActions = ({ product, addToCart, navigate }) => {
+  const [addedToCart, setAddedToCart] = useState(false);
+  const isOutOfStock = product.stock <= 0;
+
+  const handleAddToCart = () => {
+    if (isOutOfStock) return;
+    addToCart(product);
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
+  };
+
+  const handleBuyNow = () => {
+    if (isOutOfStock) return;
+    addToCart(product);
+    navigate("/cart");
+  };
+
+  return (
+    <div className="action-buttons">
+      <button
+        className={`btn btn-secondary ${isOutOfStock ? "disabled" : ""}`}
+        onClick={handleAddToCart}
+        disabled={isOutOfStock}
+      >
+        {addedToCart ? (
+          <>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+            Đã thêm!
+          </>
+        ) : (
+          <>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
+            Thêm vào giỏ
+          </>
+        )}
+      </button>
+      <button
+        className={`btn btn-primary ${isOutOfStock ? "disabled" : ""}`}
+        onClick={handleBuyNow}
+        disabled={isOutOfStock}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        Mua ngay
+      </button>
+    </div>
+  );
+};
+
+// Related Products
+const RelatedProducts = ({ products }) => {
+  if (!products || products.length === 0) return null;
+
+  return (
+    <section className="related-products">
+      <h2 className="section-title">Sản phẩm liên quan</h2>
+      <div className="related-grid">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
 const ProductDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
   const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getProductById(id);
-        setProduct(data);
-        if (data?.thumbnail) {
-          setSelectedImage("main");
+        const [productData, allProducts] = await Promise.all([
+          getProductById(id),
+          getProducts()
+        ]);
+
+        setProduct(productData);
+        setSelectedImage(0);
+
+        // Get related products (same category, exclude current)
+        if (productData?.category) {
+          const related = allProducts
+            .filter(p => p.category === productData.category && p.id !== id && p.status === "active")
+            .slice(0, 5);
+          setRelatedProducts(related);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -29,7 +279,13 @@ const ProductDetailPage = () => {
     };
 
     fetchData();
+    window.scrollTo(0, 0);
   }, [id]);
+
+  // Scroll to top when product changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
 
   const getCategoryName = (categoryId) => {
     const category = CATEGORIES.find((c) => c.id === categoryId);
@@ -41,7 +297,9 @@ const ProductDetailPage = () => {
     return brand?.name || brandId;
   };
 
-  const discountPercent = calculateDiscountPercent(product?.price, product?.discountPrice);
+  const discountPercent = product?.discountPrice > 0 && product?.price > 0
+    ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
+    : 0;
 
   const allImages = product?.thumbnail
     ? [product.thumbnail, ...(product.images || [])]
@@ -49,467 +307,766 @@ const ProductDetailPage = () => {
 
   if (loading) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
-        <h2>Đang tải...</h2>
+      <div className="product-detail-page">
+        <div className="product-container">
+          <div className="loading-state">
+            <div className="loading-spinner" />
+            <p>Đang tải sản phẩm...</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
-        <h2>Không tìm thấy sản phẩm</h2>
-        <button onClick={() => navigate("/products")} style={backBtn}>
-          Quay lại danh sách
-        </button>
+      <div className="product-detail-page">
+        <div className="product-container">
+          <div className="error-state">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4M12 16h.01" />
+            </svg>
+            <h2>Không tìm thấy sản phẩm</h2>
+            <p>Sản phẩm bạn đang tìm kiếm không tồn tại.</p>
+            <button className="btn btn-primary" onClick={() => navigate("/products")}>
+              Quay lại cửa hàng
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
-      <button onClick={() => navigate(-1)} style={backBtn}>
-        ← Quay lại
-      </button>
+    <>
+      <style>{productDetailStyles}</style>
+      <div className="product-detail-page">
+        <div className="product-container">
+          {/* Back Button */}
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Quay lại
+          </button>
 
-      <div style={productContainer}>
-        {/* Left: Images */}
-        <div style={imageSection}>
-          <div style={mainImageContainer}>
-            {allImages.length > 0 ? (
-              <img
-                src={selectedImage === "main" ? product.thumbnail : allImages[selectedImage]}
-                alt={product.name}
-                style={mainImage}
+          {/* Breadcrumbs */}
+          <Breadcrumbs product={product} navigate={navigate} />
+
+          {/* Main Content - 2 Columns */}
+          <div className="product-main">
+            {/* Left: Gallery */}
+            <ProductGallery
+              images={allImages}
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+              discountPercent={discountPercent}
+            />
+
+            {/* Right: Info & Actions */}
+            <div className="product-right">
+              <ProductInfo
+                product={product}
+                discountPercent={discountPercent}
+                getBrandName={getBrandName}
+                getCategoryName={getCategoryName}
               />
-            ) : (
-              <div style={noImage}>Không có hình ảnh</div>
-            )}
 
-            {discountPercent > 0 && (
-              <span style={discountBadge}>-{discountPercent}%</span>
-            )}
-          </div>
+              {/* Actions */}
+              <ProductActions
+                product={product}
+                addToCart={addToCart}
+                navigate={navigate}
+              />
 
-          {allImages.length > 1 && (
-            <div style={thumbnailList}>
-              {allImages.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Thumbnail ${index + 1}`}
-                  style={{
-                    ...thumbnailImage,
-                    border: selectedImage === index ? "2px solid #3498db" : "2px solid transparent",
-                  }}
-                  onClick={() => setSelectedImage(index)}
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
-              ))}
+              {/* Meta Grid */}
+              <ProductMeta
+                product={product}
+                getCategoryName={getCategoryName}
+                getBrandName={getBrandName}
+              />
             </div>
-          )}
-        </div>
-
-        {/* Right: Info */}
-        <div style={infoSection}>
-          <div style={breadcrumbs}>
-            <span onClick={() => navigate("/")} style={breadcrumbLink}>Trang chủ</span>
-            <span style={breadcrumbSep}> / </span>
-            <span onClick={() => navigate("/products")} style={breadcrumbLink}>Sản phẩm</span>
-            <span style={breadcrumbSep}> / </span>
-            <span style={breadcrumbCurrent}>{product.name}</span>
           </div>
 
-          <h1 style={productName}>{product.name}</h1>
+          {/* Description Section */}
+          {(product.description || product.specifications?.length > 0) && (
+            <section className="description-section">
+              {product.description && (
+                <div className="description-card">
+                  <h2 className="card-title">Mô tả sản phẩm</h2>
+                  <p className="description-text">{product.description}</p>
+                </div>
+              )}
 
-          {/* Flags */}
-          <div style={flagsContainer}>
-            {product.bestSeller && <span style={flagBadge("#e74c3c")}>🔥 Bán chạy</span>}
-            {product.newProduct && <span style={flagBadge("#3498db")}>✨ Mới</span>}
-            {product.featured && <span style={flagBadge("#f39c12")}>⭐ Nổi bật</span>}
-          </div>
-
-          <div style={metaInfo}>
-            <span>Thương hiệu: <strong>{getBrandName(product.brand)}</strong></span>
-            <span style={metaSep}>|</span>
-            <span>Danh mục: <strong>{getCategoryName(product.category)}</strong></span>
-          </div>
-
-          {/* Rating */}
-          {product.rating > 0 && (
-            <div style={ratingContainer}>
-              <span style={ratingStars}>
-                {"★".repeat(Math.round(product.rating))}
-                {"☆".repeat(5 - Math.round(product.rating))}
-              </span>
-              <span style={ratingText}>
-                {Number(product.rating).toFixed(1)} ({product.ratingCount || 0} đánh giá)
-              </span>
-            </div>
+              {product.specifications?.length > 0 && (
+                <div className="specifications-card">
+                  <h2 className="card-title">Thông số kỹ thuật</h2>
+                  <div className="specs-table">
+                    {product.specifications.map((spec, index) => (
+                      <div key={index} className="spec-row">
+                        <span className="spec-key">{spec.key}</span>
+                        <span className="spec-value">{spec.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
           )}
 
-          {/* Price */}
-          <div style={priceSection}>
-            <span style={currentPrice}>
-              {Number(product.discountPrice > 0 ? product.discountPrice : product.price).toLocaleString()}đ
-            </span>
-            {product.discountPrice > 0 && (
-              <>
-                <span style={originalPrice}>
-                  {Number(product.price).toLocaleString()}đ
-                </span>
-                <span style={discountTag}>-{discountPercent}%</span>
-              </>
-            )}
-          </div>
-
-          {/* Stock */}
-          <div style={stockInfo}>
-            {product.stock > 0 ? (
-              <span style={inStock}>✓ Còn hàng ({product.stock} sản phẩm)</span>
-            ) : (
-              <span style={outOfStock}>✗ Hết hàng</span>
-            )}
-            <span style={soldCount}> | Đã bán: {product.sold || 0}</span>
-          </div>
-
-          {/* Short Description */}
-          {product.shortDescription && (
-            <p style={shortDesc}>{product.shortDescription}</p>
-          )}
-
-          {/* Tags */}
-          {product.tags?.length > 0 && (
-            <div style={tagsContainer}>
-              {product.tags.map((tag, index) => (
-                <span key={index} style={tagBadge}>{tag}</span>
-              ))}
-            </div>
-          )}
-
-          {/* Add to Cart */}
-          <div style={actionSection}>
-            <button
-              onClick={() => addToCart(product)}
-              disabled={product.stock <= 0}
-              style={{
-                ...addToCartBtn,
-                opacity: product.stock <= 0 ? 0.5 : 1,
-                cursor: product.stock <= 0 ? "not-allowed" : "pointer",
-              }}
-            >
-              🛒 Thêm vào giỏ hàng
-            </button>
-          </div>
+          {/* Related Products */}
+          <RelatedProducts products={relatedProducts} />
         </div>
       </div>
-
-      {/* Description */}
-      {(product.description || product.specifications?.length > 0) && (
-        <div style={detailSection}>
-          {product.description && (
-            <div style={descBlock}>
-              <h2 style={sectionTitle}>Mô tả sản phẩm</h2>
-              <p style={descText}>{product.description}</p>
-            </div>
-          )}
-
-          {product.specifications?.length > 0 && (
-            <div style={specBlock}>
-              <h2 style={sectionTitle}>Thông số kỹ thuật</h2>
-              <table style={specTable}>
-                <tbody>
-                  {product.specifications.map((spec, index) => (
-                    <tr key={index}>
-                      <td style={specKey}>{spec.key}</td>
-                      <td style={specValue}>{spec.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
-const backBtn = {
-  marginBottom: "20px",
-  padding: "8px 16px",
-  backgroundColor: "#f5f5f5",
-  border: "1px solid #ddd",
-  borderRadius: "6px",
-  cursor: "pointer",
-};
+// ============================================
+// STYLES
+// ============================================
+const productDetailStyles = `
+  /* ==================== PAGE LAYOUT ==================== */
+  .product-detail-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding: 24px 0 60px;
+  }
 
-const productContainer = {
-  display: "flex",
-  gap: "40px",
-  flexWrap: "wrap",
-};
+  .product-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-const imageSection = {
-  flex: "1 1 400px",
-};
+  /* ==================== BACK BUTTON ==================== */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+  }
 
-const mainImageContainer = {
-  position: "relative",
-  backgroundColor: "#f8f8f8",
-  borderRadius: "12px",
-  overflow: "hidden",
-};
+  .back-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
 
-const mainImage = {
-  width: "100%",
-  maxHeight: "500px",
-  objectFit: "contain",
-};
+  /* ==================== BREADCRUMBS ==================== */
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
 
-const noImage = {
-  width: "100%",
-  height: "400px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "#999",
-};
+  .breadcrumbs span {
+    color: #64748b;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
 
-const discountBadge = {
-  position: "absolute",
-  top: "10px",
-  left: "10px",
-  backgroundColor: "#e74c3c",
-  color: "#fff",
-  padding: "4px 10px",
-  borderRadius: "4px",
-  fontWeight: "bold",
-  fontSize: "14px",
-};
+  .breadcrumbs span:hover {
+    color: #2563eb;
+  }
 
-const thumbnailList = {
-  display: "flex",
-  gap: "10px",
-  marginTop: "10px",
-  flexWrap: "wrap",
-};
+  .breadcrumbs .sep {
+    cursor: default;
+  }
 
-const thumbnailImage = {
-  width: "80px",
-  height: "80px",
-  objectFit: "cover",
-  borderRadius: "8px",
-  cursor: "pointer",
-};
+  .breadcrumbs .current {
+    color: #0f172a;
+    font-weight: 500;
+    cursor: default;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-const infoSection = {
-  flex: "1 1 400px",
-};
+  /* ==================== MAIN CONTENT ==================== */
+  .product-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
 
-const breadcrumbs = {
-  fontSize: "13px",
-  color: "#666",
-  marginBottom: "10px",
-};
+  /* ==================== GALLERY ==================== */
+  .product-gallery {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+  }
 
-const breadcrumbLink = {
-  cursor: "pointer",
-  color: "#3498db",
-};
+  .main-image-container {
+    position: relative;
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    padding: 24px;
+  }
 
-const breadcrumbLinkHover = {
-  textDecoration: "underline",
-};
+  .main-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+  }
 
-const breadcrumbSep = {
-  margin: "0 4px",
-};
+  .main-image-container:hover .main-image {
+    transform: scale(1.03);
+  }
 
-const breadcrumbCurrent = {
-  color: "#333",
-};
+  .discount-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ff4d2d;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+  }
 
-const productName = {
-  fontSize: "28px",
-  marginBottom: "12px",
-  lineHeight: "1.3",
-};
+  .thumbnail-list {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
 
-const flagsContainer = {
-  display: "flex",
-  gap: "8px",
-  marginBottom: "12px",
-  flexWrap: "wrap",
-};
+  .thumbnail {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #ffffff;
+    transition: all 0.2s ease;
+  }
 
-const flagBadge = (bgColor) => ({
-  padding: "4px 10px",
-  borderRadius: "4px",
-  fontSize: "12px",
-  fontWeight: "bold",
-  color: "#fff",
-  backgroundColor: bgColor,
-});
+  .thumbnail:hover {
+    border-color: #cbd5e1;
+  }
 
-const metaInfo = {
-  fontSize: "14px",
-  color: "#666",
-  marginBottom: "10px",
-};
+  .thumbnail.active {
+    border-color: #2563eb;
+  }
 
-const metaSep = {
-  margin: "0 8px",
-};
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-const ratingContainer = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  marginBottom: "12px",
-};
+  /* ==================== PRODUCT INFO ==================== */
+  .product-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 
-const ratingStars = {
-  color: "#f39c12",
-  fontSize: "16px",
-  letterSpacing: "2px",
-};
+  .product-info {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  }
 
-const ratingText = {
-  fontSize: "13px",
-  color: "#666",
-};
+  .product-brand {
+    font-size: 13px;
+    font-weight: 700;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
 
-const priceSection = {
-  display: "flex",
-  alignItems: "center",
-  gap: "12px",
-  marginBottom: "12px",
-};
+  .product-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.3;
+    margin: 0 0 16px;
+  }
 
-const currentPrice = {
-  fontSize: "32px",
-  fontWeight: "bold",
-  color: "#e74c3c",
-};
+  .product-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
 
-const originalPrice = {
-  fontSize: "18px",
-  color: "#999",
-  textDecoration: "line-through",
-};
+  .badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
 
-const discountTag = {
-  padding: "4px 8px",
-  backgroundColor: "#e74c3c",
-  color: "#fff",
-  borderRadius: "4px",
-  fontSize: "12px",
-  fontWeight: "bold",
-};
+  .badge-hot { background: linear-gradient(135deg, #ff6b35, #ff4d2d); color: #fff; }
+  .badge-new { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; }
+  .badge-featured { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
 
-const stockInfo = {
-  fontSize: "14px",
-  marginBottom: "16px",
-};
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
 
-const inStock = {
-  color: "#27ae60",
-  fontWeight: "bold",
-};
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
 
-const outOfStock = {
-  color: "#e74c3c",
-  fontWeight: "bold",
-};
+  .star {
+    font-size: 16px;
+    color: #e2e8f0;
+  }
 
-const soldCount = {
-  color: "#999",
-};
+  .star.filled {
+    color: #ffc107;
+  }
 
-const shortDesc = {
-  fontSize: "14px",
-  color: "#555",
-  lineHeight: "1.6",
-  marginBottom: "16px",
-};
+  .rating-text {
+    font-size: 14px;
+    color: #64748b;
+  }
 
-const tagsContainer = {
-  display: "flex",
-  gap: "8px",
-  flexWrap: "wrap",
-  marginBottom: "20px",
-};
+  /* ==================== PRICE ==================== */
+  .price-section {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
 
-const tagBadge = {
-  padding: "4px 10px",
-  backgroundColor: "#f0f0f0",
-  borderRadius: "12px",
-  fontSize: "12px",
-  color: "#666",
-};
+  .current-price {
+    font-size: 36px;
+    font-weight: 800;
+    color: #ef4444;
+    letter-spacing: -1px;
+  }
 
-const actionSection = {
-  marginTop: "20px",
-};
+  .original-price {
+    font-size: 18px;
+    color: #94a3b8;
+    text-decoration: line-through;
+  }
 
-const addToCartBtn = {
-  padding: "14px 32px",
-  fontSize: "16px",
-  fontWeight: "bold",
-  backgroundColor: "#27ae60",
-  color: "#fff",
-  border: "none",
-  borderRadius: "8px",
-};
+  .discount-tag {
+    background: #ff4d2d;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+  }
 
-const detailSection = {
-  marginTop: "40px",
-  borderTop: "1px solid #eee",
-  paddingTop: "30px",
-};
+  /* ==================== STOCK ==================== */
+  .stock-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
 
-const descBlock = {
-  marginBottom: "30px",
-};
+  .in-stock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #22c55e;
+    font-weight: 600;
+  }
 
-const sectionTitle = {
-  fontSize: "20px",
-  marginBottom: "16px",
-  paddingBottom: "10px",
-  borderBottom: "2px solid #27ae60",
-};
+  .out-of-stock {
+    color: #ef4444;
+    font-weight: 600;
+  }
 
-const descText = {
-  fontSize: "14px",
-  lineHeight: "1.8",
-  color: "#444",
-  whiteSpace: "pre-wrap",
-};
+  .sold-count {
+    color: #94a3b8;
+  }
 
-const specBlock = {
-  marginTop: "30px",
-};
+  /* ==================== DESCRIPTION & TAGS ==================== */
+  .short-description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #475569;
+    margin: 0 0 16px;
+  }
 
-const specTable = {
-  width: "100%",
-  maxWidth: "600px",
-  borderCollapse: "collapse",
-};
+  .product-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
 
-const specKey = {
-  padding: "10px",
-  backgroundColor: "#f8f8f8",
-  borderBottom: "1px solid #eee",
-  fontWeight: "bold",
-  width: "200px",
-};
+  .tag {
+    padding: 6px 12px;
+    background: #f1f5f9;
+    color: #64748b;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+  }
 
-const specValue = {
-  padding: "10px",
-  borderBottom: "1px solid #eee",
-};
+  /* ==================== ACTION BUTTONS ==================== */
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 28px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    flex: 1;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45);
+  }
+
+  .btn-secondary {
+    background: #ffffff;
+    color: #2563eb;
+    border-color: #2563eb;
+  }
+
+  .btn-secondary:hover {
+    background: #eff6ff;
+    transform: translateY(-2px);
+  }
+
+  .btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  /* ==================== META GRID ==================== */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .meta-value {
+    font-size: 14px;
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  .meta-value.in-stock {
+    color: #22c55e;
+  }
+
+  .meta-value.out-stock {
+    color: #ef4444;
+  }
+
+  /* ==================== DESCRIPTION SECTION ==================== */
+  .description-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .description-card,
+  .specifications-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .description-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #334155;
+    white-space: pre-wrap;
+    margin: 0;
+  }
+
+  .specs-table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 10px;
+  }
+
+  .spec-key {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .spec-value {
+    font-size: 14px;
+    color: #0f172a;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* ==================== RELATED PRODUCTS ==================== */
+  .related-products {
+    margin-top: 48px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 24px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* ==================== LOADING & ERROR ==================== */
+  .loading-state,
+  .error-state {
+    text-align: center;
+    padding: 80px 20px;
+  }
+
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .error-state svg {
+    color: #cbd5e1;
+    margin-bottom: 16px;
+  }
+
+  .error-state h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 8px;
+  }
+
+  .error-state p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0 0 24px;
+  }
+
+  /* ==================== RESPONSIVE ==================== */
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .related-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .related-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .product-container {
+      padding: 0 16px;
+    }
+
+    .product-detail-page {
+      padding: 16px 0 100px;
+    }
+
+    .product-main {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .product-gallery {
+      position: static;
+    }
+
+    .main-image-container {
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .main-image-container:hover .main-image {
+      transform: none;
+    }
+
+    .product-info {
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 22px;
+    }
+
+    .current-price {
+      font-size: 28px;
+    }
+
+    .action-buttons {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 16px;
+      margin: 0 -16px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .btn {
+      height: 48px;
+      padding: 0 20px;
+      font-size: 15px;
+    }
+
+    .description-section {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+    }
+
+    .thumbnail-list {
+      gap: 8px;
+    }
+  }
+
+  /* Small Mobile */
+  @media (max-width: 480px) {
+    .action-buttons {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-badges {
+      gap: 6px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+  }
+`;
 
 export default ProductDetailPage;

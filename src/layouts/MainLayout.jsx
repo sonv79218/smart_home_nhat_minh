@@ -6,18 +6,21 @@ const MainLayout = ({ children }) => {
     <>
       <Navbar />
 
-      <main
-        style={{
-          minHeight: "80vh",
-          padding: "20px",
-        }}
-      >
+      <main style={styles.main}>
         {children}
       </main>
 
       <Footer />
     </>
   );
+};
+
+const styles = {
+  main: {
+    minHeight: "100vh",
+    paddingTop: "70px",
+    overflow: "hidden",
+  },
 };
 
 export default MainLayout;

@@ -167,3 +167,39 @@ export const searchProducts = async (searchTerm) => {
       p.tags?.some((tag) => tag.toLowerCase().includes(term))
   );
 };
+
+export const getProductsByCategory = async (categoryId, limitCount = 4) => {
+  const snapshot = await getDocs(productsRef);
+  const allProducts = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return allProducts
+    .filter(
+      (p) => p.status === "active" && p.category === categoryId
+    )
+    .sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
+    })
+    .slice(0, limitCount);
+};
+
+export const getFeaturedProducts = async (limitCount = 8) => {
+  const snapshot = await getDocs(productsRef);
+  const allProducts = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return allProducts
+    .filter((p) => p.status === "active")
+    .sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
+    })
+    .slice(0, limitCount);
+};
