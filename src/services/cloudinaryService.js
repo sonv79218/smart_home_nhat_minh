@@ -5,11 +5,11 @@ export const uploadImageToCloudinary = async (file) => {
 
   formData.append(
     "upload_preset",
-    "react_upload"
+    import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
   );
 
   const response = await fetch(
-    "https://api.cloudinary.com/v1_1/dwmfqzmf9/image/upload",
+    import.meta.env.VITE_CLOUDINARY_UPLOAD_URL,
     {
       method: "POST",
       body: formData,
