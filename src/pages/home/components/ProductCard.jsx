@@ -1,5 +1,6 @@
 // ============================================
-// PRODUCT CARD - ECOMMERCE STYLE
+// PRODUCT CARD - MODERN PREMIUM ECOMMERCE
+// TailwindCSS + Enhanced Animations
 // ============================================
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const hasDiscount = product.discountPrice > 0 && product.discountPrice < product.price;
   const discountPercent = hasDiscount && product.price > 0
@@ -32,394 +34,345 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <style>{productCardStyles}</style>
-      <div
-        className="product-card"
+      <article
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleViewProduct}
+        className={`
+          product-card group
+          bg-white rounded-2xl overflow-hidden cursor-pointer
+          border transition-all duration-300 ease-out
+          ${isHovered 
+            ? "border-primary-200 shadow-xl -translate-y-2" 
+            : "border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1"
+          }
+        `}
       >
-        {/* Image Section */}
-        <div className="product-image-wrapper">
+        {/* Image Container */}
+        <div className={`
+          relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100
+          aspect-square
+          ${!imageLoaded ? "animate-pulse" : ""}
+        `}>
+          {/* Product Image */}
           <img
-            src={product.thumbnail || "https://via.placeholder.com/300/f5f5f5/999?text=No+Image"}
+            src={product.thumbnail || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop"}
             alt={product.name}
-            className={`product-image ${isHovered ? "hovered" : ""}`}
+            className={`
+              w-full h-full object-contain p-4
+              transition-all duration-500 ease-out
+              ${isHovered ? "scale-110" : "scale-100"}
+              ${imageLoaded ? "opacity-100" : "opacity-0"}
+            `}
             loading="lazy"
+            onLoad={() => setImageLoaded(true)}
           />
 
-          {/* Discount Badge */}
-          {hasDiscount && (
-            <div className="discount-badge">
-              <span>-{discountPercent}%</span>
+          {/* Loading Skeleton */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-slate-200 border-t-primary-600 rounded-full animate-spin" />
             </div>
           )}
 
-          {/* Badges */}
+          {/* Discount Badge - Top Right */}
+          {hasDiscount && (
+            <div className={`
+              absolute top-3 right-3 z-10
+              px-2.5 py-1.5 rounded-xl
+              bg-gradient-to-br from-red-500 to-red-600
+              text-white text-xs font-bold
+              shadow-lg shadow-red-500/30
+              transition-all duration-300
+              ${isHovered ? "scale-105" : "scale-100"}
+            `}>
+              -{discountPercent}%
+            </div>
+          )}
+
+          {/* Product Badges - Top Left */}
           {(product.newProduct || product.bestSeller) && (
-            <div className="product-badges">
+            <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
               {product.bestSeller && (
-                <span className="badge badge-hot">Bán chạy</span>
+                <span className="
+                  px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider
+                  bg-gradient-to-r from-orange-500 to-red-500
+                  text-white shadow-lg shadow-orange-500/30
+                ">
+                  Bán chạy
+                </span>
               )}
               {product.newProduct && (
-                <span className="badge badge-new">Mới</span>
+                <span className="
+                  px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider
+                  bg-gradient-to-r from-primary-600 to-blue-500
+                  text-white shadow-lg shadow-blue-500/30
+                ">
+                  Mới
+                </span>
               )}
             </div>
           )}
 
-          {/* Quick View Button */}
-          <div className={`quick-action ${isHovered ? "visible" : ""}`}>
-            <button className="quick-view-btn" onClick={handleViewProduct}>
-              XEM NHANH
-            </button>
+          {/* Quick Actions Overlay */}
+          <div className={`
+            absolute inset-x-0 bottom-0
+            bg-gradient-to-t from-slate-900/95 via-slate-900/80 to-transparent
+            pt-4 pb-4 px-4
+            transition-all duration-400 ease-out
+            ${isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+          `}>
+            <div className="flex gap-2">
+              <button
+                onClick={(e) => { e.stopPropagation(); handleViewProduct(); }}
+                className="
+                  flex-1 py-2.5 px-4
+                  bg-white text-slate-900
+                  text-xs font-bold uppercase tracking-wider
+                  rounded-xl
+                  hover:bg-slate-100 active:scale-95
+                  transition-all duration-200
+                "
+              >
+                Xem chi tiết
+              </button>
+              <button
+                onClick={handleAddToCart}
+                className="
+                  flex-1 py-2.5 px-4
+                  bg-primary-600 text-white
+                  text-xs font-bold uppercase tracking-wider
+                  rounded-xl
+                  hover:bg-primary-700 active:scale-95
+                  transition-all duration-200
+                  flex items-center justify-center gap-1.5
+                "
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                Thêm
+              </button>
+            </div>
           </div>
+
+          {/* Add to Cart Floating Button (Mobile) */}
+          <button
+            onClick={handleAddToCart}
+            className="
+              md:hidden absolute bottom-3 right-3 z-10
+              w-10 h-10 rounded-full
+              bg-primary-600 text-white
+              shadow-lg shadow-primary-500/40
+              flex items-center justify-center
+              hover:bg-primary-700 active:scale-90
+              transition-all duration-200
+            "
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
+
+          {/* Hover Glow Effect */}
+          <div className={`
+            absolute inset-0 pointer-events-none
+            bg-gradient-to-t from-primary-500/10 via-transparent to-transparent
+            transition-opacity duration-500
+            ${isHovered ? "opacity-100" : "opacity-0"}
+          `} />
         </div>
 
-        {/* Info Section */}
-        <div className="product-info">
-          {/* Product Name */}
-          <h3 className="product-name">{product.name}</h3>
-          {/* <h3 className="product-name">{product.description}</h3> */}
+        {/* Content Section */}
+        <div className="p-4">
+          {/* Brand/Category Tag */}
+          {product.brand && (
+            <span className="inline-block text-[10px] font-semibold uppercase tracking-wider text-primary-600 mb-1.5">
+              {product.brand}
+            </span>
+          )}
 
-          {/* Rating */}
-          <div className="product-rating">
-            <div className="stars">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className={i < Math.round(product.rating || 0) ? "star filled" : "star"}>★</span>
+          {/* Product Name */}
+          <h3 className="
+            font-semibold text-slate-800 text-sm leading-snug
+            line-clamp-2 mb-2 min-h-[2.5rem]
+            group-hover:text-primary-600
+            transition-colors duration-200
+          ">
+            {product.name}
+          </h3>
+
+          {/* Rating Stars */}
+          <div className="flex items-center gap-1.5 mb-3">
+            <div className="flex gap-0.5">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <svg
+                  key={star}
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill={star <= Math.round(product.rating || 0) ? "#f59e0b" : "#e2e8f0"}
+                  stroke="none"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
               ))}
             </div>
-            <span className="rating-count">({product.ratingCount || 0})</span>
+            <span className="text-[11px] text-slate-400 font-medium">
+              ({product.ratingCount || 0})
+            </span>
           </div>
 
-          {/* Price */}
-          <div className="price-section">
-            <span className="current-price">
+          {/* Price Section */}
+          <div className="flex items-end gap-2 flex-wrap">
+            <span className="
+              text-lg font-bold
+              bg-gradient-to-r from-primary-600 to-blue-500
+              bg-clip-text text-transparent
+            ">
               {formatPrice(product.price, product.discountPrice)}đ
             </span>
             {hasDiscount && (
-              <span className="original-price">
-                {Number(product.price).toLocaleString()}đ
-              </span>
+              <>
+                <span className="text-xs text-slate-400 line-through font-medium">
+                  {Number(product.price).toLocaleString()}đ
+                </span>
+                <span className="
+                  px-1.5 py-0.5 rounded text-[10px] font-bold
+                  bg-red-50 text-red-500
+                ">
+                  -{discountPercent}%
+                </span>
+              </>
             )}
           </div>
 
-          {/* Add to Cart Button (Mobile) */}
-          <button className="mobile-add-btn" onClick={handleAddToCart}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="9" cy="21" r="1" />
-              <circle cx="20" cy="21" r="1" />
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-            </svg>
-            Thêm vào giỏ
-          </button>
+          {/* Stock Status (optional) */}
+          {product.stock !== undefined && product.stock <= 5 && product.stock > 0 && (
+            <div className="mt-2 flex items-center gap-1.5 text-[11px] text-orange-500 font-semibold">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              Chỉ còn {product.stock} sản phẩm
+            </div>
+          )}
+
+          {/* Out of Stock Overlay */}
+          {product.stock === 0 && (
+            <div className="mt-2 py-1.5 px-3 bg-slate-100 rounded-lg text-center">
+              <span className="text-xs font-semibold text-slate-500">Hết hàng</span>
+            </div>
+          )}
         </div>
-      </div>
+
+        {/* Bottom Border Gradient on Hover */}
+        <div className={`
+          h-1 w-full
+          bg-gradient-to-r from-primary-600 via-accent to-primary-600
+          transition-all duration-500
+          ${isHovered ? "opacity-100" : "opacity-0"}
+        `} />
+      </article>
     </>
   );
 };
 
 // ============================================
-// STYLES
+// ENHANCED CSS STYLES
 // ============================================
 const productCardStyles = `
-  /* ==================== PRODUCT CARD ==================== */
+  /* Card Hover Effects */
   .product-card {
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f0f0f0;
+    will-change: transform, box-shadow;
   }
 
-  .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  /* ==================== IMAGE ==================== */
-  .product-image-wrapper {
-    position: relative;
-    background: #ffffff;
-    padding: 12px;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-
-  .product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-  }
-
-  .product-image.hovered {
-    transform: scale(1.04);
-  }
-
-  /* ==================== DISCOUNT BADGE ==================== */
-  .discount-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #ff4d2d;
-    color: #ffffff;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-    z-index: 2;
-  }
-
-  .discount-badge::before {
+  .product-card::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.2) 50%);
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #2563eb20, #38bdf820);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
-  /* ==================== PRODUCT BADGES ==================== */
-  .product-badges {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    z-index: 2;
+  .product-card:hover::before {
+    opacity: 1;
   }
 
-  .badge {
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 1.2;
+  /* Image Container */
+  .product-card img {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+    transition: filter 0.3s ease;
   }
 
-  .badge-hot {
-    background: linear-gradient(135deg, #ff6b35, #ff4d2d);
-    color: #ffffff;
+  .product-card:hover img {
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
   }
 
-  .badge-new {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: #ffffff;
+  /* Discount Badge Animation */
+  .product-card .discount-badge {
+    animation: badgePulse 2s ease-in-out infinite;
   }
 
-  /* ==================== QUICK VIEW ==================== */
-  .quick-action {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(29, 78, 216, 0.95), rgba(29, 78, 216, 0.8));
-    padding: 10px;
-    transform: translateY(100%);
-    transition: transform 0.25s ease;
-    z-index: 3;
+  @keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
   }
 
-  .quick-action.visible {
-    transform: translateY(0);
+  /* Quick Action Transition */
+  // .product-card .bg-gradient-to-t {
+  //   backdrop-filter: blur(4px);
+  // }
+
+  /* Bottom Border Animation */
+  .product-card > div:last-child {
+    transform-origin: center;
   }
 
-  .quick-view-btn {
-    width: 100%;
-    padding: 10px;
-    background: transparent;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-  }
-
-  .quick-view-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  /* ==================== INFO SECTION ==================== */
-  .product-info {
-    padding: 12px 14px 16px;
-  }
-
-  .product-name {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1e293b;
-    line-height: 1.45;
-    margin: 0 0 8px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 40px;
-  }
-
-  /* ==================== RATING ==================== */
-  .product-rating {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 8px;
-  }
-
-  .stars {
-    display: flex;
-    gap: 1px;
-  }
-
-  .star {
-    font-size: 12px;
-    color: #e0e0e0;
-  }
-
-  .star.filled {
-    color: #ffc107;
-  }
-
-  .rating-count {
-    font-size: 12px;
-    color: #999999;
-  }
-
-  /* ==================== PRICE ==================== */
-  .price-section {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .current-price {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1d4ed8;
-    letter-spacing: -0.5px;
-  }
-
-  .original-price {
-    font-size: 13px;
-    color: #999999;
-    text-decoration: line-through;
-  }
-
-  /* ==================== MOBILE ADD BUTTON ==================== */
-  .mobile-add-btn {
-    display: none;
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px 12px;
-    background: #1d4ed8;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: background 0.2s ease;
-  }
-
-  .mobile-add-btn:active {
-    background: #1e40af;
-  }
-
-  /* ==================== RESPONSIVE ==================== */
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .product-card {
-      border-radius: 6px;
-    }
-
-    .product-card:hover {
-      transform: none;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-
-    .product-image-wrapper {
-      padding: 8px;
-    }
-
-    .product-info {
-      padding: 10px 12px 12px;
-    }
-
-    .product-name {
-      font-size: 13px;
-      min-height: 36px;
-    }
-
-    .current-price {
-      font-size: 16px;
-    }
-
-    .original-price {
-      font-size: 11px;
-    }
-
-    .quick-action {
-      display: none;
-    }
-
-    .mobile-add-btn {
-      display: flex;
-    }
-
-    .discount-badge {
-      font-size: 11px;
-      padding: 3px 6px;
-    }
-  }
-
-  /* Small Mobile */
-  @media (max-width: 375px) {
-    .product-name {
-      font-size: 12px;
-      min-height: 34px;
-    }
-
-    .current-price {
-      font-size: 14px;
-    }
-
-    .product-info {
-      padding: 8px 10px 10px;
-    }
-  }
-
-  /* Desktop - Show quick action on hover */
-  @media (min-width: 769px) {
-    .mobile-add-btn {
-      display: none;
-    }
-  }
-
-  /* Touch devices - No hover effect */
+  /* Touch Device Optimizations */
   @media (hover: none) {
     .product-card:hover {
       transform: none;
+      shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
-    .product-image.hovered {
+    .product-card:hover::before {
+      opacity: 0;
+    }
+
+    .product-card img:hover {
       transform: none;
+      filter: none;
     }
+  }
 
-    .quick-action {
-      display: none;
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .product-card,
+    .product-card img,
+    .product-card .discount-badge,
+    .product-card > div {
+      transition: none;
+      animation: none;
     }
+  }
+
+  /* Loading Spinner */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
   }
 `;
 

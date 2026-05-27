@@ -3,24 +3,16 @@ import Footer from "../components/layout/Footer";
 
 const MainLayout = ({ children }) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <Navbar />
 
-      <main style={styles.main}>
+      <main className="flex-1 pt-[70px] overflow-visible">
         {children}
       </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
-
-const styles = {
-  main: {
-    minHeight: "100vh",
-    paddingTop: "70px",
-    overflow: "hidden",
-  },
 };
 
 export default MainLayout;

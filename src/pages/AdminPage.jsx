@@ -1,63 +1,83 @@
-import { Link, Outlet } from "react-router-dom";
+// ============================================
+// ADMIN PAGE - Layout with Sidebar
+// ============================================
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const AdminPage = () => {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/admin/login");
+  };
+
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <aside
-        style={{
-          width: "240px",
-          backgroundColor: "#2c3e50",
-          color: "#fff",
-          padding: "20px 0",
-        }}
-      >
-        <h2
-          style={{
-            padding: "0 20px",
-            marginBottom: "30px",
-            fontSize: "20px",
-          }}
-        >
-          Admin Panel
-        </h2>
+    <div className="flex min-h-screen bg-slate-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-slate-900 text-white flex flex-col">
+        {/* Logo */}
+        <div className="p-6 border-b border-slate-700">
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <span className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-sm">
+              🏠
+            </span>
+            Admin Panel
+          </h2>
+        </div>
 
-        <nav>
-          <Link
-            to="/admin/products"
-            style={navLinkStyle}
-          >
-            📦 Quản lý sản phẩm
-          </Link>
-
-          <Link
-            to="/admin/orders"
-            style={navLinkStyle}
-          >
-            📋 Quản lý đơn hàng
-          </Link>
-
-          <Link
-            to="/admin/banners"
-            style={navLinkStyle}
-          >
-            🖼️ Quản lý Banner
-          </Link>
+        {/* Navigation */}
+        <nav className="flex-1 p-4 space-y-1">
+          <NavLink to="/admin/dashboard" icon="📊">
+            Dashboard
+          </NavLink>
+          <NavLink to="/admin/products" icon="📦">
+            Quản lý sản phẩm
+          </NavLink>
+          <NavLink to="/admin/orders" icon="📋">
+            Quản lý đơn hàng
+          </NavLink>
+          <NavLink to="/admin/banners" icon="🖼️">
+            Quản lý Banner
+          </NavLink>
         </nav>
+
+        {/* Bottom Actions */}
+        <div className="p-4 border-t border-slate-700 space-y-2">
+          <Link
+            to="/"
+            className="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+          >
+            <span>🌐</span>
+            <span className="text-sm font-medium">Xem website</span>
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"
+          >
+            <span>🚪</span>
+            <span className="text-sm font-medium">Đăng xuất</span>
+          </button>
+        </div>
       </aside>
 
-      <main style={{ flex: 1, padding: "20px", backgroundColor: "#f5f5f5" }}>
+      {/* Main Content */}
+      <main className="flex-1 overflow-auto">
         <Outlet />
       </main>
     </div>
   );
 };
 
-const navLinkStyle = {
-  display: "block",
-  padding: "12px 20px",
-  color: "#fff",
-  textDecoration: "none",
-  transition: "background-color 0.2s",
-};
+const NavLink = ({ to, icon, children }) => (
+  <Link
+    to={to}
+    className="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+  >
+    <span>{icon}</span>
+    <span className="text-sm font-medium">{children}</span>
+  </Link>
+);
 
 export default AdminPage;

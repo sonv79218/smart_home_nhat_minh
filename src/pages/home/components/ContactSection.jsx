@@ -1,5 +1,5 @@
 // ============================================
-// CONTACT SECTION COMPONENT
+// CONTACT SECTION - TAILWIND
 // Modern Premium Smart Home Style
 // ============================================
 
@@ -95,426 +95,114 @@ const ContactSection = ({ companyInfo, companySocial }) => {
   ];
 
   return (
-    <>
-      <style>{contactStyles}</style>
-      <section className="contact-section">
-        <div className="contact-container">
-          {/* Section Header */}
-          <div className="contact-header">
-            <span className="header-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-              </svg>
-              Liên hệ
-            </span>
-            <h2 className="contact-title">Kết nối với chúng tôi</h2>
-            <p className="contact-subtitle">
-              Đội ngũ hỗ trợ luôn sẵn sàng giúp đỡ bạn 24/7
-            </p>
+    <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50 relative">
+      {/* Top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-300/30 to-transparent" />
+      
+      <div className="max-w-[1200px] mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-10 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full mb-4">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary-600">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg>
+            <span className="text-sm font-semibold text-primary-600">Liên hệ</span>
           </div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-secondary tracking-tight mb-3">
+            Kết nối với chúng tôi
+          </h2>
+          <p className="text-slate-500 text-sm md:text-base">
+            Đội ngũ hỗ trợ luôn sẵn sàng giúp đỡ bạn 24/7
+          </p>
+        </div>
 
-          {/* Contact Cards */}
-          <div className="contact-grid">
-            {contactMethods.map((method, index) => (
-              <a
-                key={index}
-                href={method.href}
-                className={`contact-card ${method.href ? "clickable" : ""}`}
-                onClick={(e) => !method.href && e.preventDefault()}
-              >
-                <div className="card-icon">{method.icon}</div>
-                <div className="card-content">
-                  <span className="card-label">{method.label}</span>
-                  <span className="card-value">{method.value}</span>
+        {/* Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-12">
+          {contactMethods.map((method, index) => (
+            <a
+              key={index}
+              href={method.href || "#"}
+              onClick={(e) => !method.href && e.preventDefault()}
+              className={`
+                flex items-center gap-4 p-5 md:p-6
+                bg-white rounded-2xl border-2
+                transition-all duration-300
+                ${method.href 
+                  ? "cursor-pointer hover:border-primary-500 hover:-translate-y-1 hover:shadow-lg" 
+                  : "cursor-default"
+                }
+                border-slate-200
+              `}
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-primary-600 to-accent rounded-2xl flex items-center justify-center flex-shrink-0">
+                <div className="text-white">{method.icon}</div>
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">
+                  {method.label}
+                </span>
+                <span className="block text-sm font-semibold text-secondary leading-tight">
+                  {method.value}
+                </span>
+              </div>
+              {method.href && (
+                <div className="text-slate-400 group-hover:text-primary-600 transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </div>
-                {method.href && (
-                  <div className="card-arrow">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                )}
-              </a>
-            ))}
-          </div>
-
-          {/* Social Links */}
-          <div className="social-section">
-            <h3 className="social-title">Theo dõi chúng tôi</h3>
-            <div className="social-grid">
-              {socialLinks.map((social, index) =>
-                social.href ? (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="social-link"
-                    style={{ "--social-color": social.color }}
-                  >
-                    <span className="social-icon">{social.icon}</span>
-                    <span className="social-name">{social.name}</span>
-                  </a>
-                ) : null
               )}
-            </div>
-          </div>
-
-          {/* Bottom CTA */}
-          <div className="contact-cta">
-            <div className="cta-content">
-              <h3>Bạn cần hỗ trợ ngay?</h3>
-              <p>Đội ngũ chuyên gia sẵn sàng tư vấn miễn phí</p>
-            </div>
-            <a href={`tel:${companyInfo.phone}`} className="cta-button">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              Gọi ngay {companyInfo.phone}
             </a>
+          ))}
+        </div>
+
+        {/* Social Links */}
+        <div className="text-center mb-10 md:mb-12">
+          <h3 className="text-base md:text-lg font-bold text-secondary mb-5">
+            Theo dõi chúng tôi
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {socialLinks.map((social, index) =>
+              social.href ? (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 bg-white rounded-full border-2 border-slate-200 hover:border-current transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                  style={{ "--hover-color": social.color }}
+                >
+                  <span style={{ color: social.color }}>{social.icon}</span>
+                  <span className="text-sm font-semibold text-secondary">{social.name}</span>
+                </a>
+              ) : null
+            )}
           </div>
         </div>
-      </section>
-    </>
+
+        {/* Bottom CTA */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 p-6 md:p-10 bg-gradient-to-br from-secondary to-slate-700 rounded-3xl shadow-strong">
+          <div className="text-center md:text-left">
+            <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-2">
+              Bạn cần hỗ trợ ngay?
+            </h3>
+            <p className="text-slate-300 text-sm md:text-base">
+              Đội ngũ chuyên gia sẵn sàng tư vấn miễn phí
+            </p>
+          </div>
+          <a 
+            href={`tel:${companyInfo.phone}`}
+            className="flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200 whitespace-nowrap"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            Gọi ngay {companyInfo.phone}
+          </a>
+        </div>
+      </div>
+    </section>
   );
 };
-
-const contactStyles = `
-  /* ==================== SECTION LAYOUT ==================== */
-  .contact-section {
-    padding: 80px 0;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
-  }
-
-  .contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ==================== HEADER ==================== */
-  .contact-header {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-
-  .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(56, 189, 248, 0.1));
-    border: 1px solid rgba(37, 99, 235, 0.2);
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #2563eb;
-    margin-bottom: 16px;
-  }
-
-  .contact-title {
-    font-size: clamp(28px, 5vw, 40px);
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0 0 12px;
-    letter-spacing: -1px;
-  }
-
-  .contact-subtitle {
-    font-size: clamp(14px, 2vw, 16px);
-    color: #64748b;
-    margin: 0;
-  }
-
-  /* ==================== CONTACT GRID ==================== */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 48px;
-  }
-
-  .contact-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 24px;
-    background: #ffffff;
-    border-radius: 20px;
-    border: 2px solid #e2e8f0;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(56, 189, 248, 0.05));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .contact-card.clickable:hover {
-    border-color: #2563eb;
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.15);
-  }
-
-  .contact-card.clickable:hover::before {
-    opacity: 1;
-  }
-
-  .card-icon {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .card-content {
-    flex: 1;
-    position: relative;
-    z-index: 1;
-  }
-
-  .card-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
-
-  .card-value {
-    display: block;
-    font-size: 15px;
-    font-weight: 600;
-    color: #0f172a;
-    line-height: 1.4;
-  }
-
-  .card-arrow {
-    color: #94a3b8;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
-  }
-
-  .contact-card.clickable:hover .card-arrow {
-    color: #2563eb;
-    transform: translateX(4px);
-  }
-
-  /* ==================== SOCIAL SECTION ==================== */
-  .social-section {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-
-  .social-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 24px;
-  }
-
-  .social-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 24px;
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: all 0.25s ease;
-  }
-
-  .social-link:hover {
-    border-color: var(--social-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  .social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--social-color);
-    transition: transform 0.25s ease;
-  }
-
-  .social-link:hover .social-icon {
-    transform: scale(1.1);
-  }
-
-  .social-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  /* ==================== CTA SECTION ==================== */
-  .contact-cta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-    padding: 40px 48px;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    border-radius: 28px;
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.3);
-  }
-
-  .cta-content h3 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 8px;
-  }
-
-  .cta-content p {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-  }
-
-  .cta-button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 32px;
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 700;
-    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
-    transition: all 0.25s ease;
-    white-space: nowrap;
-  }
-
-  .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(34, 197, 94, 0.5);
-  }
-
-  /* ==================== RESPONSIVE ==================== */
-
-  @media (max-width: 992px) {
-    .contact-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .contact-cta {
-      flex-direction: column;
-      text-align: center;
-      padding: 32px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .contact-container {
-      padding: 0 16px;
-    }
-
-    .contact-section {
-      padding: 60px 0;
-    }
-
-    .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    .contact-card {
-      padding: 20px;
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-    }
-
-    .social-grid {
-      gap: 12px;
-    }
-
-    .social-link {
-      padding: 12px 20px;
-    }
-
-    .social-name {
-      font-size: 13px;
-    }
-
-    .contact-cta {
-      padding: 24px;
-      border-radius: 20px;
-    }
-
-    .cta-content h3 {
-      font-size: 20px;
-    }
-
-    .cta-button {
-      width: 100%;
-      justify-content: center;
-      padding: 14px 24px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .social-link {
-      justify-content: center;
-    }
-
-    .social-name {
-      display: none;
-    }
-  }
-`;
 
 export default ContactSection;

@@ -1,5 +1,5 @@
 // ============================================
-// ABOUT SECTION COMPONENT
+// ABOUT SECTION - TAILWIND
 // Modern & Professional Company Introduction
 // ============================================
 import { useNavigate } from "react-router-dom";
@@ -19,670 +19,190 @@ const AboutSection = ({ companyInfo }) => {
 
   if (!companyInfo) return null;
 
-  // const stats = [
-  //   { value: "5+", label: "Năm kinh nghiệm" },
-  //   { value: "10K+", label: "Khách hàng" },
-  //   { value: "50+", label: "Sản phẩm" },
-  //   { value: "24/7", label: "Hỗ trợ" },
-  // ];
+  const stats = [
+    { value: "5+", label: "Năm kinh nghiệm" },
+    { value: "10K+", label: "Khách hàng" },
+    { value: "50+", label: "Sản phẩm" },
+    { value: "24/7", label: "Hỗ trợ" },
+  ];
 
-  // const features = [
-  //   {
-  //     icon: Shield,
-  //     title: "Sản phẩm chính hãng",
-  //     description: "100% authentic products with warranty",
-  //     color: "#2563eb",
-  //   },
-  //   {
-  //     icon: Zap,
-  //     title: "Công nghệ tiên tiến",
-  //     description: "Latest smart home technology",
-  //     color: "#f59e0b",
-  //   },
-  //   {
-  //     icon: Users,
-  //     title: "Khách hàng là trung tâm",
-  //     description: "Customer-first approach",
-  //     color: "#10b981",
-  //   },
-  //   {
-  //     icon: Headphones,
-  //     title: "Hỗ trợ 24/7",
-  //     description: "Round-the-clock support",
-  //     color: "#8b5cf6",
-  //   },
-  //   {
-  //     icon: Truck,
-  //     title: "Giao hàng nhanh",
-  //     description: "Fast & free shipping over 500K",
-  //     color: "#06b6d4",
-  //   },
-  //   {
-  //     icon: Award,
-  //     title: "Bảo hành dài hạn",
-  //     description: "Extended warranty coverage",
-  //     color: "#ef4444",
-  //   },
-  // ];
+  const features = [
+    { icon: Shield, title: "Sản phẩm chính hãng", color: "blue" },
+    { icon: Zap, title: "Công nghệ tiên tiến", color: "amber" },
+    { icon: Users, title: "Khách hàng là trung tâm", color: "green" },
+    { icon: Headphones, title: "Hỗ trợ 24/7", color: "purple" },
+    { icon: Truck, title: "Giao hàng nhanh", color: "cyan" },
+    { icon: Award, title: "Bảo hành dài hạn", color: "red" },
+  ];
+
+  const colorMap = {
+    blue: "bg-blue-100 text-blue-600",
+    amber: "bg-amber-100 text-amber-600",
+    green: "bg-green-100 text-green-600",
+    purple: "bg-purple-100 text-purple-600",
+    cyan: "bg-cyan-100 text-cyan-600",
+    red: "bg-red-100 text-red-600",
+  };
 
   return (
-    <>
-      <style>{aboutStyles}</style>
-      <section className="about-section">
-        <div className="about-container">
-          {/* Section Header */}
-          <div className="about-header">
-            <span className="header-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
-              Về chúng tôi
-            </span>
-            <h2 className="about-title">Nhật Minh Smart Home</h2>
-            <p className="about-slogan">{companyInfo.slogan}</p>
+    <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white relative">
+      {/* Top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-300/30 to-transparent" />
+      
+      <div className="max-w-[1400px] mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-10 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full mb-4">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary-600">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span className="text-sm font-semibold text-primary-600">Về chúng tôi</span>
           </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary tracking-tight mb-3">
+            Nhật Minh Smart Home
+          </h2>
+          <p className="text-slate-500 text-base md:text-lg italic">
+            {companyInfo.slogan}
+          </p>
+        </div>
 
-          {/* Stats Row */}
-          {/* <div className="stats-row">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-item">
-                <span className="stat-value">{stat.value}</span>
-                <span className="stat-label">{stat.label}</span>
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-14">
+          {stats.map((stat, index) => (
+            <div 
+              key={index}
+              className="text-center p-6 md:p-8 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300"
+            >
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-600 tracking-tighter">
+                {stat.value}
+              </span>
+              <span className="text-xs md:text-sm font-semibold text-slate-500 uppercase tracking-wide mt-2 block">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 mb-12 md:mb-14">
+          {/* Left: Introduction */}
+          <div className="lg:col-span-3 flex flex-col gap-6">
+            {/* Intro Card */}
+            <div className="flex flex-col md:flex-row gap-6 p-6 md:p-8 bg-white rounded-3xl border border-slate-100 shadow-soft">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary-600 to-accent rounded-2xl flex items-center justify-center flex-shrink-0">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
               </div>
-            ))}
-          </div> */}
-
-          {/* Main Content Grid */}
-          <div className="about-grid">
-            {/* Left: Introduction */}
-            <div className="about-main">
-              <div className="intro-card">
-                <div className="intro-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                  </svg>
-                </div>
-                <div className="intro-content">
-                  <h3 className="intro-title">Giới thiệu</h3>
-                  <p className="intro-text">{companyInfo.intro}</p>
-                </div>
-              </div>
-
-              {/* Vision & Mission */}
-              <div className="vm-cards">
-                <div className="vm-card vm-card-vision">
-                  <div className="vm-icon">
-                    <Target size={24} />
-                  </div>
-                  <div className="vm-content">
-                    <h4>Tầm nhìn</h4>
-                    <p>{companyInfo.vision}</p>
-                  </div>
-                </div>
-
-                <div className="vm-card vm-card-mission">
-                  <div className="vm-icon">
-                    <Zap size={24} />
-                  </div>
-                  <div className="vm-content">
-                    <h4>Sứ mệnh</h4>
-                    <p>{companyInfo.mission}</p>
-                  </div>
-                </div>
+              <div className="flex-1">
+                <h3 className="text-lg md:text-xl font-bold text-secondary mb-3">Giới thiệu</h3>
+                <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+                  {companyInfo.intro}
+                </p>
               </div>
             </div>
 
-            {/* Right: Values & Features */}
-            <div className="about-sidebar">
-              {/* Core Values */}
-              <div className="values-card">
-                <h3 className="sidebar-title">
-                  <Award size={20} />
-                  Giá trị cốt lõi
-                </h3>
-                <ul className="values-list">
-                  {companyInfo.values?.map((value, index) => (
-                    <li key={index} className="value-item">
-                      <CheckCircle size={18} />
-                      <span>{value}</span>
-                    </li>
-                  ))}
-                </ul>
+            {/* Vision & Mission */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="flex gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-accent rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Target size={24} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-secondary mb-2">Tầm nhìn</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">{companyInfo.vision}</p>
+                </div>
               </div>
+              <div className="flex gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Zap size={24} className="text-white" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-secondary mb-2">Sứ mệnh</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">{companyInfo.mission}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              {/* Why Choose Us */}
-              {/* <div className="features-grid">
-                {features.map((feature, index) => (
-                  <div key={index} className="feature-item">
-                    <div 
-                      className="feature-icon"
-                      style={{ background: `${feature.color}15`, color: feature.color }}
-                    >
-                      <feature.icon size={20} />
-                    </div>
-                    <span className="feature-name">{feature.title}</span>
-                  </div>
+          {/* Right: Values & Features */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            {/* Core Values */}
+            <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-soft">
+              <h3 className="flex items-center gap-2 text-lg font-bold text-secondary mb-5">
+                <Award size={20} className="text-primary-600" />
+                Giá trị cốt lõi
+              </h3>
+              <ul className="flex flex-col gap-3">
+                {companyInfo.values?.map((value, index) => (
+                  <li 
+                    key={index} 
+                    className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary-600 transition-colors cursor-default"
+                  >
+                    <CheckCircle size={18} className="text-green-500 flex-shrink-0" />
+                    <span>{value}</span>
+                  </li>
                 ))}
-              </div> */}
+              </ul>
             </div>
-          </div>
 
-          {/* CTA Section */}
-          <div className="about-cta">
-            <div className="cta-content">
-              <h3>Bạn cần tư vấn về giải pháp Smart Home?</h3>
-              <p>Liên hệ ngay để được hỗ trợ miễn phí từ đội ngũ chuyên gia</p>
-            </div>
-            <div className="cta-buttons">
-              <button 
-                className="btn btn-primary"
-                onClick={() => navigate("/products")}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                </svg>
-                Khám phá sản phẩm
-              </button>
-              <a href={`tel:${companyInfo.phone}`} className="btn btn-secondary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                {companyInfo.phone}
-              </a>
-            </div>
+            {/* Why Choose Us */}
+            {/* <div className="grid grid-cols-2 gap-3">
+              {features.map((feature, index) => (
+                <div 
+                  key={index}
+                  className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 cursor-default"
+                >
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${colorMap[feature.color]}`}>
+                    <feature.icon size={20} />
+                  </div>
+                  <span className="text-xs font-semibold text-secondary leading-tight">
+                    {feature.title}
+                  </span>
+                </div>
+              ))}
+            </div> */}
           </div>
         </div>
-      </section>
-    </>
+
+        {/* CTA Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 p-8 md:p-10 bg-gradient-to-br from-secondary to-slate-700 rounded-3xl shadow-strong">
+          <div className="text-center md:text-left">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+              Bạn cần tư vấn về giải pháp Smart Home?
+            </h3>
+            <p className="text-slate-300 text-sm md:text-base">
+              Liên hệ ngay để được hỗ trợ miễn phí từ đội ngũ chuyên gia
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+            <button 
+              onClick={() => navigate("/products")}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent text-white font-semibold rounded-xl shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              Khám phá sản phẩm
+            </button>
+            <a 
+              href={`tel:${companyInfo.phone}`}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl border-2 border-white/20 hover:bg-white/20 transition-all duration-200"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              {companyInfo.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
-
-const aboutStyles = `
-  /* ==================== SECTION LAYOUT ==================== */
-  .about-section {
-    padding: 80px 0;
-    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
-  }
-
-  .about-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ==================== HEADER ==================== */
-  .about-header {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-
-  .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(56, 189, 248, 0.1));
-    border: 1px solid rgba(37, 99, 235, 0.2);
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #2563eb;
-    margin-bottom: 16px;
-  }
-
-  .about-title {
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0 0 12px;
-    letter-spacing: -1px;
-  }
-
-  .about-slogan {
-    font-size: clamp(16px, 2vw, 18px);
-    color: #64748b;
-    margin: 0;
-    font-style: italic;
-  }
-
-  /* ==================== STATS ROW ==================== */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 56px;
-  }
-
-  .stat-item {
-    text-align: center;
-    padding: 32px 24px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-    border: 1px solid rgba(226, 232, 240, 0.5);
-    transition: all 0.3s ease;
-  }
-
-  .stat-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
-    border-color: rgba(37, 99, 235, 0.2);
-  }
-
-  .stat-value {
-    display: block;
-    font-size: 40px;
-    font-weight: 800;
-    color: #2563eb;
-    margin-bottom: 8px;
-    letter-spacing: -2px;
-  }
-
-  .stat-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  /* ==================== MAIN GRID ==================== */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 40px;
-    margin-bottom: 56px;
-  }
-
-  /* ==================== INTRO CARD ==================== */
-  .about-main {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .intro-card {
-    display: flex;
-    gap: 24px;
-    padding: 32px;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-    border: 1px solid rgba(226, 232, 240, 0.5);
-  }
-
-  .intro-icon {
-    width: 72px;
-    height: 72px;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    flex-shrink: 0;
-  }
-
-  .intro-content {
-    flex: 1;
-  }
-
-  .intro-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 12px;
-  }
-
-  .intro-text {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #475569;
-    margin: 0;
-  }
-
-  /* ==================== VISION & MISSION ==================== */
-  .vm-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .vm-card {
-    display: flex;
-    gap: 16px;
-    padding: 24px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-    border: 1px solid rgba(226, 232, 240, 0.5);
-    transition: all 0.3s ease;
-  }
-
-  .vm-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
-  }
-
-  .vm-card-vision .vm-icon {
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-  }
-
-  .vm-card-mission .vm-icon {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-  }
-
-  .vm-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    flex-shrink: 0;
-  }
-
-  .vm-content h4 {
-    font-size: 16px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 8px;
-  }
-
-  .vm-content p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #64748b;
-    margin: 0;
-  }
-
-  /* ==================== SIDEBAR ==================== */
-  .about-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .values-card {
-    padding: 28px;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-    border: 1px solid rgba(226, 232, 240, 0.5);
-  }
-
-  .sidebar-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 20px;
-  }
-
-  .sidebar-title svg {
-    color: #2563eb;
-  }
-
-  .values-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .value-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: #f8fafc;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #334155;
-    transition: all 0.2s ease;
-  }
-
-  .value-item:hover {
-    background: rgba(37, 99, 235, 0.06);
-    transform: translateX(4px);
-  }
-
-  .value-item svg {
-    color: #22c55e;
-    flex-shrink: 0;
-  }
-
-  /* ==================== FEATURES GRID ==================== */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
-    border: 1px solid rgba(226, 232, 240, 0.5);
-    transition: all 0.25s ease;
-    cursor: default;
-  }
-
-  .feature-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-    border-color: rgba(37, 99, 235, 0.2);
-  }
-
-  .feature-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .feature-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #0f172a;
-    line-height: 1.3;
-  }
-
-  /* ==================== CTA SECTION ==================== */
-  .about-cta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-    padding: 40px 48px;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    border-radius: 28px;
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.3);
-  }
-
-  .cta-content h3 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 8px;
-  }
-
-  .cta-content p {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 16px;
-    flex-shrink: 0;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 28px;
-    border-radius: 14px;
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    color: #ffffff;
-    border: none;
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.5);
-  }
-
-  .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-
-  /* ==================== RESPONSIVE ==================== */
-  @media (max-width: 1200px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .about-sidebar {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 992px) {
-    .stats-row {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .about-cta {
-      flex-direction: column;
-      text-align: center;
-      padding: 32px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .about-container {
-      padding: 0 16px;
-    }
-
-    .about-section {
-      padding: 60px 0;
-    }
-
-    .stats-row {
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    .stat-item {
-      padding: 24px 16px;
-    }
-
-    .stat-value {
-      font-size: 32px;
-    }
-
-    .about-grid {
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .about-sidebar {
-      grid-template-columns: 1fr;
-    }
-
-    .intro-card {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 24px;
-    }
-
-    .vm-cards {
-      grid-template-columns: 1fr;
-    }
-
-    .features-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .about-cta {
-      padding: 24px;
-      border-radius: 20px;
-    }
-
-    .cta-buttons {
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .btn {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .stat-label {
-      font-size: 12px;
-    }
-
-    .features-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .cta-content h3 {
-      font-size: 20px;
-    }
-  }
-`;
 
 export default AboutSection;

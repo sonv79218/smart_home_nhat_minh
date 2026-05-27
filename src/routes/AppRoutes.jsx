@@ -15,14 +15,15 @@ import CheckoutPage from "../pages/CheckoutPage";
 
 // Admin Pages
 import AdminPage from "../pages/AdminPage";
-
 import AdminProductsPage from "../pages/admin/AdminProductsPage";
-
 import AddProductPage from "../pages/admin/AddProductPage";
-
 import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
-
 import AdminBannersPage from "../pages/admin/AdminBannersPage";
+import AdminLogin from "../pages/admin/AdminLogin";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+
+// Protected Route
+import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
 
 const AppRoutes = () => {
   return (
@@ -75,9 +76,28 @@ const AppRoutes = () => {
         />
 
         {/* ADMIN ROUTES */}
+        
+        {/* Admin Login - Public */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        {/* Admin Dashboard - Protected */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRouteAdmin>
+              <AdminDashboard />
+            </ProtectedRouteAdmin>
+          }
+        />
+
+        {/* Admin Layout - Protected */}
         <Route
           path="/admin"
-          element={<AdminPage />}
+          element={
+            <ProtectedRouteAdmin>
+              <AdminPage />
+            </ProtectedRouteAdmin>
+          }
         >
           <Route
             path="products"

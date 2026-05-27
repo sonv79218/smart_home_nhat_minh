@@ -1,5 +1,5 @@
 // ============================================
-// HOMEPAGE - MAIN PAGE COMPONENT
+// HOMEPAGE - MODERN PREMIUM ECOMMERCE
 // ============================================
 import { useState, useEffect, useMemo } from "react";
 import { getProducts } from "../services/productService";
@@ -7,7 +7,6 @@ import { getBanners } from "../services/bannerService";
 import { CATEGORIES } from "../constants/productMeta";
 import { companyInfo, companySocial } from "../data/company";
 
-// Import section components
 import {
   BannerSection,
   FeaturesBar,
@@ -17,22 +16,16 @@ import {
   EcosystemSection,
   AboutSection,
   ContactSection,
+  FloatingContactButtons,
 } from "./home/components";
 
 // ============================================
 // CONSTANTS
 // ============================================
 const PRODUCTS_LIMIT = {
-  category: 10, // Desktop: 10 per category
+  category: 10,
   featured: 8,
   topCategory: 10,
-};
-
-const GRID_COLUMNS = {
-  mobile: 2,
-  tablet: 3,
-  desktop: 4,
-  large: 5,
 };
 
 const HomePage = () => {
@@ -44,7 +37,6 @@ const HomePage = () => {
   // ============================================
   // DATA FETCHING
   // ============================================
-
   useEffect(() => {
     const fetchBanners = async () => {
       try {
@@ -75,8 +67,6 @@ const HomePage = () => {
   // ============================================
   // MEMOIZED DATA
   // ============================================
-
-  // Get products by category (limited)
   const getProductsByCategory = useMemo(() => {
     return (categoryId, limit = PRODUCTS_LIMIT.category) => {
       return products
@@ -90,7 +80,6 @@ const HomePage = () => {
     };
   }, [products]);
 
-  // Get featured products (limited)
   const getFeaturedProducts = useMemo(() => {
     return () => {
       return [...products]
@@ -103,7 +92,6 @@ const HomePage = () => {
     };
   }, [products]);
 
-  // Filter categories that have products
   // const categoriesWithProducts = useMemo(() => {
   //   return CATEGORIES.filter((cat) =>
   //     products.some((p) => p.category === cat.id)
@@ -111,36 +99,36 @@ const HomePage = () => {
   // }, [products]);
   const categoriesWithProducts = CATEGORIES;
 
-  // Get top 6 categories for grid display
   const topCategories = categoriesWithProducts.slice(0, PRODUCTS_LIMIT.topCategory);
 
   // ============================================
   // RENDER
   // ============================================
-
   return (
-    <div style={styles.pageWrapper}>
-      <style>{globalStyles}</style>
-
+    <div className="w-full min-h-screen">
       {/* ============================================ */}
-      {/* BANNER - FULL WIDTH (100vw) */}
+      {/* BANNER - FULL WIDTH (w-full) */}
       {/* ============================================ */}
-      <div style={styles.fullWidthSection}>
+      <div className="w-full">
         <BannerSection
           banners={banners}
           current={current}
           setCurrent={setCurrent}
         />
       </div>
-              {/* Ecosystem Section */}
-        <EcosystemSection />
+
+      {/* ============================================ */}
+      {/* FLOATING CONTACT BUTTONS */}
+      {/* ============================================ */}
+      <FloatingContactButtons />
 
       {/* ============================================ */}
       {/* CONTENT - CONSTRAINED (max-width) */}
       {/* ============================================ */}
-      <div style={styles.container}>
-
-
+      <div className="max-w-[1400px] mx-auto px-6">
+     
+        {/* Ecosystem Section */}
+        <EcosystemSection />
         {/* Category Grid Section */}
         {topCategories.length > 0 && (
           <CategoryGridSection categories={topCategories} />
@@ -162,18 +150,18 @@ const HomePage = () => {
         })}
 
         {/* Featured Products Section */}
-        {products.length > 0 && (
+        {/* {products.length > 0 && (
           <FeaturedProductsSection
             products={getFeaturedProducts()}
             loading={loading}
           />
-        )}
+        )} */}
 
 
 
         {/* About Section */}
         <AboutSection companyInfo={companyInfo} />
-        {/* Features Bar */}
+   {/* Features Bar */}
         <FeaturesBar />
         {/* Contact Section */}
         <ContactSection
@@ -184,120 +172,5 @@ const HomePage = () => {
     </div>
   );
 };
-
-// ============================================
-// STYLES
-// ============================================
-
-const styles = {
-  pageWrapper: {
-    width: "100%",
-    minHeight: "100vh",
-  },
-  fullWidthSection: {
-    width: "100vw",
-    position: "relative",
-    left: "50%",
-    right: "50%",
-    marginLeft: "-50vw",
-    marginRight: "-50vw",
-    backgroundColor: "#0f172a",
-  },
-  container: {
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "0 24px",
-  },
-};
-
-const globalStyles = `
-  /* ==================== GLOBAL RESET ==================== */
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    overflow-x: hidden;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-  }
-
-  /* ==================== GLOBAL ANIMATIONS ==================== */
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ==================== RESPONSIVE GRID ==================== */
-  @media (max-width: 576px) {
-    .category-grid, .product-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-  }
-
-  @media (min-width: 576px) {
-    .category-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .category-grid {
-      grid-template-columns: repeat(4, 1fr) !important;
-    }
-    .product-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .category-grid {
-      grid-template-columns: repeat(5, 1fr) !important;
-    }
-    .product-grid {
-      grid-template-columns: repeat(4, 1fr) !important;
-    }
-  }
-
-  /* ==================== HOVER EFFECTS ==================== */
-  @media (max-width: 768px) {
-    .category-card, .product-card {
-      transform: none !important;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .category-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-    .category-card:hover .category-image {
-      transform: scale(1.05);
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    }
-    .quick-action {
-      opacity: 0 !important;
-    }
-    .product-card:hover .quick-action {
-      opacity: 1 !important;
-    }
-  }
-
-  .product-card, .category-card {
-    animation: fadeIn 0.3s ease-out;
-  }
-`;
 
 export default HomePage;
