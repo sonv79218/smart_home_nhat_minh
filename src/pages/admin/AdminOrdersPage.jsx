@@ -1,13 +1,16 @@
+// ============================================
+// ADMIN ORDERS PAGE - Fully Responsive
+// ============================================
 import { useEffect, useState } from "react";
 import { getOrders, updateOrderStatus, deleteOrder } from "../../services/orderService";
 
 const STATUS_OPTIONS = ["pending", "processing", "shipped", "done"];
 
 const STATUS_COLORS = {
-  pending: "#f39c12",
-  processing: "#3498db",
-  shipped: "#9b59b6",
-  done: "#27ae60",
+  pending: "bg-amber-500",
+  processing: "bg-blue-500",
+  shipped: "bg-purple-500",
+  done: "bg-green-500",
 };
 
 const STATUS_LABELS = {
@@ -23,6 +26,7 @@ const AdminOrdersPage = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [filterStatus, setFilterStatus] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     fetchOrders();
@@ -48,6 +52,10 @@ const AdminOrdersPage = () => {
   const formatDate = (timestamp) => {
     if (!timestamp?.seconds) return "N/A";
     return new Date(timestamp.seconds * 1000).toLocaleString("vi-VN");
+  };
+
+  const formatPrice = (price) => {
+    return Number(price || 0).toLocaleString("vi-VN");
   };
 
   const handleStatusChange = async (orderId, newStatus) => {
@@ -106,352 +114,307 @@ const AdminOrdersPage = () => {
 
   if (loading) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
-        <h2>Đang tải dữ liệu...</h2>
+      <div className="flex items-center justify-center h-64">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin" />
+          <p className="text-slate-500 text-sm">Đang tải dữ liệu...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ marginBottom: "24px" }}>
-        <h1>Quản lý đơn hàng</h1>
-        <p style={{ color: "#666", marginTop: "4px" }}>
-          Tổng số: <strong>{orders.length}</strong> đơn hàng
-        </p>
+    <div className="max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800">Quản lý đơn hàng</h1>
+          <p className="text-slate-500 mt-1">
+            Tổng số: <span className="font-semibold text-primary-600">{orders.length}</span> đơn hàng
+          </p>
+        </div>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "16px",
-          marginBottom: "20px",
-          flexWrap: "wrap",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Tìm theo tên hoặc số điện thoại..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            padding: "10px 14px",
-            border: "1px solid #ddd",
-            borderRadius: "6px",
-            width: "280px",
-          }}
-        />
-
-        <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          style={{
-            padding: "10px 14px",
-            border: "1px solid #ddd",
-            borderRadius: "6px",
-            minWidth: "160px",
-          }}
+      {/* Filters */}
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm mb-6">
+        {/* Filter Header - Mobile */}
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className="lg:hidden w-full flex items-center justify-between p-4 border-b border-slate-100"
         >
-          <option value="all">Tất cả trạng thái</option>
-          {STATUS_OPTIONS.map((status) => (
-            <option key={status} value={status}>
-              {STATUS_LABELS[status]}
-            </option>
-          ))}
-        </select>
+          <span className="flex items-center gap-2 font-medium text-slate-700">
+            <FilterIcon className="w-5 h-5" />
+            Bộ lọc
+          </span>
+          <ChevronIcon className={`w-5 h-5 text-slate-400 transition-transform ${showFilters ? "rotate-180" : ""}`} />
+        </button>
+
+        {/* Filter Content */}
+        <div className={`${showFilters ? "block" : "hidden"} lg:block p-4`}>
+          <div className="flex flex-col lg:flex-row gap-3">
+            {/* Search */}
+            <div className="flex-1">
+              <div className="relative">
+                <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Tìm theo tên hoặc số điện thoại..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Status Filter */}
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white min-w-[160px]"
+            >
+              <option value="all">Tất cả trạng thái</option>
+              {STATUS_OPTIONS.map((status) => (
+                <option key={status} value={status}>
+                  {STATUS_LABELS[status]}
+                </option>
+              ))}
+            </select>
+
+            {/* Clear Filters */}
+            {(searchTerm || filterStatus !== "all") && (
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                  setFilterStatus("all");
+                }}
+                className="px-4 py-2.5 text-red-500 hover:bg-red-50 rounded-xl transition-colors text-sm font-medium"
+              >
+                Xóa bộ lọc
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
+      {/* Orders Table */}
       {filteredOrders.length === 0 ? (
-        <div style={{ padding: "40px", textAlign: "center", color: "#999" }}>
-          <p>Không có đơn hàng nào</p>
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
+          <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <EmptyIcon className="w-8 h-8 text-slate-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-700 mb-2">Không có đơn hàng nào</h3>
+          <p className="text-slate-500">
+            {searchTerm || filterStatus !== "all"
+              ? "Thử thay đổi bộ lọc để xem thêm đơn hàng"
+              : "Chưa có đơn hàng nào được tạo"}
+          </p>
         </div>
       ) : (
-        <div style={{ overflowX: "auto" }}>
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-              backgroundColor: "#fff",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-              borderRadius: "8px",
-              overflow: "hidden",
-            }}
-          >
-            <thead>
-              <tr style={{ backgroundColor: "#f8f9fa" }}>
-                <th style={thStyle}>Order ID</th>
-                <th style={thStyle}>Khách hàng</th>
-                <th style={thStyle}>Số điện thoại</th>
-                <th style={thStyle}>Địa chỉ</th>
-                <th style={thStyle}>Tổng tiền</th>
-                <th style={thStyle}>Trạng thái</th>
-                <th style={thStyle}>Ngày tạo</th>
-                <th style={thStyle}>Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredOrders.map((order) => (
-                <tr
-                  key={order.id}
-                  style={{
-                    borderBottom: "1px solid #eee",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setSelectedOrder(order)}
-                >
-                  <td style={tdStyle}>
-                    <code style={{ fontSize: "12px" }}>
-                      {truncateId(order.id)}
-                    </code>
-                  </td>
-                  <td style={tdStyle}>{order.userInfo?.name || "N/A"}</td>
-                  <td style={tdStyle}>{order.userInfo?.phone || "N/A"}</td>
-                  <td style={{ ...tdStyle, maxWidth: "150px" }}>
-                    <span
-                      style={{
-                        display: "block",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                      }}
-                      title={order.userInfo?.address}
-                    >
-                      {order.userInfo?.address || "N/A"}
-                    </span>
-                  </td>
-                  <td style={tdStyle}>
-                    <strong style={{ color: "#27ae60" }}>
-                      {Number(order.totalPrice || 0).toLocaleString()}đ
-                    </strong>
-                  </td>
-                  <td style={tdStyle}>
-                    <span
-                      style={{
-                        padding: "4px 10px",
-                        borderRadius: "12px",
-                        fontSize: "12px",
-                        fontWeight: "bold",
-                        backgroundColor: STATUS_COLORS[order.status] || "#999",
-                        color: "#fff",
-                      }}
-                    >
-                      {STATUS_LABELS[order.status] || order.status}
-                    </span>
-                  </td>
-                  <td style={{ ...tdStyle, fontSize: "13px" }}>
-                    {formatDate(order.createdAt)}
-                  </td>
-                  <td style={tdStyle}>
-                    <div
-                      style={{ display: "flex", gap: "8px" }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <button
-                        onClick={() => setSelectedOrder(order)}
-                        style={actionButton("#3498db")}
-                      >
-                        Chi tiết
-                      </button>
-                      <button
-                        onClick={() => handleDelete(order.id)}
-                        style={actionButton("#e74c3c")}
-                      >
-                        Xóa
-                      </button>
-                    </div>
-                  </td>
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-100">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Order ID</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Khách hàng</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Số điện thoại</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Tổng tiền</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Trạng thái</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Ngày tạo</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Hành động</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {filteredOrders.map((order) => (
+                  <tr
+                    key={order.id}
+                    className="hover:bg-slate-50 transition-colors cursor-pointer"
+                    onClick={() => setSelectedOrder(order)}
+                  >
+                    <td className="px-4 py-3">
+                      <code className="text-xs bg-slate-100 px-2 py-1 rounded">{truncateId(order.id)}</code>
+                    </td>
+                    <td className="px-4 py-3 text-sm font-medium text-slate-800">
+                      {order.userInfo?.name || "N/A"}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-slate-600">
+                      {order.userInfo?.phone || "N/A"}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="font-semibold text-green-600 text-sm">
+                        {formatPrice(order.totalPrice)}đ
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-semibold text-white ${STATUS_COLORS[order.status] || "bg-slate-400"}`}>
+                        {STATUS_LABELS[order.status] || order.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-sm text-slate-500">
+                      {formatDate(order.createdAt)}
+                    </td>
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setSelectedOrder(order)}
+                          className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                          title="Chi tiết"
+                        >
+                          <EyeIcon className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(order.id)}
+                          className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                          title="Xóa"
+                        >
+                          <TrashIcon className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Cards */}
+          <div className="md:hidden divide-y divide-slate-100">
+            {filteredOrders.map((order) => (
+              <div
+                key={order.id}
+                className="p-4 cursor-pointer hover:bg-slate-50 transition-colors"
+                onClick={() => setSelectedOrder(order)}
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <code className="text-xs bg-slate-100 px-2 py-1 rounded">{truncateId(order.id)}</code>
+                    <p className="font-medium text-slate-800 mt-1">{order.userInfo?.name || "N/A"}</p>
+                    <p className="text-sm text-slate-500">{order.userInfo?.phone || "N/A"}</p>
+                  </div>
+                  <span className={`px-2.5 py-1 rounded-full text-xs font-semibold text-white ${STATUS_COLORS[order.status] || "bg-slate-400"}`}>
+                    {STATUS_LABELS[order.status] || order.status}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-green-600">{formatPrice(order.totalPrice)}đ</span>
+                  <span className="text-xs text-slate-400">{formatDate(order.createdAt)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
+      {/* Order Detail Modal */}
       {selectedOrder && (
         <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedOrder(null)}
         >
           <div
-            style={{
-              backgroundColor: "#fff",
-              borderRadius: "12px",
-              padding: "24px",
-              maxWidth: "600px",
-              width: "90%",
-              maxHeight: "90vh",
-              overflowY: "auto",
-            }}
+            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "20px",
-              }}
-            >
-              <h2 style={{ margin: 0 }}>Chi tiết đơn hàng</h2>
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-bold text-slate-800">Chi tiết đơn hàng</h2>
+                <p className="text-xs text-slate-400 mt-0.5">ID: {selectedOrder.id}</p>
+              </div>
               <button
                 onClick={() => setSelectedOrder(null)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  fontSize: "24px",
-                  cursor: "pointer",
-                }}
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
               >
-                ×
+                <CloseIcon className="w-5 h-5 text-slate-500" />
               </button>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
-              <p style={{ marginBottom: "8px" }}>
-                <strong>Order ID:</strong>{" "}
-                <code style={{ fontSize: "12px" }}>{selectedOrder.id}</code>
-              </p>
-              <p style={{ marginBottom: "8px" }}>
-                <strong>Ngày tạo:</strong> {formatDate(selectedOrder.createdAt)}
-              </p>
-              <p style={{ marginBottom: "12px" }}>
-                <strong>Trạng thái hiện tại:</strong>{" "}
-                <span
-                  style={{
-                    padding: "4px 10px",
-                    borderRadius: "12px",
-                    fontSize: "12px",
-                    fontWeight: "bold",
-                    backgroundColor:
-                      STATUS_COLORS[selectedOrder.status] || "#999",
-                    color: "#fff",
-                  }}
-                >
-                  {STATUS_LABELS[selectedOrder.status] || selectedOrder.status}
-                </span>
-              </p>
+            {/* Modal Content */}
+            <div className="p-6">
+              {/* Status Section */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`px-3 py-1.5 rounded-full text-sm font-semibold text-white ${STATUS_COLORS[selectedOrder.status] || "bg-slate-400"}`}>
+                    {STATUS_LABELS[selectedOrder.status] || selectedOrder.status}
+                  </span>
+                  <span className="text-sm text-slate-500">{formatDate(selectedOrder.createdAt)}</span>
+                </div>
 
-              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                 {getNextStatus(selectedOrder.status) && (
                   <button
-                    onClick={() =>
-                      handleStatusChange(
-                        selectedOrder.id,
-                        getNextStatus(selectedOrder.status)
-                      )
-                    }
-                    style={{
-                      padding: "8px 16px",
-                      backgroundColor: "#27ae60",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                    }}
+                    onClick={() => handleStatusChange(selectedOrder.id, getNextStatus(selectedOrder.status))}
+                    className="w-full py-2.5 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors"
                   >
                     Chuyển sang "{STATUS_LABELS[getNextStatus(selectedOrder.status)]}"
                   </button>
                 )}
               </div>
-            </div>
 
-            <div
-              style={{
-                padding: "16px",
-                backgroundColor: "#f8f9fa",
-                borderRadius: "8px",
-                marginBottom: "20px",
-              }}
-            >
-              <h3 style={{ marginTop: 0, marginBottom: "12px" }}>
-                Thông tin khách hàng
-              </h3>
-              <p style={{ marginBottom: "6px" }}>
-                <strong>Tên:</strong> {selectedOrder.userInfo?.name}
-              </p>
-              <p style={{ marginBottom: "6px" }}>
-                <strong>Phone:</strong> {selectedOrder.userInfo?.phone}
-              </p>
-              <p style={{ marginBottom: "6px" }}>
-                <strong>Địa chỉ:</strong> {selectedOrder.userInfo?.address}
-              </p>
-              {selectedOrder.userInfo?.note && (
-                <p style={{ marginBottom: 0 }}>
-                  <strong>Ghi chú:</strong> {selectedOrder.userInfo.note}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <h3 style={{ marginTop: 0, marginBottom: "12px" }}>
-                Sản phẩm ({selectedOrder.items?.length || 0})
-              </h3>
-              {selectedOrder.items?.map((item, index) => (
-                <div
-                  key={item.id || index}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "12px 0",
-                    borderBottom:
-                      index < selectedOrder.items.length - 1
-                        ? "1px solid #eee"
-                        : "none",
-                  }}
-                >
-                  <img
-                    src={item.thumbnail}
-                    alt={item.name}
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                      objectFit: "cover",
-                      borderRadius: "6px",
-                    }}
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                    }}
-                  />
-                  <div style={{ flex: 1 }}>
-                    <p style={{ margin: 0, fontWeight: "bold" }}>{item.name}</p>
-                    <p style={{ margin: "4px 0 0", color: "#666", fontSize: "13px" }}>
-                      {item.quantity} x {Number(item.price).toLocaleString()}đ
-                    </p>
-                  </div>
-                  <strong style={{ color: "#27ae60" }}>
-                    {Number(item.price * item.quantity).toLocaleString()}đ
-                  </strong>
+              {/* Customer Info */}
+              <div className="bg-slate-50 rounded-xl p-4 mb-6">
+                <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                  <UserIcon className="w-5 h-5 text-slate-400" />
+                  Thông tin khách hàng
+                </h3>
+                <div className="space-y-2 text-sm">
+                  <p><span className="text-slate-500">Tên:</span> <span className="font-medium text-slate-700">{selectedOrder.userInfo?.name || "N/A"}</span></p>
+                  <p><span className="text-slate-500">Phone:</span> <span className="font-medium text-slate-700">{selectedOrder.userInfo?.phone || "N/A"}</span></p>
+                  <p><span className="text-slate-500">Địa chỉ:</span> <span className="font-medium text-slate-700">{selectedOrder.userInfo?.address || "N/A"}</span></p>
+                  {selectedOrder.userInfo?.note && (
+                    <p><span className="text-slate-500">Ghi chú:</span> <span className="font-medium text-slate-700 italic">{selectedOrder.userInfo.note}</span></p>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div
-              style={{
-                marginTop: "20px",
-                paddingTop: "16px",
-                borderTop: "2px solid #ddd",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <strong style={{ fontSize: "18px" }}>Tổng tiền:</strong>
-              <strong style={{ fontSize: "24px", color: "#e74c3c" }}>
-                {Number(selectedOrder.totalPrice || 0).toLocaleString()}đ
-              </strong>
+              {/* Products */}
+              <div>
+                <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                  <PackageIcon className="w-5 h-5 text-slate-400" />
+                  Sản phẩm ({selectedOrder.items?.length || 0})
+                </h3>
+                <div className="space-y-3">
+                  {selectedOrder.items?.map((item, index) => (
+                    <div key={item.id || index} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+                      <img
+                        src={item.thumbnail}
+                        alt={item.name}
+                        className="w-14 h-14 rounded-lg object-cover"
+                        onError={(e) => { e.target.style.display = "none"; }}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-slate-800 text-sm line-clamp-2">{item.name}</p>
+                        <p className="text-xs text-slate-500 mt-0.5">{item.quantity} x {formatPrice(item.price)}đ</p>
+                      </div>
+                      <span className="font-semibold text-green-600 text-sm whitespace-nowrap">
+                        {formatPrice(item.price * item.quantity)}đ
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Total */}
+              <div className="mt-6 pt-4 border-t-2 border-slate-200 flex items-center justify-between">
+                <span className="text-lg font-semibold text-slate-700">Tổng tiền:</span>
+                <span className="text-2xl font-bold text-red-500">{formatPrice(selectedOrder.totalPrice)}đ</span>
+              </div>
+
+              {/* Actions */}
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={() => handleDelete(selectedOrder.id)}
+                  className="flex-1 py-2.5 bg-red-50 text-red-600 font-semibold rounded-xl hover:bg-red-100 transition-colors"
+                >
+                  Xóa đơn hàng
+                </button>
+                <button
+                  onClick={() => setSelectedOrder(null)}
+                  className="flex-1 py-2.5 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors"
+                >
+                  Đóng
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -460,27 +423,60 @@ const AdminOrdersPage = () => {
   );
 };
 
-const thStyle = {
-  padding: "14px 12px",
-  textAlign: "left",
-  fontWeight: "bold",
-  fontSize: "13px",
-  color: "#333",
-};
+// ========== ICONS ==========
+const SearchIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+);
 
-const tdStyle = {
-  padding: "14px 12px",
-  fontSize: "14px",
-};
+const FilterIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+  </svg>
+);
 
-const actionButton = (bgColor) => ({
-  padding: "6px 10px",
-  backgroundColor: bgColor,
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "12px",
-});
+const ChevronIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+);
+
+const EyeIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+  </svg>
+);
+
+const TrashIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+  </svg>
+);
+
+const EmptyIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+  </svg>
+);
+
+const CloseIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+
+const UserIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+  </svg>
+);
+
+const PackageIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
 
 export default AdminOrdersPage;

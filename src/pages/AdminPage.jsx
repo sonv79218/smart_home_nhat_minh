@@ -1,83 +1,253 @@
 // ============================================
-// ADMIN PAGE - Layout with Sidebar
+// ADMIN PAGE - Responsive Layout with Sidebar
 // ============================================
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 const AdminPage = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const location = useLocation();
+  const { logout, adminUser } = useAuth();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Close sidebar on route change (mobile)
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location]);
+
+  // Prevent body scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
 
   const handleLogout = async () => {
     await logout();
     navigate("/admin/login");
   };
 
+  const navItems = [
+    { to: "/admin/dashboard", icon: DashboardIcon, label: "Dashboard" },
+    { to: "/admin/products", icon: ProductsIcon, label: "Quản lý sản phẩm" },
+    { to: "/admin/orders", icon: OrdersIcon, label: "Quản lý đơn hàng" },
+    { to: "/admin/banners", icon: BannersIcon, label: "Quản lý Banner" },
+  ];
+
   return (
     <div className="flex min-h-screen bg-slate-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white flex flex-col">
+      {/* ========== MOBILE OVERLAY ========== */}
+      {/* Backdrop when sidebar is open on mobile */}
+      <div
+        className={`
+          fixed inset-0 bg-black/50 z-40 transition-opacity duration-300
+          lg:hidden
+          ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
+        `}
+        onClick={() => setIsSidebarOpen(false)}
+      />
+
+      {/* ========== SIDEBAR ========== */}
+      <aside
+        className={`
+          fixed lg:sticky top-0 left-0 z-50 h-screen w-64
+          bg-slate-900 text-white flex flex-col
+          transform transition-transform duration-300 ease-in-out
+          lg:translate-x-0 lg:static lg:z-auto
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        `}
+      >
         {/* Logo */}
-        <div className="p-6 border-b border-slate-700">
-          <h2 className="text-xl font-bold flex items-center gap-2">
-            <span className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-sm">
-              🏠
+        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-700">
+          <Link to="/admin/dashboard" className="flex items-center gap-3">
+            <span className="w-9 h-9 bg-gradient-to-br from-primary-500 to-accent rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-lg">🏠</span>
             </span>
-            Admin Panel
-          </h2>
+            <div>
+              <span className="font-bold text-base tracking-tight">Admin</span>
+              <span className="hidden sm:inline text-slate-400 text-sm ml-1">Panel</span>
+            </div>
+          </Link>
+          
+          {/* Close button - mobile only */}
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-800 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-1">
-          <NavLink to="/admin/dashboard" icon="📊">
-            Dashboard
-          </NavLink>
-          <NavLink to="/admin/products" icon="📦">
-            Quản lý sản phẩm
-          </NavLink>
-          <NavLink to="/admin/orders" icon="📋">
-            Quản lý đơn hàng
-          </NavLink>
-          <NavLink to="/admin/banners" icon="🖼️">
-            Quản lý Banner
-          </NavLink>
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.to || 
+              (item.to !== "/admin/dashboard" && location.pathname.startsWith(item.to));
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`
+                  flex items-center gap-3 px-4 py-3 rounded-xl
+                  transition-all duration-200
+                  ${isActive 
+                    ? "bg-primary-600 text-white shadow-lg shadow-primary-500/25" 
+                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                  }
+                `}
+              >
+                <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-white" : ""}`} />
+                <span className="text-sm font-medium">{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Bottom Actions */}
-        <div className="p-4 border-t border-slate-700 space-y-2">
+        <div className="p-3 border-t border-slate-700 space-y-1">
           <Link
             to="/"
-            className="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            target="_blank"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white transition-all duration-200"
           >
-            <span>🌐</span>
+            <GlobeIcon className="w-5 h-5" />
             <span className="text-sm font-medium">Xem website</span>
+            <ExternalIcon className="w-4 h-4 ml-auto opacity-50" />
           </Link>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all duration-200"
           >
-            <span>🚪</span>
+            <LogoutIcon className="w-5 h-5" />
             <span className="text-sm font-medium">Đăng xuất</span>
           </button>
         </div>
+
+        {/* User Info */}
+        <div className="p-4 border-t border-slate-700">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-purple-500 rounded-full flex items-center justify-center text-sm font-bold">
+              {adminUser?.email?.[0]?.toUpperCase() || "A"}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                {adminUser?.email?.split("@")[0] || "Admin"}
+              </p>
+              <p className="text-xs text-slate-400 truncate">
+                {adminUser?.email || ""}
+              </p>
+            </div>
+          </div>
+        </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        <Outlet />
-      </main>
+      {/* ========== MAIN CONTENT ========== */}
+      <div className="flex-1 flex flex-col min-h-screen lg:ml-0">
+        {/* Top Bar */}
+        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30 shadow-sm">
+          {/* Left: Hamburger + Title */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
+            >
+              <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <div>
+              <h1 className="text-lg lg:text-xl font-bold text-slate-800">
+                {navItems.find(item => 
+                  location.pathname === item.to || 
+                  (item.to !== "/admin/dashboard" && location.pathname.startsWith(item.to))
+                )?.label || "Admin Panel"}
+              </h1>
+            </div>
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-2">
+            <a
+              href={`tel:${"0888999888"}`}
+              className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+            >
+              <PhoneIcon className="w-4 h-4" />
+              <span>Hỗ trợ</span>
+            </a>
+            <button
+              onClick={handleLogout}
+              className="sm:hidden w-10 h-10 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 transition-colors"
+              title="Đăng xuất"
+            >
+              <LogoutIcon className="w-5 h-5" />
+            </button>
+          </div>
+        </header>
+
+        {/* Page Content */}
+        <main className="flex-1 p-4 lg:p-6 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };
 
-const NavLink = ({ to, icon, children }) => (
-  <Link
-    to={to}
-    className="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-  >
-    <span>{icon}</span>
-    <span className="text-sm font-medium">{children}</span>
-  </Link>
+// ========== ICONS ==========
+const DashboardIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+  </svg>
+);
+
+const ProductsIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
+
+const OrdersIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+  </svg>
+);
+
+const BannersIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const GlobeIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+  </svg>
+);
+
+const ExternalIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+  </svg>
+);
+
+const LogoutIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+  </svg>
+);
+
+const PhoneIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+  </svg>
 );
 
 export default AdminPage;

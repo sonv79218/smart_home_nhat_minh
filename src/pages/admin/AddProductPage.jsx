@@ -1,13 +1,11 @@
+// ============================================
+// ADD PRODUCT PAGE - Fully Responsive
+// ============================================
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addProduct } from "../../services/productService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
-import {
-  CATEGORIES,
-  BRANDS,
-  generateSlug,
-  generateSKU,
-} from "../../constants/productMeta";
+import { CATEGORIES, BRANDS, generateSlug, generateSKU } from "../../constants/productMeta";
 
 const AddProductPage = () => {
   const navigate = useNavigate();
@@ -31,10 +29,7 @@ const AddProductPage = () => {
     status: "active",
   });
 
-  const [specifications, setSpecifications] = useState([
-    { key: "", value: "" },
-  ]);
-
+  const [specifications, setSpecifications] = useState([{ key: "", value: "" }]);
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
@@ -173,335 +168,395 @@ const AddProductPage = () => {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "800px" }}>
-      <h1>Thêm sản phẩm mới</h1>
+    <div className="max-w-4xl mx-auto">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-slate-800">Thêm sản phẩm mới</h1>
+        <p className="text-slate-500 mt-1">Điền thông tin sản phẩm bên dưới</p>
+      </div>
 
-      <form onSubmit={handleSubmit}>
-        <div style={sectionStyle}>
-          <h3 style={sectionTitle}>Thông tin cơ bản</h3>
-
-          <div style={formGroup}>
-            <label style={labelStyle}>Tên sản phẩm *</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="VD: Camera IP Xiaomi 360"
-              style={inputStyle}
-              required
-            />
-          </div>
-
-          <div style={grid2Cols}>
-            <div style={formGroup}>
-              <label style={labelStyle}>SKU</label>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Basic Info Section */}
+        <Section title="Thông tin cơ bản" icon={<InfoIcon className="w-5 h-5" />}>
+          <div className="space-y-4">
+            {/* Product Name */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Tên sản phẩm <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
-                name="sku"
-                value={formData.sku}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                placeholder="Tự động tạo nếu để trống"
-                style={inputStyle}
+                placeholder="VD: Camera IP Xiaomi 360"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                required
               />
             </div>
 
-            <div style={formGroup}>
-              <label style={labelStyle}>Danh mục *</label>
+            {/* SKU & Category */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">SKU</label>
+                <input
+                  type="text"
+                  name="sku"
+                  value={formData.sku}
+                  onChange={handleChange}
+                  placeholder="Tự động tạo nếu để trống"
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Danh mục <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white"
+                  required
+                >
+                  <option value="">Chọn danh mục</option>
+                  {CATEGORIES.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Brand */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Thương hiệu <span className="text-red-500">*</span>
+              </label>
               <select
-                name="category"
-                value={formData.category}
+                name="brand"
+                value={formData.brand}
                 onChange={handleChange}
-                style={selectStyle}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white"
                 required
               >
-                <option value="">Chọn danh mục</option>
-                {CATEGORIES.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
+                <option value="">Chọn thương hiệu</option>
+                {BRANDS.map((brand) => (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.name}
                   </option>
                 ))}
               </select>
             </div>
           </div>
+        </Section>
 
-          <div style={formGroup}>
-            <label style={labelStyle}>Thương hiệu *</label>
-            <select
-              name="brand"
-              value={formData.brand}
-              onChange={handleChange}
-              style={selectStyle}
-              required
-            >
-              <option value="">Chọn thương hiệu</option>
-              {BRANDS.map((brand) => (
-                <option key={brand.id} value={brand.id}>
-                  {brand.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div style={sectionStyle}>
-          <h3 style={sectionTitle}>Giá & Tồn kho</h3>
-
-          <div style={grid3Cols}>
-            <div style={formGroup}>
-              <label style={labelStyle}>Giá bán *</label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                placeholder="0"
-                style={inputStyle}
-                min="0"
-                required
-              />
+        {/* Price & Stock Section */}
+        <Section title="Giá & Tồn kho" icon={<PriceIcon className="w-5 h-5" />}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Giá bán <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  placeholder="0"
+                  min="0"
+                  className="w-full px-4 py-2.5 pr-12 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                  required
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">đ</span>
+              </div>
             </div>
-
-            <div style={formGroup}>
-              <label style={labelStyle}>Giá gốc</label>
-              <input
-                type="number"
-                name="costPrice"
-                value={formData.costPrice}
-                onChange={handleChange}
-                placeholder="0"
-                style={inputStyle}
-                min="0"
-              />
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá gốc</label>
+              <div className="relative">
+                <input
+                  type="number"
+                  name="costPrice"
+                  value={formData.costPrice}
+                  onChange={handleChange}
+                  placeholder="0"
+                  min="0"
+                  className="w-full px-4 py-2.5 pr-12 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">đ</span>
+              </div>
             </div>
-
-            <div style={formGroup}>
-              <label style={labelStyle}>Giá giảm</label>
-              <input
-                type="number"
-                name="discountPrice"
-                value={formData.discountPrice}
-                onChange={handleChange}
-                placeholder="0"
-                style={inputStyle}
-                min="0"
-              />
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá giảm</label>
+              <div className="relative">
+                <input
+                  type="number"
+                  name="discountPrice"
+                  value={formData.discountPrice}
+                  onChange={handleChange}
+                  placeholder="0"
+                  min="0"
+                  className="w-full px-4 py-2.5 pr-12 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">đ</span>
+              </div>
             </div>
-          </div>
-
-          <div style={grid2Cols}>
-            <div style={formGroup}>
-              <label style={labelStyle}>Số lượng tồn kho</label>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Số lượng tồn kho</label>
               <input
                 type="number"
                 name="stock"
                 value={formData.stock}
                 onChange={handleChange}
                 placeholder="0"
-                style={inputStyle}
                 min="0"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
               />
             </div>
-
-            <div style={formGroup}>
-              <label style={labelStyle}>Cảnh báo tồn kho tối thiểu</label>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Cảnh báo tồn kho tối thiểu</label>
               <input
                 type="number"
                 name="minStockAlert"
                 value={formData.minStockAlert}
                 onChange={handleChange}
                 placeholder="5"
-                style={inputStyle}
                 min="0"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
               />
             </div>
           </div>
-        </div>
+        </Section>
 
-        <div style={sectionStyle}>
-          <h3 style={sectionTitle}>Hình ảnh</h3>
-
-          <div style={grid2Cols}>
-            <div style={formGroup}>
-              <label style={labelStyle}>Ảnh đại diện (Thumbnail) *</label>
+        {/* Images Section */}
+        <Section title="Hình ảnh" icon={<ImageIcon className="w-5 h-5" />}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Thumbnail */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Ảnh đại diện <span className="text-red-500">*</span>
+              </label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleThumbnailChange}
-                style={fileInputStyle}
-                required={!thumbnailPreview}
+                className="hidden"
+                id="thumbnail-upload"
               />
-              {thumbnailPreview && (
-                <img
-                  src={thumbnailPreview}
-                  alt="Thumbnail preview"
-                  style={previewImage}
-                />
-              )}
+              <label
+                htmlFor="thumbnail-upload"
+                className="flex flex-col items-center justify-center w-full h-40 border-2 border-slate-200 border-dashed rounded-xl cursor-pointer hover:border-primary-400 hover:bg-slate-50 transition-colors"
+              >
+                {thumbnailPreview ? (
+                  <img src={thumbnailPreview} alt="Thumbnail" className="w-full h-full object-contain p-2" />
+                ) : (
+                  <>
+                    <UploadIcon className="w-8 h-8 text-slate-400 mb-2" />
+                    <span className="text-sm text-slate-500">Click để chọn ảnh</span>
+                  </>
+                )}
+              </label>
             </div>
 
-            <div style={formGroup}>
-              <label style={labelStyle}>Ảnh phụ (Gallery)</label>
+            {/* Gallery */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Ảnh phụ (Gallery)</label>
               <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleImagesChange}
-                style={fileInputStyle}
+                className="hidden"
+                id="gallery-upload"
               />
-              {imagePreviews.length > 0 && (
-                <div style={previewGallery}>
-                  {imagePreviews.map((preview, index) => (
-                    <img
-                      key={index}
-                      src={preview}
-                      alt={`Preview ${index + 1}`}
-                      style={previewThumb}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div style={sectionStyle}>
-          <h3 style={sectionTitle}>Mô tả</h3>
-
-          <div style={formGroup}>
-            <label style={labelStyle}>Mô tả ngắn</label>
-            <textarea
-              name="shortDescription"
-              value={formData.shortDescription}
-              onChange={handleChange}
-              placeholder="Mô tả ngắn gọn về sản phẩm..."
-              rows="2"
-              style={textareaStyle}
-            />
-          </div>
-
-          <div style={formGroup}>
-            <label style={labelStyle}>Mô tả chi tiết</label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Mô tả chi tiết sản phẩm..."
-              rows="5"
-              style={textareaStyle}
-            />
-          </div>
-        </div>
-
-        <div style={sectionStyle}>
-          <h3 style={sectionTitle}>Thông số kỹ thuật</h3>
-
-          {specifications.map((spec, index) => (
-            <div key={index} style={specRow}>
-              <input
-                type="text"
-                value={spec.key}
-                onChange={(e) => handleSpecChange(index, "key", e.target.value)}
-                placeholder="VD: Wifi"
-                style={{ ...inputStyle, flex: 1 }}
-              />
-              <input
-                type="text"
-                value={spec.value}
-                onChange={(e) => handleSpecChange(index, "value", e.target.value)}
-                placeholder="VD: 802.11 b/g/n"
-                style={{ ...inputStyle, flex: 1 }}
-              />
-              <button
-                type="button"
-                onClick={() => removeSpecification(index)}
-                style={removeBtn}
-                disabled={specifications.length === 1}
+              <label
+                htmlFor="gallery-upload"
+                className="flex flex-col items-center justify-center w-full h-40 border-2 border-slate-200 border-dashed rounded-xl cursor-pointer hover:border-primary-400 hover:bg-slate-50 transition-colors"
               >
-                ×
-              </button>
+                {imagePreviews.length > 0 ? (
+                  <div className="flex gap-2 flex-wrap justify-center p-2">
+                    {imagePreviews.map((preview, index) => (
+                      <img key={index} src={preview} alt={`Preview ${index + 1}`} className="w-16 h-16 object-cover rounded-lg" />
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    <UploadIcon className="w-8 h-8 text-slate-400 mb-2" />
+                    <span className="text-sm text-slate-500">Chọn nhiều ảnh</span>
+                  </>
+                )}
+              </label>
             </div>
-          ))}
+          </div>
+        </Section>
 
+        {/* Description Section */}
+        <Section title="Mô tả" icon={<DescIcon className="w-5 h-5" />}>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Mô tả ngắn</label>
+              <textarea
+                name="shortDescription"
+                value={formData.shortDescription}
+                onChange={handleChange}
+                placeholder="Mô tả ngắn gọn về sản phẩm..."
+                rows="2"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm resize-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Mô tả chi tiết</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Mô tả chi tiết sản phẩm..."
+                rows="5"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm resize-none"
+              />
+            </div>
+          </div>
+        </Section>
+
+        {/* Specifications Section */}
+        <Section title="Thông số kỹ thuật" icon={<SpecIcon className="w-5 h-5" />}>
+          <div className="space-y-3">
+            {specifications.map((spec, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <input
+                  type="text"
+                  value={spec.key}
+                  onChange={(e) => handleSpecChange(index, "key", e.target.value)}
+                  placeholder="VD: Wifi"
+                  className="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+                <input
+                  type="text"
+                  value={spec.value}
+                  onChange={(e) => handleSpecChange(index, "value", e.target.value)}
+                  placeholder="VD: 802.11 b/g/n"
+                  className="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeSpecification(index)}
+                  disabled={specifications.length === 1}
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-500 hover:bg-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <CloseIcon className="w-5 h-5" />
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addSpecification}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
+            >
+              <PlusIcon className="w-4 h-4" />
+              Thêm thông số
+            </button>
+          </div>
+        </Section>
+
+        {/* Tags & Classification Section */}
+        <Section title="Tags & Phân loại" icon={<TagIcon className="w-5 h-5" />}>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Tags (phân cách bằng dấu phẩy)</label>
+              <input
+                type="text"
+                name="tags"
+                value={formData.tags}
+                onChange={handleChange}
+                placeholder="VD: wifi, camera, indoor"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+              />
+            </div>
+
+            {/* Checkboxes */}
+            <div className="flex flex-wrap gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="featured"
+                  checked={formData.featured}
+                  onChange={handleChange}
+                  className="w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
+                />
+                <span className="text-sm text-slate-700">Sản phẩm nổi bật</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="bestSeller"
+                  checked={formData.bestSeller}
+                  onChange={handleChange}
+                  className="w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
+                />
+                <span className="text-sm text-slate-700">Sản phẩm bán chạy</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="newProduct"
+                  checked={formData.newProduct}
+                  onChange={handleChange}
+                  className="w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
+                />
+                <span className="text-sm text-slate-700">Sản phẩm mới</span>
+              </label>
+            </div>
+
+            {/* Status */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Trạng thái</label>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white max-w-xs"
+              >
+                <option value="active">Hoạt động</option>
+                <option value="inactive">Không hoạt động</option>
+                <option value="draft">Bản nháp</option>
+              </select>
+            </div>
+          </div>
+        </Section>
+
+        {/* Form Actions */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-4">
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex-1 sm:flex-none px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+          >
+            {loading ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Đang thêm...
+              </>
+            ) : (
+              <>
+                <PlusIcon className="w-5 h-5" />
+                Thêm sản phẩm
+              </>
+            )}
+          </button>
           <button
             type="button"
-            onClick={addSpecification}
-            style={addBtn}
+            onClick={resetForm}
+            className="flex-1 sm:flex-none px-6 py-3 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors"
           >
-            + Thêm thông số
-          </button>
-        </div>
-
-        <div style={sectionStyle}>
-          <h3 style={sectionTitle}>Tags & Phân loại</h3>
-
-          <div style={formGroup}>
-            <label style={labelStyle}>Tags (phân cách bằng dấu phẩy)</label>
-            <input
-              type="text"
-              name="tags"
-              value={formData.tags}
-              onChange={handleChange}
-              placeholder="VD: wifi, camera, indoor"
-              style={inputStyle}
-            />
-          </div>
-
-          <div style={checkboxGroup}>
-            <label style={checkboxLabel}>
-              <input
-                type="checkbox"
-                name="featured"
-                checked={formData.featured}
-                onChange={handleChange}
-              />
-              <span>⭐ Sản phẩm nổi bật</span>
-            </label>
-
-            <label style={checkboxLabel}>
-              <input
-                type="checkbox"
-                name="bestSeller"
-                checked={formData.bestSeller}
-                onChange={handleChange}
-              />
-              <span>🔥 Sản phẩm bán chạy</span>
-            </label>
-
-            <label style={checkboxLabel}>
-              <input
-                type="checkbox"
-                name="newProduct"
-                checked={formData.newProduct}
-                onChange={handleChange}
-              />
-              <span>✨ Sản phẩm mới</span>
-            </label>
-          </div>
-
-          <div style={formGroup}>
-            <label style={labelStyle}>Trạng thái</label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              style={selectStyle}
-            >
-              <option value="active">Hoạt động</option>
-              <option value="inactive">Không hoạt động</option>
-              <option value="draft">Bản nháp</option>
-            </select>
-          </div>
-        </div>
-
-        <div style={formActions}>
-          <button type="submit" disabled={loading} style={submitBtn}>
-            {loading ? "Đang thêm..." : "Thêm sản phẩm"}
-          </button>
-          <button type="button" onClick={resetForm} style={resetBtn}>
             Reset
           </button>
-          <button type="button" onClick={() => navigate("/admin/products")} style={cancelBtn}>
+          <button
+            type="button"
+            onClick={() => navigate("/admin/products")}
+            className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
+          >
             Hủy
           </button>
         </div>
@@ -510,185 +565,74 @@ const AddProductPage = () => {
   );
 };
 
-const sectionStyle = {
-  backgroundColor: "#fff",
-  padding: "20px",
-  borderRadius: "8px",
-  marginBottom: "20px",
-  boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-};
+// ========== COMPONENTS ==========
+const Section = ({ title, icon, children }) => (
+  <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+    <div className="px-5 py-4 border-b border-slate-100 bg-slate-50">
+      <h2 className="font-semibold text-slate-800 flex items-center gap-2">
+        {icon}
+        {title}
+      </h2>
+    </div>
+    <div className="p-5">
+      {children}
+    </div>
+  </div>
+);
 
-const sectionTitle = {
-  marginTop: 0,
-  marginBottom: "16px",
-  paddingBottom: "10px",
-  borderBottom: "1px solid #eee",
-  fontSize: "16px",
-};
+// ========== ICONS ==========
+const InfoIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
 
-const formGroup = {
-  marginBottom: "16px",
-};
+const PriceIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
 
-const labelStyle = {
-  display: "block",
-  marginBottom: "6px",
-  fontWeight: "500",
-  fontSize: "14px",
-};
+const ImageIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
 
-const inputStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  border: "1px solid #ddd",
-  borderRadius: "6px",
-  fontSize: "14px",
-  boxSizing: "border-box",
-};
+const DescIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
 
-const selectStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  border: "1px solid #ddd",
-  borderRadius: "6px",
-  fontSize: "14px",
-  backgroundColor: "#fff",
-  cursor: "pointer",
-};
+const SpecIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+  </svg>
+);
 
-const textareaStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  border: "1px solid #ddd",
-  borderRadius: "6px",
-  fontSize: "14px",
-  resize: "vertical",
-  fontFamily: "inherit",
-};
+const TagIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+  </svg>
+);
 
-const fileInputStyle = {
-  width: "100%",
-  padding: "8px",
-  border: "1px dashed #ddd",
-  borderRadius: "6px",
-  fontSize: "14px",
-};
+const UploadIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+  </svg>
+);
 
-const previewImage = {
-  marginTop: "10px",
-  width: "150px",
-  height: "150px",
-  objectFit: "cover",
-  borderRadius: "8px",
-  border: "1px solid #ddd",
-};
+const PlusIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+  </svg>
+);
 
-const previewGallery = {
-  display: "flex",
-  gap: "8px",
-  marginTop: "10px",
-  flexWrap: "wrap",
-};
-
-const previewThumb = {
-  width: "60px",
-  height: "60px",
-  objectFit: "cover",
-  borderRadius: "6px",
-  border: "1px solid #ddd",
-};
-
-const grid2Cols = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "16px",
-};
-
-const grid3Cols = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr 1fr",
-  gap: "16px",
-};
-
-const specRow = {
-  display: "flex",
-  gap: "12px",
-  marginBottom: "12px",
-  alignItems: "center",
-};
-
-const addBtn = {
-  padding: "8px 16px",
-  backgroundColor: "#3498db",
-  color: "#fff",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "14px",
-};
-
-const removeBtn = {
-  width: "36px",
-  height: "36px",
-  backgroundColor: "#e74c3c",
-  color: "#fff",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "18px",
-  fontWeight: "bold",
-};
-
-const checkboxGroup = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "20px",
-  marginBottom: "16px",
-};
-
-const checkboxLabel = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  cursor: "pointer",
-  fontSize: "14px",
-};
-
-const formActions = {
-  display: "flex",
-  gap: "12px",
-  marginTop: "20px",
-};
-
-const submitBtn = {
-  padding: "12px 32px",
-  backgroundColor: "#27ae60",
-  color: "#fff",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "14px",
-  fontWeight: "bold",
-};
-
-const resetBtn = {
-  padding: "12px 24px",
-  backgroundColor: "#95a5a6",
-  color: "#fff",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "14px",
-};
-
-const cancelBtn = {
-  padding: "12px 24px",
-  backgroundColor: "#fff",
-  color: "#333",
-  border: "1px solid #ddd",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "14px",
-};
+const CloseIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
 
 export default AddProductPage;

@@ -1,3 +1,6 @@
+// ============================================
+// ADMIN BANNERS PAGE - Fully Responsive
+// ============================================
 import { useEffect, useState } from "react";
 import { getBanners, addBanner, updateBanner, deleteBanner } from "../../services/bannerService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
@@ -134,26 +137,23 @@ const AdminBannersPage = () => {
 
   if (loading) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
-        <h2>Đang tải dữ liệu...</h2>
+      <div className="flex items-center justify-center h-64">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin" />
+          <p className="text-slate-500 text-sm">Đang tải dữ liệu...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "24px",
-        }}
-      >
+    <div className="max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1>Quản lý Banner</h1>
-          <p style={{ color: "#666", marginTop: "4px" }}>
-            Tổng số: <strong>{banners.length}</strong> banner
+          <h1 className="text-2xl font-bold text-slate-800">Quản lý Banner</h1>
+          <p className="text-slate-500 mt-1">
+            Tổng số: <span className="font-semibold text-primary-600">{banners.length}</span> banner
           </p>
         </div>
         <button
@@ -161,65 +161,63 @@ const AdminBannersPage = () => {
             resetForm();
             setShowForm(true);
           }}
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "#27ae60",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 hover:bg-primary-700 hover:-translate-y-0.5 transition-all duration-200"
         >
-          + Thêm Banner
+          <PlusIcon className="w-5 h-5" />
+          <span>Thêm Banner</span>
         </button>
       </div>
 
+      {/* Banner Form */}
       {showForm && (
-        <div
-          style={{
-            backgroundColor: "#fff",
-            padding: "24px",
-            borderRadius: "12px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-            marginBottom: "24px",
-          }}
-        >
-          <h2 style={{ marginTop: 0, marginBottom: "20px" }}>
-            {editingBanner ? "Sửa Banner" : "Thêm Banner Mới"}
-          </h2>
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 lg:p-6 mb-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-bold text-slate-800">
+              {editingBanner ? "Sửa Banner" : "Thêm Banner Mới"}
+            </h2>
+            <button
+              onClick={resetForm}
+              className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
+            >
+              <CloseIcon className="w-5 h-5 text-slate-500" />
+            </button>
+          </div>
 
           <form onSubmit={handleSubmit}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+            {/* Title & Subtitle - Responsive Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <label style={{ display: "block", marginBottom: "6px", fontWeight: "bold" }}>
-                  Tiêu đề *
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Tiêu đề <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
                   placeholder="VD: Ưu đãi mùa hè"
-                  style={inputStyle}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                  required
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", marginBottom: "6px", fontWeight: "bold" }}>
-                  Phụ đề *
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Phụ đề <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.subtitle}
                   onChange={(e) => setFormData((prev) => ({ ...prev, subtitle: e.target.value }))}
                   placeholder="VD: Giảm giá lên đến 50%"
-                  style={inputStyle}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                  required
                 />
               </div>
             </div>
 
-            <div style={{ marginTop: "16px" }}>
-              <label style={{ display: "block", marginBottom: "6px", fontWeight: "bold" }}>
+            {/* Link */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 Link (tùy chọn)
               </label>
               <input
@@ -227,75 +225,78 @@ const AdminBannersPage = () => {
                 value={formData.link}
                 onChange={(e) => setFormData((prev) => ({ ...prev, link: e.target.value }))}
                 placeholder="VD: /products hoặc https://..."
-                style={inputStyle}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
               />
             </div>
 
-            <div style={{ marginTop: "16px" }}>
-              <label style={{ display: "block", marginBottom: "6px", fontWeight: "bold" }}>
-                Hình ảnh *
+            {/* Image Upload */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Hình ảnh <span className="text-red-500">*</span>
               </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                style={{ marginBottom: "12px" }}
-              />
-              {uploading && <span>Đang upload...</span>}
-              {formData.image && (
-                <div style={{ marginTop: "10px" }}>
-                  <img
-                    src={formData.image}
-                    alt="Preview"
-                    style={{
-                      width: "200px",
-                      height: "120px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                      border: "1px solid #ddd",
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div style={{ marginTop: "16px" }}>
-              <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
+              <div className="flex flex-col sm:flex-row gap-3 items-start">
                 <input
-                  type="checkbox"
-                  checked={formData.isActive}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, isActive: e.target.checked }))}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  id="banner-image-upload"
                 />
-                <span>Hiển thị banner này</span>
+                <label
+                  htmlFor="banner-image-upload"
+                  className="px-4 py-2.5 bg-slate-100 text-slate-700 font-medium rounded-xl cursor-pointer hover:bg-slate-200 transition-colors text-sm"
+                >
+                  {uploading ? "Đang upload..." : "Chọn ảnh"}
+                </label>
+                {formData.image && (
+                  <div className="relative group">
+                    <img
+                      src={formData.image}
+                      alt="Preview"
+                      className="w-32 h-20 object-cover rounded-xl border border-slate-200"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, image: "" }))}
+                      className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <CloseIcon className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Active Toggle */}
+            <div className="mb-6">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    checked={formData.isActive}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, isActive: e.target.checked }))}
+                    className="sr-only"
+                  />
+                  <div className={`w-11 h-6 rounded-full transition-colors ${formData.isActive ? "bg-primary-600" : "bg-slate-200"}`}>
+                    <div className={`w-5 h-5 bg-white rounded-full shadow transform transition-transform mt-0.5 ${formData.isActive ? "translate-x-5 ml-0.5" : "translate-x-0.5"}`} />
+                  </div>
+                </div>
+                <span className="text-sm font-medium text-slate-700">Hiển thị banner này</span>
               </label>
             </div>
 
-            <div style={{ marginTop: "24px", display: "flex", gap: "12px" }}>
+            {/* Form Actions */}
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="submit"
-                style={{
-                  padding: "10px 24px",
-                  backgroundColor: "#27ae60",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
+                className="flex-1 sm:flex-none px-6 py-2.5 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
               >
                 {editingBanner ? "Cập nhật" : "Thêm mới"}
               </button>
               <button
                 type="button"
                 onClick={resetForm}
-                style={{
-                  padding: "10px 24px",
-                  backgroundColor: "#95a5a6",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                }}
+                className="flex-1 sm:flex-none px-6 py-2.5 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors"
               >
                 Hủy
               </button>
@@ -304,123 +305,109 @@ const AdminBannersPage = () => {
         </div>
       )}
 
+      {/* Banners Grid */}
       {banners.length === 0 ? (
-        <div style={{ padding: "40px", textAlign: "center", color: "#999" }}>
-          <p>Chưa có banner nào. Hãy thêm banner mới!</p>
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
+          <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <ImageIcon className="w-8 h-8 text-slate-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-700 mb-2">Chưa có banner nào</h3>
+          <p className="text-slate-500 mb-4">Hãy thêm banner mới để bắt đầu</p>
+          <button
+            onClick={() => setShowForm(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+          >
+            <PlusIcon className="w-5 h-5" />
+            Thêm Banner
+          </button>
         </div>
       ) : (
-        <div style={{ overflowX: "auto" }}>
-          <table style={tableStyle}>
-            <thead>
-              <tr style={{ backgroundColor: "#f8f9fa" }}>
-                <th style={thStyle}>Hình ảnh</th>
-                <th style={thStyle}>Tiêu đề</th>
-                <th style={thStyle}>Phụ đề</th>
-                <th style={thStyle}>Trạng thái</th>
-                <th style={thStyle}>Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              {banners.map((banner) => (
-                <tr key={banner.id} style={{ borderBottom: "1px solid #eee" }}>
-                  <td style={tdStyle}>
-                    <img
-                      src={banner.image}
-                      alt={banner.title}
-                      style={{
-                        width: "120px",
-                        height: "70px",
-                        objectFit: "cover",
-                        borderRadius: "6px",
-                      }}
-                      onError={(e) => {
-                        e.target.style.display = "none";
-                      }}
-                    />
-                  </td>
-                  <td style={tdStyle}>{banner.title}</td>
-                  <td style={tdStyle}>{banner.subtitle}</td>
-                  <td style={tdStyle}>
-                    <button
-                      onClick={() => handleToggleActive(banner)}
-                      style={{
-                        padding: "4px 12px",
-                        borderRadius: "12px",
-                        fontSize: "12px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                        border: "none",
-                        backgroundColor: banner.isActive ? "#27ae60" : "#95a5a6",
-                        color: "#fff",
-                      }}
-                    >
-                      {banner.isActive ? "Active" : "Inactive"}
-                    </button>
-                  </td>
-                  <td style={tdStyle}>
-                    <div style={{ display: "flex", gap: "8px" }}>
-                      <button
-                        onClick={() => handleEdit(banner)}
-                        style={actionButton("#3498db")}
-                      >
-                        Sửa
-                      </button>
-                      <button
-                        onClick={() => handleDelete(banner.id)}
-                        style={actionButton("#e74c3c")}
-                      >
-                        Xóa
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+          {banners.map((banner) => (
+            <div
+              key={banner.id}
+              className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all hover:shadow-md ${
+                !banner.isActive ? "opacity-60" : ""
+              }`}
+            >
+              {/* Banner Image */}
+              <div className="relative aspect-[16/9] bg-slate-100">
+                <img
+                  src={banner.image}
+                  alt={banner.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+                {/* Status Badge */}
+                <div className="absolute top-3 right-3">
+                  <span
+                    className={`px-2.5 py-1 rounded-full text-xs font-semibold text-white ${
+                      banner.isActive ? "bg-green-500" : "bg-slate-400"
+                    }`}
+                  >
+                    {banner.isActive ? "Active" : "Inactive"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Banner Info */}
+              <div className="p-4">
+                <h3 className="font-semibold text-slate-800 line-clamp-1">{banner.title}</h3>
+                <p className="text-sm text-slate-500 mt-1 line-clamp-2">{banner.subtitle}</p>
+
+                {/* Actions */}
+                <div className="flex items-center gap-2 mt-4">
+                  <button
+                    onClick={() => handleToggleActive(banner)}
+                    className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${
+                      banner.isActive
+                        ? "bg-amber-50 text-amber-600 hover:bg-amber-100"
+                        : "bg-green-50 text-green-600 hover:bg-green-100"
+                    }`}
+                  >
+                    {banner.isActive ? "Tắt" : "Bật"}
+                  </button>
+                  <button
+                    onClick={() => handleEdit(banner)}
+                    className="flex-1 py-2 bg-blue-50 text-blue-600 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors"
+                  >
+                    Sửa
+                  </button>
+                  <button
+                    onClick={() => handleDelete(banner.id)}
+                    className="flex-1 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-lg hover:bg-red-100 transition-colors"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
   );
 };
 
-const inputStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  border: "1px solid #ddd",
-  borderRadius: "6px",
-  fontSize: "14px",
-};
+// ========== ICONS ==========
+const PlusIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+  </svg>
+);
 
-const tableStyle = {
-  width: "100%",
-  borderCollapse: "collapse",
-  backgroundColor: "#fff",
-  boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-  borderRadius: "8px",
-  overflow: "hidden",
-};
+const CloseIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
 
-const thStyle = {
-  padding: "14px 12px",
-  textAlign: "left",
-  fontWeight: "bold",
-  fontSize: "13px",
-  color: "#333",
-};
-
-const tdStyle = {
-  padding: "14px 12px",
-  fontSize: "14px",
-};
-
-const actionButton = (bgColor) => ({
-  padding: "6px 12px",
-  backgroundColor: bgColor,
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "12px",
-});
+const ImageIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
 
 export default AdminBannersPage;

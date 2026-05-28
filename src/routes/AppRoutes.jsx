@@ -13,6 +13,9 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 
+// Ecosystem Pages
+import LumiPage from "../pages/ecosystem/LumiPage";
+
 // Admin Pages
 import AdminPage from "../pages/AdminPage";
 import AdminProductsPage from "../pages/admin/AdminProductsPage";
@@ -75,20 +78,21 @@ const AppRoutes = () => {
           }
         />
 
+        {/* ECOSYSTEM ROUTES */}
+        <Route
+          path="/ecosystem/lumi"
+          element={
+            <MainLayout>
+              <LumiPage />
+            </MainLayout>
+          }
+        />
+
         {/* ADMIN ROUTES */}
         
         {/* Admin Login - Public */}
         <Route path="/admin/login" element={<AdminLogin />} />
 
-        {/* Admin Dashboard - Protected */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <ProtectedRouteAdmin>
-              <AdminDashboard />
-            </ProtectedRouteAdmin>
-          }
-        />
 
         {/* Admin Layout - Protected */}
         <Route
@@ -99,6 +103,11 @@ const AppRoutes = () => {
             </ProtectedRouteAdmin>
           }
         >
+          <Route
+            path="dashboard"
+            element={<AdminDashboard />}
+          />
+
           <Route
             path="products"
             element={<AdminProductsPage />}
