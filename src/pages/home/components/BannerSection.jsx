@@ -207,26 +207,14 @@ const BannerSection = ({ banners, current, setCurrent }) => {
               })}
             </h1>
 
-            {/* Subtitle - Desktop */}
-            <p className="banner-subtitle">{currentBanner.subtitle}</p>
-
+    
             {/* Subtitle - Mobile */}
-            {/* <p className="banner-subtitle show-mobile">
+            <p className="banner-subtitle show-mobile">
               {currentBanner.subtitle}
-            </p> */}
+            </p>
 
             {/* CTA Buttons */}
-            <div className="banner-cta">
-              <button className="cta-primary" onClick={handleCTA}>
-                <span>Khám phá ngay</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
-                {/* <button className="cta-secondary" onClick={() => navigate("/products")}>
-                  Xem sản phẩm
-                </button> */}
-            </div>
+
 
             {/* Stats */}
             <BannerStats stats={BANNER_STATS} />

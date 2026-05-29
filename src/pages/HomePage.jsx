@@ -128,7 +128,7 @@ const HomePage = () => {
       <div className="max-w-[1400px] mx-auto px-6">
      
         {/* Ecosystem Section */}
-        <EcosystemSection />
+        {/* <EcosystemSection /> */}
         {/* Category Grid Section */}
         {topCategories.length > 0 && (
           <CategoryGridSection categories={topCategories} />

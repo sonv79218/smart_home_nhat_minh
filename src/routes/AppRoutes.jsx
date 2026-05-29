@@ -20,6 +20,7 @@ import LumiPage from "../pages/ecosystem/LumiPage";
 import AdminPage from "../pages/AdminPage";
 import AdminProductsPage from "../pages/admin/AdminProductsPage";
 import AddProductPage from "../pages/admin/AddProductPage";
+import EditProductPage from "../pages/admin/EditProductPage";
 import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
 import AdminBannersPage from "../pages/admin/AdminBannersPage";
 import AdminLogin from "../pages/admin/AdminLogin";
@@ -116,6 +117,11 @@ const AppRoutes = () => {
           <Route
             path="products/add"
             element={<AddProductPage />}
+          />
+
+          <Route
+            path="products/edit/:id"
+            element={<EditProductPage />}
           />
 
           <Route
