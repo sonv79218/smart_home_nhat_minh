@@ -230,7 +230,7 @@ const ProductCard = ({ product }) => {
               ))}
             </div>
             <span className="text-[10px] text-slate-400">
-              {product.ratingCount || 0} đã bán
+              {product.sold || 0} đã bán
             </span>
           </div>
 

@@ -235,7 +235,7 @@ const CheckoutPage = () => {
                     <div key={item.id} className="summary-item">
                       <div className="item-image">
                         <img src={item.thumbnail} alt={item.name} />
-                        <span className="item-qty">{item.quantity}</span>
+                        {/* <span className="item-qty">{item.quantity}</span> */}
                       </div>
                       <div className="item-info">
                         <span className="item-name">{item.name}</span>

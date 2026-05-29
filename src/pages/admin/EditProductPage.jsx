@@ -25,6 +25,8 @@ const EditProductPage = () => {
     costPrice: "",
     stock: "",
     minStockAlert: "5",
+    rating: "",
+    sold: "",
     shortDescription: "",
     description: "",
     tags: "",
@@ -63,6 +65,8 @@ const EditProductPage = () => {
           costPrice: product.costPrice?.toString() || "",
           stock: product.stock?.toString() || "",
           minStockAlert: product.minStockAlert?.toString() || "5",
+          rating: product.rating?.toString() || "",
+          sold: product.sold?.toString() || "",
           shortDescription: product.shortDescription || "",
           description: product.description || "",
           tags: Array.isArray(product.tags) ? product.tags.join(", ") : "",
@@ -211,6 +215,8 @@ const EditProductPage = () => {
         costPrice: formData.costPrice ? Number(formData.costPrice) : 0,
         stock: Number(formData.stock) || 0,
         minStockAlert: Number(formData.minStockAlert) || 5,
+        rating: Number(formData.rating) || 0,
+        sold: Number(formData.sold) || 0,
         specifications: specsArray,
         tags: tagsArray,
         thumbnail: thumbnailUrl,
@@ -240,6 +246,8 @@ const EditProductPage = () => {
       costPrice: "",
       stock: "",
       minStockAlert: "5",
+      rating: "",
+      sold: "",
       shortDescription: "",
       description: "",
       tags: "",
@@ -383,7 +391,7 @@ const EditProductPage = () => {
 
         {/* Price & Stock Section */}
         <Section title="Giá & Tồn kho" icon={<PriceIcon className="w-5 h-5" />}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 Giá bán <span className="text-red-500">*</span>
@@ -452,6 +460,35 @@ const EditProductPage = () => {
                 value={formData.minStockAlert}
                 onChange={handleChange}
                 placeholder="5"
+                min="0"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Số sao (rating)</label>
+              <div className="relative">
+                <input
+                  type="number"
+                  name="rating"
+                  value={formData.rating}
+                  onChange={handleChange}
+                  placeholder="0 - 5"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  className="w-full px-4 py-2.5 pr-10 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">⭐</span>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Số lượt mua</label>
+              <input
+                type="number"
+                name="sold"
+                value={formData.sold}
+                onChange={handleChange}
+                placeholder="0"
                 min="0"
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
               />
