@@ -4,6 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 
+import ScrollToTop from "../components/common/ScrollToTop";
 import MainLayout from "../layouts/MainLayout";
 
 // Public Pages
@@ -33,6 +34,7 @@ import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* PUBLIC ROUTES */}
         <Route
