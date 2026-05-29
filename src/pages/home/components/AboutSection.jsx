@@ -1,202 +1,225 @@
 // ============================================
-// ABOUT SECTION - TAILWIND
-// Modern & Professional Company Introduction
+// ABOUT SECTION - REAL SMART HOME COMPANY STYLE
 // ============================================
 import { useNavigate } from "react-router-dom";
 import {
-  Target,
-  Zap,
-  Award,
-  Users,
-  Shield,
-  Truck,
-  Headphones,
+  Home,
+  Camera,
+  Wrench,
+  ShieldCheck,
+  Lightbulb,
+  Lock,
   CheckCircle,
+  ArrowRight,
+  ImageIcon,
 } from "lucide-react";
+
+const aboutImages = {
+  main: "",
+  project1: "",
+  project2: "",
+  project3: "",
+};
+
+const ImageBox = ({ src, label, className = "" }) => {
+  return (
+    <div className={`relative overflow-hidden bg-slate-100 border border-slate-200 ${className}`}>
+      {src ? (
+        <img src={src} alt={label} className="w-full h-full object-cover" />
+      ) : (
+        <div className="w-full h-full min-h-[160px] flex items-center justify-center text-center p-5">
+          <div>
+            <ImageIcon className="w-8 h-8 mx-auto mb-2 text-slate-400" />
+            <p className="text-sm font-semibold text-slate-500">{label}</p>
+            <p className="text-xs text-slate-400 mt-1">Thêm ảnh trong aboutImages</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const AboutSection = ({ companyInfo }) => {
   const navigate = useNavigate();
 
   if (!companyInfo) return null;
 
-  const stats = [
-    { value: "5+", label: "Năm kinh nghiệm" },
-    { value: "10K+", label: "Khách hàng" },
-    { value: "50+", label: "Sản phẩm" },
-    { value: "24/7", label: "Hỗ trợ" },
+  const services = [
+    {
+      icon: Lightbulb,
+      title: "Chiếu sáng thông minh",
+      desc: "Điều khiển đèn theo khu vực, lịch trình hoặc cảm biến.",
+    },
+    {
+      icon: Lock,
+      title: "Khóa cửa thông minh",
+      desc: "Mở khóa bằng vân tay, mã số, thẻ từ và app.",
+    },
+    {
+      icon: Camera,
+      title: "Camera an ninh",
+      desc: "Giám sát nhà ở, cửa hàng, văn phòng và cảnh báo từ xa.",
+    },
+    {
+      icon: Home,
+      title: "Tự động hóa nhà ở",
+      desc: "Kết nối công tắc, rèm, cảm biến, camera thành hệ thống.",
+    },
   ];
 
-  const features = [
-    { icon: Shield, title: "Sản phẩm chính hãng", color: "blue" },
-    { icon: Zap, title: "Công nghệ tiên tiến", color: "amber" },
-    { icon: Users, title: "Khách hàng là trung tâm", color: "green" },
-    { icon: Headphones, title: "Hỗ trợ 24/7", color: "purple" },
-    { icon: Truck, title: "Giao hàng nhanh", color: "cyan" },
-    { icon: Award, title: "Bảo hành dài hạn", color: "red" },
+  const commitments = [
+    "Tư vấn đúng nhu cầu sử dụng",
+    "Thiết bị chính hãng, rõ nguồn gốc",
+    "Thi công gọn gàng, đúng kỹ thuật",
+    "Hướng dẫn sử dụng sau lắp đặt",
+    "Bảo hành và hỗ trợ lâu dài",
   ];
-
-  const colorMap = {
-    blue: "bg-blue-100 text-blue-600",
-    amber: "bg-amber-100 text-amber-600",
-    green: "bg-green-100 text-green-600",
-    purple: "bg-purple-100 text-purple-600",
-    cyan: "bg-cyan-100 text-cyan-600",
-    red: "bg-red-100 text-red-600",
-  };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white relative">
-      {/* Top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-300/30 to-transparent" />
-      
-      <div className="max-w-[1400px] mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-10 md:mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full mb-4">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary-600">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <span className="text-sm font-semibold text-primary-600">Về chúng tôi</span>
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/40 to-transparent" />
+
+      <div className="max-w-[1400px] mx-auto px-5 md:px-6">
+        {/* Header */}
+        <div className="max-w-3xl mb-10 md:mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-50 border border-sky-100 text-sky-600 text-sm font-bold mb-4">
+            <Home size={16} />
+            Về Nhất Minh Smart Home
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary tracking-tight mb-3">
-            Nhật Minh Smart Home
+
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+            Không chỉ bán thiết bị, chúng tôi thi công một hệ thống Smart Home hoàn chỉnh
           </h2>
-          <p className="text-slate-500 text-base md:text-lg italic">
-            {companyInfo.slogan}
+
+          <p className="mt-4 text-slate-600 text-base md:text-lg leading-relaxed">
+            Nhất Minh Smart Home tư vấn, cung cấp và lắp đặt các giải pháp nhà thông minh
+            cho nhà phố, căn hộ, biệt thự, showroom và văn phòng.
           </p>
         </div>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-14">
-          {stats.map((stat, index) => (
-            <div 
-              key={index}
-              className="text-center p-6 md:p-8 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300"
-            >
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-600 tracking-tighter">
-                {stat.value}
-              </span>
-              <span className="text-xs md:text-sm font-semibold text-slate-500 uppercase tracking-wide mt-2 block">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
+        {/* Main Grid */}
+        <div className="grid lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
+          {/* Left Image Area */}
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-2 gap-4 h-full">
+              <ImageBox
+                src={aboutImages.main}
+                label="Ảnh showroom / đội ngũ / công trình chính"
+                className="col-span-2 h-[280px] md:h-[420px] rounded-3xl"
+              />
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 mb-12 md:mb-14">
-          {/* Left: Introduction */}
-          <div className="lg:col-span-3 flex flex-col gap-6">
-            {/* Intro Card */}
-            <div className="flex flex-col md:flex-row gap-6 p-6 md:p-8 bg-white rounded-3xl border border-slate-100 shadow-soft">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary-600 to-accent rounded-2xl flex items-center justify-center flex-shrink-0">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg md:text-xl font-bold text-secondary mb-3">Giới thiệu</h3>
-                <p className="text-slate-500 text-sm md:text-base leading-relaxed">
-                  {companyInfo.intro}
-                </p>
-              </div>
-            </div>
+              <ImageBox
+                src={aboutImages.project1}
+                label="Ảnh thi công 1"
+                className="h-[150px] md:h-[190px] rounded-2xl"
+              />
 
-            {/* Vision & Mission */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div className="flex gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-accent rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Target size={24} className="text-white" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-secondary mb-2">Tầm nhìn</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed">{companyInfo.vision}</p>
-                </div>
-              </div>
-              <div className="flex gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Zap size={24} className="text-white" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-secondary mb-2">Sứ mệnh</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed">{companyInfo.mission}</p>
-                </div>
-              </div>
+              <ImageBox
+                src={aboutImages.project2}
+                label="Ảnh thi công 2"
+                className="h-[150px] md:h-[190px] rounded-2xl"
+              />
             </div>
           </div>
 
-          {/* Right: Values & Features */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
-            {/* Core Values */}
-            <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-soft">
-              <h3 className="flex items-center gap-2 text-lg font-bold text-secondary mb-5">
-                <Award size={20} className="text-primary-600" />
-                Giá trị cốt lõi
+          {/* Right Content */}
+          <div className="lg:col-span-6 flex flex-col gap-5">
+            <div className="p-6 md:p-8 rounded-3xl bg-slate-950 text-white">
+              <div className="w-14 h-14 rounded-2xl bg-sky-500 flex items-center justify-center mb-5">
+                <Wrench size={28} />
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-extrabold mb-4">
+                Thi công thực tế, tư vấn theo từng công trình
               </h3>
-              <ul className="flex flex-col gap-3">
-                {companyInfo.values?.map((value, index) => (
-                  <li 
-                    key={index} 
-                    className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary-600 transition-colors cursor-default"
-                  >
-                    <CheckCircle size={18} className="text-green-500 flex-shrink-0" />
-                    <span>{value}</span>
-                  </li>
-                ))}
-              </ul>
+
+              <p className="text-slate-300 leading-relaxed">
+                Mỗi ngôi nhà có nhu cầu khác nhau. Chúng tôi khảo sát hiện trạng,
+                tư vấn hệ thiết bị phù hợp, lắp đặt, cấu hình app và hướng dẫn khách
+                sử dụng các ngữ cảnh thông minh trong sinh hoạt hằng ngày.
+              </p>
             </div>
 
-            {/* Why Choose Us */}
-            {/* <div className="grid grid-cols-2 gap-3">
-              {features.map((feature, index) => (
-                <div 
-                  key={index}
-                  className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-soft hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 cursor-default"
-                >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${colorMap[feature.color]}`}>
-                    <feature.icon size={20} />
+            <div className="grid sm:grid-cols-2 gap-4">
+              {services.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="w-11 h-11 rounded-2xl bg-white border border-slate-200 flex items-center justify-center mb-4">
+                      <Icon size={22} className="text-sky-500" />
+                    </div>
+
+                    <h4 className="font-extrabold text-slate-900 mb-2">
+                      {item.title}
+                    </h4>
+
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
-                  <span className="text-xs font-semibold text-secondary leading-tight">
-                    {feature.title}
-                  </span>
-                </div>
-              ))}
-            </div> */}
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 p-8 md:p-10 bg-gradient-to-br from-secondary to-slate-700 rounded-3xl shadow-strong">
-          <div className="text-center md:text-left">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-              Bạn cần tư vấn về giải pháp Smart Home?
+        {/* Commitment Row */}
+        <div className="mt-10 md:mt-14 grid lg:grid-cols-12 gap-6 md:gap-8">
+          <div className="lg:col-span-4 p-6 md:p-8 rounded-3xl bg-gradient-to-br from-sky-500 to-blue-600 text-white">
+            <ShieldCheck size={34} className="mb-5" />
+            <h3 className="text-2xl font-extrabold mb-3">
+              Cam kết rõ ràng
             </h3>
-            <p className="text-slate-300 text-sm md:text-base">
-              Liên hệ ngay để được hỗ trợ miễn phí từ đội ngũ chuyên gia
+            <p className="text-white/85 leading-relaxed">
+              Chúng tôi ưu tiên giải pháp bền, dễ dùng và có thể hỗ trợ lâu dài
+              sau khi bàn giao.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-            <button 
+
+          <div className="lg:col-span-8 grid sm:grid-cols-2 gap-4">
+            {commitments.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm"
+              >
+                <CheckCircle size={20} className="text-emerald-500 shrink-0" />
+                <span className="font-semibold text-slate-700">
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-10 md:mt-14 rounded-3xl bg-slate-100 border border-slate-200 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5">
+          <div>
+            <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 mb-2">
+              Muốn biết nhà bạn nên lắp hệ Smart Home nào?
+            </h3>
+            <p className="text-slate-600">
+              Gửi nhu cầu, Nhất Minh sẽ tư vấn phương án phù hợp với công trình và ngân sách.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <button
               onClick={() => navigate("/products")}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-accent text-white font-semibold rounded-xl shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-sky-500 text-white font-bold hover:bg-sky-400 transition"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>
-              Khám phá sản phẩm
+              Xem sản phẩm
+              <ArrowRight size={18} />
             </button>
-            <a 
+
+            <a
               href={`tel:${companyInfo.phone}`}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl border-2 border-white/20 hover:bg-white/20 transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-slate-950 text-white font-bold hover:bg-slate-800 transition"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              {companyInfo.phone}
+              Gọi tư vấn
             </a>
           </div>
         </div>

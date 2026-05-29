@@ -95,69 +95,7 @@ const ContactSection = ({ companyInfo, companySocial }) => {
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50 relative">
-      {/* Top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-300/30 to-transparent" />
-      
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-10 md:mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 rounded-full mb-4">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary-600">
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-            </svg>
-            <span className="text-sm font-semibold text-primary-600">Liên hệ</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-secondary tracking-tight mb-3">
-            Kết nối với chúng tôi
-          </h2>
-          <p className="text-slate-500 text-sm md:text-base">
-            Đội ngũ hỗ trợ luôn sẵn sàng giúp đỡ bạn 24/7
-          </p>
-        </div>
-
-        {/* Contact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-10 md:mb-12">
-          {contactMethods.map((method, index) => (
-            <a
-              key={index}
-              href={method.href || "#"}
-              onClick={(e) => !method.href && e.preventDefault()}
-              className={`
-                flex items-center gap-4 p-5 md:p-6
-                bg-white rounded-2xl border-2
-                transition-all duration-300
-                ${method.href 
-                  ? "cursor-pointer hover:border-primary-500 hover:-translate-y-1 hover:shadow-lg" 
-                  : "cursor-default"
-                }
-                border-slate-200
-              `}
-            >
-              <div className="w-14 h-14 bg-gradient-to-br from-primary-600 to-accent rounded-2xl flex items-center justify-center flex-shrink-0">
-                <div className="text-white">{method.icon}</div>
-              </div>
-              <div className="flex-1 min-w-0">
-                <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">
-                  {method.label}
-                </span>
-                <span className="block text-sm font-semibold text-secondary leading-tight">
-                  {method.value}
-                </span>
-              </div>
-              {method.href && (
-                <div className="text-slate-400 group-hover:text-primary-600 transition-colors">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
-              )}
-            </a>
-          ))}
-        </div>
-
-        {/* Social Links */}
-        <div className="text-center mb-10 md:mb-12">
+      <div className="text-center mb-10 md:mb-12">
           <h3 className="text-base md:text-lg font-bold text-secondary mb-5">
             Theo dõi chúng tôi
           </h3>
@@ -178,30 +116,8 @@ const ContactSection = ({ companyInfo, companySocial }) => {
               ) : null
             )}
           </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 p-6 md:p-10 bg-gradient-to-br from-secondary to-slate-700 rounded-3xl shadow-strong">
-          <div className="text-center md:text-left">
-            <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-2">
-              Bạn cần hỗ trợ ngay?
-            </h3>
-            <p className="text-slate-300 text-sm md:text-base">
-              Đội ngũ chuyên gia sẵn sàng tư vấn miễn phí
-            </p>
-          </div>
-          <a 
-            href={`tel:${companyInfo.phone}`}
-            className="flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200 whitespace-nowrap"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-            Gọi ngay {companyInfo.phone}
-          </a>
-        </div>
+  
       </div>
-    </section>
   );
 };
 
