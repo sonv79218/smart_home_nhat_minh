@@ -202,9 +202,11 @@ const CategoryProductSection = ({
         viewAllLink={link}
       />
 
-      {hasBanner && (
-        <CategoryBanner banner={category.banner} />
-      )}
+{hasBanner && (
+  <div className="hidden md:block">
+    <CategoryBanner banner={category.banner} />
+  </div>
+)}
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
         {paginatedProducts.map((product) => (

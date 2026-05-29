@@ -17,7 +17,7 @@ const CategoryGridSection = ({ categories }) => {
 
   return (
     <section className="mb-8 md:mb-15">
-      <div className="max-w-[1600px] mx-auto px-3 sm:px-5 md:px-6">
+      <div className="max-w-[1600px] mx-auto px-0 sm:px-5 md:px-6">
         
         {/* Header */}
         <div className="text-center mb-4 md:mb-6">

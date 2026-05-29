@@ -33,16 +33,6 @@ const EcosystemCard = ({ ecosystem }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
         
-        {/* Logo Badge */}
-        <div className="absolute top-4 left-4 md:top-5 md:left-5">
-          <div className="w-14 h-14 md:w-16 md:h-16 bg-white/95 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
-            <img 
-              src={ecosystem.logo} 
-              alt={`${ecosystem.name} logo`} 
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
 
         {/* Color Accent Line */}
         <div 

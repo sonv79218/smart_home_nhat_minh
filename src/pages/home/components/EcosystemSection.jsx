@@ -2,6 +2,9 @@
 // ECOSYSTEM SECTION - TAILWIND
 // ============================================
 import EcosystemCard from "./EcosystemCard";
+import hunonicImg from "../../../assets/brand/hunonic.png";
+import lumiImg from "../../../assets/brand/lumi.png";
+import aqaraImg from "../../../assets/brand/aqara.png";
 
 const ecosystems = [
   {
@@ -9,9 +12,9 @@ const ecosystems = [
     name: "Aqara",
     description: "Hệ sinh thái smart home cao cấp hỗ trợ Apple HomeKit và Zigbee.",
     features: ["HomeKit", "Automation", "Zigbee", "AI Smart"],
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Aqara_logo.svg/200px-Aqara_logo.svg.png",
-    color: "#2563eb",
+    image: aqaraImg,
+    // logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Aqara_logo.svg/200px-Aqara_logo.svg.png",
+    color: "#4e5055",
     link: "/products?brand=aqara",
   },
   {
@@ -19,9 +22,9 @@ const ecosystems = [
     name: "Lumi",
     description: "Giải pháp nhà thông minh toàn diện dành cho gia đình Việt.",
     features: ["Made in Vietnam", "Tiếng Việt", "Dễ sử dụng", "Ổn định"],
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop",
-    logo: "https://lumi.vn/favicon.ico",
-    color: "#0f172a",
+    image: lumiImg,
+    // logo: "https://lumi.vn/favicon.ico",
+    color: "#24743f",
     link: "/products?brand=lumi",
   },
   {
@@ -29,9 +32,9 @@ const ecosystems = [
     name: "Hunonic",
     description: "Thiết bị thông minh giá tốt, dễ lắp đặt và điều khiển từ xa.",
     features: ["Giá tốt", "WiFi", "Điều khiển app", "Smart Life"],
-    image: "https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&h=400&fit=crop",
-    logo: "https://hunonic.com/favicon.ico",
-    color: "#38bdf8",
+    image: hunonicImg,
+    // logo: "https://hunonic.com/favicon.ico",
+    color: "#04c53a",
     link: "/products?brand=hunonic",
   },
 ];

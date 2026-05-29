@@ -12,6 +12,7 @@ import ProductsPage from "../pages/ProductsPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import AboutPage from "../pages/AboutPage";
 
 // Ecosystem Pages
 import LumiPage from "../pages/ecosystem/LumiPage";
@@ -75,6 +76,15 @@ const AppRoutes = () => {
           element={
             <MainLayout>
               <CheckoutPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <MainLayout>
+              <AboutPage />
             </MainLayout>
           }
         />

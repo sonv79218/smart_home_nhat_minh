@@ -13,6 +13,7 @@ import {
   SHADOW,
   TRANSITION,
 } from "../../styles/designSystem";
+import { getCategoryIcon } from "../../pages/home/components/categoryIcons";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -133,6 +134,13 @@ const Navbar = () => {
             >
               Sản phẩm
             </Link>
+
+            <Link
+              to="/about"
+              className={`menu-item ${isActive("/about") ? "active" : ""}`}
+            >
+              Giới thiệu
+            </Link>
           </div>
 
           {/* Search Bar */}
@@ -245,8 +253,37 @@ const Navbar = () => {
             Sản phẩm
           </Link>
 
+          <Link to="/about" className="mobile-menu-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Giới thiệu
+          </Link>
+<div className="mobile-categories">
+  <p className="mobile-category-title">
+    Danh mục sản phẩm
+  </p>
+
+  {CATEGORIES.map((category) => {
+    const Icon = getCategoryIcon(category.id);
+
+    return (
+      <Link
+        key={category.id}
+        to={`/products?category=${category.id}`}
+        className="mobile-category-item"
+      >
+        <div className="mobile-category-icon">
+          <Icon size={22} strokeWidth={2} />
+        </div>
+
+        <span>{category.name}</span>
+      </Link>
+    );
+  })}
+</div>
           {/* Mobile Categories */}
-          <div className="mobile-categories">
+          {/* <div className="mobile-categories">
             <p className="mobile-category-title">Danh mục sản phẩm</p>
             {CATEGORIES.map((category) => (
               <Link
@@ -258,7 +295,7 @@ const Navbar = () => {
                 <span>{category.name}</span>
               </Link>
             ))}
-          </div>
+          </div> */}
 
           <Link to="/cart" className="mobile-menu-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
