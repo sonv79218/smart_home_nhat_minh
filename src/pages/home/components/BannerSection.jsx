@@ -142,7 +142,7 @@ const BannerSection = ({ banners, current, setCurrent }) => {
   if (!banners || banners.length === 0) {
     return (
       <section className="banner-section">
-        <div className="banner-empty">
+        {/* <div className="banner-empty">
           <div className="banner-empty-content">
             <h2>Smart Home</h2>
             <p>Giải pháp nhà thông minh cho cuộc sống hiện đại</p>
@@ -150,7 +150,7 @@ const BannerSection = ({ banners, current, setCurrent }) => {
               Khám phá ngay
             </button>
           </div>
-        </div>
+        </div> */}
       </section>
     );
   }
