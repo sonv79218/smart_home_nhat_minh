@@ -106,7 +106,10 @@ const HomePage = () => {
           setCurrent={setCurrent}
         />
       </div>
-
+        {/* Category Grid Section */}
+        {topCategories.length > 0 && (
+          <CategoryGridSection categories={topCategories} />
+        )}
       {/* ============================================ */}
       {/* FLOATING CONTACT BUTTONS */}
       {/* ============================================ */}
@@ -120,10 +123,7 @@ const HomePage = () => {
         {/* Ecosystem Section */}
         <EcosystemSection />
         
-        {/* Category Grid Section */}
-        {topCategories.length > 0 && (
-          <CategoryGridSection categories={topCategories} />
-        )}
+
 
         {/* Category Product Sections - Optimized */}
         {topCategories.map((category) => {
