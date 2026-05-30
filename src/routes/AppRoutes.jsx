@@ -6,6 +6,7 @@ import {
 
 import ScrollToTop from "../components/common/ScrollToTop";
 import MainLayout from "../layouts/MainLayout";
+import AdminLoginRoute from "./AdminLoginRoute";
 
 // Public Pages
 import HomePage from "../pages/HomePage";
@@ -20,6 +21,9 @@ import NotFoundPage from "../pages/NotFoundPage";
 import LumiPage from "../pages/ecosystem/LumiPage";
 import Hunonic from "../pages/ecosystem/HunonicPage";
 import AqaraPage from "../pages/ecosystem/AqaraPage";
+import SolutionsByHousePage from "../pages/projects/ProjectsPage";
+
+
 
 // Admin Pages
 import AdminPage from "../pages/AdminPage";
@@ -119,52 +123,70 @@ const AppRoutes = () => {
             </MainLayout>
           }
         />
+        <Route
+          path="/solutions-by-house"
+          element={
+            <MainLayout>
+              <SolutionsByHousePage />
+            </MainLayout>
+          }
+        />
+
 
         {/* ADMIN ROUTES */}
         
         {/* Admin Login - Public */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+  path="/admin/login"
+  element={
+    <AdminLoginRoute>
+      <AdminLogin />
+    </AdminLoginRoute>
+  }
+/>
 
 
         {/* Admin Layout - Protected */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRouteAdmin>
-              <AdminPage />
-            </ProtectedRouteAdmin>
-          }
-        >
-          <Route
-            path="dashboard"
-            element={<AdminDashboard />}
-          />
+<Route
+  path="/admin"
+  element={
+    <ProtectedRouteAdmin>
+      <AdminPage />
+    </ProtectedRouteAdmin>
+  }
+>
+  <Route index element={<AdminDashboard />} />
 
-          <Route
-            path="products"
-            element={<AdminProductsPage />}
-          />
+  <Route
+    path="dashboard"
+    element={<AdminDashboard />}
+  />
 
-          <Route
-            path="products/add"
-            element={<AddProductPage />}
-          />
+  <Route
+    path="products"
+    element={<AdminProductsPage />}
+  />
 
-          <Route
-            path="products/edit/:id"
-            element={<EditProductPage />}
-          />
+  <Route
+    path="products/add"
+    element={<AddProductPage />}
+  />
 
-          <Route
-            path="orders"
-            element={<AdminOrdersPage />}
-          />
+  <Route
+    path="products/edit/:id"
+    element={<EditProductPage />}
+  />
 
-          <Route
-            path="banners"
-            element={<AdminBannersPage />}
-          />
-        </Route>
+  <Route
+    path="orders"
+    element={<AdminOrdersPage />}
+  />
+
+  <Route
+    path="banners"
+    element={<AdminBannersPage />}
+  />
+</Route>
 
         {/* 404 - Not Found */}
         <Route
