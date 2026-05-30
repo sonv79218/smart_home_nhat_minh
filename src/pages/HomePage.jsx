@@ -1,18 +1,20 @@
 // ============================================
 // HOMEPAGE - MODERN PREMIUM ECOMMERCE
+// OPTIMIZED: Firestore queries with pagination + Fallback support
 // ============================================
 import { useState, useEffect, useMemo } from "react";
-import { getProducts } from "../services/productService";
-import { getBanners } from "../services/bannerService";
+import { getFeaturedProducts, getProductsByCategory } from "../services/productService";
+import { getActiveBanners } from "../services/bannerService";
 import { CATEGORIES } from "../constants/productMeta";
 import { companyInfo, companySocial } from "../data/company";
+import { useApp } from "../contexts/AppContext";
+import OfflineNotice from "../components/common/OfflineNotice";
 
 import {
   BannerSection,
   FeaturesBar,
   CategoryGridSection,
   CategoryProductSection,
-  FeaturedProductsSection,
   EcosystemSection,
   AboutSection,
   ContactSection,
@@ -29,75 +31,57 @@ const PRODUCTS_LIMIT = {
 };
 
 const HomePage = () => {
+  const { offlineMode } = useApp();
   const [current, setCurrent] = useState(0);
-  const [products, setProducts] = useState([]);
   const [banners, setBanners] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [productsByCategory, setProductsByCategory] = useState({});
   const [loading, setLoading] = useState(true);
 
   // ============================================
-  // DATA FETCHING
+  // DATA FETCHING - OPTIMIZED
   // ============================================
   useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const data = await getBanners();
-        const activeBanners = data.filter((b) => b.isActive);
-        setBanners(activeBanners);
-      } catch (error) {
-        console.error("Error fetching banners:", error);
-      }
-    };
-
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getProducts();
-        setProducts(data.filter((p) => p.status === "active"));
+
+        // Fetch banners (only active ones)
+        const bannersData = await getActiveBanners();
+        setBanners(bannersData);
+
+        // Fetch featured products
+        const featured = await getFeaturedProducts(PRODUCTS_LIMIT.featured);
+        setFeaturedProducts(featured);
+
+        // Fetch products by category
+        const categoryProducts = {};
+        for (const category of CATEGORIES.slice(0, PRODUCTS_LIMIT.topCategory)) {
+          const products = await getProductsByCategory(
+            category.id,
+            PRODUCTS_LIMIT.category
+          );
+          if (products.length > 0) {
+            categoryProducts[category.id] = products;
+          }
+        }
+        setProductsByCategory(categoryProducts);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching homepage data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBanners();
-    fetchProducts();
+    fetchData();
   }, []);
 
   // ============================================
-  // MEMOIZED DATA
+  // FILTERED CATEGORIES - Only categories with products
   // ============================================
-  const getProductsByCategory = useMemo(() => {
-    return (categoryId, limit = PRODUCTS_LIMIT.category) => {
-      return products
-        .filter((p) => p.category === categoryId)
-        .sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
-        })
-        .slice(0, limit);
-    };
-  }, [products]);
-
-  const getFeaturedProducts = useMemo(() => {
-    return () => {
-      return [...products]
-        .sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
-        })
-        .slice(0, PRODUCTS_LIMIT.featured);
-    };
-  }, [products]);
-
-  // const categoriesWithProducts = useMemo(() => {
-  //   return CATEGORIES.filter((cat) =>
-  //     products.some((p) => p.category === cat.id)
-  //   );
-  // }, [products]);
-  const categoriesWithProducts = CATEGORIES;
+  const categoriesWithProducts = useMemo(() => {
+    return CATEGORIES.filter((cat) => productsByCategory[cat.id]?.length > 0);
+  }, [productsByCategory]);
 
   const topCategories = categoriesWithProducts.slice(0, PRODUCTS_LIMIT.topCategory);
 
@@ -106,6 +90,11 @@ const HomePage = () => {
   // ============================================
   return (
     <div className="w-full min-h-screen">
+      {/* ============================================ */}
+      {/* OFFLINE NOTICE - Fallback Mode Banner */}
+      {/* ============================================ */}
+      {offlineMode && <OfflineNotice />}
+
       {/* ============================================ */}
       {/* BANNER - FULL WIDTH (w-full) */}
       {/* ============================================ */}
@@ -129,14 +118,15 @@ const HomePage = () => {
      
         {/* Ecosystem Section */}
         <EcosystemSection />
+        
         {/* Category Grid Section */}
         {topCategories.length > 0 && (
           <CategoryGridSection categories={topCategories} />
         )}
 
-        {/* Category Product Sections */}
-        {categoriesWithProducts.map((category) => {
-          const categoryProducts = getProductsByCategory(category.id);
+        {/* Category Product Sections - Optimized */}
+        {topCategories.map((category) => {
+          const categoryProducts = productsByCategory[category.id] || [];
           if (categoryProducts.length === 0) return null;
           return (
             <CategoryProductSection
@@ -149,19 +139,9 @@ const HomePage = () => {
           );
         })}
 
-        {/* Featured Products Section */}
-        {/* {products.length > 0 && (
-          <FeaturedProductsSection
-            products={getFeaturedProducts()}
-            loading={loading}
-          />
-        )} */}
-
-
-
         {/* About Section */}
         <AboutSection companyInfo={companyInfo} />
-   {/* Features Bar */}
+        {/* Features Bar */}
         <FeaturesBar />
         {/* Contact Section */}
         <ContactSection

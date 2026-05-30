@@ -1,0 +1,859 @@
+[
+  {
+    "id": "1c2Y6bFtdJqDejOZb1gL",
+    "name": "Vũ Trường Sơn",
+    "brand": "Hunomic",
+    "category": "smart-plug",
+    "price": 123,
+    "discountPrice": 123,
+    "stock": 123,
+    "shortDescription": "123",
+    "description": "123",
+    "specifications": {
+      "wifi": "123",
+      "appSupport": "123",
+      "voiceAssistant": "123"
+    },
+    "featured": true,
+    "status": "active",
+    "slug": "vũ-trường-sơn",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779760681/joqhq0qxmsdm7aobpsfd.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779760681/joqhq0qxmsdm7aobpsfd.jpg"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "createdAt": {
+      "_seconds": 1779760682,
+      "_nanoseconds": 860000000
+    },
+    "updatedAt": {
+      "_seconds": 1779760682,
+      "_nanoseconds": 860000000
+    }
+  },
+  {
+    "id": "9aNTkobhxH4UAlb5fWDw",
+    "name": "camera a1",
+    "sku": "CAM-CAME-2337",
+    "brand": "hunonic",
+    "category": "camera",
+    "price": 1000000,
+    "discountPrice": 0,
+    "costPrice": 1500000,
+    "stock": 0,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 56,
+    "shortDescription": "mô tả ngắn gọn",
+    "description": "mô tả chi tiết",
+    "featured": true,
+    "bestSeller": true,
+    "newProduct": true,
+    "slug": "camera-a1",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780025712/jopnmblq4tnvzja582of.jpg",
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780025713,
+      "_nanoseconds": 705000000
+    },
+    "status": "draft",
+    "updatedAt": {
+      "_seconds": 1780041227,
+      "_nanoseconds": 585000000
+    }
+  },
+  {
+    "id": "BJWPc0Usq3xOn07e70qP",
+    "name": "Động cơ rèm kéo ngang thông minh Aqara Zigbee - Quốc tế",
+    "sku": "OTH-NGCR-3983",
+    "brand": "aqara",
+    "category": "other",
+    "price": 15000000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 11,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 9,
+    "shortDescription": "Động cơ rèm kéo ngang thông minh Aqara Zigbee – Bản Quốc Tế là thiết bị tự động hóa rèm cửa, cho phép đóng/mở rèm bằng điện thoại, giọng nói hoặc lịch trình. Hỗ trợ Zigbee 3.0, tương thích Apple HomeKit, Google Home và Alexa, mang đến trải nghiệm nhà thông minh tiện lợi và hiện đại.",
+    "description": "Động cơ rèm Aqara Zigbee là giải pháp tự động hóa rèm cửa hiện đại, giúp người dùng điều khiển rèm kéo ngang một cách dễ dàng mà không cần thao tác thủ công. Thiết bị phù hợp cho gia đình, văn phòng, khách sạn hoặc không gian cao cấp, mang lại sự tiện nghi và sang trọng cho hệ thống nội thất.\n\nSản phẩm cho phép điều khiển rèm từ xa qua ứng dụng Aqara Home, điều khiển bằng giọng nói hoặc thiết lập lịch trình tự động mở/đóng theo thời gian trong ngày. Ngoài ra, người dùng có thể tạo ngữ cảnh thông minh như “Buổi sáng”, “Xem phim”, “Đi ngủ” để rèm tự động hoạt động theo kịch bản.\n\nĐộng cơ sử dụng giao thức Zigbee 3.0 giúp kết nối ổn định, phản hồi nhanh và tiết kiệm điện năng khi hoạt động cùng hub Aqara. Sản phẩm tương thích với Apple HomeKit, Google Assistant, Amazon Alexa và Matter (qua hub), dễ dàng tích hợp vào hệ sinh thái nhà thông minh.\n\nThiết bị vận hành êm ái, độ ồn thấp, phù hợp không gian sinh hoạt cần sự yên tĩnh. Ngoài ra, động cơ có thể kéo rèm nhẹ nhàng, ổn định và hỗ trợ dừng chính xác theo vị trí mong muốn.\n\nCÔNG DỤNG\n• Tự động đóng/mở rèm cửa theo nhu cầu\n• Điều khiển rèm từ xa qua điện thoại hoặc giọng nói\n• Tạo ngữ cảnh thông minh trong hệ sinh thái Aqara\n• Hẹn giờ đóng/mở rèm theo lịch trình\n• Tăng tiện nghi và hiện đại cho không gian sống\n• Hỗ trợ tiết kiệm năng lượng (giảm nắng, giữ nhiệt độ phòng)\n\nTÍNH NĂNG NỔI BẬT\n• Hỗ trợ Zigbee 3.0 kết nối ổn định\n• Điều khiển qua app, giọng nói và tự động hóa\n• Tương thích Apple HomeKit, Google Home, Alexa, Matter (qua hub)\n• Hoạt động êm ái, độ ồn thấp\n• Hỗ trợ tạo kịch bản thông minh đa dạng\n• Dừng rèm chính xác theo vị trí cài đặt\n• Thiết kế nhỏ gọn, dễ lắp đặt trên thanh ray rèm kéo ngang\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara Curtain Driver (Zigbee)\n• Phiên bản: Quốc Tế\n• Loại rèm hỗ trợ: rèm kéo ngang (track curtain)\n• Kết nối: Zigbee 3.0\n• Điều khiển: Aqara Home / Apple HomeKit / Google Home / Alexa\n• Nguồn điện: Pin sạc hoặc nguồn DC (tùy phiên bản)\n• Thời lượng pin: lên đến vài tháng sử dụng (tùy tần suất)\n• Tốc độ kéo: ổn định, êm ái\n• Tải trọng hỗ trợ: phù hợp nhiều loại rèm tiêu chuẩn\n• Lắp đặt: gắn ray rèm\n• Màu sắc: Trắng",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "ong-co-rem-keo-ngang-thong-minh-aqara-zigbee-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780049763/odnr68azdobx3kvfs0uu.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780049764/jhqix3acvq8hbfz0d8y5.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780049764/krxoheseieiv9toskmfo.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780049765/o3tjirodqopcifjkguri.jpg"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780049765,
+      "_nanoseconds": 214000000
+    },
+    "updatedAt": {
+      "_seconds": 1780049765,
+      "_nanoseconds": 214000000
+    }
+  },
+  {
+    "id": "COdUVCLEsFjVMK0NsBit",
+    "name": "Công tắc cảm ứng WiFi Hunonic 2 Nút 1 Ổ, HCN, màu Đen",
+    "sku": "SMA-CNGT-8317",
+    "brand": "hunonic",
+    "category": "smart-switch",
+    "price": 700000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 0,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-cam-ung-wifi-hunonic-2-nut-1-o-hcn-mau-en",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779960261/a8r5fje94pw8jz0y6mrf.jpg",
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779960263,
+      "_nanoseconds": 593000000
+    },
+    "updatedAt": {
+      "_seconds": 1779960263,
+      "_nanoseconds": 593000000
+    }
+  },
+  {
+    "id": "G2jgUKUJQEdlWXML1veg",
+    "name": "Đèn âm trần Aqara T2 Pro 75mm 12W - Ra 96 - Quốc tế - ĐEN - Spotlight 36 độ",
+    "sku": "SMA-NMTR-7436",
+    "brand": "aqara",
+    "category": "smart-light",
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 8,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 18,
+    "shortDescription": "Đèn âm trần Aqara T2 Pro 75mm 12W – Ra96 – Bản Quốc Tế – Đen – Spotlight 36° mang đến khả năng chiếu sáng cao cấp với thiết kế hiện đại, ánh sáng tập trung sắc nét và chỉ số hoàn màu CRI Ra96 cho màu sắc trung thực tự nhiên. Đèn hỗ trợ điều chỉnh độ sáng và nhiệt độ màu linh hoạt, phù hợp cho không gian phòng khách, showroom, cửa hàng hoặc căn hộ cao cấp.\n\nSản phẩm sử dụng công nghệ LED tiết kiệm điện, góc chiếu Spotlight 36° tạo điểm nhấn ánh sáng chuyên nghiệp. Aqara T2 Pro hỗ trợ Zigbee 3.0, tương thích Apple HomeKit, Google Home, Alexa và Matter, dễ dàng điều khiển qua điện thoại hoặc giọng nói trong hệ sinh thái nhà thông minh.",
+    "description": "Aqara T2 Pro 75mm là dòng đèn âm trần thông minh cao cấp với thiết kế hiện đại, tông màu đen sang trọng cùng khả năng chiếu sáng Spotlight 36° tập trung chuyên nghiệp. Sản phẩm được trang bị công nghệ LED chất lượng cao với chỉ số hoàn màu CRI Ra96, mang lại ánh sáng trung thực, tái tạo màu sắc tự nhiên và dễ chịu cho mắt.\n\nĐèn hỗ trợ điều chỉnh độ sáng và nhiệt độ màu linh hoạt, phù hợp cho nhiều nhu cầu sử dụng khác nhau như chiếu sáng sinh hoạt, tạo điểm nhấn nội thất, trang trí showroom, quầy trưng bày, phòng khách, phòng ngủ hoặc không gian thương mại cao cấp. Góc chiếu Spotlight 36° giúp ánh sáng tập trung hơn, làm nổi bật vật thể, tranh ảnh hoặc khu vực cần nhấn mạnh.\n\nAqara T2 Pro sử dụng giao thức Zigbee 3.0 cho kết nối ổn định, phản hồi nhanh và tiết kiệm điện năng. Sản phẩm tương thích Apple HomeKit, Google Assistant, Amazon Alexa và Matter, hỗ trợ điều khiển từ xa qua ứng dụng hoặc giọng nói trong hệ sinh thái nhà thông minh Aqara.\n\nCÔNG DỤNG\n• Chiếu sáng không gian sống hiện đại và cao cấp\n• Tạo điểm nhấn ánh sáng cho nội thất, tranh ảnh, quầy kệ\n• Phù hợp lắp đặt cho phòng khách, phòng ngủ, showroom, cửa hàng\n• Hỗ trợ tạo ngữ cảnh ánh sáng thông minh theo nhu cầu sử dụng\n• Điều khiển từ xa và tự động hóa trong hệ thống Smart Home\n• Tiết kiệm điện năng và tăng tuổi thọ sử dụng\n\nTÍNH NĂNG NỔI BẬT\n• Thiết kế âm trần hiện đại, màu đen sang trọng\n• Công suất 12W tiết kiệm điện\n• Chỉ số hoàn màu CRI Ra96 cho ánh sáng chân thực\n• Góc chiếu Spotlight 36° tập trung ánh sáng chuyên nghiệp\n• Điều chỉnh độ sáng và nhiệt độ màu linh hoạt\n• Hỗ trợ Zigbee 3.0 kết nối ổn định\n• Tương thích Apple HomeKit, Google Home, Alexa, Matter\n• Điều khiển bằng app hoặc giọng nói\n• Tuổi thọ LED cao, hoạt động ổn định\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara T2 Pro Spotlight\n• Phiên bản: Quốc Tế\n• Công suất: 12W\n• Kích thước khoét lỗ: 75mm\n• Góc chiếu: 36°\n• Chỉ số hoàn màu: CRI Ra96\n• Nhiệt độ màu: điều chỉnh linh hoạt\n• Kết nối: Zigbee 3.0\n• Điều khiển: App Aqara Home / giọng nói\n• Tương thích: Apple HomeKit, Google Assistant, Amazon Alexa, Matter\n• Điện áp hoạt động: 220V – 240V\n• Màu sắc: Đen\n• Chất liệu: Hợp kim + nhựa cao cấp\n• Tuổi thọ LED: lên đến 25.000 giờ",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "en-am-tran-aqara-t2-pro-75mm-12w-ra-96-quoc-te-en-spotlight-36-o",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043863/in5z6tdnerggxkytetdb.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043864/btiqgzzojq07wwmsvu0c.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043865/qoocvgff9pncqoj6tl5t.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043865/siruhdlssekax02bbexw.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043865/u2x7mttfsqjoyhbdyu37.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043864/j4ybzissmggrmap2ortw.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043864/yarrufqhcxgy6q8glckq.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780043865,
+      "_nanoseconds": 435000000
+    },
+    "price": 3900000,
+    "updatedAt": {
+      "_seconds": 1780043898,
+      "_nanoseconds": 87000000
+    }
+  },
+  {
+    "id": "IpNWifdilYDNuUmJgSp0",
+    "name": "cảm biến chuyển động Aqara",
+    "sku": "SEN-CMBI-4195",
+    "brand": "aqara",
+    "category": "sensor",
+    "price": 345000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "shortDescription": "Không chỉ phát hiện chuyển động, cảm biến chuyển động và ánh sáng AQARA P2 còn đo độ sáng chính xác, giúp ngôi nhà bạn thông minh hơn bao giờ hết. Tự động bật đèn khi trời tối có người đến, cảnh báo đột nhập, tiết kiệm năng lượng. Nhỏ gọn, pin trâu, kết nối ổn định. Trải nghiệm ngay.",
+    "description": "* Đặc điểm nổi bật:\nPhát hiện chuyển động chính xác: Sử dụng cảm biến hồng ngoại (PIR) chất lượng cao, nhận diện chuyển động của người và vật nuôi trong phạm vi rộng, độ trễ thấp.\nKết nối thông minh: Tương thích với Zigbee/Matter (tùy phiên bản), dễ dàng tích hợp vào hệ sinh thái Aqara hoặc các nền tảng nhà thông minh phổ biến như Apple Home, Google Home, Alexa.\nTự động hóa linh hoạt: Kích hoạt đèn, camera, hoặc các thiết bị khác khi phát hiện chuyển động; hỗ trợ tạo kịch bản thông minh theo thời gian hoặc điều kiện ánh sáng.\nTiết kiệm năng lượng: Pin dung lượng cao, thời gian sử dụng lên đến 2–5 năm (tùy phiên bản và tần suất sử dụng).\nThiết kế 360°: Chân đế xoay đa hướng, dễ dàng điều chỉnh góc quét để phù hợp với từng không gian.\n* Thông số kỹ thuật (tham khảo):\n\nGóc quét: 170° ngang, 60° dọc\nKhoảng cách phát hiện: Tối đa 7–10m\nKết nối: Zigbee 3.0 / Matter (tùy model)\nNguồn: Pin CR2450 hoặc CR123A\nKích thước: Nhỏ gọn, dễ lắp đặt\nMàu sắc: Trắng tối giản\n* Ứng dụng thực tế:\n\nTự động bật đèn khi bạn bước vào phòng\nKích hoạt cảnh báo khi phát hiện chuyển động bất thường\nKết hợp với cảm biến ánh sáng để tối ưu tiết kiệm điện\nTạo kịch bản “chào mừng” khi bạn về nhà",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cam-bien-chuyen-ong-aqara",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779962577/aofzhjghwef85jmuqp06.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779962578/vbtrclerpp0y9c6oglpy.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779962578/rycslnb0ie9mkdnmzfzj.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779962578/nabten3qjdyp0tdzsefh.webp"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779962580,
+      "_nanoseconds": 598000000
+    },
+    "updatedAt": {
+      "_seconds": 1779962580,
+      "_nanoseconds": 598000000
+    }
+  },
+  {
+    "id": "JjUKHEXrZFA7z3O9LxGD",
+    "name": "Đèn ốp trần thông minh Aqara T1M có RGB - Quốc tế",
+    "sku": "SMA-NPTR-9624",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 12000000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 8,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 12,
+    "shortDescription": "Đèn ốp trần thông minh Aqara T1M – Bản Quốc Tế sở hữu thiết kế hiện đại với ánh sáng trắng và RGB đa màu sắc, phù hợp cho phòng khách, phòng ngủ hoặc không gian làm việc. Đèn hỗ trợ điều chỉnh độ sáng, nhiệt độ màu linh hoạt cùng hiệu ứng RGB viền độc đáo tạo không gian sống hiện đại và sang trọng.\n\nSản phẩm hỗ trợ Apple HomeKit, Google Home, Alexa và giao thức Matter, dễ dàng kết nối hệ sinh thái nhà thông minh. Aqara T1M còn tích hợp Zigbee 3.0 giúp hoạt động ổn định, tiết kiệm điện năng và hỗ trợ điều khiển từ xa qua ứng dụng hoặc giọng nói.",
+    "description": "Aqara Ceiling Light T1M là mẫu đèn ốp trần thông minh cao cấp với thiết kế hiện đại, tích hợp ánh sáng trắng và viền RGB đa màu sắc nổi bật. Sản phẩm mang đến không gian chiếu sáng sang trọng, phù hợp cho phòng khách, phòng ngủ, văn phòng hoặc căn hộ thông minh hiện đại.\n\nĐèn hỗ trợ điều chỉnh độ sáng và nhiệt độ màu linh hoạt từ ánh sáng vàng ấm đến trắng lạnh, đáp ứng nhiều nhu cầu sử dụng như thư giãn, làm việc hay sinh hoạt hằng ngày. Phần viền RGB độc lập hỗ trợ hàng triệu màu sắc và nhiều hiệu ứng ánh sáng đẹp mắt, giúp tạo không gian giải trí và trang trí ấn tượng.\n\nAqara T1M sử dụng giao thức Zigbee 3.0 cho kết nối ổn định, tiết kiệm điện năng và phản hồi nhanh. Sản phẩm tương thích Apple HomeKit, Google Assistant, Amazon Alexa và Matter, dễ dàng tích hợp vào hệ sinh thái nhà thông minh để điều khiển bằng điện thoại hoặc giọng nói.\n\nTÍNH NĂNG NỔI BẬT\n• Thiết kế đèn ốp trần hiện đại, sang trọng\n• Ánh sáng chính kết hợp viền RGB đa màu sắc\n• Hỗ trợ hàng triệu màu RGB và hiệu ứng ánh sáng\n• Điều chỉnh độ sáng và nhiệt độ màu linh hoạt\n• Hỗ trợ điều khiển qua app và giọng nói\n• Tích hợp Zigbee 3.0 kết nối ổn định\n• Tương thích Apple HomeKit, Google Home, Alexa, Matter\n• Tiết kiệm điện năng, tuổi thọ LED cao\n• Hoạt động ổn định trong hệ sinh thái Aqara Smart Home\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara Ceiling Light T1M\n• Phiên bản: Quốc Tế\n• Công suất: 50W\n• Quang thông: khoảng 3450lm\n• Nhiệt độ màu: 2700K – 6500K\n• RGB: 16 triệu màu\n• Chỉ số hoàn màu: CRI > 90\n• Kết nối: Zigbee 3.0\n• Tương thích: Apple HomeKit, Google Assistant, Amazon Alexa, Matter\n• Điện áp hoạt động: 220V – 240V\n• Kích thước: khoảng 495 × 75 mm\n• Chất liệu: Nhựa cao cấp + khung kim loại\n• Màu sắc: Trắng\n• Tuổi thọ LED: lên đến 25.000 giờ",
+    "featured": true,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "en-op-tran-thong-minh-aqara-t1m-co-rgb-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043204/jbpn2jzqogdp2g9t0hse.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043205/xgwsjqgmtrmub3q7ncfl.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043205/mx6diqv9tnv9bvisjk3a.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780043205/rtcnrvnytrhwd50axjnk.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780043205,
+      "_nanoseconds": 926000000
+    },
+    "updatedAt": {
+      "_seconds": 1780043205,
+      "_nanoseconds": 926000000
+    }
+  },
+  {
+    "id": "K2kZfyJCghBovWQDMYqp",
+    "name": "camera",
+    "sku": "CAM-CAME-5882",
+    "brand": "ezviz",
+    "category": "camera",
+    "price": 180000,
+    "discountPrice": 70000,
+    "costPrice": 250000,
+    "stock": 80,
+    "minStockAlert": 5,
+    "shortDescription": "mô tả",
+    "description": "mô tả chi tiết",
+    "featured": true,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "camera",
+    "specifications": [
+      {
+        "key": "công suất",
+        "value": "100w"
+      }
+    ],
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779765532/tbnzjgrzczlfgxgubydd.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779765537/vwwq8ucqshfyhyvdsvmc.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779765534/ak4y4xmiirh3wvw55nuh.jpg"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "createdAt": {
+      "_seconds": 1779765539,
+      "_nanoseconds": 987000000
+    },
+    "updatedAt": {
+      "_seconds": 1779765539,
+      "_nanoseconds": 987000000
+    }
+  },
+  {
+    "id": "KccFSVw9imjAoKcCJwCf",
+    "name": "Camera Aqara G3 AI - Bản Quốc Tế",
+    "sku": "CAM-CAME-4599",
+    "brand": "aqara",
+    "category": "camera",
+    "price": 1500000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 12,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 50,
+    "shortDescription": "Camera Aqara G3 AI – Bản Quốc Tế sở hữu độ phân giải 2K sắc nét, xoay 360° linh hoạt cùng công nghệ AI nhận diện khuôn mặt, cử chỉ và chuyển động thông minh. Tích hợp Hub Zigbee 3.0, hỗ trợ Apple HomeKit, Google Home và Alexa, giúp giám sát an ninh và điều khiển nhà thông minh tiện lợi trong một thiết bị nhỏ gọn.",
+    "description": "CAMERA AQARA G3 AI – BẢN QUỐC TẾ\n\nAqara Camera Hub G3 là dòng camera an ninh thông minh cao cấp tích hợp AI hiện đại và trung tâm điều khiển nhà thông minh Zigbee 3.0 trong cùng một thiết bị. Với độ phân giải 2K siêu nét, khả năng xoay 360° linh hoạt cùng nhiều tính năng AI thông minh, Aqara G3 mang đến giải pháp giám sát toàn diện cho gia đình, văn phòng và cửa hàng.\n\nSản phẩm được trang bị công nghệ AI nhận diện khuôn mặt, thú cưng và cử chỉ tay trực tiếp trên thiết bị, giúp tăng tốc độ phản hồi và đảm bảo quyền riêng tư tốt hơn. Camera có khả năng tự động theo dõi chuyển động, gửi cảnh báo theo thời gian thực và hỗ trợ đàm thoại 2 chiều tiện lợi. Ngoài chức năng giám sát, Aqara G3 còn hoạt động như một trung tâm Hub Zigbee 3.0, giúp kết nối và điều khiển các thiết bị nhà thông minh Aqara dễ dàng ngay trên ứng dụng.\nTÍNH NĂNG NỔI BẬT\n• Độ phân giải 2K 1296p sắc nét, hình ảnh chi tiết rõ ràng\n• Góc quay ngang 360°, quay dọc linh hoạt, hạn chế điểm mù\n• AI nhận diện khuôn mặt, thú cưng, cử chỉ tay và chuyển động\n• Tự động theo dõi đối tượng chuyển động thông minh (AI Tracking)\n• Hồng ngoại ban đêm hiển thị rõ nét trong điều kiện thiếu sáng\n• Hỗ trợ đàm thoại 2 chiều với micro và loa tích hợp\n• Tích hợp Hub Zigbee 3.0 kết nối tối đa 128 thiết bị Aqara\n• Tương thích Apple HomeKit Secure Video, Google Home, Alexa và IFTTT\n• Hỗ trợ Wi-Fi băng tần kép 2.4GHz & 5GHz cho kết nối ổn định\n• Chế độ bảo mật riêng tư tự động che camera khi không sử dụng\n• Hỗ trợ lưu trữ qua thẻ nhớ MicroSD lên đến 128GB và cloud\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara Camera Hub G3\n• Phiên bản: Quốc Tế\n• Độ phân giải: 2304 x 1296P (2K)\n• Góc nhìn: 110°\n• Chuẩn kết nối: Wi-Fi IEEE 802.11 a/b/g/n/ac\n• Băng tần Wi-Fi: 2.4GHz / 5GHz\n• Chuẩn Zigbee: Zigbee 3.0\n• Hỗ trợ hệ sinh thái: Apple HomeKit, Google Assistant, Amazon Alexa\n• Bộ nhớ hỗ trợ: MicroSD tối đa 128GB\n• Cổng nguồn: USB-C\n• Nguồn điện: 5V/2A\n• Kích thước: 123 x 85 x 67 mm\n• Màu sắc: Trắng\n•Nguồn điện: 5V/2A USB-C\n• Công suất hoạt động: 10W\n• Kích thước: 123 × 85 × 67 mm\n• Trọng lượng: khoảng 510g\n• Nhiệt độ hoạt động: -10°C đến 40°C",
+    "featured": true,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "camera-aqara-g3-ai-ban-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780042686/jkwnirxxp3tt4o5urxdj.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780042687/w9e2pzblp0qojwnfsbqa.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780042687/vuahhfacnmbwah9alswx.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780042687/xhyovw7zhmedqswcgt9o.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780042687,
+      "_nanoseconds": 584000000
+    },
+    "updatedAt": {
+      "_seconds": 1780042687,
+      "_nanoseconds": 584000000
+    }
+  },
+  {
+    "id": "MmgeaWGgOR6zXA6j1udd",
+    "name": "Màn hình Aqara S1 Plus 6.9inch - Quốc tế - Đen",
+    "sku": "OTH-MNHN-1127",
+    "brand": "aqara",
+    "category": "other",
+    "price": 15000000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 20,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 18,
+    "shortDescription": "Màn hình Aqara S1 Plus 6.9 inch – Bản Quốc Tế – Đen là màn hình điều khiển trung tâm thông minh treo tường, tích hợp công tắc và hub nhà thông minh. Thiết bị giúp quản lý toàn bộ hệ sinh thái Aqara, hỗ trợ cảm ứng, giọng nói và kết nối Zigbee tiện lợi.",
+    "description": "Aqara S1 Plus (MagicPad) là màn hình cảm ứng thông minh cao cấp kích thước 6.9 inch, được thiết kế để lắp âm tường, đóng vai trò như trung tâm điều khiển toàn bộ hệ sinh thái nhà thông minh. Với giao diện trực quan, người dùng có thể quản lý đèn, rèm, điều hòa, cảm biến và các ngữ cảnh tự động hóa chỉ bằng một chạm.\n\nThiết bị không chỉ là màn hình điều khiển mà còn tích hợp công tắc vật lý và công tắc ngữ cảnh, giúp thay thế nhiều công tắc truyền thống trên tường. Ngoài ra, màn hình còn tự động bật khi có người đến gần, mang lại trải nghiệm sử dụng tiện lợi và hiện đại.\n\nAqara S1 Plus hỗ trợ kết nối Zigbee 3.0, Wi-Fi và Bluetooth, đóng vai trò như một hub trung tâm cho hệ sinh thái Aqara, cho phép kết nối và điều khiển nhiều thiết bị thông minh trong nhà. Sản phẩm tương thích Apple HomeKit, Google Home và các nền tảng smarthome phổ biến, giúp dễ dàng điều khiển bằng điện thoại hoặc giọng nói.\n\nNgoài ra, thiết bị còn hỗ trợ hiển thị trạng thái thiết bị, camera chuông cửa, cảm biến và các kịch bản tự động hóa, giúp người dùng theo dõi và kiểm soát ngôi nhà một cách trực quan ngay trên màn hình.\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara S1 Plus MagicPad\n• Phiên bản: Quốc Tế\n• Kích thước màn hình: 6.9 inch LCD\n• Độ phân giải: 1440 × 720\n• Loại lắp đặt: âm tường (wall-mounted)\n• Kết nối: Wi-Fi 2.4GHz/5GHz, Zigbee 3.0, Bluetooth\n• Chức năng: màn hình điều khiển + hub + công tắc\n• Cảm biến: cảm biến tiệm cận (tự bật màn hình)\n• Loa & micro: có tích hợp\n• Tương thích: Apple HomeKit, Google Home, Alexa\n• Nguồn điện: AC 100–240V\n• Màu sắc: Đen\n• Ứng dụng điều khiển: Aqara Home\n\nCÔNG DỤNG\n• Trung tâm điều khiển toàn bộ nhà thông minh\n• Thay thế công tắc truyền thống trên tường\n• Điều khiển đèn, rèm, điều hòa, thiết bị điện\n• Tạo và kích hoạt ngữ cảnh tự động hóa\n• Hiển thị trạng thái thiết bị và camera\n• Điều khiển bằng cảm ứng, giọng nói hoặc app\n• Tăng tính thẩm mỹ và hiện đại cho không gian sống",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "man-hinh-aqara-s1-plus-69inch-quoc-te-en",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044973/oigpgojpqw0mcrgyo26y.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044974/hjqebwlxj2kvm4pqm7aa.gif",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044974/tihji3mfguzok7ktos1h.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044974/guzjz1gos617ffjs78cn.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044974/yp8mel23wevctnbaump4.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044974/umcgutjtetww8djzcgnm.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780044974,
+      "_nanoseconds": 583000000
+    },
+    "updatedAt": {
+      "_seconds": 1780044974,
+      "_nanoseconds": 583000000
+    }
+  },
+  {
+    "id": "NONCLzwxLs1T3MQnwL8k",
+    "name": "Đèn sưởi nhà tắm thông minh Smart Bathroom Heater T1 - Bản Quốc tế",
+    "sku": "SMA-NSIN-1798",
+    "brand": "aqara",
+    "category": "smart-light",
+    "discountPrice": 0,
+    "costPrice": 0,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "en-suoi-nha-tam-thong-minh-smart-bathroom-heater-t1-ban-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961331/ezkgp6rugprr9etx95dg.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961332/p7rbbfiyejymyuxvcpjg.webp"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779961334,
+      "_nanoseconds": 119000000
+    },
+    "price": 91999,
+    "stock": 5,
+    "updatedAt": {
+      "_seconds": 1780019273,
+      "_nanoseconds": 161000000
+    }
+  },
+  {
+    "id": "OkRyqbEbltigxoakV2hw",
+    "name": "hệ thống giám sát",
+    "sku": "SMA-HTHN-7794",
+    "brand": "smartlife",
+    "category": "smart-switch",
+    "price": 180000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 122,
+    "minStockAlert": 5,
+    "shortDescription": "nút bấm aqada",
+    "description": "nút bấm aquada chi tiết",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "he-thong-giam-sat",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779787489/mr5kcshdghtti0hssfzk.jpg",
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779787489,
+      "_nanoseconds": 840000000
+    },
+    "updatedAt": {
+      "_seconds": 1779787489,
+      "_nanoseconds": 840000000
+    }
+  },
+  {
+    "id": "SaPYuEzRES9FcMcKb6hd",
+    "name": "Cảm biến hiện diện Aqara FP1E - Quốc tế",
+    "sku": "SEN-CMBI-6604",
+    "brand": "aqara",
+    "category": "sensor",
+    "price": 870000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 12,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 19,
+    "shortDescription": "Cảm biến hiện diện Aqara FP1E – Bản Quốc Tế là cảm biến thông minh sử dụng công nghệ radar mmWave kết hợp AI, giúp phát hiện chính xác cả khi con người đứng yên. Thiết bị hỗ trợ Zigbee 3.0, tương thích Apple HomeKit, Google Home và Alexa, mang lại khả năng tự động hóa nhà thông minh chính xác và ổn định.",
+    "description": "Aqara FP1E là cảm biến hiện diện thế hệ mới, được trang bị công nghệ radar sóng milimet (mmWave) kết hợp thuật toán AI thông minh, cho phép phát hiện sự hiện diện của con người ngay cả khi không có chuyển động. Điều này giúp khắc phục hạn chế của cảm biến hồng ngoại truyền thống, mang lại độ chính xác cao hơn trong các tình huống như ngồi làm việc, ngủ hoặc đứng yên.\n\nThiết bị có khả năng học không gian thông minh, tự động nhận diện môi trường và loại bỏ nhiễu từ các yếu tố như rèm cửa, quạt, kính hoặc vật nuôi. FP1E hỗ trợ tùy chỉnh vùng phát hiện và khoảng cách quét linh hoạt, giúp người dùng dễ dàng tối ưu theo từng khu vực lắp đặt.\n\nVới góc quét rộng và phạm vi phát hiện lên đến khoảng 6m, cảm biến có thể bao phủ tốt nhiều không gian như phòng ngủ, phòng khách, phòng làm việc hoặc nhà vệ sinh. Khi kết hợp với hub Aqara, thiết bị có thể tham gia vào các kịch bản tự động hóa như bật/tắt đèn, điều hòa, rèm cửa hoặc hệ thống an ninh.\n\nFP1E hoạt động trên giao thức Zigbee 3.0, đảm bảo kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng. Sản phẩm tương thích với Apple HomeKit, Google Home, Amazon Alexa và Matter (qua hub Aqara), giúp dễ dàng tích hợp vào hệ sinh thái nhà thông minh hiện đại.\n\nCÔNG DỤNG\n• Phát hiện chính xác sự hiện diện của con người kể cả khi đứng yên\n• Tự động bật/tắt đèn, điều hòa, quạt theo trạng thái có người\n• Hỗ trợ hệ thống an ninh thông minh (phát hiện có người trong khu vực)\n• Tạo kịch bản tự động hóa nhà thông minh theo thời gian thực\n• Tối ưu trải nghiệm sinh hoạt tiện nghi, tiết kiệm năng lượng\n\nTÍNH NĂNG NỔI BẬT\n• Công nghệ radar mmWave kết hợp AI chính xác cao\n• Phát hiện cả chuyển động và trạng thái tĩnh\n• Tùy chỉnh vùng và khoảng cách phát hiện\n• Góc quét rộng, bao phủ không gian tốt\n• Học không gian thông minh, giảm báo sai\n• Kết nối Zigbee 3.0 ổn định\n• Tương thích Apple HomeKit, Google Home, Alexa, Matter (qua hub)\n• Lắp đặt linh hoạt: tường, trần hoặc góc\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara Presence Sensor FP1E\n• Phiên bản: Quốc Tế\n• Công nghệ: Radar mmWave (60–61 GHz) + AI\n• Phạm vi phát hiện: tối đa khoảng 6m\n• Góc phát hiện: ~120° (tùy vị trí lắp đặt)\n• Diện tích phủ sóng: ~35–50m²\n• Kết nối: Zigbee 3.0\n• Nguồn điện: 5V DC (USB)\n• Nhiệt độ hoạt động: -10°C đến 40°C\n• Độ ẩm hoạt động: 0–95% RH\n• Lắp đặt: tường / trần / góc (linh hoạt)\n• Ứng dụng: Aqara Home",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cam-bien-hien-dien-aqara-fp1e-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050048/frrmtmfenbbddqflnycb.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050049/c2qftwjfbyxvkb8klk2a.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050049/nqwmww0qpi5r6dot0ml2.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050049/dokmkmqf5jzjxt2ff1mx.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050050/sev5juaxm9uvtokpap6s.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780050049,
+      "_nanoseconds": 838000000
+    },
+    "updatedAt": {
+      "_seconds": 1780050049,
+      "_nanoseconds": 838000000
+    }
+  },
+  {
+    "id": "TQdo9PDSuntbPB4CK8vV",
+    "name": "Cảm biến khói Hunonic Smoker ",
+    "sku": "SEN-CMBI-6042",
+    "brand": "hunonic",
+    "category": "sensor",
+    "price": 520000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 100,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cam-bien-khoi-hunonic-smoker-",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961069/dhn7jsmjsryaqqbyte25.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961070/mh5t20dd7jley6m0gk7c.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961070/gl5k2dipkom1k4cw7eui.webp"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779961072,
+      "_nanoseconds": 582000000
+    },
+    "updatedAt": {
+      "_seconds": 1779961072,
+      "_nanoseconds": 582000000
+    }
+  },
+  {
+    "id": "U3aJKe6dYAhzDMkTQphC",
+    "name": "khóa học Redux",
+    "sku": "qưe",
+    "brand": "ezviz",
+    "category": "camera",
+    "price": 123123,
+    "discountPrice": 123,
+    "costPrice": 123,
+    "stock": 123,
+    "minStockAlert": 5,
+    "shortDescription": "q21e",
+    "description": "qưe",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "khoa-hoc-redux",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779765623/jjkvdlhfrr8fpgykmiyg.jpg",
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779765625,
+      "_nanoseconds": 402000000
+    },
+    "updatedAt": {
+      "_seconds": 1779765625,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "id": "VyVW7Rx3Yrhl4nG7g0pw",
+    "name": "Camera EZVIZ H1C",
+    "sku": "CAM-CAME-5415",
+    "brand": "hunonic",
+    "category": "camera",
+    "price": 1900000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 0,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "camera-ezviz-h1c",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779959806/xmww9fqdh4zvemdj0tkg.webp",
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779959808,
+      "_nanoseconds": 167000000
+    },
+    "updatedAt": {
+      "_seconds": 1779959808,
+      "_nanoseconds": 167000000
+    }
+  },
+  {
+    "id": "YVdDahwgNyEZpfAlXLBj",
+    "name": "camera u4",
+    "sku": "CAM-CAME-1654",
+    "brand": "hunonic",
+    "category": "camera",
+    "price": 123123,
+    "discountPrice": 0,
+    "costPrice": 123122,
+    "stock": 0,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "camera-u4",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961988/p0f4irfoeeepjeg06jei.jpg",
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779961990,
+      "_nanoseconds": 130000000
+    },
+    "sold": 549,
+    "rating": 4.9,
+    "updatedAt": {
+      "_seconds": 1780024459,
+      "_nanoseconds": 761000000
+    }
+  },
+  {
+    "id": "YvqnKIPKocVMZM9EpR2X",
+    "name": "Công tắc Aqara Q1 âm tường chữ nhật - bản quốc tế - 2 nút - Có N",
+    "sku": "SMA-CNGT-4269",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 1800000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 20,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "cong-tac-aqara-q1-am-tuong-chu-nhat-ban-quoc-te-2-nut-co-n",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961799/nykegcuh0lepnjxlxoba.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961800/hisqlrma6edhfjr3gxqj.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961800/gcqx7rvfcynboenxumkq.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779961800/rawyjw4uu5onasmnatvk.webp"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779961802,
+      "_nanoseconds": 664000000
+    },
+    "updatedAt": {
+      "_seconds": 1779961802,
+      "_nanoseconds": 664000000
+    }
+  },
+  {
+    "id": "bheLQjba5DDD3d3GQSV8",
+    "name": "Công tắc núm xoay thông minh Aqara V1 Knob EU - Màu trắng - Quốc tế",
+    "sku": "SMA-CNGT-1301",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 7800000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 20,
+    "minStockAlert": 5,
+    "rating": 4.5,
+    "sold": 33,
+    "shortDescription": "Công tắc núm xoay thông minh Aqara V1 Knob EU – Màu trắng – Bản Quốc Tế là công tắc cao cấp tích hợp màn hình cảm ứng và núm xoay điều khiển, giúp điều chỉnh ánh sáng, thiết bị và ngữ cảnh thông minh một cách trực quan, hiện đại. Hỗ trợ kết nối Zigbee, Wi-Fi, Bluetooth và tương thích Apple Home, Google Home, Alexa.",
+    "description": "Aqara V1 Knob EU là công tắc âm tường thông minh thế hệ mới, kết hợp giữa núm xoay vật lý có phản hồi xúc giác, màn hình cảm ứng LCD hiển thị trạng thái và hệ thống điều khiển đa chức năng. Sản phẩm mang lại trải nghiệm điều khiển nhà thông minh trực quan, thay thế nhiều công tắc truyền thống bằng một thiết bị duy nhất.\n\nThiết bị cho phép người dùng xoay để điều chỉnh độ sáng đèn, nhiệt độ màu, tốc độ quạt hoặc các thiết bị tương thích khác. Màn hình LCD hiển thị rõ ràng trạng thái thiết bị, thời gian, nhiệt độ và các ngữ cảnh sử dụng, đồng thời có cảm biến tiệm cận giúp tự động bật màn hình khi người dùng đến gần.\n\nAqara V1 Knob EU hỗ trợ 2 kênh điều khiển tải điện trực tiếp và 2 nút ngữ cảnh tùy chỉnh, cho phép thiết lập các kịch bản như “Đi ngủ”, “Rời nhà”, “Xem phim”… Ngoài ra, thiết bị còn hỗ trợ điều khiển không dây linh hoạt thông qua ứng dụng Aqara Home.\n\nSản phẩm hoạt động trong hệ sinh thái Aqara Zigbee, có thể kết hợp với hub để mở rộng khả năng tự động hóa và tương thích với Apple HomeKit, Google Home, Amazon Alexa và Matter (qua hub), giúp điều khiển bằng giọng nói hoặc smartphone dễ dàng.\n\nCÔNG DỤNG\n• Điều khiển ánh sáng, quạt, rèm và thiết bị điện thông minh\n• Tạo và kích hoạt ngữ cảnh tự động hóa trong nhà\n• Thay thế nhiều công tắc truyền thống bằng một thiết bị\n• Hiển thị thông tin như thời gian, nhiệt độ, trạng thái thiết bị\n• Điều khiển tiện lợi bằng xoay, chạm hoặc qua ứng dụng\n• Tăng tính thẩm mỹ và hiện đại cho không gian sống\n\nTÍNH NĂNG NỔI BẬT\n• Núm xoay vật lý có phản hồi xúc giác (haptic feedback)\n• Màn hình LCD hiển thị trạng thái thiết bị và thông tin hệ thống\n• Cảm biến tiệm cận tự động bật màn hình\n• 2 kênh tải điện + 2 nút ngữ cảnh linh hoạt\n• Điều khiển độ sáng, nhiệt độ màu và thiết bị thông minh\n• Kết nối Zigbee, Wi-Fi, Bluetooth (qua hệ Aqara)\n• Tương thích Apple HomeKit, Google Home, Alexa, Matter\n• Tích hợp sâu hệ sinh thái Aqara Smart Home\n• Thiết kế âm tường sang trọng, hiện đại\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara V1 Knob EU\n• Phiên bản: Quốc Tế\n• Màu sắc: Trắng\n• Kích thước: 86 × 86 × 62.1 mm\n• Màn hình: LCD cảm ứng hiển thị trạng thái\n• Núm xoay: Có, hỗ trợ điều chỉnh thông minh\n• Kênh điều khiển: 2 kênh tải + 2 nút ngữ cảnh\n• Kết nối: Zigbee 3.0, Wi-Fi 2.4GHz, Bluetooth\n• Điện áp: 100–250V AC, 50/60Hz\n• Công suất tải: tối đa ~2200W (tùy tải)\n• Cảm biến: tiệm cận, nhiệt độ, độ ẩm\n• Hệ sinh thái hỗ trợ: Apple HomeKit, Google Home, Amazon Alexa, Matter (qua hub)\n• Ứng dụng: Aqara Home",
+    "featured": false,
+    "bestSeller": true,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-num-xoay-thong-minh-aqara-v1-knob-eu-mau-trang-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780045258/to6wt5jmhocn0sldyxhc.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780045258/yisdxhmsffneoya017ge.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780045258/rucajpg0xhxx8hbzcwoh.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780045258/id1o0i7s7ytuv66bpr58.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780045258/sdtbfkio7qjzwhvsslpd.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780045258/ezge9wlmzo6wcmupi1rs.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780045258,
+      "_nanoseconds": 839000000
+    },
+    "updatedAt": {
+      "_seconds": 1780045258,
+      "_nanoseconds": 839000000
+    }
+  },
+  {
+    "id": "eFuxiqvXA0YDPBuGdgjk",
+    "name": "Công tắc cảm ứng BLE Hunonic Datic CSL Chống Giật, màu Đen",
+    "sku": "SMA-CNGT-6761",
+    "brand": "hunonic",
+    "category": "smart-switch",
+    "price": 650000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 120,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-cam-ung-ble-hunonic-datic-csl-chong-giat-mau-en",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779960473/oce3ps9jmcx7ddibpoxc.jpg",
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779960475,
+      "_nanoseconds": 662000000
+    },
+    "updatedAt": {
+      "_seconds": 1779960475,
+      "_nanoseconds": 662000000
+    }
+  },
+  {
+    "id": "jTG9OXcrJUoXwv0vHzs2",
+    "name": "Bộ điều khiển trung tâm Aqara Hub M2 - Quốc tế",
+    "sku": "OTH-BIUK-3741",
+    "brand": "aqara",
+    "category": "other",
+    "price": 3600000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 26,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 52,
+    "shortDescription": "Bộ điều khiển trung tâm Aqara Hub M2 – Bản Quốc Tế là thiết bị hub thông minh giúp kết nối và quản lý toàn bộ hệ sinh thái Aqara trong nhà. Hỗ trợ Zigbee 3.0, điều khiển hồng ngoại IR 360° và tương thích Apple HomeKit, Google Home, Alexa, mang đến giải pháp nhà thông minh tiện lợi, ổn định và dễ sử dụng.",
+    "description": "Aqara Hub M2 là trung tâm điều khiển quan trọng trong hệ sinh thái Aqara Smart Home, giúp kết nối các thiết bị như cảm biến, công tắc, rèm cửa, khóa cửa và nhiều thiết bị thông minh khác. Với giao thức Zigbee 3.0, Hub M2 đảm bảo khả năng kết nối ổn định, phản hồi nhanh và hỗ trợ lên đến 128 thiết bị cùng lúc.\n\nThiết bị được trang bị cổng mạng LAN RJ45 giúp tăng độ ổn định khi sử dụng, hạn chế tình trạng gián đoạn kết nối Wi-Fi. Ngoài ra, Hub M2 còn tích hợp điều khiển hồng ngoại IR 360°, cho phép người dùng điều khiển các thiết bị điện tử truyền thống như TV, điều hòa, quạt… biến chúng thành thiết bị thông minh trong hệ sinh thái.\n\nAqara Hub M2 còn có loa tích hợp, có thể sử dụng như chuông cửa hoặc còi báo động khi có sự kiện an ninh. Sản phẩm hỗ trợ tự động hóa cục bộ (local automation), giúp hệ thống vẫn hoạt động bình thường ngay cả khi mất kết nối Internet, tăng độ tin cậy khi sử dụng.\n\nPhiên bản Quốc Tế tương thích với Apple HomeKit, Google Assistant, Amazon Alexa và IFTTT, cho phép người dùng điều khiển toàn bộ hệ thống bằng giọng nói hoặc ứng dụng trên điện thoại một cách dễ dàng.\n\nCÔNG DỤNG\n• Kết nối và quản lý toàn bộ thiết bị Aqara Smart Home\n• Tạo và điều khiển các kịch bản tự động hóa trong nhà\n• Điều khiển thiết bị hồng ngoại như TV, máy lạnh, quạt\n• Làm chuông cửa hoặc còi báo động an ninh\n• Duy trì hoạt động hệ thống ngay cả khi mất Internet\n• Điều khiển từ xa qua ứng dụng hoặc giọng nói\n\nTÍNH NĂNG NỔI BẬT\n• Hỗ trợ Zigbee 3.0 ổn định, tiết kiệm điện\n• Kết nối tối đa 128 thiết bị Aqara\n• Điều khiển hồng ngoại IR 360° đa hướng\n• Cổng mạng LAN RJ45 tăng độ ổn định\n• Loa tích hợp báo động và chuông cửa\n• Tương thích Apple HomeKit, Google Home, Alexa, IFTTT\n• Hỗ trợ tự động hóa cục bộ (local automation)\n• Thiết kế nhỏ gọn, dễ lắp đặt\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara Hub M2 (HM2-G01)\n• Phiên bản: Quốc Tế\n• Kết nối: Zigbee 3.0, Wi-Fi 2.4GHz, Bluetooth LE\n• Cổng kết nối: LAN RJ45, Micro USB\n• Hỗ trợ thiết bị: tối đa 128 thiết bị\n• Điều khiển hồng ngoại: Có (360°)\n• Nguồn điện: 5V DC\n• Kích thước: 100.5 × 30.75 mm\n• Màu sắc: Đen\n• Nhiệt độ hoạt động: 5°C – 50°C\n• Hệ sinh thái hỗ trợ: Apple HomeKit, Google Home, Amazon Alexa\n• Ứng dụng: Aqara Home",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "bo-ieu-khien-trung-tam-aqara-hub-m2-quoc-te",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044501/hs7j92ry6z8nfwxf2nl5.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044501/upgnlirc4aaitoujhnji.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044502/adenveyyzyxgmzrcsru4.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044502/s5fxxow6egcuqqwur2rw.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780044502/udze7jxe7bl3apkj7h7s.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780044501,
+      "_nanoseconds": 739000000
+    },
+    "updatedAt": {
+      "_seconds": 1780044501,
+      "_nanoseconds": 739000000
+    }
+  },
+  {
+    "id": "jjVhEQacqKwkoIMxPrbe",
+    "name": "Vũ Trường Sơn",
+    "brand": "Hunomic",
+    "category": "camera",
+    "price": 123,
+    "discountPrice": 123,
+    "stock": 123,
+    "shortDescription": "123",
+    "description": "123",
+    "specifications": {
+      "wifi": "123",
+      "appSupport": "123",
+      "voiceAssistant": "123"
+    },
+    "featured": false,
+    "status": "active",
+    "slug": "vũ-trường-sơn",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779761181/hulcomridui4xhwqhqdf.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779761181/hulcomridui4xhwqhqdf.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779761181/irbpdqs69oqe6eexuidd.jpg"
+    ],
+    "sold": 0,
+    "rating": 0,
+    "createdAt": {
+      "_seconds": 1779761183,
+      "_nanoseconds": 471000000
+    },
+    "updatedAt": {
+      "_seconds": 1779761183,
+      "_nanoseconds": 471000000
+    }
+  },
+  {
+    "id": "qO7vS317gq0MtsoZLdBH",
+    "name": "camera u5",
+    "sku": "CAM-CAME-5969",
+    "brand": "hunonic",
+    "category": "camera",
+    "discountPrice": 0,
+    "costPrice": 123123,
+    "minStockAlert": 5,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "camera-u5",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1779963994/czgu1kbpijh28cmuirfj.jpg",
+    "sold": 0,
+    "rating": 0,
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1779963995,
+      "_nanoseconds": 622000000
+    },
+    "stock": 5,
+    "price": 4000000,
+    "updatedAt": {
+      "_seconds": 1780019234,
+      "_nanoseconds": 292000000
+    }
+  },
+  {
+    "id": "tGq694EdhUntoLCCyRU9",
+    "name": "Công tắc Aqara Q1 âm tường chữ nhật - bản quốc tế - 2 nút - Có N",
+    "sku": "SMA-CNGT-7387",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 560000,
+    "discountPrice": 0,
+    "costPrice": 0,
+    "stock": 35,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 50,
+    "shortDescription": "Công tắc Aqara Q1 âm tường chữ nhật – Bản Quốc Tế – 2 nút – Có dây N là công tắc thông minh hỗ trợ điều khiển đèn và thiết bị điện từ xa qua điện thoại, giọng nói hoặc tự động hóa. Sản phẩm sử dụng Zigbee 3.0, tương thích Apple HomeKit, Google Home và Alexa, mang lại trải nghiệm nhà thông minh ổn định và tiện lợi.",
+    "description": "Aqara Q1 là dòng công tắc âm tường thông minh thiết kế dạng chữ nhật hiện đại, phù hợp tiêu chuẩn hộp điện phổ biến. Phiên bản 2 nút có dây N giúp hoạt động ổn định hơn, hỗ trợ nguồn điện liên tục và tăng độ bền khi sử dụng lâu dài.\n\nThiết bị cho phép người dùng điều khiển đèn hoặc thiết bị điện trực tiếp bằng nút bấm vật lý, đồng thời hỗ trợ điều khiển từ xa qua ứng dụng Aqara Home hoặc giọng nói. Ngoài ra, công tắc có thể tích hợp vào các kịch bản tự động hóa như bật đèn khi có người, tắt toàn bộ thiết bị khi rời nhà hoặc bật chế độ “ngủ”.\n\nCông tắc Aqara Q1 sử dụng giao thức Zigbee 3.0 giúp kết nối nhanh, ổn định và tiết kiệm điện năng khi hoạt động cùng hub Aqara. Sản phẩm tương thích Apple HomeKit, Google Home, Amazon Alexa và Matter (qua hub), dễ dàng tích hợp vào hệ sinh thái nhà thông minh.\n\nCÔNG DỤNG\n• Điều khiển đèn và thiết bị điện trong nhà\n• Thay thế công tắc cơ truyền thống\n• Điều khiển từ xa qua điện thoại hoặc giọng nói\n• Tạo ngữ cảnh tự động hóa thông minh\n• Hỗ trợ quản lý điện năng hiệu quả\n• Tăng tính tiện nghi và hiện đại cho không gian sống\n\nTÍNH NĂNG NỔI BẬT\n• Thiết kế âm tường chữ nhật hiện đại\n• 2 nút điều khiển độc lập\n• Có dây N giúp hoạt động ổn định hơn\n• Hỗ trợ Zigbee 3.0 kết nối nhanh và ổn định\n• Điều khiển qua app, giọng nói và nút bấm vật lý\n• Tương thích Apple HomeKit, Google Home, Alexa, Matter (qua hub)\n• Hỗ trợ tạo kịch bản tự động hóa\n• Lắp đặt dễ dàng với hộp âm tiêu chuẩn\n\nTHÔNG SỐ KỸ THUẬT\n• Model: Aqara Q1 Switch (EU/Rectangular)\n• Phiên bản: Quốc Tế\n• Số nút: 2 nút\n• Dây trung tính: Có (có N)\n• Kết nối: Zigbee 3.0\n• Điện áp: 100–250V AC, 50/60Hz\n• Công suất tải: phù hợp đèn và thiết bị dân dụng\n• Tương thích: Apple HomeKit, Google Home, Amazon Alexa, Matter (qua hub)\n• Ứng dụng: Aqara Home\n• Lắp đặt: âm tường tiêu chuẩn EU\n• Màu sắc: Trắng",
+    "featured": false,
+    "bestSeller": true,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-aqara-q1-am-tuong-chu-nhat-ban-quoc-te-2-nut-co-n",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050220/am5be87nbmihm26svj4c.webp",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050221/x68rbe7hbfsqvvwnygui.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050221/jrlvnrltzrsccpvxrzyt.webp",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780050221/huo7yhpsiazraydro4ah.webp"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": {
+      "_seconds": 1780050221,
+      "_nanoseconds": 324000000
+    },
+    "updatedAt": {
+      "_seconds": 1780050221,
+      "_nanoseconds": 324000000
+    }
+  }
+]
