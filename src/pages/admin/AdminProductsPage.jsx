@@ -55,9 +55,9 @@ const AdminProductsPage = () => {
     try {
       setLoading(true);
 
-      const data = await getProducts();
+const data = await getProducts();
 
-      setProducts(data);
+setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error(
         "Error fetching products:",
@@ -105,8 +105,8 @@ const AdminProductsPage = () => {
   };
 
   // FILTER PRODUCTS
-  const filteredProducts =
-    products.filter((product) => {
+const filteredProducts =
+  (Array.isArray(products) ? products : []).filter((product) => {
       const matchesCategory =
         !filterCategory ||
         product.category ===
