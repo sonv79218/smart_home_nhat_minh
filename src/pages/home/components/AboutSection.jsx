@@ -84,7 +84,7 @@ const AboutSection = ({ companyInfo }) => {
         <div className="max-w-3xl mb-10 md:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-50 border border-sky-100 text-sky-600 text-sm font-bold mb-4">
             <Home size={16} />
-            Về Nhất Minh Smart Home
+            Về Nhật Minh Smart Home
           </div>
 
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight">
@@ -92,7 +92,7 @@ const AboutSection = ({ companyInfo }) => {
           </h2>
 
           <p className="mt-4 text-slate-600 text-base md:text-lg leading-relaxed">
-            Nhất Minh Smart Home tư vấn, cung cấp và lắp đặt các giải pháp nhà thông minh
+            Nhật Minh Smart Home tư vấn, cung cấp và lắp đặt các giải pháp nhà thông minh
             cho nhà phố, căn hộ, biệt thự, showroom và văn phòng.
           </p>
         </div>
@@ -202,7 +202,7 @@ const AboutSection = ({ companyInfo }) => {
               Muốn biết nhà bạn nên lắp hệ Smart Home nào?
             </h3>
             <p className="text-slate-600">
-              Gửi nhu cầu, Nhất Minh sẽ tư vấn phương án phù hợp với công trình và ngân sách.
+              Gửi nhu cầu, Nhật Minh sẽ tư vấn phương án phù hợp với công trình và ngân sách.
             </p>
           </div>
 

@@ -155,7 +155,7 @@ const AboutPage = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-sm font-semibold mb-6">
               <Home size={16} />
-              Nhất Minh Smart Home
+              Nhật Minh Smart Home
             </div>
 
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
@@ -163,7 +163,7 @@ const AboutPage = () => {
             </h1>
 
             <p className="mt-5 text-slate-300 text-base md:text-lg leading-relaxed max-w-xl">
-              Nhất Minh Smart Home cung cấp giải pháp thiết bị thông minh cho nhà ở,
+              Nhật Minh Smart Home cung cấp giải pháp thiết bị thông minh cho nhà ở,
               căn hộ, biệt thự, văn phòng và cửa hàng. Chúng tôi giúp không gian sống
               tiện nghi hơn, an toàn hơn và dễ kiểm soát hơn mỗi ngày.
             </p>
@@ -210,7 +210,7 @@ const AboutPage = () => {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Nhất Minh Smart Home tập trung vào các giải pháp thiết bị thông minh,
+              Nhật Minh Smart Home tập trung vào các giải pháp thiết bị thông minh,
               tự động hóa nhà ở và hệ thống an ninh. Mỗi công trình đều được tư vấn
               dựa trên nhu cầu thực tế, thói quen sinh hoạt và ngân sách của khách hàng.
             </p>
@@ -374,7 +374,7 @@ const AboutPage = () => {
               Bạn cần tư vấn giải pháp Smart Home?
             </h2>
             <p className="text-slate-300 leading-relaxed mb-8">
-              Gửi nhu cầu của bạn, Nhất Minh Smart Home sẽ tư vấn phương án phù hợp
+              Gửi nhu cầu của bạn, Nhật Minh Smart Home sẽ tư vấn phương án phù hợp
               với công trình, ngân sách và thói quen sử dụng.
             </p>
 

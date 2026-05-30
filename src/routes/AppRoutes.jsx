@@ -14,9 +14,12 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import AboutPage from "../pages/AboutPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 // Ecosystem Pages
 import LumiPage from "../pages/ecosystem/LumiPage";
+import Hunonic from "../pages/ecosystem/HunonicPage";
+import AqaraPage from "../pages/ecosystem/AqaraPage";
 
 // Admin Pages
 import AdminPage from "../pages/AdminPage";
@@ -100,6 +103,22 @@ const AppRoutes = () => {
             </MainLayout>
           }
         />
+        <Route
+          path="/ecosystem/hunonic"
+          element={
+            <MainLayout>
+              <Hunonic />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/ecosystem/aqara"
+          element={
+            <MainLayout>
+              <AqaraPage />
+            </MainLayout>
+          }
+        />
 
         {/* ADMIN ROUTES */}
         
@@ -146,6 +165,16 @@ const AppRoutes = () => {
             element={<AdminBannersPage />}
           />
         </Route>
+
+        {/* 404 - Not Found */}
+        <Route
+          path="*"
+          element={
+            <MainLayout>
+              <NotFoundPage />
+            </MainLayout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

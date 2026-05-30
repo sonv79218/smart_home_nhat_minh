@@ -11,11 +11,12 @@ import {
   ImageIcon,
   MapPin,
   Phone,
+  ToggleLeft,
 } from "lucide-react";
 
-const lumiGreen = "#009B5A";
+const hunonicGreen = "#0bff03";
 
-const lumiImages = {
+const hunonicImages = {
   hero: "",
   intro: "",
   solution1: "",
@@ -30,15 +31,15 @@ const lumiImages = {
 };
 
 const ImageBox = ({ src, label, className = "" }) => (
-  <div className={`relative overflow-hidden bg-emerald-50 border border-emerald-100 ${className}`}>
+  <div className={`relative overflow-hidden bg-lime-50 border border-lime-100 ${className}`}>
     {src ? (
       <img src={src} alt={label} className="w-full h-full object-cover" />
     ) : (
       <div className="w-full h-full min-h-[180px] flex items-center justify-center text-center p-5">
         <div>
-          <ImageIcon className="w-9 h-9 mx-auto mb-3 text-emerald-400" />
-          <p className="text-sm font-bold text-emerald-700">{label}</p>
-          <p className="text-xs text-emerald-500 mt-1">Thêm ảnh trong lumiImages</p>
+          <ImageIcon className="w-9 h-9 mx-auto mb-3 text-lime-500" />
+          <p className="text-sm font-bold text-lime-700">{label}</p>
+          <p className="text-xs text-lime-600 mt-1">Thêm ảnh trong hunonicImages</p>
         </div>
       </div>
     )}
@@ -47,90 +48,92 @@ const ImageBox = ({ src, label, className = "" }) => (
 
 const strengths = [
   "Thương hiệu Smart Home Việt Nam",
+  "Chi phí dễ tiếp cận hơn Lumi",
   "App tiếng Việt, dễ sử dụng",
-  "Phù hợp gia đình Việt",
+  "Phù hợp người mới bắt đầu Smart Home",
   "Dễ bảo hành và hỗ trợ kỹ thuật",
-  "Hệ sinh thái thiết bị đa dạng",
 ];
 
 const solutions = [
   {
+    icon: ToggleLeft,
+    image: hunonicImages.solution1,
+    title: "Công tắc thông minh",
+    desc: "Điều khiển đèn, bình nóng lạnh, thiết bị điện qua app hoặc theo ngữ cảnh.",
+  },
+  {
     icon: Lightbulb,
-    image: lumiImages.solution1,
+    image: hunonicImages.solution2,
     title: "Chiếu sáng thông minh",
-    desc: "Điều khiển đèn theo khu vực, lịch trình, cảm biến hoặc ngữ cảnh sinh hoạt.",
-  },
-  {
-    icon: Smartphone,
-    image: lumiImages.solution2,
-    title: "Điều khiển qua app",
-    desc: "Quản lý thiết bị từ xa, tạo ngữ cảnh và kiểm soát ngôi nhà dễ dàng.",
-  },
-  {
-    icon: ShieldCheck,
-    image: lumiImages.solution3,
-    title: "An ninh thông minh",
-    desc: "Kết hợp cảm biến, khóa cửa, camera và cảnh báo khi có bất thường.",
+    desc: "Bật tắt đèn theo lịch trình, khu vực, cảm biến hoặc thói quen sinh hoạt.",
   },
   {
     icon: Waves,
-    image: lumiImages.solution4,
-    title: "Rèm & thiết bị tự động",
-    desc: "Tự động hóa rèm, công tắc, cảm biến và các thiết bị trong nhà.",
+    image: hunonicImages.solution3,
+    title: "Rèm cửa tự động",
+    desc: "Điều khiển rèm từ xa, hẹn giờ mở đóng và kết hợp với ngữ cảnh trong nhà.",
+  },
+  {
+    icon: ShieldCheck,
+    image: hunonicImages.solution4,
+    title: "Cảm biến & an ninh",
+    desc: "Kết hợp cảm biến cửa, cảm biến chuyển động và cảnh báo để tăng an toàn.",
   },
 ];
 
 const projects = [
-  { image: lumiImages.project1, title: "Nhà phố Lumi", desc: "Giải pháp gọn gàng, dễ dùng cho gia đình." },
-  { image: lumiImages.project2, title: "Căn hộ thông minh", desc: "Điều khiển đèn, rèm, cảm biến và thiết bị qua app." },
-  { image: lumiImages.project3, title: "Biệt thự Smart Home", desc: "Hệ thống Lumi đồng bộ cho nhiều khu vực trong nhà." },
-  { image: lumiImages.project4, title: "Showroom / Văn phòng", desc: "Tối ưu vận hành, ánh sáng và an ninh." },
+  { image: hunonicImages.project1, title: "Nhà phố Hunonic", desc: "Giải pháp tiết kiệm, dễ dùng cho gia đình." },
+  { image: hunonicImages.project2, title: "Căn hộ thông minh", desc: "Điều khiển công tắc, đèn, rèm và cảm biến qua app." },
+  { image: hunonicImages.project3, title: "Gia đình mới bắt đầu", desc: "Lắp từ vài thiết bị cơ bản rồi nâng cấp dần." },
+  { image: hunonicImages.project4, title: "Công trình dân dụng", desc: "Phù hợp nhu cầu thực tế, dễ bảo hành và hỗ trợ." },
 ];
 
-const LumiPage = () => {
+const HunonicPage = () => {
   return (
     <main className="bg-white text-slate-900">
       {/* HERO */}
       <section className="relative min-h-[620px] bg-slate-950 overflow-hidden">
         <ImageBox
-          src={lumiImages.hero}
-          label="Ảnh hero Lumi"
+          src={hunonicImages.hero}
+          label="Ảnh hero Hunonic"
           className="absolute inset-0 rounded-none border-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-emerald-900/20" />
-        <div className="absolute -right-20 top-20 w-96 h-96 rounded-full bg-emerald-500/30 blur-3xl" />
+
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/75 to-lime-900/20" />
+        <div className="absolute -right-20 top-20 w-96 h-96 rounded-full bg-lime-500/30 blur-3xl" />
+        <div className="absolute left-10 bottom-10 w-72 h-72 rounded-full bg-green-500/20 blur-3xl" />
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
           <div className="max-w-3xl pt-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 text-sm font-bold mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/10 border border-lime-400/20 text-lime-300 text-sm font-bold mb-6">
               <Home size={16} />
-              Hệ sinh thái Lumi
+              Hệ sinh thái Hunonic
             </div>
 
             <h1 className="text-4xl md:text-7xl font-extrabold text-white leading-tight">
-              Giải pháp Smart Home Lumi cho gia đình Việt
+              Giải pháp Smart Home Hunonic dễ dùng cho gia đình Việt
             </h1>
 
             <p className="mt-6 text-white/75 text-base md:text-xl leading-relaxed max-w-2xl">
-              Nhật Minh Smart Home tư vấn, cung cấp và triển khai hệ sinh thái Lumi
-              cho nhà phố, căn hộ, biệt thự, showroom và văn phòng.
+              Nhật Minh Smart Home tư vấn, cung cấp và triển khai hệ sinh thái Hunonic
+              cho nhà phố, chung cư, gia đình mới bắt đầu và các công trình dân dụng.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-white font-bold transition"
-                style={{ backgroundColor: lumiGreen }}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-slate-950 font-extrabold hover:brightness-110 transition"
+                style={{ backgroundColor: hunonicGreen }}
               >
-                Nhận tư vấn Lumi
+                Nhận tư vấn Hunonic
                 <ArrowRight size={18} />
               </Link>
 
               <Link
-                to="/products?brand=lumi"
+                to="/products?brand=hunonic"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/15 text-white font-bold hover:bg-white/15 transition"
               >
-                Xem sản phẩm Lumi
+                Xem sản phẩm Hunonic
               </Link>
             </div>
           </div>
@@ -141,30 +144,30 @@ const LumiPage = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <ImageBox
-            src={lumiImages.intro}
-            label="Ảnh giới thiệu Lumi"
+            src={hunonicImages.intro}
+            label="Ảnh giới thiệu Hunonic"
             className="h-[320px] md:h-[480px] rounded-3xl"
           />
 
           <div>
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Lumi là gì?
+            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
+              Hunonic là gì?
             </p>
 
             <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-              Thương hiệu nhà thông minh Việt Nam, dễ dùng và dễ triển khai
+              Nhà thông minh Việt Nam, dễ dùng và chi phí dễ tiếp cận
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Lumi là hệ sinh thái thiết bị Smart Home hướng đến trải nghiệm sử dụng
-              đơn giản, phù hợp thói quen của người Việt. Nhật Minh Smart Home lựa chọn
-              Lumi cho các công trình cần sự ổn định, dễ bảo hành và dễ mở rộng.
+              Hunonic là hệ sinh thái Smart Home Việt Nam tập trung vào sự đơn giản,
+              dễ sử dụng và phù hợp với nhu cầu thực tế của gia đình Việt. Đây là lựa
+              chọn tốt cho khách hàng muốn bắt đầu nhà thông minh với chi phí hợp lý.
             </p>
 
             <div className="space-y-3">
               {strengths.map((item) => (
                 <div key={item} className="flex items-center gap-3">
-                  <CheckCircle size={20} className="text-emerald-500 shrink-0" />
+                  <CheckCircle size={20} className="text-lime-500 shrink-0" />
                   <span className="font-semibold text-slate-700">{item}</span>
                 </div>
               ))}
@@ -174,25 +177,25 @@ const LumiPage = () => {
       </section>
 
       {/* WHY */}
-      <section className="py-16 md:py-24 bg-emerald-50/60">
+      <section className="py-16 md:py-24 bg-lime-50/70">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Vì sao Nhật Minh tư vấn Lumi?
+            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
+              Vì sao Nhật Minh tư vấn Hunonic?
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Phù hợp với nhiều công trình thực tế
+              Dễ bắt đầu, dễ dùng, dễ nâng cấp
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5">
             {[
-              ["Dễ sử dụng", "App tiếng Việt, thao tác gần gũi với người dùng."],
-              ["Dễ hỗ trợ", "Thuận tiện khi cần bảo hành, cấu hình hoặc mở rộng."],
-              ["Dễ triển khai", "Phù hợp nhà phố, chung cư, biệt thự và showroom."],
+              ["Chi phí dễ tiếp cận", "Phù hợp khách hàng muốn làm smart home với ngân sách hợp lý."],
+              ["Dễ sử dụng", "App tiếng Việt, thao tác đơn giản, phù hợp nhiều độ tuổi."],
+              ["Dễ triển khai", "Có thể lắp từ công tắc, đèn, rèm đến cảm biến theo từng giai đoạn."],
             ].map(([title, desc]) => (
-              <div key={title} className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-sm">
-                <Cpu className="mb-4" size={30} style={{ color: lumiGreen }} />
+              <div key={title} className="bg-white rounded-3xl border border-lime-100 p-6 shadow-sm">
+                <Cpu className="mb-4" size={30} style={{ color: hunonicGreen }} />
                 <h3 className="text-xl font-extrabold mb-2">{title}</h3>
                 <p className="text-slate-600 leading-relaxed">{desc}</p>
               </div>
@@ -205,11 +208,11 @@ const LumiPage = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Giải pháp Lumi
+            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
+              Giải pháp Hunonic
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Một hệ thống, nhiều thiết bị hoạt động cùng nhau
+              Từ thiết bị cơ bản đến hệ thống Smart Home hoàn chỉnh
             </h2>
           </div>
 
@@ -218,11 +221,11 @@ const LumiPage = () => {
               const Icon = item.icon;
 
               return (
-                <div key={item.title} className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
+                <div key={item.title} className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-lg transition">
                   <ImageBox src={item.image} label={`Ảnh ${item.title}`} className="h-[210px] rounded-none border-0" />
 
                   <div className="p-5">
-                    <Icon size={28} className="mb-3" style={{ color: lumiGreen }} />
+                    <Icon size={28} className="mb-3" style={{ color: hunonicGreen }} />
                     <h3 className="text-lg font-extrabold mb-2">{item.title}</h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
                   </div>
@@ -238,24 +241,24 @@ const LumiPage = () => {
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
-              <p className="text-emerald-300 font-extrabold mb-3">
-                Lumi phù hợp với ai?
+              <p className="text-lime-300 font-extrabold mb-3">
+                Hunonic phù hợp với ai?
               </p>
 
               <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-                Phù hợp từ căn hộ nhỏ đến nhà phố và biệt thự
+                Phù hợp cho người mới bắt đầu nhà thông minh
               </h2>
 
               <p className="text-slate-300 leading-relaxed">
-                Với khả năng mở rộng linh hoạt, Lumi phù hợp cho khách hàng muốn
-                bắt đầu từ vài thiết bị cơ bản rồi nâng cấp dần thành hệ thống hoàn chỉnh.
+                Hunonic phù hợp với khách hàng muốn trải nghiệm Smart Home theo cách
+                đơn giản, dễ dùng và có thể nâng cấp dần theo nhu cầu sử dụng thực tế.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {["Nhà phố", "Chung cư", "Biệt thự", "Showroom"].map((item) => (
+              {["Nhà phố", "Chung cư", "Người mới bắt đầu", "Công trình dân dụng"].map((item) => (
                 <div key={item} className="rounded-3xl bg-white/5 border border-white/10 p-6">
-                  <Home className="text-emerald-300 mb-4" size={30} />
+                  <Home className="text-lime-300 mb-4" size={30} />
                   <h3 className="text-xl font-extrabold">{item}</h3>
                 </div>
               ))}
@@ -268,11 +271,11 @@ const LumiPage = () => {
       <section className="py-16 md:py-24 bg-slate-50">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Công trình Lumi
+            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
+              Công trình Hunonic
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Thêm ảnh thực tế để khách hàng thấy năng lực triển khai
+              Thêm ảnh thực tế để khách hàng dễ hình dung
             </h2>
           </div>
 
@@ -296,28 +299,28 @@ const LumiPage = () => {
         </div>
       </section>
 
-      {/* COMPARISON */}
+      {/* OVERVIEW */}
       <section className="py-16 md:py-24">
         <div className="max-w-[900px] mx-auto px-5">
           <div className="text-center mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
+            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
               Tổng quan nhanh
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold">
-              Lumi trong mắt Nhật Minh
+              Hunonic trong mắt Nhật Minh
             </h2>
           </div>
 
-          <div className="rounded-3xl border border-emerald-100 overflow-hidden bg-white shadow-sm">
+          <div className="rounded-3xl border border-lime-100 overflow-hidden bg-white shadow-sm">
             {[
               ["Nguồn gốc", "Việt Nam"],
               ["Ngôn ngữ app", "Tiếng Việt, dễ dùng"],
-              ["Chi phí", "Trung bình - cao"],
-              ["Phù hợp", "Gia đình Việt, nhà phố, biệt thự"],
-              ["Khả năng mở rộng", "Tốt"],
+              ["Chi phí", "Dễ tiếp cận hơn Lumi"],
+              ["Phù hợp", "Gia đình Việt, nhà phố, chung cư"],
+              ["Khả năng mở rộng", "Tốt cho nhu cầu dân dụng"],
             ].map(([label, value]) => (
-              <div key={label} className="grid grid-cols-3 border-b last:border-b-0 border-emerald-100">
-                <div className="col-span-1 bg-emerald-50 p-4 font-bold text-emerald-700">
+              <div key={label} className="grid grid-cols-3 border-b last:border-b-0 border-lime-100">
+                <div className="col-span-1 bg-lime-50 p-4 font-bold text-lime-700">
                   {label}
                 </div>
                 <div className="col-span-2 p-4 font-semibold text-slate-700">
@@ -330,29 +333,29 @@ const LumiPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="relative py-20 md:py-28 bg-emerald-700 overflow-hidden">
+      <section className="relative py-20 md:py-28 bg-lime-600 overflow-hidden">
         <ImageBox
-          src={lumiImages.cta}
-          label="Ảnh CTA Lumi"
+          src={hunonicImages.cta}
+          label="Ảnh CTA Hunonic"
           className="absolute inset-0 rounded-none border-0 opacity-30"
         />
 
-        <div className="absolute inset-0 bg-emerald-900/75" />
+        <div className="absolute inset-0 bg-green-950/70" />
 
         <div className="relative z-10 max-w-[900px] mx-auto px-5 text-center text-white">
           <h2 className="text-3xl md:text-6xl font-extrabold leading-tight">
-            Bạn muốn lắp hệ thống Smart Home Lumi?
+            Bạn muốn lắp hệ thống Smart Home Hunonic?
           </h2>
 
           <p className="mt-5 text-white/80 text-base md:text-lg leading-relaxed">
-            Nhật Minh Smart Home sẽ khảo sát, tư vấn và triển khai phương án Lumi
-            phù hợp với công trình và ngân sách của bạn.
+            Nhật Minh Smart Home sẽ khảo sát, tư vấn và triển khai phương án Hunonic
+            phù hợp với công trình, nhu cầu sử dụng và ngân sách của bạn.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-emerald-700 font-extrabold hover:bg-emerald-50 transition"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-lime-700 font-extrabold hover:bg-lime-50 transition"
             >
               Liên hệ tư vấn
               <ArrowRight size={18} />
@@ -372,4 +375,4 @@ const LumiPage = () => {
   );
 };
 
-export default LumiPage;
+export default HunonicPage;
