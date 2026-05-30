@@ -174,7 +174,8 @@ const AdminProductsPage = () => {
       </div>
     );
   }
-
+const PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
   return (
     <div className="max-w-7xl mx-auto">
       {/* HEADER */}
@@ -383,10 +384,12 @@ const AdminProductsPage = () => {
                     <td className="px-4 py-3">
                       <img
                         src={
-                          product.thumbnail ||
-                          ""
+                          product.thumbnail ||PLACEHOLDER_IMAGE
                         }
                         alt={product.name}
+                          onError={(e) => {
+    e.currentTarget.src = PLACEHOLDER_IMAGE;
+  }}
                         className="w-14 h-14 rounded-lg object-cover"
                       />
                     </td>
@@ -477,11 +480,13 @@ const AdminProductsPage = () => {
                 <div className="flex gap-3">
                   <img
                     src={
-                      product.thumbnail ||
-                      ""
+                      product.thumbnail ||PLACEHOLDER_IMAGE
                     }
                     alt={product.name}
                     className="w-20 h-20 rounded-xl object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = PLACEHOLDER_IMAGE;
+                    }}
                   />
 
                   <div className="flex-1 min-w-0">

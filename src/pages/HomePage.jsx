@@ -79,9 +79,10 @@ const HomePage = () => {
   // ============================================
   // FILTERED CATEGORIES - Only categories with products
   // ============================================
-  const categoriesWithProducts = useMemo(() => {
-    return CATEGORIES.filter((cat) => productsByCategory[cat.id]?.length > 0);
-  }, [productsByCategory]);
+  // const categoriesWithProducts = useMemo(() => {
+  //   return CATEGORIES.filter((cat) => productsByCategory[cat.id]?.length > 0);
+  // }, [productsByCategory]);
+  const categoriesWithProducts = CATEGORIES;
 
   const topCategories = categoriesWithProducts.slice(0, PRODUCTS_LIMIT.topCategory);
 

@@ -62,11 +62,34 @@ const Navbar = () => {
       >
         <nav className="navbar-container">
           {/* Logo */}
-          <Link to="/" className="navbar-logo">
+          <Link
+  to="/"
+  className="flex items-center gap-3 group"
+>
+  {/* <img
+    src="/favicon.svg"
+    alt="Nhật Minh Smart Home"
+    className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105"
+  /> */}
+
+  <div className="flex flex-col leading-none">
+    {/* <span className="text-xl md:text-2xl font-black tracking-wide">
+      <span className="text-[#0A4DFF]">NHẬT</span>
+      <span className="text-slate-900"> MINH</span>
+    </span> */}
             <span className="logo-text">
               <span className="logo-highlight">NHAT </span>MINH
             </span>
-          </Link>
+    <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-slate-500">
+      NHÀ THÔNG MINH
+    </span>
+  </div>
+</Link>
+          {/* <Link to="/" className="navbar-logo">
+            <span className="logo-text">
+              <span className="logo-highlight">NHAT </span>MINH
+            </span>
+          </Link> */}
 
           {/* Desktop Menu */}
           <div className="navbar-menu desktop-only">
@@ -319,14 +342,14 @@ const Navbar = () => {
             ))}
           </div> */}
 
-          {/* <Link to="/cart" className="mobile-menu-item">
+          <Link to="/cart" className="mobile-menu-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="9" cy="21" r="1" />
               <circle cx="20" cy="21" r="1" />
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
             </svg>
             Giỏ hàng ({totalItems})
-          </Link> */}
+          </Link>
 
           {/* <Link to="/admin" className="mobile-menu-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

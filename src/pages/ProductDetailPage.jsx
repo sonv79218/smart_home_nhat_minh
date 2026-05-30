@@ -39,14 +39,18 @@ const Breadcrumbs = ({ product, navigate }) => (
 // ============================================
 const ProductGallery = ({ images, selectedImage, setSelectedImage, discountPercent }) => {
   const allImages = images.length > 0 ? images : [];
-
+const PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
   return (
     <div className="lg:sticky lg:top-24">
       {/* Main Image */}
       <div className="relative bg-white rounded-2xl overflow-hidden shadow-sm">
         <img
-          src={allImages[selectedImage] || allImages[0]}
+          src={allImages[selectedImage] || allImages[0]||PLACEHOLDER_IMAGE}
           alt="Product"
+            onError={(e) => {
+    e.target.src = PLACEHOLDER_IMAGE;
+  }}
           className="w-full aspect-square object-contain p-4 md:p-6 transition-transform duration-300 hover:scale-105"
         />
         

@@ -48,6 +48,8 @@ const CartItem = ({
   const hasDiscount = item.originalPrice && item.originalPrice > item.price;
   const [showDelete, setShowDelete] = useState(false);
 
+  const PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
   return (
     <div className={`
       relative flex gap-3 p-3 bg-white rounded-xl shadow-sm
@@ -78,9 +80,12 @@ const CartItem = ({
       {/* Product Image */}
       <Link to={`/product/${item.id}`} className="flex-shrink-0">
         <img 
-          src={item.thumbnail} 
+          src={item.thumbnail||PLACEHOLDER_IMAGE} 
           alt={item.name} 
           className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg" 
+          onError={(e) => {
+            e.currentTarget.src = PLACEHOLDER_IMAGE;
+          }}
         />
       </Link>
 
