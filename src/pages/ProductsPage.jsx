@@ -66,8 +66,10 @@ const ProductsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const data = await getProducts();
+        // setProducts(data);
         const data = await getProducts();
-        setProducts(data);
+setProducts(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -103,7 +105,7 @@ const ProductsPage = () => {
   // FILTERED & SORTED PRODUCTS (Memoized)
   // ============================================
   const filteredAndSortedProducts = useMemo(() => {
-    return products
+   return (products || [])
       .filter((product) => {
         const matchesCategory = !filterCategory || product.category === filterCategory;
         const matchesBrand = !filterBrand || product.brand === filterBrand;
