@@ -5,7 +5,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProductById, getProducts } from "../services/productService";
-import { CATEGORIES, BRANDS } from "../constants/productMeta";
+import { getCategoryName } from "../services/categoryService";
+import { getBrands, getBrandById } from "../services/brandService";
 import useCart from "../hooks/useCart";
 import ProductCard from "./home/components/ProductCard";
 
@@ -39,8 +40,8 @@ const Breadcrumbs = ({ product, navigate }) => (
 // ============================================
 const ProductGallery = ({ images, selectedImage, setSelectedImage, discountPercent }) => {
   const allImages = images.length > 0 ? images : [];
-const PLACEHOLDER_IMAGE =
-  "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
+  const PLACEHOLDER_IMAGE =
+    "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
   return (
     <div className="lg:sticky lg:top-24">
       {/* Main Image */}
@@ -49,8 +50,8 @@ const PLACEHOLDER_IMAGE =
           src={allImages[selectedImage] || allImages[0]||PLACEHOLDER_IMAGE}
           alt="Product"
             onError={(e) => {
-    e.target.src = PLACEHOLDER_IMAGE;
-  }}
+            e.target.src = PLACEHOLDER_IMAGE;
+          }}
           className="w-full aspect-square object-contain p-4 md:p-6 transition-transform duration-300 hover:scale-105"
         />
         
@@ -94,14 +95,14 @@ const PLACEHOLDER_IMAGE =
 // ============================================
 // PRODUCT INFO
 // ============================================
-const ProductInfo = ({ product, discountPercent, getBrandName, getCategoryName }) => {
+const ProductInfo = ({ product, discountPercent, brandName, categoryName }) => {
   const hasDiscount = product.discountPrice > 0 && product.discountPrice < product.price;
 
   return (
     <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm">
       {/* Brand */}
       <span className="text-xs font-bold text-primary-600 uppercase tracking-wider">
-        {getBrandName(product.brand)}
+        {brandName}
       </span>
 
       {/* Title */}
@@ -357,18 +358,18 @@ const ProductActions = ({ product, addToCart, navigate }) => {
 // ============================================
 // PRODUCT META GRID
 // ============================================
-const ProductMeta = ({ product, getCategoryName, getBrandName }) => (
+const ProductMeta = ({ product, categoryName, brandName }) => (
   <div className="grid grid-cols-2 gap-3 bg-white rounded-2xl p-4 shadow-sm">
     <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
       <span className="text-[11px] text-slate-400 font-semibold uppercase">Danh mục</span>
       <span className="text-sm text-slate-800 font-medium">
-        {getCategoryName(product.category)}
+        {categoryName}
       </span>
     </div>
     <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
       <span className="text-[11px] text-slate-400 font-semibold uppercase">Thương hiệu</span>
       <span className="text-sm text-slate-800 font-medium">
-        {getBrandName(product.brand)}
+        {brandName}
       </span>
     </div>
     <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
@@ -418,6 +419,8 @@ const ProductDetailPage = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [brandName, setBrandName] = useState("");
+  const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -429,6 +432,16 @@ const ProductDetailPage = () => {
 
         setProduct(productData);
         setSelectedImage(0);
+
+        // Get brand and category names
+        if (productData?.brand) {
+          const brand = await getBrandById(productData.brand);
+          setBrandName(brand?.name || productData.brand);
+        }
+        if (productData?.category) {
+          const catName = getCategoryName(productData.category);
+          setCategoryName(catName);
+        }
 
         if (productData?.category) {
           const related = allProducts
@@ -450,16 +463,6 @@ const ProductDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);
-
-  const getCategoryName = (categoryId) => {
-    const category = CATEGORIES.find((c) => c.id === categoryId);
-    return category?.name || categoryId;
-  };
-
-  const getBrandName = (brandId) => {
-    const brand = BRANDS.find((b) => b.id === brandId);
-    return brand?.name || brandId;
-  };
 
   const discountPercent = product?.discountPrice > 0 && product?.price > 0
     ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
@@ -535,8 +538,8 @@ const ProductDetailPage = () => {
             <ProductInfo
               product={product}
               discountPercent={discountPercent}
-              getBrandName={getBrandName}
-              getCategoryName={getCategoryName}
+              brandName={brandName}
+              categoryName={categoryName}
             />
 
             {/* Actions */}
@@ -549,8 +552,8 @@ const ProductDetailPage = () => {
             {/* Meta Grid */}
             <ProductMeta
               product={product}
-              getCategoryName={getCategoryName}
-              getBrandName={getBrandName}
+              categoryName={categoryName}
+              brandName={brandName}
             />
           </div>
         </div>

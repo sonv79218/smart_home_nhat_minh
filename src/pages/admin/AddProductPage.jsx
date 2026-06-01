@@ -1,14 +1,18 @@
 // ============================================
 // ADD PRODUCT PAGE - Fully Responsive
 // ============================================
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addProduct } from "../../services/productService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
-import { CATEGORIES, BRANDS, generateSlug, generateSKU } from "../../constants/productMeta";
+import { getCategories } from "../../services/categoryService";
+import { getBrands } from "../../services/brandService";
+import { generateSlug, generateSKU } from "../../constants/productMeta";
 
 const AddProductPage = () => {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,6 +41,16 @@ const AddProductPage = () => {
   const [imageFiles, setImageFiles] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // Fetch categories and brands
+  useEffect(() => {
+    const fetchMeta = async () => {
+      const [cats, brds] = await Promise.all([getCategories(), getBrands()]);
+      setCategories(cats);
+      setBrands(brds);
+    };
+    fetchMeta();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -223,7 +237,7 @@ const AddProductPage = () => {
                   required
                 >
                   <option value="">Chọn danh mục</option>
-                  {CATEGORIES.map((cat) => (
+                  {categories.map((cat) => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name}
                     </option>
@@ -243,14 +257,14 @@ const AddProductPage = () => {
                 onChange={handleChange}
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white"
                 required
-              >
-                <option value="">Chọn thương hiệu</option>
-                {BRANDS.map((brand) => (
-                  <option key={brand.id} value={brand.id}>
-                    {brand.name}
-                  </option>
-                ))}
-              </select>
+                >
+                  <option value="">Chọn thương hiệu</option>
+                  {brands.map((brand) => (
+                    <option key={brand.id} value={brand.id}>
+                      {brand.name}
+                    </option>
+                  ))}
+                </select>
             </div>
           </div>
         </Section>

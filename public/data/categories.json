@@ -1,0 +1,132 @@
+[
+  {
+    "id": "hub",
+    "name": "Bộ điều khiển trung tâm",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "description": "Hub trung tâm, gateway, bộ điều khiển hệ sinh thái Smart Home",
+    "banner": {
+      "title": "Bộ Điều Khiển Trung Tâm",
+      "subtitle": "Kết nối và quản lý toàn bộ thiết bị thông minh trong nhà",
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "buttonText": "Khám phá Hub",
+      "link": "/products?category=hub"
+    }
+  },
+  {
+    "id": "sensor",
+    "name": "Cảm biến các loại",
+    "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+    "description": "Cảm biến hiện diện, chuyển động, cửa, khói, nhiệt độ, độ ẩm",
+    "banner": {
+      "title": "Cảm Biến Thông Minh",
+      "subtitle": "Tự động hóa và bảo vệ ngôi nhà chính xác hơn",
+      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1400&h=400&fit=crop",
+      "buttonText": "Xem cảm biến",
+      "link": "/products?category=sensor"
+    }
+  },
+  {
+    "id": "smart-switch",
+    "name": "Công tắc thông minh",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "description": "Công tắc cảm ứng, công tắc ngữ cảnh, điều khiển đèn và thiết bị",
+    "banner": {
+      "title": "Công Tắc Thông Minh",
+      "subtitle": "Điều khiển đèn và thiết bị bằng app, giọng nói hoặc tự động hóa",
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "buttonText": "Xem công tắc",
+      "link": "/products?category=smart-switch"
+    }
+  },
+  {
+    "id": "smart-light",
+    "name": "Đèn thông minh",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    "description": "Đèn âm trần, đèn ốp trần, LED RGB, điều chỉnh độ sáng",
+    "banner": {
+      "title": "Đèn Thông Minh",
+      "subtitle": "Tạo không gian sống hiện đại với ánh sáng thông minh",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&h=400&fit=crop",
+      "buttonText": "Xem đèn",
+      "link": "/products?category=smart-light"
+    }
+  },
+  {
+    "id": "smart-plug",
+    "name": "Ổ cắm thông minh",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "description": "Ổ cắm điều khiển từ xa, hẹn giờ, theo dõi thiết bị điện",
+    "banner": {
+      "title": "Ổ Cắm Thông Minh",
+      "subtitle": "Biến thiết bị điện thường thành thiết bị thông minh",
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "buttonText": "Xem ổ cắm",
+      "link": "/products?category=smart-plug"
+    }
+  },
+  {
+    "id": "curtain",
+    "name": "Rèm tự động",
+    "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+    "description": "Động cơ rèm, điều khiển rèm từ xa và theo ngữ cảnh",
+    "banner": {
+      "title": "Rèm Tự Động",
+      "subtitle": "Tự động đóng mở rèm theo thời gian, ánh sáng hoặc ngữ cảnh",
+      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1400&h=400&fit=crop",
+      "buttonText": "Xem rèm",
+      "link": "/products?category=curtain"
+    }
+  },
+  {
+    "id": "doorbell",
+    "name": "Chuông cửa có hình",
+    "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400&h=400&fit=crop",
+    "description": "Chuông cửa camera, đàm thoại từ xa, cảnh báo thông minh",
+    "banner": {
+      "title": "Chuông Cửa Có Hình",
+      "subtitle": "Quan sát và trò chuyện với khách ngay trên điện thoại",
+      "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=1400&h=400&fit=crop",
+      "buttonText": "Xem chuông cửa",
+      "link": "/products?category=doorbell"
+    }
+  },
+  {
+    "id": "camera",
+    "name": "Camera thông minh",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    "description": "Camera AI, giám sát an ninh, theo dõi chuyển động",
+    "banner": {
+      "title": "Camera Thông Minh",
+      "subtitle": "Giám sát ngôi nhà 24/7 với hình ảnh sắc nét và cảnh báo thông minh",
+      "image": "/assets/category/banner_khoa.png",
+      "buttonText": "Xem camera",
+      "link": "/products?category=camera"
+    }
+  },
+  {
+    "id": "smart-lock",
+    "name": "Khóa cửa thông minh",
+    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "description": "Khóa vân tay, mật khẩu, thẻ từ, mở khóa qua app",
+    "banner": {
+      "title": "Khóa Cửa Thông Minh",
+      "subtitle": "An toàn, tiện lợi và hiện đại cho cửa nhà bạn",
+      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "buttonText": "Xem khóa",
+      "link": "/products?category=smart-lock"
+    }
+  },
+  {
+    "id": "other",
+    "name": "Thiết bị khác",
+    "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400&h=400&fit=crop",
+    "description": "Màn hình điều khiển, thiết bị mở rộng và phụ kiện Smart Home",
+    "banner": {
+      "title": "Thiết Bị Smart Home Khác",
+      "subtitle": "Hoàn thiện hệ sinh thái nhà thông minh của bạn",
+      "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=1400&h=400&fit=crop",
+      "buttonText": "Khám phá",
+      "link": "/products?category=other"
+    }
+  }
+]

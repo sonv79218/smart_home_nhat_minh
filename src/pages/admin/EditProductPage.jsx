@@ -3,14 +3,16 @@
 // ============================================
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProductById, updateProduct } from "../../services/productService";
+import {   getProductByIdForAdmin, updateProduct } from "../../services/productService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
-import { CATEGORIES, BRANDS } from "../../constants/productMeta";
+import { getCategories } from "../../services/categoryService";
+import { getBrands } from "../../services/brandService";
 
 const EditProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -44,11 +46,22 @@ const EditProductPage = () => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
 
+  // Fetch categories and brands
+  useEffect(() => {
+    const fetchMeta = async () => {
+      const [cats, brds] = await Promise.all([getCategories(), getBrands()]);
+      setCategories(cats);
+      setBrands(brds);
+    };
+    fetchMeta();
+  }, []);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const product = await getProductById(id);
+        // const product = await getProductById(id);
+        const product = await getProductByIdForAdmin(id);
 
         if (!product) {
           setError("Không tìm thấy sản phẩm");
@@ -357,7 +370,7 @@ const EditProductPage = () => {
                   required
                 >
                   <option value="">Chọn danh mục</option>
-                  {CATEGORIES.map((cat) => (
+                  {categories.map((cat) => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name}
                     </option>
@@ -379,7 +392,7 @@ const EditProductPage = () => {
                 required
               >
                 <option value="">Chọn thương hiệu</option>
-                {BRANDS.map((brand) => (
+                {brands.map((brand) => (
                   <option key={brand.id} value={brand.id}>
                     {brand.name}
                   </option>

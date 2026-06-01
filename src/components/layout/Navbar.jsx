@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useCart from "../../hooks/useCart";
-import { CATEGORIES } from "../../constants/productMeta";
+import { getCategories } from "../../services/categoryService";
 import {
   COLORS,
   TYPOGRAPHY,
@@ -20,10 +20,20 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [categories, setCategories] = useState([]);
   const location = useLocation();
 
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
+
+  // Fetch categories on mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const cats = await getCategories();
+      setCategories(cats);
+    };
+    fetchCategories();
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -52,7 +62,7 @@ const Navbar = () => {
   };
 
   // Top categories for dropdown (first 6)
-  const topCategories = CATEGORIES.slice(0, 6);
+  const topCategories = categories.slice(0, 6);
 
   return (
     <>
@@ -66,17 +76,7 @@ const Navbar = () => {
   to="/"
   className="flex items-center gap-3 group"
 >
-  {/* <img
-    src="/favicon.svg"
-    alt="Nhật Minh Smart Home"
-    className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105"
-  /> */}
-
   <div className="flex flex-col leading-none">
-    {/* <span className="text-xl md:text-2xl font-black tracking-wide">
-      <span className="text-[#0A4DFF]">NHẬT</span>
-      <span className="text-slate-900"> MINH</span>
-    </span> */}
             <span className="logo-text">
               <span className="logo-highlight">NHAT </span>MINH
             </span>
@@ -85,11 +85,6 @@ const Navbar = () => {
     </span>
   </div>
 </Link>
-          {/* <Link to="/" className="navbar-logo">
-            <span className="logo-text">
-              <span className="logo-highlight">NHAT </span>MINH
-            </span>
-          </Link> */}
 
           {/* Desktop Menu */}
           <div className="navbar-menu desktop-only">
@@ -99,57 +94,6 @@ const Navbar = () => {
             >
               Trang chủ
             </Link>
-
-            {/* Category Dropdown */}
-            {/* <div
-              className="menu-item dropdown-trigger"
-              onMouseEnter={() => setIsCategoryOpen(true)}
-              onMouseLeave={() => setIsCategoryOpen(false)}
-            >
-              <span className={`${isActive("/products") ? "active" : ""}`}>
-                Danh mục
-                <svg
-                  className={`dropdown-arrow ${isCategoryOpen ? "open" : ""}`}
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-
-              {isCategoryOpen && (
-                <div className="dropdown-menu">
-                  {topCategories.map((category) => (
-                    <Link
-                      key={category.id}
-                      to={`/products?category=${category.id}`}
-                      className="dropdown-item"
-                    >
-                      <img
-                        src={category.image}
-                        alt={category.name}
-                        className="dropdown-item-icon"
-                      />
-                      <div className="dropdown-item-content">
-                        <span className="dropdown-item-name">{category.name}</span>
-                        <span className="dropdown-item-desc">
-                          {category.description}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                  <div className="dropdown-footer">
-                    <Link to="/products" className="view-all-link">
-                      Xem tất cả sản phẩm →
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div> */}
 
             <Link
               to="/products"
@@ -217,21 +161,6 @@ const Navbar = () => {
                 <span className="cart-badge">{totalItems > 99 ? "99+" : totalItems}</span>
               )}
             </Link>
-
-            {/* Admin Button */}
-            {/* <Link to="/admin" className="icon-button">
-              <svg
-                width={TYPOGRAPHY.iconSize}
-                height={TYPOGRAPHY.iconSize}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </Link> */}
 
             {/* Mobile Menu Toggle */}
             <button
@@ -304,43 +233,31 @@ const Navbar = () => {
 </svg>
             Giải pháp
           </Link>
-<div className="mobile-categories">
-  <p className="mobile-category-title">
-    Danh mục sản phẩm
-  </p>
 
-  {CATEGORIES.map((category) => {
-    const Icon = getCategoryIcon(category.id);
-
-    return (
-      <Link
-        key={category.id}
-        to={`/products?category=${category.id}`}
-        className="mobile-category-item"
-      >
-        <div className="mobile-category-icon">
-          <Icon size={22} strokeWidth={2} />
-        </div>
-
-        <span>{category.name}</span>
-      </Link>
-    );
-  })}
-</div>
           {/* Mobile Categories */}
-          {/* <div className="mobile-categories">
-            <p className="mobile-category-title">Danh mục sản phẩm</p>
-            {CATEGORIES.map((category) => (
-              <Link
-                key={category.id}
-                to={`/products?category=${category.id}`}
-                className="mobile-category-item"
-              >
-                <img src={category.image} alt={category.name} />
-                <span>{category.name}</span>
-              </Link>
-            ))}
-          </div> */}
+          <div className="mobile-categories">
+            <p className="mobile-category-title">
+              Danh mục sản phẩm
+            </p>
+
+            {categories.map((category) => {
+              const Icon = getCategoryIcon(category.id);
+
+              return (
+                <Link
+                  key={category.id}
+                  to={`/products?category=${category.id}`}
+                  className="mobile-category-item"
+                >
+                  <div className="mobile-category-icon">
+                    <Icon size={22} strokeWidth={2} />
+                  </div>
+
+                  <span>{category.name}</span>
+                </Link>
+              );
+            })}
+          </div>
 
           <Link to="/cart" className="mobile-menu-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -350,14 +267,6 @@ const Navbar = () => {
             </svg>
             Giỏ hàng ({totalItems})
           </Link>
-
-          {/* <Link to="/admin" className="mobile-menu-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-            </svg>
-            Quản lý (Admin)
-          </Link> */}
         </div>
       </div>
 
@@ -450,107 +359,6 @@ const navbarCSS = `
     color: ${COLORS.textPrimary};
     background: linear-gradient(135deg, ${COLORS.primary}, ${COLORS.accent});
     box-shadow: ${SHADOW.buttonGlow};
-  }
-
-  /* ==================== DROPDOWN ==================== */
-  .dropdown-trigger {
-    position: relative;
-  }
-
-  .dropdown-arrow {
-    transition: ${TRANSITION.fast};
-  }
-
-  .dropdown-arrow.open {
-    transform: rotate(180deg);
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 320px;
-    background: ${COLORS.dropdownBg};
-    border-radius: ${BORDER_RADIUS.dropdown};
-    box-shadow: ${SHADOW.dropdown};
-    padding: 12px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    animation: dropdownFadeIn 0.2s ease;
-    z-index: 1001;
-  }
-
-  @keyframes dropdownFadeIn {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-  }
-
-  .dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: ${TRANSITION.fast};
-  }
-
-  .dropdown-item:hover {
-    background: ${COLORS.hoverBgAccent};
-  }
-
-  .dropdown-item-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  .dropdown-item-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .dropdown-item-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: ${COLORS.secondary};
-  }
-
-  .dropdown-item-desc {
-    font-size: 11px;
-    color: #666;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 120px;
-  }
-
-  .dropdown-footer {
-    grid-column: 1 / -1;
-    padding-top: 8px;
-    border-top: 1px solid #eee;
-    text-align: center;
-  }
-
-  .view-all-link {
-    color: ${COLORS.primary};
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .view-all-link:hover {
-    text-decoration: underline;
   }
 
   /* ==================== SEARCH ==================== */
@@ -771,11 +579,15 @@ const navbarCSS = `
     background: ${COLORS.hoverBgAccent};
   }
 
-  .mobile-category-item img {
+  .mobile-category-icon {
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    object-fit: cover;
+    background: ${COLORS.hoverBgAccent};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${COLORS.accent};
   }
 
   .mobile-menu-overlay {

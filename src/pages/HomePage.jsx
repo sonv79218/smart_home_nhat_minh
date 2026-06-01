@@ -4,8 +4,8 @@
 // ============================================
 import { useState, useEffect } from "react";
 import { getFeaturedProducts, getProductsByCategory } from "../services/productService";
+import { getCategories } from "../services/categoryService";
 import { getActiveBanners } from "../services/bannerService";
-import { CATEGORIES } from "../constants/productMeta";
 import { companyInfo, companySocial } from "../data/company";
 import { useApp } from "../contexts/AppContext";
 import OfflineNotice from "../components/common/OfflineNotice";
@@ -41,6 +41,7 @@ const HomePage = () => {
   const [banners, setBanners] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState({});
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // ============================================
@@ -50,6 +51,10 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
+
+        // Fetch categories from JSON
+        const categoriesData = await getCategories();
+        setCategories(categoriesData);
 
         // Fetch banners
         const bannersData = await getActiveBanners();
@@ -61,7 +66,7 @@ const HomePage = () => {
 
         // Fetch products by category
         const categoryProducts = {};
-        for (const category of CATEGORIES.slice(0, PRODUCTS_LIMIT.topCategory)) {
+        for (const category of categoriesData.slice(0, PRODUCTS_LIMIT.topCategory)) {
           const products = await getProductsByCategory(
             category.id,
             PRODUCTS_LIMIT.category
@@ -81,8 +86,7 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  const categoriesWithProducts = CATEGORIES;
-  const topCategories = categoriesWithProducts.slice(0, PRODUCTS_LIMIT.topCategory);
+  const topCategories = categories.slice(0, PRODUCTS_LIMIT.topCategory);
 
   // ============================================
   // RENDER

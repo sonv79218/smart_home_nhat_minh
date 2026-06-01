@@ -4,7 +4,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getProducts } from "../services/productService";
-import { CATEGORIES, BRANDS } from "../constants/productMeta";
+import { getCategories } from "../services/categoryService";
+import { getBrands } from "../services/brandService";
 import ProductCard from "./home/components/ProductCard";
 import Pagination from "../components/common/Pagination";
 
@@ -28,6 +29,8 @@ const getItemsPerPage = (width) => {
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,6 +55,23 @@ const ProductsPage = () => {
   // Items per page based on screen size
   const itemsPerPage = useMemo(() => getItemsPerPage(windowWidth), [windowWidth]);
 
+  // Fetch categories and brands
+  useEffect(() => {
+    const fetchMeta = async () => {
+      try {
+        const [cats, brds] = await Promise.all([
+          getCategories(),
+          getBrands()
+        ]);
+        setCategories(cats);
+        setBrands(brds);
+      } catch (error) {
+        console.error("Error fetching categories/brands:", error);
+      }
+    };
+    fetchMeta();
+  }, []);
+
   // Update URL when category changes
   useEffect(() => {
     if (filterCategory) {
@@ -66,10 +86,8 @@ const ProductsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const data = await getProducts();
-        // setProducts(data);
         const data = await getProducts();
-setProducts(Array.isArray(data) ? data : []);
+        setProducts(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -96,7 +114,7 @@ setProducts(Array.isArray(data) ? data : []);
   // Get current category info
   const getCurrentCategoryInfo = () => {
     if (!filterCategory) return null;
-    return CATEGORIES.find((c) => c.id === filterCategory);
+    return categories.find((c) => c.id === filterCategory);
   };
 
   const currentCategory = getCurrentCategoryInfo();
@@ -105,7 +123,7 @@ setProducts(Array.isArray(data) ? data : []);
   // FILTERED & SORTED PRODUCTS (Memoized)
   // ============================================
   const filteredAndSortedProducts = useMemo(() => {
-   return (products || [])
+    return (products || [])
       .filter((product) => {
         const matchesCategory = !filterCategory || product.category === filterCategory;
         const matchesBrand = !filterBrand || product.brand === filterBrand;
@@ -261,7 +279,7 @@ setProducts(Array.isArray(data) ? data : []);
               className="filter-select"
             >
               <option value="">Tất cả danh mục</option>
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
                 </option>
@@ -275,7 +293,7 @@ setProducts(Array.isArray(data) ? data : []);
               className="filter-select"
             >
               <option value="">Tất cả thương hiệu</option>
-              {BRANDS.map((brand) => (
+              {brands.map((brand) => (
                 <option key={brand.id} value={brand.id}>
                   {brand.name}
                 </option>
@@ -313,13 +331,13 @@ setProducts(Array.isArray(data) ? data : []);
             <div className="active-filters">
               {filterCategory && (
                 <span className="filter-tag">
-                  {CATEGORIES.find((c) => c.id === filterCategory)?.name}
+                  {categories.find((c) => c.id === filterCategory)?.name}
                   <button onClick={() => setFilterCategory("")}>×</button>
                 </span>
               )}
               {filterBrand && (
                 <span className="filter-tag">
-                  {BRANDS.find((b) => b.id === filterBrand)?.name}
+                  {brands.find((b) => b.id === filterBrand)?.name}
                   <button onClick={() => setFilterBrand("")}>×</button>
                 </span>
               )}

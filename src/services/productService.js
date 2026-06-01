@@ -5,11 +5,11 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  getDoc,
   updateDoc,
   query,
   orderBy,
 } from "firebase/firestore";
-
 import { db } from "../firebase";
 import {
   generateSlug,
@@ -391,5 +391,25 @@ export const getAllProductsForAdmin = async () => {
 export const getProductsCount = async (filters = {}) => {
   const products = await getProducts(filters);
   return products.length;
+};
+
+
+export const getProductByIdForAdmin = async (id) => {
+  try {
+    const productRef = doc(db, "products", id);
+    const snapshot = await getDoc(productRef);
+
+    if (!snapshot.exists()) {
+      return null;
+    }
+
+    return {
+      id: snapshot.id,
+      ...snapshot.data(),
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 

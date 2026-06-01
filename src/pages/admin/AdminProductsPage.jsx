@@ -5,10 +5,10 @@ import {
   getAllProductsForAdmin,
   deleteProduct,
 } from "../../services/productService";
+import { getCategories } from "../../services/categoryService";
+import { getBrands } from "../../services/brandService";
 
 import {
-  CATEGORIES,
-  BRANDS,
   PRODUCT_STATUS,
 } from "../../constants/productMeta";
 
@@ -16,6 +16,8 @@ const PRODUCTS_PER_PAGE = 10;
 
 const AdminProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [filterCategory, setFilterCategory] =
@@ -38,6 +40,13 @@ const AdminProductsPage = () => {
     useState(1);
 
   useEffect(() => {
+    // Fetch categories and brands
+    const fetchMeta = async () => {
+      const [cats, brds] = await Promise.all([getCategories(), getBrands()]);
+      setCategories(cats);
+      setBrands(brds);
+    };
+    fetchMeta();
     fetchProducts();
   }, []);
 
@@ -281,7 +290,7 @@ const PLACEHOLDER_IMAGE =
                 Tất cả danh mục
               </option>
 
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <option
                   key={cat.id}
                   value={cat.id}
@@ -305,7 +314,7 @@ const PLACEHOLDER_IMAGE =
                 Tất cả thương hiệu
               </option>
 
-              {BRANDS.map((brand) => (
+              {brands.map((brand) => (
                 <option
                   key={brand.id}
                   value={brand.id}
