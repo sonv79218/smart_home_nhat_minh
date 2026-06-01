@@ -2,7 +2,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
-  getProducts,
+  getAllProductsForAdmin,
   deleteProduct,
 } from "../../services/productService";
 
@@ -55,7 +55,7 @@ const AdminProductsPage = () => {
     try {
       setLoading(true);
 
-const data = await getProducts();
+const data = await getAllProductsForAdmin();
 
 setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
