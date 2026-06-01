@@ -1,5 +1,6 @@
 // ============================================
 // PREMIUM BANNER SECTION COMPONENT
+// Seamless landing page hero with gradient transition
 // ============================================
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +8,6 @@ import {
   BANNER_COLORS,
   BANNER_DIMENSIONS,
   BANNER_SHADOW,
-  BANNER_TRANSITION,
-  BANNER_BREAKPOINTS,
-  BANNER_STATS,
 } from "../../../styles/bannerStyles";
 
 // ============================================
@@ -141,16 +139,12 @@ const BannerSection = ({ banners, current, setCurrent }) => {
   // Empty state
   if (!banners || banners.length === 0) {
     return (
-      <section className="banner-section">
-        {/* <div className="banner-empty">
-          <div className="banner-empty-content">
-            <h2>Smart Home</h2>
-            <p>Giải pháp nhà thông minh cho cuộc sống hiện đại</p>
-            <button className="cta-primary" onClick={() => navigate("/products")}>
-              Khám phá ngay
-            </button>
-          </div>
-        </div> */}
+      <section className="banner-section banner-section-empty">
+        <style>{bannerStyles}</style>
+        <div className="banner-wrapper-empty">
+          {/* Gradient background for empty state */}
+          <div className="banner-empty-gradient" />
+        </div>
       </section>
     );
   }
@@ -177,8 +171,11 @@ const BannerSection = ({ banners, current, setCurrent }) => {
             className={`banner-image ${isTransitioning ? "transitioning" : ""}`}
           />
 
-          {/* Gradient Overlay */}
+          {/* Gradient Overlay - Extended for seamless transition */}
           <div className="banner-overlay" />
+          
+          {/* Seamless Gradient Fade to next section */}
+          <div className="banner-seamless-fade" />
 
           {/* Floating Badges */}
           <div className="banner-badges">
@@ -207,14 +204,10 @@ const BannerSection = ({ banners, current, setCurrent }) => {
               })}
             </h1>
 
-    
             {/* Subtitle - Mobile */}
             <p className="banner-subtitle show-mobile">
               {currentBanner.subtitle}
             </p>
-
-            {/* CTA Buttons */}
-
 
             {/* Stats */}
             <BannerStats stats={BANNER_STATS} />
@@ -240,6 +233,12 @@ const BannerSection = ({ banners, current, setCurrent }) => {
 // ============================================
 // CSS STYLES
 // ============================================
+const BANNER_STATS = [
+  { value: "5000+", label: "Khách hàng" },
+  { value: "100+", label: "Sản phẩm Smart" },
+  { value: "24/7", label: "Hỗ trợ" },
+];
+
 const bannerStyles = `
   /* ==================== BANNER SECTION ==================== */
   .banner-section {
@@ -247,25 +246,55 @@ const bannerStyles = `
     width: 100%;
   }
 
-  .banner-wrapper {
-    position: relative;
-    height: ${BANNER_DIMENSIONS.bannerHeight.mobile};
-    width: 100%;
-    border-radius: 0;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: ${BANNER_SHADOW.banner};
+  .banner-section-empty {
+    height: 320px;
   }
 
-  @media (min-width: ${BANNER_BREAKPOINTS.tablet}) {
+  .banner-wrapper-empty {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .banner-empty-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #2563eb 100%);
+  }
+
+  .banner-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  /* Responsive Heights */
+  .banner-wrapper {
+    height: 260px;
+  }
+
+  @media (min-width: 480px) {
     .banner-wrapper {
-      height: ${BANNER_DIMENSIONS.bannerHeight.tablet};
+      height: 320px;
     }
   }
 
-  @media (min-width: ${BANNER_BREAKPOINTS.mobile}) {
+  @media (min-width: 768px) {
     .banner-wrapper {
-      height: ${BANNER_DIMENSIONS.bannerHeight.desktop};
+      height: 400px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .banner-wrapper {
+      height: 480px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .banner-wrapper {
+      height: 520px;
     }
   }
 
@@ -278,7 +307,7 @@ const bannerStyles = `
     height: 200%;
     background: radial-gradient(
       ellipse at 30% 50%,
-      ${BANNER_COLORS.accent}22 0%,
+      rgba(37, 99, 235, 0.15) 0%,
       transparent 50%
     );
     pointer-events: none;
@@ -299,6 +328,7 @@ const bannerStyles = `
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     z-index: 0;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -322,38 +352,77 @@ const bannerStyles = `
     background: linear-gradient(
       90deg,
       ${BANNER_COLORS.overlay} 0%,
-      ${BANNER_COLORS.overlayLight} 35%,
+      ${BANNER_COLORS.overlayLight} 40%,
       ${BANNER_COLORS.overlayFade} 100%
     );
     z-index: 2;
   }
 
+  /* Seamless fade to next section */
+  .banner-seamless-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(
+      to bottom,
+      rgba(248, 250, 252, 0) 0%,
+      rgba(248, 250, 252, 0.6) 40%,
+      rgba(248, 250, 252, 1) 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .banner-seamless-fade {
+      height: 100px;
+    }
+  }
+
   /* ==================== FLOATING BADGES ==================== */
   .banner-badges {
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 16px;
+    right: 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     z-index: 10;
+  }
+
+  @media (min-width: 768px) {
+    .banner-badges {
+      top: 24px;
+      right: 24px;
+      gap: 10px;
+    }
   }
 
   .banner-floating-badge {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: ${BANNER_COLORS.glassBg};
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid ${BANNER_COLORS.glassBorder};
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50px;
-    color: ${BANNER_COLORS.white};
-    font-size: 12px;
+    color: white;
+    font-size: 11px;
     font-weight: 600;
     animation: floatBadge 3s ease-in-out infinite;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (min-width: 768px) {
+    .banner-floating-badge {
+      padding: 10px 16px;
+      font-size: 12px;
+      gap: 8px;
+    }
   }
 
   .banner-badges .banner-floating-badge:nth-child(1) { animation-delay: 0s; }
@@ -366,18 +435,31 @@ const bannerStyles = `
   }
 
   .badge-icon {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .badge-icon {
+      font-size: 14px;
+    }
   }
 
   /* ==================== CONTENT ==================== */
   .banner-content {
     position: absolute;
     top: 50%;
-    left: clamp(24px, 6vw, 80px);
+    left: 20px;
     transform: translateY(-50%);
-    max-width: 580px;
+    max-width: 500px;
     z-index: 5;
     animation: fadeInUp 0.6s ease-out;
+  }
+
+  @media (min-width: 768px) {
+    .banner-content {
+      left: clamp(24px, 6vw, 80px);
+      max-width: 580px;
+    }
   }
 
   @keyframes fadeInUp {
@@ -393,12 +475,19 @@ const bannerStyles = `
 
   /* ==================== TITLE ==================== */
   .banner-title {
-    font-size: clamp(32px, 6vw, 64px);
+    font-size: clamp(22px, 5vw, 56px);
     font-weight: 800;
-    color: ${BANNER_COLORS.white};
-    line-height: 1.1;
-    margin: 0 0 16px;
-    letter-spacing: -1px;
+    color: white;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+
+  @media (min-width: 768px) {
+    .banner-title {
+      margin: 0 0 16px;
+      letter-spacing: -1px;
+    }
   }
 
   .title-highlight {
@@ -408,74 +497,39 @@ const bannerStyles = `
 
   /* ==================== SUBTITLE ==================== */
   .banner-subtitle {
-    font-size: clamp(14px, 2vw, 20px);
+    font-size: clamp(12px, 2vw, 18px);
     color: ${BANNER_COLORS.textWhite};
-    line-height: 1.7;
-    margin: 0 0 28px;
-    max-width: 480px;
+    line-height: 1.6;
+    margin: 0 0 20px;
+    max-width: 420px;
   }
 
-  /* ==================== CTA BUTTONS ==================== */
-  .banner-cta {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-
-  .cta-primary {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    background: linear-gradient(135deg, ${BANNER_COLORS.primary}, ${BANNER_COLORS.accent});
-    color: ${BANNER_COLORS.white};
-    border: none;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: ${BANNER_SHADOW.button};
-  }
-
-  .cta-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
-  }
-
-  .cta-primary svg {
-    transition: transform 0.25s ease;
-  }
-
-  .cta-primary:hover svg {
-    transform: translateX(4px);
-  }
-
-  .cta-secondary {
-    padding: 14px 28px;
-    background: ${BANNER_COLORS.glassBg};
-    border: 1px solid ${BANNER_COLORS.glassBorder};
-    color: ${BANNER_COLORS.white};
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .cta-secondary:hover {
-    background: ${BANNER_COLORS.glassBorder};
-    transform: translateY(-2px);
+  @media (min-width: 768px) {
+    .banner-subtitle {
+      margin: 0 0 28px;
+    }
   }
 
   /* ==================== STATS ==================== */
   .banner-stats {
-    display: flex;
-    gap: 32px;
-    padding-top: 24px;
-    border-top: 1px solid ${BANNER_COLORS.glassBorder};
+    display: none;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  @media (min-width: 640px) {
+    .banner-stats {
+      display: flex;
+      gap: 28px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .banner-stats {
+      gap: 32px;
+      padding-top: 24px;
+    }
   }
 
   .stat-item {
@@ -485,9 +539,9 @@ const bannerStyles = `
   }
 
   .stat-value {
-    font-size: 24px;
+    font-size: clamp(18px, 3vw, 28px);
     font-weight: 800;
-    color: ${BANNER_COLORS.white};
+    color: white;
     background: linear-gradient(135deg, ${BANNER_COLORS.primary}, ${BANNER_COLORS.accent});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -495,7 +549,7 @@ const bannerStyles = `
   }
 
   .stat-label {
-    font-size: 12px;
+    font-size: 11px;
     color: ${BANNER_COLORS.textMuted};
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -504,17 +558,24 @@ const bannerStyles = `
   /* ==================== DOTS ==================== */
   .banner-dots {
     position: absolute;
-    bottom: 24px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 8px;
     z-index: 10;
   }
 
+  @media (min-width: 768px) {
+    .banner-dots {
+      bottom: 24px;
+      gap: 10px;
+    }
+  }
+
   .banner-dots .dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     border: none;
     background: ${BANNER_COLORS.dotInactive};
@@ -523,10 +584,23 @@ const bannerStyles = `
     transition: all 0.3s ease;
   }
 
+  @media (min-width: 768px) {
+    .banner-dots .dot {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
   .banner-dots .dot.active {
-    width: 32px;
+    width: 24px;
     border-radius: 5px;
     background: linear-gradient(135deg, ${BANNER_COLORS.primary}, ${BANNER_COLORS.accent});
+  }
+
+  @media (min-width: 768px) {
+    .banner-dots .dot.active {
+      width: 32px;
+    }
   }
 
   /* ==================== ARROWS ==================== */
@@ -534,21 +608,28 @@ const bannerStyles = `
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: ${BANNER_COLORS.glassBg};
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid ${BANNER_COLORS.glassBorder};
-    color: ${BANNER_COLORS.white};
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
     transition: all 0.25s ease;
-    box-shadow: ${BANNER_SHADOW.arrow};
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (min-width: 768px) {
+    .banner-arrow {
+      width: 48px;
+      height: 48px;
+    }
   }
 
   .banner-arrow:hover {
@@ -559,73 +640,27 @@ const bannerStyles = `
   }
 
   .arrow-left {
-    left: 20px;
+    left: 10px;
   }
 
   .arrow-right {
-    right: 20px;
+    right: 10px;
   }
 
-  /* ==================== EMPTY STATE ==================== */
-  .banner-empty {
-    width: 100%;
-    height: ${BANNER_DIMENSIONS.bannerHeight.mobile};
-    background: linear-gradient(135deg, ${BANNER_COLORS.secondary}, ${BANNER_COLORS.primary});
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: ${BANNER_SHADOW.banner};
-  }
-
-  @media (min-width: ${BANNER_BREAKPOINTS.mobile}) {
-    .banner-empty {
-      height: ${BANNER_DIMENSIONS.bannerHeight.tablet};
+  @media (min-width: 768px) {
+    .arrow-left {
+      left: 20px;
     }
-  }
 
-  .banner-empty-content {
-    text-align: center;
-    padding: 20px;
-  }
-
-  .banner-empty-content h2 {
-    font-size: clamp(28px, 5vw, 48px);
-    font-weight: 800;
-    color: ${BANNER_COLORS.white};
-    margin: 0 0 12px;
-  }
-
-  .banner-empty-content p {
-    font-size: clamp(14px, 2vw, 18px);
-    color: ${BANNER_COLORS.textWhite};
-    margin: 0 0 24px;
+    .arrow-right {
+      right: 20px;
+    }
   }
 
   /* ==================== RESPONSIVE - MOBILE FIRST ==================== */
 
-  /* Tablet & Desktop */
-  @media (min-width: ${BANNER_BREAKPOINTS.mobile}) {
-    .banner-content {
-      left: clamp(24px, 6vw, 80px);
-      transform: translateY(-50%);
-      text-align: left;
-    }
-
-    .banner-subtitle {
-      display: block;
-    }
-
-    .banner-cta {
-      justify-content: flex-start;
-    }
-
-    .banner-stats {
-      justify-content: flex-start;
-    }
-  }
-
   /* Mobile Only */
-  @media (max-width: ${BANNER_BREAKPOINTS.mobile}) {
+  @media (max-width: 767px) {
     /* Content - Center on mobile */
     .banner-content {
       text-align: center;
@@ -638,74 +673,42 @@ const bannerStyles = `
 
     /* Title - Smaller on mobile */
     .banner-title {
-      font-size: clamp(26px, 8vw, 32px);
-      margin-bottom: 10px;
-      letter-spacing: -0.5px;
+      margin-bottom: 6px;
     }
 
-    /* Subtitle - Hide on very small screens */
-    .banner-subtitle {
-      display: none;
-    }
-
+    /* Subtitle - Show on mobile */
     .banner-subtitle.show-mobile {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.5;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       opacity: 0.85;
     }
 
-    /* CTA - Full width buttons */
-    .banner-cta {
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .cta-primary, .cta-secondary {
-      width: 100%;
-      max-width: 220px;
-      padding: 12px 20px;
-      font-size: 14px;
-      justify-content: center;
-    }
-
-    /* Stats - Compact on mobile */
+    /* Stats - Hidden on mobile */
     .banner-stats {
-      gap: 16px;
-      padding-top: 16px;
+      display: none;
     }
 
-    .stat-value {
-      font-size: 16px;
-    }
-
-    .stat-label {
-      font-size: 10px;
-    }
-
-    /* Floating Badges - Top right, compact */
+    /* Floating Badges - Compact on mobile */
     .banner-badges {
-      top: 12px;
-      right: 12px;
+      top: 10px;
+      right: 10px;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 6px;
-      max-width: 60%;
+      max-width: 50%;
       justify-content: flex-end;
     }
 
     .banner-floating-badge {
-      padding: 5px 10px;
-      font-size: 10px;
+      padding: 4px 8px;
+      font-size: 9px;
       gap: 4px;
       animation: none;
     }
 
     .badge-icon {
-      font-size: 11px;
+      font-size: 10px;
     }
 
     /* Arrows - Smaller on mobile */
@@ -715,58 +718,26 @@ const bannerStyles = `
     }
 
     .banner-arrow svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
 
     .arrow-left {
-      left: 8px;
+      left: 6px;
     }
 
     .arrow-right {
-      right: 8px;
-    }
-
-    /* Dots - Centered at bottom */
-    .banner-dots {
-      bottom: 16px;
-      gap: 6px;
-    }
-
-    .banner-dots .dot {
-      width: 8px;
-      height: 8px;
-    }
-
-    .banner-dots .dot.active {
-      width: 24px;
+      right: 6px;
     }
 
     /* Glow - Less prominent on mobile */
     .banner-glow {
-      opacity: 0.5;
-    }
-  }
-
-  /* Extra Small Screens (iPhone SE) */
-  @media (max-width: 375px) {
-    .banner-title {
-      font-size: 24px;
+      opacity: 0.4;
     }
 
-    .cta-primary, .cta-secondary {
-      padding: 10px 16px;
-      font-size: 13px;
-    }
-
-    .banner-badges {
-      top: 8px;
-      right: 8px;
-    }
-
-    .banner-floating-badge {
-      padding: 4px 8px;
-      font-size: 9px;
+    /* Seamless fade - shorter on mobile */
+    .banner-seamless-fade {
+      height: 60px;
     }
   }
 
@@ -780,10 +751,6 @@ const bannerStyles = `
     .banner-title {
       font-size: 56px;
     }
-
-    .banner-subtitle {
-      font-size: 20px;
-    }
   }
 
   /* Touch Devices - Disable hover effects */
@@ -791,14 +758,7 @@ const bannerStyles = `
     .cta-primary:hover,
     .cta-secondary:hover,
     .banner-arrow:hover {
-      transform: none;
-    }
-  }
-
-  /* High DPI Displays */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .banner-image {
-      image-rendering: -webkit-optimize-contrast;
+      transform: translateY(-50%);
     }
   }
 `;

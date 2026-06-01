@@ -1,8 +1,8 @@
 // ============================================
-// HOMEPAGE - MODERN PREMIUM ECOMMERCE
-// OPTIMIZED: Firestore queries with pagination + Fallback support
+// HOMEPAGE - UNIFIED DESIGN SYSTEM
+// Seamless sections with consistent styling and dividers
 // ============================================
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { getFeaturedProducts, getProductsByCategory } from "../services/productService";
 import { getActiveBanners } from "../services/bannerService";
 import { CATEGORIES } from "../constants/productMeta";
@@ -30,6 +30,11 @@ const PRODUCTS_LIMIT = {
   topCategory: 10,
 };
 
+// Section divider component
+const SectionDivider = () => (
+  <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+);
+
 const HomePage = () => {
   const { offlineMode } = useApp();
   const [current, setCurrent] = useState(0);
@@ -39,14 +44,14 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
   // ============================================
-  // DATA FETCHING - OPTIMIZED
+  // DATA FETCHING
   // ============================================
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
 
-        // Fetch banners (only active ones)
+        // Fetch banners
         const bannersData = await getActiveBanners();
         setBanners(bannersData);
 
@@ -76,80 +81,96 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  // ============================================
-  // FILTERED CATEGORIES - Only categories with products
-  // ============================================
-  // const categoriesWithProducts = useMemo(() => {
-  //   return CATEGORIES.filter((cat) => productsByCategory[cat.id]?.length > 0);
-  // }, [productsByCategory]);
   const categoriesWithProducts = CATEGORIES;
-
   const topCategories = categoriesWithProducts.slice(0, PRODUCTS_LIMIT.topCategory);
 
   // ============================================
   // RENDER
   // ============================================
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen bg-white">
       {/* ============================================ */}
-      {/* OFFLINE NOTICE - Fallback Mode Banner */}
+      {/* OFFLINE NOTICE */}
       {/* ============================================ */}
       {offlineMode && <OfflineNotice />}
 
       {/* ============================================ */}
-      {/* BANNER - FULL WIDTH (w-full) */}
+      {/* HERO: Banner + Categories */}
       {/* ============================================ */}
       <div className="w-full">
+        {/* Banner */}
         <BannerSection
           banners={banners}
           current={current}
           setCurrent={setCurrent}
         />
+
+        {/* Category Grid - Connected with gradient */}
+        <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+          {topCategories.length > 0 && (
+            <CategoryGridSection categories={topCategories} />
+          )}
+        </div>
       </div>
-        {/* Category Grid Section */}
-        {topCategories.length > 0 && (
-          <CategoryGridSection categories={topCategories} />
-        )}
+
+      {/* Divider */}
+      <SectionDivider />
+
+      {/* ============================================ */}
+      {/* ECOSYSTEM SECTION */}
+      {/* ============================================ */}
+      <EcosystemSection />
+
+      {/* Divider */}
+      <SectionDivider />
+
       {/* ============================================ */}
       {/* FLOATING CONTACT BUTTONS */}
       {/* ============================================ */}
       <FloatingContactButtons />
 
       {/* ============================================ */}
-      {/* CONTENT - CONSTRAINED (max-width) */}
+      {/* CATEGORY PRODUCTS */}
       {/* ============================================ */}
-      <div className="max-w-[1400px] mx-auto px-6">
-     
-        {/* Ecosystem Section */}
-        <EcosystemSection />
-        
-
-
-        {/* Category Product Sections - Optimized */}
-        {topCategories.map((category) => {
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+        {topCategories.map((category, index) => {
           const categoryProducts = productsByCategory[category.id] || [];
           if (categoryProducts.length === 0) return null;
           return (
-            <CategoryProductSection
-              key={category.id}
-              category={category}
-              products={categoryProducts}
-              viewAllLink={`/products?category=${category.id}`}
-              maxProducts={PRODUCTS_LIMIT.category}
-            />
+            <div key={category.id}>
+              <CategoryProductSection
+                category={category}
+                products={categoryProducts}
+                viewAllLink={`/products?category=${category.id}`}
+                maxProducts={PRODUCTS_LIMIT.category}
+              />
+              {/* Divider between category sections */}
+              {index < topCategories.length - 1 && <SectionDivider />}
+            </div>
           );
         })}
-
-        {/* About Section */}
-        <AboutSection companyInfo={companyInfo} />
-        {/* Features Bar */}
-        <FeaturesBar />
-        {/* Contact Section */}
-        <ContactSection
-          companyInfo={companyInfo}
-          companySocial={companySocial}
-        />
       </div>
+
+      {/* ============================================ */}
+      {/* ABOUT SECTION */}
+      {/* ============================================ */}
+      <SectionDivider />
+      <AboutSection companyInfo={companyInfo} />
+
+      {/* ============================================ */}
+      {/* FEATURES BAR */}
+      {/* ============================================ */}
+      <SectionDivider />
+      <FeaturesBar />
+
+      {/* ============================================ */}
+      {/* CONTACT SECTION */}
+      {/* ============================================ */}
+      <SectionDivider />
+      <ContactSection
+        companyInfo={companyInfo}
+        companySocial={companySocial}
+      />
     </div>
   );
 };
