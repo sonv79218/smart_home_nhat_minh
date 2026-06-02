@@ -385,7 +385,7 @@ const AboutPage = () => {
               </div>
               <div className="flex gap-3">
                 <Phone className="w-5 h-5 text-sky-300 shrink-0" />
-                <span>Hotline: 0888 999 888</span>
+                <span>Hotline: 0876.906.668</span>
               </div>
               <div className="flex gap-3">
                 <Mail className="w-5 h-5 text-sky-300 shrink-0" />

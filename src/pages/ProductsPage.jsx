@@ -513,6 +513,7 @@ const productsPageStyles = `
     padding: 10px 36px 10px 40px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
+    color: #000;
     font-size: 14px;
     transition: all 0.2s ease;
     background: #f8fafc;

@@ -362,7 +362,7 @@ const HunonicPage = () => {
             </Link>
 
             <a
-              href="tel:0888999888"
+              href="tel:0876906668"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/20 text-white font-extrabold hover:bg-white/15 transition"
             >
               <Phone size={18} />

@@ -4,13 +4,13 @@ const FloatingContactButtons = () => {
   const buttons = [
     {
       label: "Zalo tư vấn",
-      href: "https://zalo.me/0888999888",
+      href: "https://zalo.me/0876906668",
       icon: MessageCircle,
       className: "bg-blue-600 hover:bg-blue-700 shadow-blue-500/40",
     },
     {
       label: "Gọi ngay",
-      href: "tel:0888999888",
+      href: "tel:0876906668",
       icon: Phone,
       className: "bg-red-500 hover:bg-red-600 shadow-red-500/40",
     },

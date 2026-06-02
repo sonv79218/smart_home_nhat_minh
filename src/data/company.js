@@ -28,5 +28,5 @@ export const companySocial = {
   tiktok: "https://tiktok.com/@nhatminhsmarthome",
   youtube: "https://youtube.com/@nhatminhsmarthome",
   instagram: "https://instagram.com/nhatminhsmarthome",
-  zalo: "https://zalo.me/0888999888",
+  zalo: "https://zalo.me/0876906668",
 };

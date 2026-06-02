@@ -21,7 +21,6 @@ const db = admin.firestore();
 
 const collections = [
   "products",
-  "orders",
 ];
 
 /**

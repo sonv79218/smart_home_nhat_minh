@@ -65,6 +65,43 @@
     "updatedAt": "2026-06-01T10:07:33.889Z"
   },
   {
+    "id": "4A6zFKGh2BZQ526svJPm",
+    "name": "Bộ điều khiển điều hòa trung tâm Aqara VRF T1",
+    "sku": "OTH-BIUK-8330",
+    "brand": "aqara",
+    "category": "other",
+    "discountPrice": 0,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 165,
+    "shortDescription": "Bộ điều khiển điều hòa trung tâm Aqara VRF T1 là thiết bị giúp quản lý hệ thống điều hòa trung tâm thông minh, hỗ trợ kết nối Zigbee, Wi-Fi và BLE. Sản phẩm cho phép điều khiển nhiều dàn lạnh cùng lúc, tích hợp Apple Home, mang đến giải pháp kiểm soát nhiệt độ tiện lợi, hiện đại cho công trình lớn.",
+    "description": "Aqara VRF T1 là bộ điều khiển chuyên dụng dành cho hệ thống điều hòa trung tâm, giúp người dùng quản lý và vận hành toàn bộ hệ thống HVAC một cách thông minh và hiệu quả. Thiết bị cho phép điều khiển tập trung nhiều dàn lạnh, phù hợp cho căn hộ cao cấp, biệt thự, văn phòng hoặc tòa nhà thương mại.\n\nSản phẩm hỗ trợ các chuẩn kết nối hiện đại như Zigbee, Wi-Fi và BLE, giúp đảm bảo khả năng giao tiếp ổn định và linh hoạt với hệ sinh thái nhà thông minh Aqara. Người dùng có thể dễ dàng điều chỉnh nhiệt độ, chế độ hoạt động, tạo lịch vận hành hoặc thiết lập kịch bản tự động hóa thông qua ứng dụng trên điện thoại.\n\nAqara VRF T1 hỗ trợ điều khiển tối đa 2 dàn nóng và lên đến 32 dàn lạnh (hoặc 64 dàn lạnh trong cấu hình mở rộng 1 dàn nóng), đáp ứng nhu cầu cho cả hệ thống dân dụng và thương mại quy mô lớn. Thiết bị hoạt động với nguồn điện 12V, đảm bảo an toàn và tiết kiệm năng lượng trong quá trình sử dụng.\n\nĐặc biệt, sản phẩm tương thích với Apple Home, giúp người dùng dễ dàng tích hợp vào hệ sinh thái nhà thông minh và điều khiển thiết bị bằng iPhone hoặc Apple Watch một cách nhanh chóng và tiện lợi.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bộ điều khiển điều hòa trung tâm Aqara VRF T1\nKết nối: Zigbee / Wi-Fi / BLE\nỨng dụng: Điều khiển hệ thống điều hòa trung tâm (HVAC)\nSố dàn nóng hỗ trợ: Tối đa 2\nSố dàn lạnh hỗ trợ: Tối đa 32 (1 dàn nóng) / 64 (mở rộng)\nNguồn điện: 12V\nTương thích: Apple Home\nĐiều khiển: Qua ứng dụng Aqara Home\nHệ sinh thái: Aqara Smart Home\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển tập trung hệ thống điều hòa trung tâm VRF\nHỗ trợ nhiều dàn lạnh, phù hợp công trình lớn\nKết nối Zigbee, Wi-Fi và BLE linh hoạt\nĐiều khiển từ xa qua ứng dụng điện thoại\nTích hợp Apple Home tiện lợi\nTạo lịch hoạt động và kịch bản tự động hóa thông minh\nTối ưu vận hành và tiết kiệm năng lượng cho hệ thống HVAC",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "bo-ieu-khien-ieu-hoa-trung-tam-aqara-vrf-t1",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367856/s6qvurbbgojqetvc9rpi.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367857/yl46oi3qeb9sxzcofh4n.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/djejjnhios1agg0qlgp2.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/aav7z96kmidqz3w5spig.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/kx2oqahr7z30levyfl3w.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/bvj7djmyfzaoonqyvlo7.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/ljuaaivkg9svnfpkdq8r.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/sk0da1cfubxhiv9erft4.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367858/rpj3ye8c6s7ma7f2zdmu.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780367859/uvc4scdcoazts9fofmct.png"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T02:37:41.134Z",
+    "stock": 25,
+    "price": 11490000,
+    "updatedAt": "2026-06-02T02:42:41.133Z"
+  },
+  {
     "id": "5CheRDpnLFPwioD6V01U",
     "name": "Đèn ốp trần thông minh Aqara L1-350",
     "sku": "SMA-NPTR-4135",
@@ -349,7 +386,7 @@
     "sold": 98000,
     "bestSeller": true,
     "newProduct": false,
-    "updatedAt": "2026-06-02T01:44:55.511Z"
+    "updatedAt": "2026-06-02T02:02:42.503Z"
   },
   {
     "id": "EANvjLsfKzybVxM4qO7B",
@@ -582,6 +619,41 @@
     "specifications": [],
     "createdAt": "2026-06-01T08:53:47.367Z",
     "updatedAt": "2026-06-01T08:53:47.367Z"
+  },
+  {
+    "id": "I9CyLoriT8cBAzsSX4bY",
+    "name": "Bộ điều nhiệt Thermostat W400 -  Phiên bản VRF",
+    "sku": "OTH-BIUN-4811",
+    "brand": "aqara",
+    "category": "other",
+    "price": 4190000,
+    "discountPrice": 5990000,
+    "minStockAlert": 5,
+    "rating": 0,
+    "sold": 0,
+    "shortDescription": "Bộ điều nhiệt Aqara Thermostat W400 VRF là thiết bị điều khiển nhiệt độ thông minh, hỗ trợ kết nối Zigbee, Wi-Fi và BLE, giúp quản lý điều hòa, sưởi sàn và hệ thống gió tươi một cách linh hoạt. Sản phẩm mang đến khả năng điều khiển chính xác, tiết kiệm năng lượng và dễ dàng tích hợp vào hệ sinh thái nhà thông minh.",
+    "description": "Aqara Thermostat W400 VRF là bộ điều khiển nhiệt độ đa năng được thiết kế dành cho các hệ thống điều hòa trung tâm VRF, điều hòa cục bộ, sưởi sàn và hệ thống thông gió. Thiết bị cho phép người dùng kiểm soát nhiệt độ trong không gian sống một cách chính xác và tiện lợi thông qua ứng dụng trên điện thoại hoặc bảng điều khiển trực tiếp.\n\nSản phẩm hỗ trợ nhiều chuẩn kết nối hiện đại như Zigbee, Wi-Fi và BLE, giúp đảm bảo khả năng kết nối ổn định và linh hoạt trong nhiều hệ sinh thái nhà thông minh khác nhau. Người dùng có thể dễ dàng thiết lập lịch hoạt động, điều chỉnh nhiệt độ theo từng khung giờ hoặc tạo các kịch bản tự động hóa để tối ưu hóa trải nghiệm sử dụng và tiết kiệm năng lượng.\n\nNgoài khả năng điều khiển điều hòa, Aqara W400 VRF còn hỗ trợ điều khiển hệ thống sưởi sàn và gió tươi, đồng thời có thể mở rộng để điều khiển các thiết bị khác trong hệ thống nhà thông minh. Thiết kế vuông chuẩn 86 × 86 mm giúp sản phẩm dễ dàng lắp đặt thay thế công tắc truyền thống, phù hợp với nhiều không gian nội thất hiện đại.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bộ điều nhiệt Aqara Thermostat W400 VRF\nKết nối: Zigbee / Wi-Fi / BLE\nỨng dụng: Điều khiển điều hòa, sưởi sàn, hệ thống gió tươi\nĐiều khiển thiết bị khác: Có hỗ trợ mở rộng\nNguồn điện: 220–250VAC, 50/60Hz\nKích thước: 86 × 86 × 44 mm\nKiểu lắp đặt: Âm tường chuẩn 86\nTương thích: Hệ sinh thái Aqara và các thiết bị smart home tương thích\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển điều hòa, sưởi sàn và gió tươi thông minh\nHỗ trợ 3 chuẩn kết nối: Zigbee, Wi-Fi, BLE\nĐiều khiển từ xa qua ứng dụng điện thoại\nThiết lập lịch trình hoạt động linh hoạt\nTối ưu tiết kiệm năng lượng trong sử dụng\nThiết kế chuẩn 86 × 86 dễ dàng lắp đặt thay thế công tắc cũ\nKhả năng mở rộng điều khiển thiết bị trong hệ sinh thái smart home",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bo-ieu-nhiet-thermostat-w400-phien-ban-vrf",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366317/myioet52lbjx25ykxygt.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366318/yepq0pbxgxcygq4p20zx.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366318/gzqwokxojk0mskg7ldbv.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366318/xnxodysxymhuy9azrnpq.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366318/nmkc5ggbwvufyuj58d4r.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366318/zdf2lz7sx8jnlaoid7ke.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366319/jjlqvvktrrgsge6nqt3s.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366319/n4lvwrsxkc9xhs2yrwjy.jpg"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T02:12:01.043Z",
+    "stock": 16,
+    "updatedAt": "2026-06-02T02:12:20.422Z"
   },
   {
     "id": "IK1OfP730VA2AiTeoqHA",
@@ -937,6 +1009,40 @@
     "updatedAt": "2026-06-01T02:31:20.547Z"
   },
   {
+    "id": "OMnSUg4OETuanqHkJAXG",
+    "name": "Máy cho thú cưng ăn tự động Aqara Smart Pet Feeder C1",
+    "sku": "OTH-MYCH-3267",
+    "brand": "aqara",
+    "category": "other",
+    "price": 1850000,
+    "discountPrice": 0,
+    "stock": 15,
+    "minStockAlert": 5,
+    "rating": 0,
+    "sold": 0,
+    "shortDescription": "Máy cho thú cưng ăn tự động Aqara Smart Pet Feeder C1 là giải pháp chăm sóc thú cưng thông minh, giúp bạn quản lý bữa ăn của chó mèo mọi lúc mọi nơi thông qua ứng dụng trên điện thoại. Thiết bị hỗ trợ hẹn giờ cho ăn tự động, kiểm soát khẩu phần ăn chính xác và đảm bảo thức ăn luôn khô ráo nhờ hệ thống chống ẩm hiệu quả.",
+    "description": "Aqara Smart Pet Feeder C1 được thiết kế dành cho những người bận rộn nhưng vẫn muốn đảm bảo thú cưng được ăn uống đúng giờ và đủ dinh dưỡng mỗi ngày. Thông qua ứng dụng Aqara Home, người dùng có thể dễ dàng thiết lập lịch cho ăn, theo dõi và điều chỉnh khẩu phần ăn từ xa chỉ với vài thao tác đơn giản.\n\nThiết bị cho phép cài đặt nhiều khung giờ cho ăn trong ngày cùng lượng thức ăn cố định cho từng bữa. Điều này giúp hình thành thói quen ăn uống khoa học cho thú cưng, đồng thời hỗ trợ kiểm soát cân nặng và chế độ dinh dưỡng hiệu quả hơn.\n\nAqara Smart Pet Feeder C1 được trang bị hệ thống bảo quản thức ăn khô với khả năng chống ẩm, giúp duy trì độ tươi ngon và hạn chế tình trạng vón cục của thức ăn. Thiết kế khay chứa và các bộ phận tiếp xúc với thực phẩm có thể tháo rời dễ dàng, thuận tiện cho việc vệ sinh và bảo dưỡng định kỳ.\n\nNgoài nguồn điện chính, sản phẩm còn hỗ trợ sử dụng pin AA dự phòng, đảm bảo thiết bị vẫn hoạt động bình thường trong trường hợp mất điện, giúp thú cưng không bị gián đoạn bữa ăn theo lịch đã cài đặt.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Aqara Smart Pet Feeder C1\nChức năng: Máy cho thú cưng ăn tự động\nĐiều khiển: Qua ứng dụng Aqara Home\nHẹn giờ cho ăn: Có\nThiết lập khẩu phần ăn: Có\nQuản lý từ xa: Có\nHệ thống chống ẩm thức ăn: Có\nThiết kế tháo rời để vệ sinh: Có\nNguồn điện chính: Adapter nguồn\nNguồn dự phòng: Pin AA\nTương thích: Hệ sinh thái nhà thông minh Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển và quản lý từ xa qua điện thoại\nHẹn giờ cho ăn tự động theo lịch trình\nThiết lập chính xác lượng thức ăn cho từng bữa\nGiúp duy trì chế độ ăn khoa học cho thú cưng\nHệ thống chống ẩm giữ thức ăn luôn khô ráo\nDễ dàng tháo lắp và vệ sinh định kỳ\nHỗ trợ pin AA dự phòng khi mất điện\nPhù hợp cho chó và mèo sử dụng thức ăn khô",
+    "featured": false,
+    "bestSeller": true,
+    "newProduct": false,
+    "status": "active",
+    "slug": "may-cho-thu-cung-an-tu-ong-aqara-smart-pet-feeder-c1",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365685/c3pkvrjf3vjom44rdums.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365686/z4545cfadmud1mbrreib.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365686/eyg7fkjygopu5yrnqzeq.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365686/hwn2w0ucf9nzzkk4rtni.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365686/vaco5zynf70hv2jvfc3a.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365686/c9yb7lwqk0ao8wnwj752.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780365686/zdwhcaxhh9aolxbpfann.jpg"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T02:01:29.110Z",
+    "updatedAt": "2026-06-02T02:01:29.110Z"
+  },
+  {
     "id": "OvpyOG1fRtlKxXJa3QYz",
     "name": "Công tắc rèm Aqara H2 EU - Vuông - Trắng",
     "sku": "SMA-CNGT-9751",
@@ -1258,6 +1364,72 @@
     "specifications": [],
     "createdAt": "2026-06-01T09:56:30.963Z",
     "updatedAt": "2026-06-01T09:56:30.963Z"
+  },
+  {
+    "id": "YZS62kGZVSjiVPX0cLX6",
+    "name": "Máy sưởi nhà tắm đa năng Aqara T1",
+    "sku": "OTH-MYSI-5993",
+    "brand": "aqara",
+    "category": "other",
+    "price": 3990000,
+    "discountPrice": 5990000,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 0,
+    "sold": 0,
+    "shortDescription": "Máy sưởi nhà tắm đa năng Aqara Bathroom Heater T1 là thiết bị sưởi ấm và chiếu sáng thông minh được thiết kế dành riêng cho không gian phòng tắm. Với công suất sưởi mạnh mẽ 2800W, công nghệ sưởi gốm PTC cùng 2 động cơ thổi gió tốc độ cao, sản phẩm mang lại khả năng làm ấm nhanh chóng, đồng thời hỗ trợ điều khiển thông minh qua Apple HomeKit và hệ sinh thái Aqara.",
+    "description": "Aqara Bathroom Heater T1 là giải pháp lý tưởng giúp mang lại sự thoải mái cho người dùng trong những ngày thời tiết lạnh hoặc tại các khu vực có độ ẩm cao. Sản phẩm được trang bị hệ thống sưởi gốm PTC công suất 2800W kết hợp cùng 2 động cơ thổi khí hiệu suất cao, giúp luồng khí ấm được phân bổ nhanh và đồng đều khắp không gian phòng tắm.\n\nBên cạnh chức năng sưởi ấm, thiết bị còn tích hợp hệ thống đèn LED chiếu sáng hiện đại với khả năng điều chỉnh nhiệt độ màu từ 2700K đến 6500K. Người dùng có thể linh hoạt lựa chọn ánh sáng vàng ấm, trung tính hoặc trắng sáng tùy theo nhu cầu sử dụng và thời điểm trong ngày.\n\nMáy sưởi nhà tắm Aqara T1 hỗ trợ kết nối với hệ sinh thái nhà thông minh Aqara và Apple HomeKit, cho phép điều khiển từ xa, thiết lập lịch hoạt động hoặc tạo các kịch bản tự động hóa thông minh. Người dùng có thể kết hợp với cảm biến hiện diện, cảm biến nhiệt độ hoặc các thiết bị Aqara khác để tối ưu hóa trải nghiệm sử dụng.\n\nVới thiết kế âm trần hiện đại, kiểu dáng mỏng gọn và sang trọng, Aqara Bathroom Heater T1 phù hợp với nhiều phong cách nội thất phòng tắm khác nhau. Sản phẩm đặc biệt thích hợp cho các không gian có diện tích từ 10 đến 20m², đáp ứng hiệu quả nhu cầu sưởi ấm và chiếu sáng trong gia đình.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Máy sưởi nhà tắm đa năng Aqara T1\nCông suất sưởi: 2800W\nCông nghệ sưởi: Gốm PTC\nHệ thống quạt: 2 động cơ thổi khí ấm\nĐiều khiển thông minh: Aqara Home, Apple HomeKit\nNhiệt độ màu ánh sáng: 2700K – 6500K\nKích thước: 300 × 600 × 34 mm\nDiện tích sử dụng phù hợp: 10 – 20 m²\nKiểu lắp đặt: Âm trần\nTương thích: Apple HomeKit, hệ sinh thái Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nCông suất sưởi mạnh mẽ 2800W làm ấm nhanh chóng\nCông nghệ sưởi gốm PTC an toàn và tiết kiệm điện\n2 động cơ thổi khí giúp phân bổ nhiệt đều khắp phòng\nTích hợp đèn LED chiếu sáng và điều chỉnh nhiệt độ màu\nHỗ trợ điều khiển thông minh qua Apple HomeKit\nTạo kịch bản tự động hóa với các thiết bị Aqara\nThiết kế âm trần hiện đại, tiết kiệm không gian\nPhù hợp cho phòng tắm có diện tích từ 10 đến 20m²",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "may-suoi-nha-tam-a-nang-aqara-t1",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366082/csjapj5wve9tj3k0yqrr.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366083/vtmfiroyu6jygtw88vtc.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366083/qq8brch3xdvzoo0lsv2m.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366084/j4shmmojpyjj39remufb.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366084/nwhfsf4gemvj8f5sf8cg.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780366084/rw3gx02ospx2krfhygtj.png"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T02:08:06.717Z",
+    "updatedAt": "2026-06-02T02:08:06.717Z"
+  },
+  {
+    "id": "ZJ5exXptvP5KJ0h3MPcL",
+    "name": "Bộ điều khiển Van thông minh Aqara Valve T1",
+    "sku": "OTH-BIUK-7863",
+    "brand": "aqara",
+    "category": "other",
+    "price": 1190000,
+    "discountPrice": 890000,
+    "stock": 53,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 190000000,
+    "shortDescription": "Bộ điều khiển van thông minh Aqara Valve Controller T1 là giải pháp tự động hóa giúp điều khiển đóng/mở van nước từ xa thông qua điện thoại. Sản phẩm sử dụng kết nối Zigbee ổn định, vận hành bằng pin và có khả năng kết hợp với các cảm biến thông minh để tự động ngắt nguồn nước khi phát hiện rò rỉ, góp phần bảo vệ ngôi nhà an toàn hơn.",
+    "description": "Aqara Valve Controller T1 được thiết kế để tự động hóa việc kiểm soát nguồn nước trong gia đình, căn hộ, văn phòng hoặc các khu vực cần quản lý hệ thống cấp nước. Thiết bị cho phép người dùng điều khiển đóng hoặc mở van nước từ xa thông qua ứng dụng Aqara Home trên điện thoại, mang đến sự tiện lợi và chủ động trong quá trình sử dụng.\n\nNhờ sử dụng giao thức Zigbee, Valve Controller T1 đảm bảo kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng. Khi kết hợp với Aqara Hub và cảm biến rò rỉ nước Aqara, thiết bị có thể tự động đóng van ngay khi phát hiện sự cố rò rỉ, giúp hạn chế thiệt hại do nước gây ra và nâng cao mức độ an toàn cho ngôi nhà.\n\nThiết bị được thiết kế nhỏ gọn, dễ dàng lắp đặt trên nhiều loại van nước phổ biến mà không cần thay đổi hệ thống đường ống hiện có. Nguồn điện sử dụng pin giúp việc lắp đặt linh hoạt hơn, không phụ thuộc vào vị trí ổ cắm điện và vẫn đảm bảo hoạt động ổn định trong thời gian dài.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bộ điều khiển van thông minh Aqara Valve Controller T1\nChức năng: Điều khiển đóng/mở van nước từ xa\nKết nối không dây: Zigbee\nĐiều khiển: Thông qua ứng dụng Aqara Home\nChuẩn bảo vệ: IP20\nNguồn điện: Pin\nKích thước: 93 × 72 × 84 mm\nMôi trường sử dụng: Trong nhà\nTương thích: Aqara Home và hệ sinh thái nhà thông minh Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển van nước từ xa bằng điện thoại\nKết nối Zigbee ổn định, tiết kiệm năng lượng\nTự động đóng van khi kết hợp với cảm biến rò rỉ nước\nLắp đặt dễ dàng trên nhiều loại van nước phổ biến\nHoạt động bằng pin, không cần đi dây nguồn\nQuản lý và theo dõi trạng thái thiết bị trên ứng dụng Aqara Home\nNâng cao an toàn và hạn chế rủi ro do rò rỉ nước",
+    "featured": true,
+    "bestSeller": true,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bo-ieu-khien-van-thong-minh-aqara-valve-t1",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780364956/m5m6kalsy2gqvt5txnad.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780364957/huvroysr2bfb7w6qh3y2.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780364958/wqhhwbq4ekzew0shby3e.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780364958/ts3lo6y3oubcrubxig8d.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780364958/jdjejvi2vtlg8vbul7zm.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780364958/bcxmlr0syyrgfmdk024d.png"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T01:49:20.379Z",
+    "updatedAt": "2026-06-02T01:49:20.379Z"
   },
   {
     "id": "aG29yfQ4e5eicbLbLIQN",
@@ -1674,6 +1846,98 @@
     "updatedAt": "2026-06-01T09:52:13.565Z"
   },
   {
+    "id": "pDH5jYpBCeLKtmOXeVmV",
+    "name": "Bộ cấp nguồn cho đèn V1 48V",
+    "sku": "OTH-BCPN-1150",
+    "brand": "aqara",
+    "category": "other",
+    "price": 1290000,
+    "discountPrice": 0,
+    "stock": 0,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 236,
+    "shortDescription": "Bộ cấp nguồn cho đèn Aqara V1 48V là thiết bị chuyển đổi điện áp từ 220V sang 48V, cung cấp nguồn ổn định cho hệ thống đèn thông minh. Sản phẩm có 2 phiên bản công suất 100W và 200W, phù hợp với nhiều nhu cầu lắp đặt khác nhau trong hệ thống chiếu sáng.",
+    "description": "Bộ cấp nguồn Aqara V1 48V được thiết kế chuyên dụng để cung cấp điện áp ổn định cho hệ thống đèn thông minh Aqara, đảm bảo hoạt động an toàn và hiệu quả. Thiết bị chuyển đổi nguồn điện xoay chiều 220V thành nguồn DC 48V, giúp đèn hoạt động ổn định, giảm thiểu hiện tượng chập chờn hoặc quá tải điện.\n\nSản phẩm có hai tùy chọn công suất gồm 100W và 200W, đáp ứng linh hoạt nhu cầu sử dụng từ hệ thống chiếu sáng nhỏ đến quy mô lớn hơn. Phiên bản 100W có chiều dài khoảng 24 cm, trong khi phiên bản 200W có chiều dài khoảng 30 cm, giúp dễ dàng lựa chọn theo không gian lắp đặt thực tế.\n\nBộ nguồn được thiết kế tối ưu cho việc lắp đặt âm trần hoặc giấu trong hệ thống kỹ thuật, đảm bảo tính thẩm mỹ cao và dễ dàng tích hợp với hệ thống chiếu sáng thông minh. Ngoài ra, thiết bị còn giúp bảo vệ đèn khỏi các tình trạng quá áp, quá dòng, nâng cao độ bền và tuổi thọ của toàn bộ hệ thống.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bộ cấp nguồn đèn Aqara V1 48V\nChức năng: Chuyển đổi nguồn điện 220V sang 48V DC\nPhiên bản công suất:\n+ 100W: chiều dài khoảng 24 cm\n+ 200W: chiều dài khoảng 30 cm\nĐiện áp đầu vào: 220V AC\nĐiện áp đầu ra: 48V DC\nCông suất: 100W / 200W\nỨng dụng: Cấp nguồn cho hệ thống đèn Aqara V1\nKiểu lắp đặt: Âm trần / giấu trần\nTính năng bảo vệ: Chống quá tải, quá áp, ổn định dòng điện\n\nTÍNH NĂNG NỔI BẬT\n\nChuyển đổi nguồn 220V sang 48V ổn định\nHỗ trợ 2 mức công suất 100W và 200W\nThiết kế nhỏ gọn, dễ lắp đặt âm trần\nBảo vệ hệ thống đèn khỏi quá tải điện\nTăng tuổi thọ cho hệ thống chiếu sáng\nPhù hợp hệ sinh thái đèn Aqara V1",
+    "featured": true,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bo-cap-nguon-cho-en-v1-48v",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780369681/nngs1utinhmob8dodlky.png",
+    "options": [
+      {
+        "name": "phân loại",
+        "values": [
+          "100W",
+          "200W"
+        ]
+      },
+      {
+        "name": "màu sắc",
+        "values": [
+          "Đen",
+          "Trắng"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "100w-en",
+        "sku": "SKU-100W-EN",
+        "optionValues": [
+          "100W",
+          "Đen"
+        ],
+        "price": 1290000,
+        "discountPrice": 250000,
+        "stock": 25,
+        "thumbnail": ""
+      },
+      {
+        "id": "100w-trng",
+        "sku": "SKU-100W-TRNG",
+        "optionValues": [
+          "100W",
+          "Trắng"
+        ],
+        "price": 1290000,
+        "discountPrice": 250000,
+        "stock": 15,
+        "thumbnail": ""
+      },
+      {
+        "id": "200w-en",
+        "sku": "SKU-200W-EN",
+        "optionValues": [
+          "200W",
+          "Đen"
+        ],
+        "price": 1690000,
+        "discountPrice": 150000,
+        "stock": 23,
+        "thumbnail": ""
+      },
+      {
+        "id": "200w-trng",
+        "sku": "SKU-200W-TRNG",
+        "optionValues": [
+          "200W",
+          "Trắng"
+        ],
+        "price": 1690000,
+        "discountPrice": 150000,
+        "stock": 22,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T03:08:03.631Z",
+    "updatedAt": "2026-06-02T03:11:30.132Z"
+  },
+  {
     "id": "pHoJ0610PuWKKb6zx3xe",
     "sku": "DOO-CHUN-9068",
     "brand": "aqara",
@@ -1874,14 +2138,10 @@
     "category": "sensor",
     "price": 880000,
     "discountPrice": 0,
-    "stock": 15,
     "minStockAlert": 5,
     "rating": 4.9,
-    "sold": 17,
     "shortDescription": "Cảm biến khói Aqara là thiết bị báo cháy thông minh giúp phát hiện khói ngay từ giai đoạn đầu và kích hoạt cảnh báo bằng âm thanh lớn kết hợp thông báo từ xa đến điện thoại. Thiết bị sử dụng chuẩn Zigbee 3.0, tích hợp còi báo động công suất cao và thời lượng pin lên đến 10 năm, mang lại giải pháp an toàn cho nhà ở, căn hộ, văn phòng và các không gian sinh hoạt.",
     "description": "Cảm biến khói Aqara được thiết kế để nâng cao khả năng bảo vệ an toàn cho gia đình, căn hộ và văn phòng bằng cách giám sát khói liên tục 24/7. Khi phát hiện dấu hiệu khói bất thường, thiết bị sẽ ngay lập tức kích hoạt còi báo động âm lượng lớn cùng đèn LED cảnh báo, giúp người dùng nhanh chóng nhận biết và xử lý tình huống.\n\nNhờ kết nối Zigbee 3.0 thông qua Aqara Hub, cảm biến có thể gửi thông báo đến điện thoại theo thời gian thực dù người dùng không có mặt tại nhà. Ngoài ra, thiết bị còn hỗ trợ liên kết với các cảm biến khói hoặc hub Aqara khác để phát cảnh báo đồng bộ trên toàn bộ hệ thống.\n\nVới thiết kế nhỏ gọn cùng thời lượng pin lên đến 10 năm, Aqara Smoke Detector giúp giảm đáng kể chi phí bảo trì và thay pin trong quá trình sử dụng. Đây là giải pháp phù hợp cho nhà ở, căn hộ, văn phòng, khách sạn hoặc các khu vực cần tăng cường an toàn phòng cháy chữa cháy.\n\nThông số kỹ thuật\nTrạng thái: Phát hiện khói / Không phát hiện khói\nKết nối: Zigbee 3.0\nCòi báo động: Âm lượng cao 90dB\nThời lượng pin: Lên đến 10 năm\nPin: DC 3V (CR17450)\nKích thước: ⌀104.6 × 42 mm\nCảnh báo: Còi báo động + đèn LED\nHỗ trợ thông báo từ xa qua ứng dụng\nLắp đặt: Gắn trần hoặc tường\nTương thích: Aqara Home, Apple HomeKit, Google Home, Amazon Alexa, SmartThings, Matter over Bridge\nƯu điểm nổi bật\n\n✔ Phát hiện khói nhanh chóng với độ chính xác cao.\n✔ Còi báo động 90dB giúp cảnh báo rõ ràng khi có sự cố.\n✔ Thời lượng pin lên đến 10 năm.\n✔ Hỗ trợ Zigbee 3.0 cho kết nối ổn định và tiết kiệm năng lượng.\n✔ Gửi cảnh báo tức thì đến điện thoại.\n✔ Hỗ trợ liên kết với hệ sinh thái nhà thông minh Aqara.\n✔ Phù hợp cho nhà ở, căn hộ, văn phòng và khu vực cần giám sát an toàn cháy nổ.",
-    "featured": false,
-    "bestSeller": false,
     "newProduct": false,
     "status": "active",
     "slug": "cam-bien-khoi-aqara",
@@ -1898,7 +2158,11 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T02:27:35.263Z",
-    "updatedAt": "2026-06-01T02:27:35.263Z"
+    "sold": 760000,
+    "featured": true,
+    "bestSeller": true,
+    "stock": 980,
+    "updatedAt": "2026-06-02T01:45:42.759Z"
   },
   {
     "id": "wbldKt92kRkYdTafJy0Y",
