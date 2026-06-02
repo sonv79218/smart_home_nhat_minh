@@ -66,7 +66,13 @@ const AdminProductsPage = () => {
 
 const data = await getAllProductsForAdmin();
 
-setProducts(Array.isArray(data) ? data : []);
+// Thêm computed field hasVariants
+const productsWithVariants = (Array.isArray(data) ? data : []).map(p => ({
+  ...p,
+  hasVariants: p?.options?.length > 0 && p?.variants?.length > 0
+}));
+
+setProducts(productsWithVariants);
     } catch (error) {
       console.error(
         "Error fetching products:",
@@ -417,12 +423,27 @@ const PLACEHOLDER_IMAGE =
                     </td>
 
                     <td className="px-4 py-3">
-                      <span className="font-semibold text-red-500">
-                        {formatPrice(
-                          product.price
-                        )}
-                        đ
-                      </span>
+                      <div className="flex flex-col">
+                        {/* Giá bán */}
+                        <span className="font-semibold text-red-500">
+                          {product.hasVariants
+                            ? `Từ ${formatPrice(product.price)}đ`
+                            : `${formatPrice(product.price)}đ`
+                          }
+                        </span>
+                        {/* Giá gốc (nếu có) */}
+                        {(() => {
+                          const originalPrice = product.originalPrice || product.discountPrice || 0;
+                          if (originalPrice > product.price) {
+                            return (
+                              <span className="text-xs text-slate-400 line-through">
+                                {formatPrice(originalPrice)}đ
+                              </span>
+                            );
+                          }
+                          return null;
+                        })()}
+                      </div>
                     </td>
 
                     <td className="px-4 py-3">
@@ -503,12 +524,25 @@ const PLACEHOLDER_IMAGE =
                       {product.name}
                     </h3>
 
+                    {/* Giá bán */}
                     <p className="font-semibold text-red-500 mt-2">
-                      {formatPrice(
-                        product.price
-                      )}
-                      đ
+                      {product.hasVariants
+                        ? `Từ ${formatPrice(product.price)}đ`
+                        : `${formatPrice(product.price)}đ`
+                      }
                     </p>
+                    {/* Giá gốc (nếu có) */}
+                    {(() => {
+                      const originalPrice = product.originalPrice || product.discountPrice || 0;
+                      if (originalPrice > product.price) {
+                        return (
+                          <p className="text-xs text-slate-400 line-through">
+                            {formatPrice(originalPrice)}đ
+                          </p>
+                        );
+                      }
+                      return null;
+                    })()}
 
                     <p className="text-sm mt-1">
                       Tồn kho:

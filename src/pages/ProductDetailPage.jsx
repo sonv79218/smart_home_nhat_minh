@@ -123,17 +123,24 @@ const ProductInfo = ({
   brandName, 
   categoryName 
 }) => {
-  // Nếu có variants, dùng thông tin từ variant
-  const displayPrice = hasVariants && selectedVariant 
-    ? (selectedVariant.discountPrice > 0 ? selectedVariant.discountPrice : selectedVariant.price)
-    : (product.discountPrice > 0 ? product.discountPrice : product.price);
+  // Get price from variant or product
+  const variantPrice = selectedVariant?.price || 0;
+  const variantOriginalPrice = selectedVariant?.originalPrice || selectedVariant?.discountPrice || 0;
+  const productPrice = product?.price || 0;
+  const productOriginalPrice = product?.originalPrice || product?.discountPrice || 0;
   
-  const displayOriginalPrice = hasVariants && selectedVariant 
-    ? selectedVariant.price
-    : product.price;
+  // Display price = price field (current selling price)
+  const displayPrice = hasVariants 
+    ? variantPrice 
+    : productPrice;
   
-  const hasDiscount = displayOriginalPrice > displayPrice;
-  const discountPercent = hasDiscount 
+  // Display original price = originalPrice field (the crossed-out price)
+  const displayOriginalPrice = hasVariants 
+    ? variantOriginalPrice 
+    : productOriginalPrice;
+  
+  const hasDiscount = displayOriginalPrice > displayPrice && displayPrice > 0;
+  const discountPercent = hasDiscount && displayOriginalPrice > 0
     ? Math.round(((displayOriginalPrice - displayPrice) / displayOriginalPrice) * 100)
     : 0;
   
@@ -282,18 +289,18 @@ const ProductActions = ({
       thumbnail: hasVariants && selectedVariant?.thumbnail 
         ? selectedVariant.thumbnail 
         : product.thumbnail,
-      // Nếu có variant, lưu variant info
+      // Sử dụng price làm giá bán, originalPrice làm giá gốc
       ...(hasVariants && selectedVariant && {
         variantId: selectedVariant.id,
         sku: selectedVariant.sku,
         optionValues: selectedVariant.optionValues,
-        price: selectedVariant.discountPrice > 0 ? selectedVariant.discountPrice : selectedVariant.price,
-        originalPrice: selectedVariant.price,
+        price: selectedVariant.price || 0,
+        originalPrice: selectedVariant.originalPrice || selectedVariant.discountPrice || 0,
       }),
       // Fallback cho sản phẩm không có variant
       ...(!hasVariants && {
-        price: product.discountPrice > 0 ? product.discountPrice : product.price,
-        originalPrice: product.price,
+        price: product.price || 0,
+        originalPrice: product.originalPrice || product.discountPrice || 0,
       }),
     };
     
@@ -311,16 +318,17 @@ const ProductActions = ({
       thumbnail: hasVariants && selectedVariant?.thumbnail 
         ? selectedVariant.thumbnail 
         : product.thumbnail,
+      // Sử dụng price làm giá bán, originalPrice làm giá gốc
       ...(hasVariants && selectedVariant && {
         variantId: selectedVariant.id,
         sku: selectedVariant.sku,
         optionValues: selectedVariant.optionValues,
-        price: selectedVariant.discountPrice > 0 ? selectedVariant.discountPrice : selectedVariant.price,
-        originalPrice: selectedVariant.price,
+        price: selectedVariant.price || 0,
+        originalPrice: selectedVariant.originalPrice || selectedVariant.discountPrice || 0,
       }),
       ...(!hasVariants && {
-        price: product.discountPrice > 0 ? product.discountPrice : product.price,
-        originalPrice: product.price,
+        price: product.price || 0,
+        originalPrice: product.originalPrice || product.discountPrice || 0,
       }),
     };
     

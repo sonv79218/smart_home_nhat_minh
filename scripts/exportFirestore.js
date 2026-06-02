@@ -27,9 +27,19 @@ const collections = [
  * Clean product data for public export
  * - Remove costPrice (internal use only)
  * - Keep options and variants intact
+ * - Remove costPrice from variants as well
  */
 function cleanProductData(product) {
   const { costPrice, ...rest } = product;
+  
+  // Also remove costPrice from variants
+  if (rest.variants && Array.isArray(rest.variants)) {
+    rest.variants = rest.variants.map(variant => {
+      const { costPrice: variantCostPrice, ...variantRest } = variant;
+      return variantRest;
+    });
+  }
+  
   return rest;
 }
 

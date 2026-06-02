@@ -13,9 +13,12 @@ const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  const hasDiscount = product.discountPrice > 0 && product.discountPrice < product.price;
-  const discountPercent = hasDiscount && product.price > 0
-    ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
+  // Check for discount (originalPrice > price means there's a discount)
+  const displayPrice = product.price || 0;
+  const originalPriceValue = product.originalPrice || product.discountPrice || 0;
+  const hasDiscount = originalPriceValue > displayPrice && displayPrice > 0;
+  const discountPercent = hasDiscount && originalPriceValue > 0
+    ? Math.round(((originalPriceValue - displayPrice) / originalPriceValue) * 100)
     : 0;
 
   const formatPrice = (price) => {
@@ -204,11 +207,11 @@ const ProductCard = ({ product }) => {
         <div className="mt-auto pt-2">
           <div className="flex items-baseline gap-1.5 flex-wrap">
             <span className="text-base font-bold text-red-600">
-              {formatPrice(hasDiscount ? product.discountPrice : product.price)}đ
+              {formatPrice(displayPrice)}đ
             </span>
             {hasDiscount && (
               <span className="text-[11px] text-slate-400 line-through">
-                {formatPrice(product.price)}đ
+                {formatPrice(originalPriceValue)}đ
               </span>
             )}
           </div>

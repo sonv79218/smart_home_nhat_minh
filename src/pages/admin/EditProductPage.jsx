@@ -34,7 +34,7 @@ const EditProductPage = () => {
     brand: "",
     category: "",
     price: "",
-    discountPrice: "",
+    originalPrice: "",
     costPrice: "",
     stock: "",
     minStockAlert: "5",
@@ -107,7 +107,7 @@ const EditProductPage = () => {
           brand: product.brand || "",
           category: product.category || "",
           price: product.price?.toString() || "",
-          discountPrice: product.discountPrice?.toString() || "",
+          originalPrice: product.originalPrice?.toString() || product.discountPrice?.toString() || "",
           costPrice: product.costPrice?.toString() || "",
           stock: product.stock?.toString() || "",
           minStockAlert: product.minStockAlert?.toString() || "5",
@@ -148,7 +148,8 @@ const EditProductPage = () => {
             sku: v.sku || "",
             optionValues: v.optionValues || [],
             price: v.price?.toString() || "",
-            discountPrice: v.discountPrice?.toString() || "",
+            originalPrice: v.originalPrice?.toString() || v.discountPrice?.toString() || "",
+            costPrice: v.costPrice?.toString() || "",
             stock: v.stock?.toString() || "0",
             thumbnail: v.thumbnail || ""
           }));
@@ -235,7 +236,8 @@ const EditProductPage = () => {
         sku: "",
         optionValues: options.map(() => ""),
         price: formData.price,
-        discountPrice: formData.discountPrice,
+        originalPrice: formData.originalPrice,
+        costPrice: formData.costPrice,
         stock: formData.stock,
         thumbnail: ""
       }]);
@@ -279,7 +281,8 @@ const EditProductPage = () => {
       sku: "",
       optionValues: options.map(() => ""),
       price: formData.price,
-      discountPrice: formData.discountPrice,
+      originalPrice: formData.originalPrice,
+      costPrice: formData.costPrice,
       stock: formData.stock,
       thumbnail: ""
     };
@@ -366,7 +369,8 @@ const EditProductPage = () => {
     setVariants(variants.map(v => ({
       ...v,
       price: formData.price,
-      discountPrice: formData.discountPrice,
+      originalPrice: formData.originalPrice,
+      costPrice: formData.costPrice,
       stock: formData.stock
     })));
   };
@@ -419,9 +423,10 @@ const EditProductPage = () => {
 
       const productData = {
         ...formData,
-        price: Number(formData.price),
-        discountPrice: formData.discountPrice ? Number(formData.discountPrice) : 0,
-        costPrice: formData.costPrice ? Number(formData.costPrice) : 0,
+        price: Number(formData.price) || 0,
+        originalPrice: Number(formData.originalPrice) || 0,
+        costPrice: Number(formData.costPrice) || 0,
+        discountPrice: 0, // DEPRECATED - kept for backward compatibility
         stock: Number(formData.stock) || 0,
         minStockAlert: Number(formData.minStockAlert) || 5,
         rating: Number(formData.rating) || 0,
@@ -446,7 +451,8 @@ const EditProductPage = () => {
             sku: v.sku || `${formData.sku || "SKU"}-${v.id}`.toUpperCase(),
             optionValues: v.optionValues,
             price: Number(v.price) || 0,
-            discountPrice: v.discountPrice ? Number(v.discountPrice) : 0,
+            originalPrice: Number(v.originalPrice) || 0,
+            costPrice: Number(v.costPrice) || 0,
             stock: Number(v.stock) || 0,
             thumbnail: uploadedVariantThumbnails[idx] || v.thumbnail || ""
           }));
@@ -560,19 +566,23 @@ const EditProductPage = () => {
 
         {/* Price & Stock Section */}
         <Section title="Giá & Tồn kho" icon={<PriceIcon className="w-5 h-5" />}>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá bán</label>
               <input type="number" name="price" value={formData.price} onChange={handleChange}
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá gốc</label>
-              <input type="number" name="discountPrice" value={formData.discountPrice} onChange={handleChange}
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Giá gốc <span className="text-xs text-slate-400">(bị gạch)</span>
+              </label>
+              <input type="number" name="originalPrice" value={formData.originalPrice} onChange={handleChange}
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá vốn</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Giá vốn <span className="text-xs text-slate-400">(nội bộ)</span>
+              </label>
               <input type="number" name="costPrice" value={formData.costPrice} onChange={handleChange}
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
@@ -739,7 +749,7 @@ const EditProductPage = () => {
                       </button>
                     </div>
                     
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
                       <div className="md:col-span-2">
                         <label className="block text-xs text-slate-500 mb-1">SKU</label>
                         <input type="text" value={variant.sku}
@@ -747,15 +757,21 @@ const EditProductPage = () => {
                           className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-mono" />
                       </div>
                       <div>
-                        <label className="block text-xs text-slate-500 mb-1">Giá</label>
+                        <label className="block text-xs text-slate-500 mb-1">Giá bán</label>
                         <input type="number" value={variant.price}
                           onChange={(e) => handleVariantChange(varIdx, "price", e.target.value)}
                           className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
                       </div>
                       <div>
-                        <label className="block text-xs text-slate-500 mb-1">Giảm giá</label>
-                        <input type="number" value={variant.discountPrice}
-                          onChange={(e) => handleVariantChange(varIdx, "discountPrice", e.target.value)}
+                        <label className="block text-xs text-slate-500 mb-1">Giá gốc</label>
+                        <input type="number" value={variant.originalPrice}
+                          onChange={(e) => handleVariantChange(varIdx, "originalPrice", e.target.value)}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-500 mb-1">Giá vốn</label>
+                        <input type="number" value={variant.costPrice}
+                          onChange={(e) => handleVariantChange(varIdx, "costPrice", e.target.value)}
                           className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
                       </div>
                       <div>

@@ -26,7 +26,7 @@ const getInitialFormData = () => ({
   brand: "",
   category: "",
   price: "",
-  discountPrice: "",
+  originalPrice: "",
   costPrice: "",
   stock: "",
   minStockAlert: "5",
@@ -65,9 +65,10 @@ const AddProductPage = () => {
       id: generateVariantId(), 
       sku: "", 
       optionValues: [], 
-      price: "", 
-      discountPrice: "", 
-      stock: "", 
+      price: "",
+      originalPrice: "",
+      costPrice: "",
+      stock: "",
       thumbnail: "" 
     }
   ]);
@@ -141,7 +142,8 @@ const AddProductPage = () => {
         sku: "",
         optionValues: options.map(() => ""),
         price: formData.price,
-        discountPrice: formData.discountPrice,
+        originalPrice: formData.originalPrice,
+        costPrice: formData.costPrice,
         stock: formData.stock,
         thumbnail: ""
       };
@@ -192,7 +194,8 @@ const AddProductPage = () => {
       sku: "",
       optionValues: options.map(() => ""),
       price: formData.price,
-      discountPrice: formData.discountPrice,
+      originalPrice: formData.originalPrice,
+      costPrice: formData.costPrice,
       stock: formData.stock,
       thumbnail: ""
     };
@@ -278,7 +281,8 @@ const AddProductPage = () => {
         sku: existingVariant?.sku || `${formData.sku || "SKU"}-${id}`.toUpperCase(),
         optionValues: optionValues,
         price: existingVariant?.price || formData.price || "",
-        discountPrice: existingVariant?.discountPrice || formData.discountPrice || "",
+        originalPrice: existingVariant?.originalPrice || formData.originalPrice || "",
+        costPrice: existingVariant?.costPrice || formData.costPrice || "",
         stock: existingVariant?.stock || formData.stock || "0",
         thumbnail: existingVariant?.thumbnail || ""
       };
@@ -292,7 +296,8 @@ const AddProductPage = () => {
     setVariants(variants.map(v => ({
       ...v,
       price: formData.price,
-      discountPrice: formData.discountPrice,
+      originalPrice: formData.originalPrice,
+      costPrice: formData.costPrice,
       stock: formData.stock
     })));
   };
@@ -360,9 +365,10 @@ const AddProductPage = () => {
         ...formData,
         slug: generateSlug(formData.name),
         sku: formData.sku || generateSKU(formData.name, formData.category),
-        price: Number(formData.price),
-        discountPrice: formData.discountPrice ? Number(formData.discountPrice) : 0,
-        costPrice: formData.costPrice ? Number(formData.costPrice) : 0,
+        price: Number(formData.price) || 0,
+        originalPrice: Number(formData.originalPrice) || 0,
+        costPrice: Number(formData.costPrice) || 0,
+        discountPrice: 0, // DEPRECATED - kept for backward compatibility
         stock: Number(formData.stock) || 0,
         minStockAlert: Number(formData.minStockAlert) || 5,
         rating: Number(formData.rating) || Number(getRandomRating()),
@@ -387,7 +393,8 @@ const AddProductPage = () => {
             sku: v.sku || `${formData.sku || "SKU"}-${v.id}`.toUpperCase(),
             optionValues: v.optionValues,
             price: Number(v.price) || 0,
-            discountPrice: v.discountPrice ? Number(v.discountPrice) : 0,
+            originalPrice: Number(v.originalPrice) || 0,
+            costPrice: Number(v.costPrice) || 0,
             stock: Number(v.stock) || 0,
             thumbnail: uploadedVariantThumbnails[idx] || v.thumbnail || ""
           }));
@@ -415,7 +422,7 @@ const AddProductPage = () => {
     setImagePreviews([]);
     setHasVariants(false);
     setOptions([{ name: "", values: [""] }]);
-    setVariants([{ id: generateVariantId(), sku: "", optionValues: [], price: "", discountPrice: "", stock: "", thumbnail: "" }]);
+    setVariants([{ id: generateVariantId(), sku: "", optionValues: [], price: "", originalPrice: "", costPrice: "", stock: "", thumbnail: "" }]);
   };
 
   return (
@@ -490,7 +497,7 @@ const AddProductPage = () => {
 
         {/* Price & Stock Section */}
         <Section title="Giá & Tồn kho" icon={<PriceIcon className="w-5 h-5" />}>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 Giá bán <span className="text-red-500">*</span>
@@ -507,11 +514,13 @@ const AddProductPage = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá gốc</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Giá gốc <span className="text-xs text-slate-400">(bị gạch)</span>
+              </label>
               <input
                 type="number"
-                name="discountPrice"
-                value={formData.discountPrice}
+                name="originalPrice"
+                value={formData.originalPrice}
                 onChange={handleChange}
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
                 placeholder="0"
@@ -519,7 +528,9 @@ const AddProductPage = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá vốn</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Giá vốn <span className="text-xs text-slate-400">(nội bộ)</span>
+              </label>
               <input
                 type="number"
                 name="costPrice"
@@ -759,7 +770,7 @@ const AddProductPage = () => {
                       </button>
                     </div>
                     
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
                       <div className="md:col-span-2">
                         <label className="block text-xs text-slate-500 mb-1">SKU</label>
                         <input
@@ -771,7 +782,7 @@ const AddProductPage = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-slate-500 mb-1">Giá</label>
+                        <label className="block text-xs text-slate-500 mb-1">Giá bán</label>
                         <input
                           type="number"
                           value={variant.price}
@@ -781,11 +792,21 @@ const AddProductPage = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-slate-500 mb-1">Giảm giá</label>
+                        <label className="block text-xs text-slate-500 mb-1">Giá gốc</label>
                         <input
                           type="number"
-                          value={variant.discountPrice}
-                          onChange={(e) => handleVariantChange(varIdx, "discountPrice", e.target.value)}
+                          value={variant.originalPrice}
+                          onChange={(e) => handleVariantChange(varIdx, "originalPrice", e.target.value)}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                          placeholder="0"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-500 mb-1">Giá vốn</label>
+                        <input
+                          type="number"
+                          value={variant.costPrice}
+                          onChange={(e) => handleVariantChange(varIdx, "costPrice", e.target.value)}
                           className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
                           placeholder="0"
                         />
