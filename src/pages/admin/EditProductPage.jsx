@@ -8,6 +8,17 @@ import { uploadImageToCloudinary } from "../../services/cloudinaryService";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
 
+// ============================================
+// RANDOM HELPERS
+// ============================================
+const getRandomRating = () => {
+  return (Math.random() * (5 - 4.7) + 4.7).toFixed(1);
+};
+
+const getRandomSold = () => {
+  return Math.floor(Math.random() * (300 - 10 + 1)) + 10;
+};
+
 const EditProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -82,6 +93,14 @@ const EditProductPage = () => {
           return;
         }
 
+        // Load rating and sold with fallback to random if not exist
+        const loadedRating = product.rating !== undefined && product.rating !== null && product.rating > 0 
+          ? product.rating.toString() 
+          : getRandomRating();
+        const loadedSold = product.sold !== undefined && product.sold !== null && product.sold > 0 
+          ? product.sold.toString() 
+          : getRandomSold().toString();
+
         setFormData({
           name: product.name || "",
           sku: product.sku || "",
@@ -92,8 +111,8 @@ const EditProductPage = () => {
           costPrice: product.costPrice?.toString() || "",
           stock: product.stock?.toString() || "",
           minStockAlert: product.minStockAlert?.toString() || "5",
-          rating: product.rating?.toString() || "",
-          sold: product.sold?.toString() || "",
+          rating: loadedRating,
+          sold: loadedSold,
           shortDescription: product.shortDescription || "",
           description: product.description || "",
           tags: Array.isArray(product.tags) ? product.tags.join(", ") : "",
@@ -566,6 +585,79 @@ const EditProductPage = () => {
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Báo low stock</label>
               <input type="number" name="minStockAlert" value={formData.minStockAlert} onChange={handleChange}
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
+            </div>
+          </div>
+
+          {/* Fake Rating & Sold */}
+          <div className="mt-4 pt-4 border-t border-slate-200">
+            <h4 className="text-sm font-medium text-slate-600 mb-3 flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" strokeWidth="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              Đánh giá giả lập
+              <span className="text-xs text-slate-400 font-normal">(Tự động random nếu chưa có)</span>
+            </h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Số sao (rating)
+                </label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-400">
+                    ⭐
+                  </span>
+                  <input
+                    type="number"
+                    name="rating"
+                    value={formData.rating}
+                    onChange={handleChange}
+                    className="w-full pl-8 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all text-sm"
+                    placeholder="4.8"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Số lượt mua (sold)
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    name="sold"
+                    value={formData.sold}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
+                    placeholder="126"
+                    min="0"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">
+                    lượt
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-end">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFormData(prev => ({
+                      ...prev,
+                      rating: getRandomRating(),
+                      sold: getRandomSold().toString()
+                    }));
+                  }}
+                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-sm font-medium transition-colors"
+                >
+                  🎲 Random lại
+                </button>
+              </div>
+              <div className="flex items-end">
+                <p className="text-xs text-slate-400">
+                  Rating: {Number(formData.rating || 0).toFixed(1)} ⭐ | Sold: {Number(formData.sold || 0).toLocaleString()} lượt
+                </p>
+              </div>
             </div>
           </div>
 
