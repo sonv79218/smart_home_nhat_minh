@@ -9,6 +9,8 @@ import {
   updateDoc,
   query,
   orderBy,
+  where,
+  limit,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import {
@@ -18,9 +20,10 @@ import {
 } from "../constants/productMeta";
 
 // ============================================
-// CONFIG
+// CONFIG - SWITCH BETWEEN DATA SOURCES
 // ============================================
-const DEBUG_MODE = false; // Set to true to enable debug logs
+const DEBUG_MODE = true; // Set to true to enable debug logs
+const USE_FIREBASE_FOR_USER = true; // Set to false to use JSON
 const PRODUCTS_JSON_URL = "/products.json";
 
 const log = (message, data) => {
@@ -29,10 +32,16 @@ const log = (message, data) => {
   }
 };
 
+// Log which data source is being used
+console.log(
+  "[ProductService] USER DATA SOURCE:",
+  USE_FIREBASE_FOR_USER ? "🔥 FIREBASE" : "📄 JSON"
+);
+
 const productsRef = collection(db, "products");
 
 // ============================================
-// JSON HELPERS - USER READ
+// JSON HELPERS - BACKUP DATA SOURCE
 // ============================================
 const readProductsJson = async () => {
   try {
@@ -103,7 +112,7 @@ const applyProductFilters = (products, filters = {}) => {
 };
 
 // ============================================
-// FIREBASE HELPER - ADMIN READ
+// FIREBASE HELPERS
 // ============================================
 const executeQuery = async (q) => {
   try {
@@ -122,8 +131,119 @@ const executeQuery = async (q) => {
   }
 };
 
+/**
+ * Get all active products from Firebase for USER
+ * This is the main helper for user-facing functions
+ */
+const getProductsFromFirebaseForUser = async (filters = {}) => {
+  try {
+    // Build query conditions
+    const conditions = [];
+    
+    // Always filter by active status for user
+    conditions.push(where("status", "==", filters.status || "active"));
+    
+    // Add category filter if provided
+    if (filters.category) {
+      conditions.push(where("category", "==", filters.category));
+    }
+    
+    // Add brand filter if provided
+    if (filters.brand) {
+      conditions.push(where("brand", "==", filters.brand));
+    }
+    
+    // Add featured filter if provided
+    if (filters.featured) {
+      conditions.push(where("featured", "==", true));
+    }
+    
+    // Add bestSeller filter if provided
+    if (filters.bestSeller) {
+      conditions.push(where("bestSeller", "==", true));
+    }
+    
+    // Add newProduct filter if provided
+    if (filters.newProduct) {
+      conditions.push(where("newProduct", "==", true));
+    }
+
+    // Create query with orderBy
+    const q = query(
+      productsRef,
+      ...conditions,
+      orderBy("createdAt", "desc")
+    );
+
+    const data = await executeQuery(q);
+    log("getProductsFromFirebaseForUser:", data.length, "products", filters);
+    return data;
+  } catch (error) {
+    console.error("[ProductService] getProductsFromFirebaseForUser error:", error);
+    return [];
+  }
+};
+
+/**
+ * Get product by ID from Firebase
+ */
+const getProductByIdFromFirebase = async (id) => {
+  try {
+    const productRef = doc(db, "products", id);
+    const snapshot = await getDoc(productRef);
+
+    if (!snapshot.exists()) {
+      log("getProductByIdFromFirebase: Product not found", id);
+      return null;
+    }
+
+    const data = {
+      id: snapshot.id,
+      ...snapshot.data(),
+    };
+    
+    log("getProductByIdFromFirebase: Found product", data.name);
+    return data;
+  } catch (error) {
+    console.error("[ProductService] getProductByIdFromFirebase error:", error);
+    return null;
+  }
+};
+
+/**
+ * Get product by slug from Firebase
+ */
+const getProductBySlugFromFirebase = async (slug) => {
+  try {
+    const q = query(
+      productsRef,
+      where("slug", "==", slug),
+      limit(1)
+    );
+    
+    const snapshot = await getDocs(q);
+    
+    if (snapshot.empty) {
+      log("getProductBySlugFromFirebase: Product not found", slug);
+      return null;
+    }
+
+    const docSnap = snapshot.docs[0];
+    const data = {
+      id: docSnap.id,
+      ...docSnap.data(),
+    };
+    
+    log("getProductBySlugFromFirebase: Found product", data.name);
+    return data;
+  } catch (error) {
+    console.error("[ProductService] getProductBySlugFromFirebase error:", error);
+    return null;
+  }
+};
+
 // ============================================
-// ADMIN: ADD PRODUCT
+// ADMIN: ADD PRODUCT (unchanged - always Firebase)
 // ============================================
 export const addProduct = async (productData) => {
   const sanitized = sanitizeProductData(productData);
@@ -161,11 +281,22 @@ export const addProduct = async (productData) => {
 };
 
 // ============================================
-// USER: GET PRODUCTS FROM JSON
+// USER: GET PRODUCTS
 // ============================================
 export const getProducts = async (filters = {}) => {
-  log("getProducts from JSON:", filters);
+  if (USE_FIREBASE_FOR_USER) {
+    log("getProducts from Firebase:", filters);
+    let products = await getProductsFromFirebaseForUser(filters);
 
+    if (filters.limit) {
+      products = products.slice(0, Number(filters.limit));
+    }
+
+    return products;
+  }
+
+  // JSON fallback
+  log("getProducts from JSON:", filters);
   let products = await readProductsJson();
   products = applyProductFilters(products, filters);
 
@@ -177,7 +308,7 @@ export const getProducts = async (filters = {}) => {
 };
 
 // ============================================
-// USER: GET PRODUCTS PAGINATED FROM JSON
+// USER: GET PRODUCTS PAGINATED
 // ============================================
 export const getProductsPaginated = async ({
   category = null,
@@ -186,11 +317,28 @@ export const getProductsPaginated = async ({
   pageSize = 20,
   lastDoc = null,
 } = {}) => {
-  const products = await getProducts({
-    category,
-    brand,
-    status,
-  });
+  if (USE_FIREBASE_FOR_USER) {
+    log("getProductsPaginated from Firebase:", { category, brand, status, pageSize });
+    
+    // Get all products (Firebase doesn't support startAfter with complex queries easily)
+    // For simplicity, we'll fetch and paginate client-side
+    const allProducts = await getProductsFromFirebaseForUser({ category, brand, status });
+    
+    const startIndex = lastDoc?.index || 0;
+    const paginatedProducts = allProducts.slice(startIndex, startIndex + pageSize);
+
+    const nextIndex = startIndex + pageSize;
+    const hasMore = nextIndex < allProducts.length;
+
+    return {
+      products: paginatedProducts,
+      lastDocument: hasMore ? { index: nextIndex } : null,
+      hasMore,
+    };
+  }
+
+  // JSON fallback
+  const products = await getProducts({ category, brand, status });
 
   const startIndex = lastDoc?.index || 0;
   const paginatedProducts = products.slice(startIndex, startIndex + pageSize);
@@ -206,33 +354,45 @@ export const getProductsPaginated = async ({
 };
 
 // ============================================
-// USER: GET ACTIVE PRODUCTS FROM JSON
+// USER: GET ACTIVE PRODUCTS
 // ============================================
 export const getActiveProducts = async (limitCount = 50) => {
-  return await getProducts({
-    status: "active",
-    limit: limitCount,
-  });
+  if (USE_FIREBASE_FOR_USER) {
+    return await getProducts({ status: "active", limit: limitCount });
+  }
+  return await getProducts({ status: "active", limit: limitCount });
 };
 
 // ============================================
-// USER: GET PRODUCT BY ID FROM JSON
+// USER: GET PRODUCT BY ID
 // ============================================
 export const getProductById = async (id) => {
+  if (USE_FIREBASE_FOR_USER) {
+    log("getProductById from Firebase:", id);
+    return await getProductByIdFromFirebase(id);
+  }
+
+  log("getProductById from JSON:", id);
   const products = await readProductsJson();
   return products.find((p) => p.id === id) || null;
 };
 
 // ============================================
-// USER: GET PRODUCT BY SLUG FROM JSON
+// USER: GET PRODUCT BY SLUG
 // ============================================
 export const getProductBySlug = async (slug) => {
+  if (USE_FIREBASE_FOR_USER) {
+    log("getProductBySlug from Firebase:", slug);
+    return await getProductBySlugFromFirebase(slug);
+  }
+
+  log("getProductBySlug from JSON:", slug);
   const products = await readProductsJson();
   return products.find((p) => p.slug === slug) || null;
 };
 
 // ============================================
-// ADMIN: UPDATE PRODUCT
+// ADMIN: UPDATE PRODUCT (unchanged)
 // ============================================
 export const updateProduct = async (id, updates) => {
   const sanitized = sanitizeProductData(updates);
@@ -248,14 +408,14 @@ export const updateProduct = async (id, updates) => {
 };
 
 // ============================================
-// ADMIN: DELETE PRODUCT
+// ADMIN: DELETE PRODUCT (unchanged)
 // ============================================
 export const deleteProduct = async (id) => {
   return await deleteDoc(doc(db, "products", id));
 };
 
 // ============================================
-// USER: SEARCH PRODUCTS FROM JSON
+// USER: SEARCH PRODUCTS
 // ============================================
 export const searchProducts = async (
   searchTerm,
@@ -269,6 +429,44 @@ export const searchProducts = async (
     };
   }
 
+  if (USE_FIREBASE_FOR_USER) {
+    log("searchProducts from Firebase:", searchTerm);
+    
+    // Get all active products from Firebase
+    const products = await getProductsFromFirebaseForUser({ status: "active" });
+    
+    // Filter client-side (same as JSON logic)
+    const term = searchTerm.toLowerCase().trim();
+    let filteredProducts = products.filter(
+      (p) =>
+        p.name?.toLowerCase().includes(term) ||
+        p.brand?.toLowerCase().includes(term) ||
+        p.category?.toLowerCase().includes(term) ||
+        p.shortDescription?.toLowerCase().includes(term) ||
+        p.description?.toLowerCase().includes(term) ||
+        (p.tags && p.tags.some((tag) => tag.toLowerCase().includes(term)))
+    );
+
+    filteredProducts = sortByCreatedAtDesc(filteredProducts);
+
+    const startIndex = lastDoc?.index || 0;
+    const paginatedProducts = filteredProducts.slice(
+      startIndex,
+      startIndex + pageSize
+    );
+
+    const nextIndex = startIndex + pageSize;
+    const hasMore = nextIndex < filteredProducts.length;
+
+    return {
+      products: paginatedProducts,
+      lastDocument: hasMore ? { index: nextIndex } : null,
+      hasMore,
+    };
+  }
+
+  // JSON fallback
+  log("searchProducts from JSON:", searchTerm);
   const products = await readProductsJson();
   const term = searchTerm.toLowerCase().trim();
 
@@ -302,7 +500,7 @@ export const searchProducts = async (
 };
 
 // ============================================
-// USER: GET PRODUCTS BY CATEGORY FROM JSON
+// USER: GET PRODUCTS BY CATEGORY
 // ============================================
 export const getProductsByCategory = async (categoryId, limitCount = 10) => {
   return await getProducts({
@@ -313,9 +511,22 @@ export const getProductsByCategory = async (categoryId, limitCount = 10) => {
 };
 
 // ============================================
-// USER: GET FEATURED PRODUCTS FROM JSON
+// USER: GET FEATURED PRODUCTS
 // ============================================
 export const getFeaturedProducts = async (limitCount = 8) => {
+  if (USE_FIREBASE_FOR_USER) {
+    const products = await getProductsFromFirebaseForUser({ featured: true, status: "active" });
+    
+    if (products.length > 0) {
+      return products.slice(0, limitCount);
+    }
+    
+    // Fallback to active products if no featured
+    const fallbackProducts = await getProductsFromFirebaseForUser({ status: "active" });
+    return fallbackProducts.slice(0, limitCount);
+  }
+
+  // JSON fallback
   const products = await getProducts({
     featured: true,
     status: "active",
@@ -333,7 +544,7 @@ export const getFeaturedProducts = async (limitCount = 8) => {
 };
 
 // ============================================
-// USER: GET NEW PRODUCTS FROM JSON
+// USER: GET NEW PRODUCTS
 // ============================================
 export const getNewProducts = async (limitCount = 8) => {
   return await getProducts({
@@ -344,7 +555,7 @@ export const getNewProducts = async (limitCount = 8) => {
 };
 
 // ============================================
-// USER: GET BEST SELLER PRODUCTS FROM JSON
+// USER: GET BEST SELLER PRODUCTS
 // ============================================
 export const getBestSellerProducts = async (limitCount = 8) => {
   return await getProducts({
@@ -355,7 +566,7 @@ export const getBestSellerProducts = async (limitCount = 8) => {
 };
 
 // ============================================
-// USER: GET RELATED PRODUCTS FROM JSON
+// USER: GET RELATED PRODUCTS
 // ============================================
 export const getRelatedProducts = async (
   categoryId,
@@ -371,7 +582,7 @@ export const getRelatedProducts = async (
 };
 
 // ============================================
-// ADMIN: GET ALL PRODUCTS FROM FIREBASE
+// ADMIN: GET ALL PRODUCTS (unchanged - always Firebase)
 // ============================================
 export const getAllProductsForAdmin = async () => {
   log("getAllProductsForAdmin from Firebase");
@@ -386,13 +597,34 @@ export const getAllProductsForAdmin = async () => {
 };
 
 // ============================================
-// USER: COUNT PRODUCTS FROM JSON
+// USER: COUNT PRODUCTS
 // ============================================
 export const getProductsCount = async (filters = {}) => {
   const products = await getProducts(filters);
   return products.length;
 };
 
+// ============================================
+// ADMIN: GET PRODUCT BY ID (unchanged - always Firebase)
+// ============================================
+export const getProductByIdForAdmin = async (id) => {
+  try {
+    const productRef = doc(db, "products", id);
+    const snapshot = await getDoc(productRef);
+
+    if (!snapshot.exists()) {
+      return null;
+    }
+
+    return {
+      id: snapshot.id,
+      ...snapshot.data(),
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
 // ============================================
 // VARIANT HELPERS
@@ -479,7 +711,6 @@ export const validateVariants = (options, variants) => {
     return { valid: true, errors: [] };
   }
 
-  // Check if all options have values
   for (const opt of options) {
     if (!opt.name?.trim()) {
       errors.push("Tên option không được trống");
@@ -489,7 +720,6 @@ export const validateVariants = (options, variants) => {
     }
   }
 
-  // Check if all variants have required fields
   for (const variant of variants) {
     if (!variant.sku?.trim()) {
       errors.push("SKU variant không được trống");
@@ -504,23 +734,3 @@ export const validateVariants = (options, variants) => {
 
   return { valid: errors.length === 0, errors };
 };
-
-export const getProductByIdForAdmin = async (id) => {
-  try {
-    const productRef = doc(db, "products", id);
-    const snapshot = await getDoc(productRef);
-
-    if (!snapshot.exists()) {
-      return null;
-    }
-
-    return {
-      id: snapshot.id,
-      ...snapshot.data(),
-    };
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
