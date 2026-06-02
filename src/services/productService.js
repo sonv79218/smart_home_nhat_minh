@@ -20,7 +20,7 @@ import {
 // ============================================
 // CONFIG
 // ============================================
-const DEBUG_MODE = true;
+const DEBUG_MODE = false; // Set to true to enable debug logs
 const PRODUCTS_JSON_URL = "/products.json";
 
 const log = (message, data) => {

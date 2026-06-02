@@ -17,7 +17,7 @@ const ecosystems = [
     features: ["HomeKit", "Automation", "Zigbee", "AI Smart"],
     image: aqaraImg,
     color: "#4e5055",
-    link: "/products?brand=aqara",
+    link: "/ecosystem/aqara",
     comparison: {
       price: "Cao",
       target: "Nhà cao cấp, người dùng Apple HomeKit",
@@ -32,7 +32,7 @@ const ecosystems = [
     features: ["Made in Vietnam", "Tiếng Việt", "Dễ sử dụng", "Ổn định"],
     image: lumiImg,
     color: "#24743f",
-    link: "/products?brand=lumi",
+    link: "/ecosystem/lumi",
     comparison: {
       price: "Trung bình - cao",
       target: "Gia đình Việt, nhà phố, biệt thự",
@@ -47,7 +47,7 @@ const ecosystems = [
     features: ["Giá tốt", "WiFi", "Điều khiển app", "Smart Life"],
     image: hunonicImg,
     color: "#04c53a",
-    link: "/products?brand=hunonic",
+    link: "/ecosystem/hunonic",
     comparison: {
       price: "Tốt",
       target: "Chung cư, nhà phố, người mới bắt đầu",

@@ -46,7 +46,7 @@ export const getCategories = async () => {
     .then((data) => {
       if (data && Array.isArray(data)) {
         categoriesCache = data;
-        console.log("[CategoryService] Loaded categories from JSON:", data.length);
+        // console.log("[CategoryService] Loaded categories from JSON:", data.length);
         return data;
       }
       console.warn("[CategoryService] Invalid categories data, returning empty array");

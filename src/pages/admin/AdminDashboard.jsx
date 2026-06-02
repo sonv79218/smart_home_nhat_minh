@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     { label: "Tổng sản phẩm", value: "0", change: "+0", color: "blue", icon: ProductsIcon },
     { label: "Đơn hàng mới", value: "0", change: "+0", color: "green", icon: OrdersIcon },
     { label: "Doanh thu", value: "0đ", change: "+0đ", color: "purple", icon: RevenueIcon },
-    { label: "Người dùng", value: "0", change: "+0", color: "orange", icon: UsersIcon },
+    // { label: "Người dùng", value: "0", change: "+0", color: "orange", icon: UsersIcon },
   ];
 
   const quickActions = [

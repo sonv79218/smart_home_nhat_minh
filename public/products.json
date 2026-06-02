@@ -1685,6 +1685,230 @@
     "updatedAt": "2026-06-01T02:38:43.236Z"
   },
   {
+    "id": "jxAA6pZTgAdEL9FrK78S",
+    "name": "Đèn âm trần Downlight / Spotlight Aqara T2",
+    "sku": "SMA-NMTR-9099",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 1150000,
+    "discountPrice": 0,
+    "stock": 0,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 71,
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "en-am-tran-downlight-spotlight-aqara-t2",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371866/rflke2w58519pb3wa0fe.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371867/kvvytwo8zy7h0fzn1zva.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371867/dalxoswjuuavf8pwyc1p.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371867/fqhymrglssfbkyntggrx.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371868/ivdostbc4y5t2tehzynu.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371867/ih81wkeegy1ekliup1aq.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371868/m0awbazicysavt70zdym.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371868/bziepznw73xqize2r3yg.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371867/wpa27banujalcn3bz24t.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371868/ofkkrorxnm4swtkkrjuc.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371868/dymgoc1yf6hgl8mkxhat.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371868/mgvq9xvz7dstkx5r9wu1.png"
+    ],
+    "options": [
+      {
+        "name": "Phân Loại",
+        "values": [
+          "Spotlight 24° Embedded",
+          "Spotlight 36° Embedded",
+          "Spotlight 55°",
+          "Spotlight 55° Embedded",
+          "Downlight 60°",
+          "Spotlight 15°",
+          "Spotlight 24°",
+          "Spotlight 36°"
+        ]
+      },
+      {
+        "name": "Màu Sắc",
+        "values": [
+          "Đen",
+          "Trắng"
+        ]
+      },
+      {
+        "name": "Lỗ Khoét",
+        "values": [
+          "¤55-8W",
+          "¤75-12W"
+        ]
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T03:44:30.657Z",
+    "variants": [
+      {
+        "id": "75-12w-trng-spotlight-36",
+        "sku": "SKU-75-12W-TRNG-SPOTLIGHT-36",
+        "optionValues": [
+          "Spotlight 24° Embedded",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371297017-2039qptlx",
+        "sku": "SKU-VAR-1780371297017-2039QPTLX",
+        "optionValues": [
+          "Spotlight 36° Embedded",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 15,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371323528-equfgs769",
+        "sku": "SKU-VAR-1780371323528-EQUFGS769",
+        "optionValues": [
+          "Spotlight 55° Embedded",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 13,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371323728-wibw79hsp",
+        "sku": "SKU-VAR-1780371323728-WIBW79HSP",
+        "optionValues": [
+          "Downlight 60°",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371323896-8dod26mm0",
+        "sku": "SKU-VAR-1780371323896-8DOD26MM0",
+        "optionValues": [
+          "Downlight 60°",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 14,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371324072-ezf3jskiy",
+        "sku": "SKU-VAR-1780371324072-EZF3JSKIY",
+        "optionValues": [
+          "Spotlight 15°",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 15,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371324225-mgzffi4iy",
+        "sku": "SKU-VAR-1780371324225-MGZFFI4IY",
+        "optionValues": [
+          "Spotlight 24°",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 16,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371324392-jc4lp79nu",
+        "sku": "SKU-VAR-1780371324392-JC4LP79NU",
+        "optionValues": [
+          "Spotlight 24°",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 0,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371500608-qgy2od3sn",
+        "sku": "SKU-VAR-1780371500608-QGY2OD3SN",
+        "optionValues": [
+          "Spotlight 24°",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 20,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371500768-0djw3h9p0",
+        "sku": "SKU-VAR-1780371500768-0DJW3H9P0",
+        "optionValues": [
+          "Spotlight 36°",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 16,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371500920-2270rnth2",
+        "sku": "SKU-VAR-1780371500920-2270RNTH2",
+        "optionValues": [
+          "Spotlight 36°",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "var-1780371501096-axos5lehv",
+        "sku": "SKU-VAR-1780371501096-AXOS5LEHV",
+        "optionValues": [
+          "Spotlight 36°",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "discountPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      }
+    ],
+    "updatedAt": "2026-06-02T03:45:28.967Z"
+  },
+  {
     "id": "k7m3lbT3Ez5V0hft4jYD",
     "name": "Camera ngoài trời thông minh Aqara G5 Pro (Wifi)",
     "sku": "CAM-CAME-1923",
