@@ -1,9 +1,9 @@
 // ============================================
-// EDIT PRODUCT PAGE - Fully Responsive
+// EDIT PRODUCT PAGE - With Variant Support
 // ============================================
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {   getProductByIdForAdmin, updateProduct } from "../../services/productService";
+import { getProductByIdForAdmin, updateProduct } from "../../services/productService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
@@ -46,6 +46,20 @@ const EditProductPage = () => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
 
+  // Variant states
+  const [hasVariants, setHasVariants] = useState(false);
+  const [options, setOptions] = useState([{ name: "", values: [""] }]);
+  const [variants, setVariants] = useState([
+    { id: "", sku: "", optionValues: [], price: "", discountPrice: "", stock: "", thumbnail: "" }
+  ]);
+  const [variantThumbnailFiles, setVariantThumbnailFiles] = useState({});
+  const [variantThumbnailPreviews, setVariantThumbnailPreviews] = useState({});
+
+  // Generate variant ID
+  function generateVariantId() {
+    return "var-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+  }
+
   // Fetch categories and brands
   useEffect(() => {
     const fetchMeta = async () => {
@@ -56,11 +70,11 @@ const EditProductPage = () => {
     fetchMeta();
   }, []);
 
+  // Load product data
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        // const product = await getProductById(id);
         const product = await getProductByIdForAdmin(id);
 
         if (!product) {
@@ -104,6 +118,23 @@ const EditProductPage = () => {
           setExistingImages(product.images);
           setImagePreviews(product.images);
         }
+
+        // Load variants if product has them
+        if (product.options?.length > 0 && product.variants?.length > 0) {
+          setHasVariants(true);
+          setOptions(product.options);
+          
+          const loadedVariants = product.variants.map(v => ({
+            id: v.id || generateVariantId(),
+            sku: v.sku || "",
+            optionValues: v.optionValues || [],
+            price: v.price?.toString() || "",
+            discountPrice: v.discountPrice?.toString() || "",
+            stock: v.stock?.toString() || "0",
+            thumbnail: v.thumbnail || ""
+          }));
+          setVariants(loadedVariants);
+        }
       } catch (err) {
         console.error("Error fetching product:", err);
         setError("Có lỗi khi tải thông tin sản phẩm");
@@ -139,31 +170,17 @@ const EditProductPage = () => {
     const currentTotal = existingImages.length + imageFiles.length;
     const maxImages = 5;
     
-    if (currentTotal >= maxImages) {
-      return;
-    }
-
+    if (currentTotal >= maxImages) return;
+    
     const remainingSlots = maxImages - currentTotal;
     const filesToAdd = files.slice(0, remainingSlots);
     
     if (filesToAdd.length > 0) {
       const newFiles = [...imageFiles, ...filesToAdd];
       setImageFiles(newFiles);
-      const newPreviews = filesToAdd.map((file) => URL.createObjectURL(file));
-      setImagePreviews((prev) => [...prev, ...newPreviews]);
+      const previews = filesToAdd.map((file) => URL.createObjectURL(file));
+      setImagePreviews([...imagePreviews, ...previews]);
     }
-  };
-
-  const handleRemoveNewImage = (index) => {
-    const actualIndex = existingImages.length + index;
-    setImageFiles((prev) => prev.filter((_, i) => i !== index));
-    setImagePreviews((prev) => prev.filter((_, i) => i !== actualIndex));
-  };
-
-  const handleRemoveExistingImage = (index) => {
-    const newExistingImages = existingImages.filter((_, i) => i !== index);
-    setExistingImages(newExistingImages);
-    setImagePreviews(newExistingImages);
   };
 
   const handleSpecChange = (index, field, value) => {
@@ -177,13 +194,165 @@ const EditProductPage = () => {
   };
 
   const removeSpecification = (index) => {
-    if (specifications.length === 1) {
-      setSpecifications([{ key: "", value: "" }]);
-    } else {
-      const newSpecs = specifications.filter((_, i) => i !== index);
-      setSpecifications(newSpecs);
+    if (specifications.length <= 1) return;
+    const newSpecs = specifications.filter((_, i) => i !== index);
+    setSpecifications(newSpecs);
+  };
+
+  const removeImage = (index) => {
+    const newImages = imagePreviews.filter((_, i) => i !== index);
+    const newFiles = imageFiles.filter((_, i) => i !== index);
+    setImagePreviews(newImages);
+    setImageFiles(newFiles);
+  };
+
+  // ========== VARIANT HANDLERS ==========
+
+  const handleToggleVariants = (checked) => {
+    setHasVariants(checked);
+    if (checked && variants.length === 0) {
+      setVariants([{
+        id: generateVariantId(),
+        sku: "",
+        optionValues: options.map(() => ""),
+        price: formData.price,
+        discountPrice: formData.discountPrice,
+        stock: formData.stock,
+        thumbnail: ""
+      }]);
     }
   };
+
+  const addOption = () => {
+    setOptions([...options, { name: "", values: [""] }]);
+    setVariants(variants.map(v => ({
+      ...v,
+      optionValues: [...v.optionValues, ""]
+    })));
+  };
+
+  const removeOption = (index) => {
+    if (options.length <= 1) return;
+    const newOptions = options.filter((_, i) => i !== index);
+    setOptions(newOptions);
+    setVariants(variants.map(v => ({
+      ...v,
+      optionValues: v.optionValues.filter((_, i) => i !== index)
+    })));
+  };
+
+  const handleOptionNameChange = (index, name) => {
+    const newOptions = [...options];
+    newOptions[index].name = name;
+    setOptions(newOptions);
+  };
+
+  const handleOptionValuesChange = (index, valuesStr) => {
+    const newOptions = [...options];
+    const values = valuesStr.split(",").map(v => v.trim()).filter(v => v);
+    newOptions[index].values = values;
+    setOptions(newOptions);
+  };
+
+  const addVariant = () => {
+    const newVariant = {
+      id: generateVariantId(),
+      sku: "",
+      optionValues: options.map(() => ""),
+      price: formData.price,
+      discountPrice: formData.discountPrice,
+      stock: formData.stock,
+      thumbnail: ""
+    };
+    setVariants([...variants, newVariant]);
+  };
+
+  const removeVariant = (index) => {
+    if (variants.length <= 1) return;
+    const newVariants = variants.filter((_, i) => i !== index);
+    setVariants(newVariants);
+  };
+
+  const handleVariantChange = (index, field, value) => {
+    const newVariants = [...variants];
+    newVariants[index][field] = value;
+    setVariants(newVariants);
+  };
+
+  const handleVariantOptionChange = (variantIndex, optionIndex, value) => {
+    const newVariants = [...variants];
+    newVariants[variantIndex].optionValues[optionIndex] = value;
+    setVariants(newVariants);
+  };
+
+  const handleVariantThumbnailChange = (variantIndex, e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const newFiles = { ...variantThumbnailFiles };
+      const newPreviews = { ...variantThumbnailPreviews };
+      newFiles[variantIndex] = file;
+      newPreviews[variantIndex] = URL.createObjectURL(file);
+      setVariantThumbnailFiles(newFiles);
+      setVariantThumbnailPreviews(newPreviews);
+    }
+  };
+
+  const generateVariants = () => {
+    if (options.length === 0) return;
+    
+    const validOptions = options.filter(opt => opt.name.trim() && opt.values.length > 0);
+    if (validOptions.length === 0) return;
+
+    const combinations = validOptions.reduce((acc, opt) => {
+      if (acc.length === 0) {
+        return opt.values.map(v => [v]);
+      }
+      const newAcc = [];
+      acc.forEach(combo => {
+        opt.values.forEach(val => {
+          newAcc.push([...combo, val]);
+        });
+      });
+      return newAcc;
+    }, []);
+
+    const newVariants = combinations.map((combo, idx) => {
+      const optionValues = options.map(opt => {
+        const validOpt = validOptions.find(vo => vo.name === opt.name);
+        if (validOpt) {
+          const valIdx = validOptions.findIndex(vo => vo.name === opt.name);
+          return combo[valIdx] || "";
+        }
+        return "";
+      });
+
+      const id = combo.join("-").toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+      const existingVariant = variants.find(v => v.id === id);
+      
+      return {
+        id,
+        sku: existingVariant?.sku || `${formData.sku || "SKU"}-${id}`.toUpperCase(),
+        optionValues,
+        price: existingVariant?.price || formData.price || "",
+        discountPrice: existingVariant?.discountPrice || formData.discountPrice || "",
+        stock: existingVariant?.stock || formData.stock || "0",
+        thumbnail: existingVariant?.thumbnail || ""
+      };
+    });
+
+    setVariants(newVariants);
+  };
+
+  const syncPriceToVariants = () => {
+    setVariants(variants.map(v => ({
+      ...v,
+      price: formData.price,
+      discountPrice: formData.discountPrice,
+      stock: formData.stock
+    })));
+  };
+
+  // ========== SUBMIT ==========
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -203,14 +372,22 @@ const EditProductPage = () => {
 
       let uploadedImages = [...existingImages];
       if (imageFiles.length > 0) {
-        const newUploads = await Promise.all(
+        const newImages = await Promise.all(
           imageFiles.map((file) => uploadImageToCloudinary(file))
         );
-        uploadedImages = [...existingImages, ...newUploads];
+        uploadedImages = [...existingImages, ...newImages];
+      }
+
+      const uploadedVariantThumbnails = {};
+      for (const [variantIndex, file] of Object.entries(variantThumbnailFiles)) {
+        if (file) {
+          const url = await uploadImageToCloudinary(file);
+          uploadedVariantThumbnails[variantIndex] = url;
+        }
       }
 
       const specsArray = specifications
-        .filter((spec) => spec.key?.trim() && spec.value?.trim())
+        .filter((spec) => spec.key.trim() && spec.value.trim())
         .map((spec) => ({
           key: spec.key.trim(),
           value: spec.value.trim(),
@@ -236,98 +413,78 @@ const EditProductPage = () => {
         images: uploadedImages,
       };
 
+      // Add variants if enabled
+      if (hasVariants) {
+        const validOptions = options.filter(opt => opt.name.trim() && opt.values.length > 0);
+        if (validOptions.length > 0) {
+          productData.options = validOptions.map(opt => ({
+            name: opt.name.trim(),
+            values: opt.values
+          }));
+          
+          productData.variants = variants.map((v, idx) => ({
+            id: v.id,
+            sku: v.sku || `${formData.sku || "SKU"}-${v.id}`.toUpperCase(),
+            optionValues: v.optionValues,
+            price: Number(v.price) || 0,
+            discountPrice: v.discountPrice ? Number(v.discountPrice) : 0,
+            stock: Number(v.stock) || 0,
+            thumbnail: uploadedVariantThumbnails[idx] || v.thumbnail || ""
+          }));
+        }
+      }
+
       await updateProduct(id, productData);
 
       alert("Cập nhật sản phẩm thành công!");
       navigate("/admin/products");
-    } catch (error) {
-      console.error("Error updating product:", error);
+    } catch (err) {
+      console.error("Error updating product:", err);
       alert("Có lỗi xảy ra khi cập nhật sản phẩm");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const resetForm = () => {
-    setFormData({
-      name: "",
-      sku: "",
-      brand: "",
-      category: "",
-      price: "",
-      discountPrice: "",
-      costPrice: "",
-      stock: "",
-      minStockAlert: "5",
-      rating: "",
-      sold: "",
-      shortDescription: "",
-      description: "",
-      tags: "",
-      featured: false,
-      bestSeller: false,
-      newProduct: false,
-      status: "active",
-    });
-    setSpecifications([{ key: "", value: "" }]);
-    setThumbnailFile(null);
-    setThumbnailPreview(existingThumbnail || "");
-    setImageFiles([]);
-    setImagePreviews(existingImages);
-    setExistingImages(existingImages);
-  };
-
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-96">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin" />
-          <p className="text-slate-500">Đang tải thông tin sản phẩm...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-96">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-            <ErrorIcon className="w-8 h-8 text-red-500" />
-          </div>
-          <p className="text-lg font-medium text-slate-800">{error}</p>
-          <button
-            onClick={() => navigate("/admin/products")}
-            className="px-6 py-2.5 bg-primary-600 text-white font-medium rounded-xl hover:bg-primary-700 transition-colors"
-          >
-            Quay lại danh sách sản phẩm
-          </button>
+      <div className="max-w-4xl mx-auto py-12 text-center">
+        <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4M12 16h.01" />
+          </svg>
         </div>
+        <h2 className="text-xl font-bold text-slate-800 mb-2">{error}</h2>
+        <button
+          onClick={() => navigate("/admin/products")}
+          className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700"
+        >
+          Quay lại
+        </button>
       </div>
     );
   }
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Header */}
       <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <button
-            onClick={() => navigate("/admin/products")}
-            className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
-          >
-            <BackIcon className="w-5 h-5 text-slate-600" />
-          </button>
-          <h1 className="text-2xl font-bold text-slate-800">Chỉnh sửa sản phẩm</h1>
-        </div>
-        <p className="text-slate-500 mt-1 ml-10">Cập nhật thông tin sản phẩm bên dưới</p>
+        <h1 className="text-2xl font-bold text-slate-800">Sửa sản phẩm</h1>
+        <p className="text-slate-500 mt-1">Cập nhật thông tin sản phẩm</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Info Section */}
         <Section title="Thông tin cơ bản" icon={<InfoIcon className="w-5 h-5" />}>
           <div className="space-y-4">
-            {/* Product Name */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 Tên sản phẩm <span className="text-red-500">*</span>
@@ -337,27 +494,12 @@ const EditProductPage = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="VD: Camera IP Xiaomi 360"
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
                 required
               />
             </div>
 
-            {/* SKU & Category */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">SKU</label>
-                <input
-                  type="text"
-                  name="sku"
-                  value={formData.sku}
-                  onChange={handleChange}
-                  placeholder="Mã sản phẩm"
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-slate-50"
-                  disabled
-                />
-                <p className="text-xs text-slate-400 mt-1">SKU không thể thay đổi</p>
-              </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1.5">
                   Danh mục <span className="text-red-500">*</span>
@@ -371,33 +513,28 @@ const EditProductPage = () => {
                 >
                   <option value="">Chọn danh mục</option>
                   {categories.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
+                    <option key={cat.id} value={cat.id}>{cat.name}</option>
                   ))}
                 </select>
               </div>
-            </div>
 
-            {/* Brand */}
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Thương hiệu <span className="text-red-500">*</span>
-              </label>
-              <select
-                name="brand"
-                value={formData.brand}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white"
-                required
-              >
-                <option value="">Chọn thương hiệu</option>
-                {brands.map((brand) => (
-                  <option key={brand.id} value={brand.id}>
-                    {brand.name}
-                  </option>
-                ))}
-              </select>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Thương hiệu <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="brand"
+                  value={formData.brand}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white"
+                  required
+                >
+                  <option value="">Chọn thương hiệu</option>
+                  {brands.map((brand) => (
+                    <option key={brand.id} value={brand.id}>{brand.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </Section>
@@ -406,227 +543,170 @@ const EditProductPage = () => {
         <Section title="Giá & Tồn kho" icon={<PriceIcon className="w-5 h-5" />}>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Giá bán <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleChange}
-                  placeholder="0"
-                  min="0"
-                  className="w-full px-4 py-2.5 pr-12 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-                  required
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">đ</span>
-              </div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá bán</label>
+              <input type="number" name="price" value={formData.price} onChange={handleChange}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá gốc</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  name="costPrice"
-                  value={formData.costPrice}
-                  onChange={handleChange}
-                  placeholder="0"
-                  min="0"
-                  className="w-full px-4 py-2.5 pr-12 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">đ</span>
-              </div>
+              <input type="number" name="discountPrice" value={formData.discountPrice} onChange={handleChange}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá giảm</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  name="discountPrice"
-                  value={formData.discountPrice}
-                  onChange={handleChange}
-                  placeholder="0"
-                  min="0"
-                  className="w-full px-4 py-2.5 pr-12 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">đ</span>
-              </div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Giá vốn</label>
+              <input type="number" name="costPrice" value={formData.costPrice} onChange={handleChange}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Số lượng tồn kho</label>
-              <input
-                type="number"
-                name="stock"
-                value={formData.stock}
-                onChange={handleChange}
-                placeholder="0"
-                min="0"
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-              />
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Tồn kho</label>
+              <input type="number" name="stock" value={formData.stock} onChange={handleChange}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Cảnh báo tồn kho tối thiểu</label>
-              <input
-                type="number"
-                name="minStockAlert"
-                value={formData.minStockAlert}
-                onChange={handleChange}
-                placeholder="5"
-                min="0"
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-              />
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Báo low stock</label>
+              <input type="number" name="minStockAlert" value={formData.minStockAlert} onChange={handleChange}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm" min="0" />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Số sao (rating)</label>
-              <div className="relative">
-                <input
-                  type="number"
-                  name="rating"
-                  value={formData.rating}
-                  onChange={handleChange}
-                  placeholder="0 - 5"
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  className="w-full px-4 py-2.5 pr-10 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">⭐</span>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Số lượt mua</label>
-              <input
-                type="number"
-                name="sold"
-                value={formData.sold}
-                onChange={handleChange}
-                placeholder="0"
-                min="0"
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-              />
-            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-slate-200">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked={hasVariants} onChange={(e) => handleToggleVariants(e.target.checked)}
+                className="w-5 h-5 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
+              <span className="text-sm font-medium text-slate-700">Sản phẩm có biến thể</span>
+            </label>
           </div>
         </Section>
 
-        {/* Images Section */}
-        <Section title="Hình ảnh" icon={<ImageIcon className="w-5 h-5" />}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Thumbnail */}
+        {/* Variants Section */}
+        {hasVariants && (
+          <Section title="Cấu hình biến thể" icon={<VariantIcon className="w-5 h-5" />}>
+            <div className="mb-6">
+              <h4 className="text-sm font-semibold text-slate-700 mb-3">Tùy chọn biến thể</h4>
+              
+              {options.map((option, optIdx) => (
+                <div key={optIdx} className="flex items-start gap-2 mb-3">
+                  <div className="flex-1 grid grid-cols-2 gap-2">
+                    <input type="text" value={option.name}
+                      onChange={(e) => handleOptionNameChange(optIdx, e.target.value)}
+                      className="px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="VD: Phiên bản" />
+                    <input type="text" value={option.values.join(", ")}
+                      onChange={(e) => handleOptionValuesChange(optIdx, e.target.value)}
+                      className="px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="VD: Q1, H2, H3" />
+                  </div>
+                  <button type="button" onClick={() => removeOption(optIdx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                    disabled={options.length <= 1}>
+                    <TrashIcon className="w-5 h-5" />
+                  </button>
+                </div>
+              ))}
+              
+              <button type="button" onClick={addOption} className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1">
+                <PlusIcon className="w-4 h-4" /> Thêm tùy chọn
+              </button>
+              <button type="button" onClick={generateVariants} className="ml-4 text-sm text-sky-600 hover:text-sky-700 font-medium">
+                Tạo biến thể từ options
+              </button>
+            </div>
+
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Ảnh đại diện
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleThumbnailChange}
-                className="hidden"
-                id="thumbnail-upload"
-              />
-              <label
-                htmlFor="thumbnail-upload"
-                className="flex flex-col items-center justify-center w-full h-40 border-2 border-slate-200 border-dashed rounded-xl cursor-pointer hover:border-primary-400 hover:bg-slate-50 transition-colors relative"
-              >
-                {thumbnailPreview ? (
-                  <>
-                    <img src={thumbnailPreview} alt="Thumbnail" className="w-full h-full object-contain p-2" />
-                    <span className="absolute bottom-2 left-2 px-2 py-1 bg-primary-600 text-white text-xs rounded-lg">
-                      {thumbnailFile ? "Mới" : "Hiện tại"}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <UploadIcon className="w-8 h-8 text-slate-400 mb-2" />
-                    <span className="text-sm text-slate-500">Click để chọn ảnh</span>
-                  </>
-                )}
-              </label>
-              {thumbnailPreview && thumbnailFile && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setThumbnailFile(null);
-                    setThumbnailPreview(existingThumbnail);
-                  }}
-                  className="mt-2 text-sm text-slate-500 hover:text-slate-700"
-                >
-                  Khôi phục ảnh cũ
-                </button>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-sm font-semibold text-slate-700">Danh sách biến thể ({variants.length})</h4>
+                <div className="flex gap-2">
+                  <button type="button" onClick={syncPriceToVariants} className="text-xs text-slate-500 hover:text-slate-700">
+                    Sync giá từ trên
+                  </button>
+                  <button type="button" onClick={addVariant} className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1">
+                    <PlusIcon className="w-4 h-4" /> Thêm biến thể
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {variants.map((variant, varIdx) => (
+                  <div key={variant.id || varIdx} className="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex flex-wrap gap-2">
+                        {options.map((opt, optIdx) => (
+                          <div key={optIdx} className="flex items-center gap-1">
+                            <span className="text-xs text-slate-500">{opt.name}:</span>
+                            <select value={variant.optionValues[optIdx] || ""}
+                              onChange={(e) => handleVariantOptionChange(varIdx, optIdx, e.target.value)}
+                              className="px-2 py-1 border border-slate-200 rounded text-sm bg-white">
+                              <option value="">Chọn</option>
+                              {opt.values.map((val) => (
+                                <option key={val} value={val}>{val}</option>
+                              ))}
+                            </select>
+                          </div>
+                        ))}
+                      </div>
+                      <button type="button" onClick={() => removeVariant(varIdx)} className="p-1 text-red-500 hover:bg-red-100 rounded"
+                        disabled={variants.length <= 1}>
+                        <TrashIcon className="w-4 h-4" />
+                      </button>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                      <div className="md:col-span-2">
+                        <label className="block text-xs text-slate-500 mb-1">SKU</label>
+                        <input type="text" value={variant.sku}
+                          onChange={(e) => handleVariantChange(varIdx, "sku", e.target.value)}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-mono" />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-500 mb-1">Giá</label>
+                        <input type="number" value={variant.price}
+                          onChange={(e) => handleVariantChange(varIdx, "price", e.target.value)}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-500 mb-1">Giảm giá</label>
+                        <input type="number" value={variant.discountPrice}
+                          onChange={(e) => handleVariantChange(varIdx, "discountPrice", e.target.value)}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-slate-500 mb-1">Tồn kho</label>
+                        <input type="number" value={variant.stock}
+                          onChange={(e) => handleVariantChange(varIdx, "stock", e.target.value)}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Section>
+        )}
+
+        {/* Image Section */}
+        <Section title="Hình ảnh" icon={<ImageIcon className="w-5 h-5" />}>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Ảnh đại diện</label>
+              <input type="file" accept="image/*" onChange={handleThumbnailChange}
+                className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-600 hover:file:bg-primary-100" />
+              {thumbnailPreview && (
+                <div className="mt-2 relative inline-block">
+                  <img src={thumbnailPreview} alt="Preview" className="w-24 h-24 object-cover rounded-lg" />
+                </div>
               )}
             </div>
 
-            {/* Gallery */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Ảnh phụ (Gallery) - {existingImages.length + imageFiles.length}/5 ảnh
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImagesChange}
-                className="hidden"
-                id="gallery-upload"
-                disabled={existingImages.length + imageFiles.length >= 5}
-              />
-              <label
-                htmlFor="gallery-upload"
-                className={`flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
-                  existingImages.length + imageFiles.length >= 5
-                    ? "border-slate-200 bg-slate-50 cursor-not-allowed"
-                    : "border-slate-200 hover:border-primary-400 hover:bg-slate-50"
-                }`}
-              >
-                <UploadIcon className="w-8 h-8 text-slate-400 mb-2" />
-                <span className="text-sm text-slate-500">
-                  {existingImages.length + imageFiles.length >= 5
-                    ? "Đã đạt giới hạn ảnh"
-                    : "Thêm ảnh mới"}
-                </span>
-              </label>
-              {(existingImages.length > 0 || imageFiles.length > 0) && (
-                <div className="flex gap-2 flex-wrap mt-3">
-                  {existingImages.map((img, index) => (
-                    <div key={`existing-${index}`} className="relative group">
-                      <img
-                        src={img}
-                        alt={`Gallery ${index + 1}`}
-                        className="w-16 h-16 object-cover rounded-lg"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveExistingImage(index)}
-                        className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        <CloseIcon className="w-3 h-3" />
-                      </button>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Ảnh gallery ({imagePreviews.length}/5)</label>
+              <input type="file" accept="image/*" multiple onChange={handleImagesChange}
+                className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-600 hover:file:bg-primary-100" />
+              {imagePreviews.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {imagePreviews.map((preview, idx) => (
+                    <div key={idx} className="relative">
+                      <img src={preview} alt={`Preview ${idx + 1}`} className="w-20 h-20 object-cover rounded-lg" />
+                      <button type="button" onClick={() => removeImage(idx)}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs">×</button>
                     </div>
                   ))}
-                  {imageFiles.map((_, index) => {
-                    const previewIndex = existingImages.length + index;
-                    const preview = imagePreviews[previewIndex];
-                    if (!preview) return null;
-                    return (
-                      <div key={`new-${index}`} className="relative group">
-                        <img
-                          src={preview}
-                          alt={`New ${index + 1}`}
-                          className="w-16 h-16 object-cover rounded-lg border-2 border-primary-300"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveNewImage(index)}
-                          className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          <CloseIcon className="w-3 h-3" />
-                        </button>
-                        <span className="absolute bottom-0 left-0 right-0 bg-primary-600 text-white text-xs text-center rounded-b-lg py-0.5">
-                          Mới
-                        </span>
-                      </div>
-                    );
-                  })}
                 </div>
               )}
             </div>
@@ -638,25 +718,13 @@ const EditProductPage = () => {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Mô tả ngắn</label>
-              <textarea
-                name="shortDescription"
-                value={formData.shortDescription}
-                onChange={handleChange}
-                placeholder="Mô tả ngắn gọn về sản phẩm..."
-                rows="2"
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm resize-none"
-              />
+              <textarea name="shortDescription" value={formData.shortDescription} onChange={handleChange} rows="2"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm resize-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">Mô tả chi tiết</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                placeholder="Mô tả chi tiết sản phẩm..."
-                rows="5"
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm resize-none"
-              />
+              <textarea name="description" value={formData.description} onChange={handleChange} rows="6"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm resize-none" />
             </div>
           </div>
         </Section>
@@ -665,138 +733,73 @@ const EditProductPage = () => {
         <Section title="Thông số kỹ thuật" icon={<SpecIcon className="w-5 h-5" />}>
           <div className="space-y-3">
             {specifications.map((spec, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <input
-                  type="text"
-                  value={spec.key}
-                  onChange={(e) => handleSpecChange(index, "key", e.target.value)}
-                  placeholder="VD: Wifi"
-                  className="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-                />
-                <input
-                  type="text"
-                  value={spec.value}
-                  onChange={(e) => handleSpecChange(index, "value", e.target.value)}
-                  placeholder="VD: 802.11 b/g/n"
-                  className="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeSpecification(index)}
-                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
-                >
-                  <CloseIcon className="w-5 h-5" />
+              <div key={index} className="flex items-center gap-2">
+                <input type="text" value={spec.key} onChange={(e) => handleSpecChange(index, "key", e.target.value)}
+                  className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="VD: Kích thước" />
+                <input type="text" value={spec.value} onChange={(e) => handleSpecChange(index, "value", e.target.value)}
+                  className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="VD: 86x86mm" />
+                <button type="button" onClick={() => removeSpecification(index)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                  disabled={specifications.length <= 1}>
+                  <TrashIcon className="w-4 h-4" />
                 </button>
               </div>
             ))}
-            <button
-              type="button"
-              onClick={addSpecification}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-600 hover:bg-primary-50 rounded-xl transition-colors"
-            >
-              <PlusIcon className="w-4 h-4" />
-              Thêm thông số
+            <button type="button" onClick={addSpecification} className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1">
+              <PlusIcon className="w-4 h-4" /> Thêm thông số
             </button>
           </div>
         </Section>
 
-        {/* Tags & Classification Section */}
-        <Section title="Tags & Phân loại" icon={<TagIcon className="w-5 h-5" />}>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Tags (phân cách bằng dấu phẩy)</label>
-              <input
-                type="text"
-                name="tags"
-                value={formData.tags}
-                onChange={handleChange}
-                placeholder="VD: wifi, camera, indoor"
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm"
-              />
-            </div>
+        {/* Tags Section */}
+        <Section title="Tags" icon={<TagIcon className="w-5 h-5" />}>
+          <input type="text" name="tags" value={formData.tags} onChange={handleChange}
+            className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm"
+            placeholder="VD: smart-home, aqara, zigbee (cách nhau bằng dấu phẩy)" />
+        </Section>
 
-            {/* Checkboxes */}
-            <div className="flex flex-wrap gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="featured"
-                  checked={formData.featured}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
-                />
-                <span className="text-sm text-slate-700">Sản phẩm nổi bật</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="bestSeller"
-                  checked={formData.bestSeller}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
-                />
-                <span className="text-sm text-slate-700">Sản phẩm bán chạy</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="newProduct"
-                  checked={formData.newProduct}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
-                />
-                <span className="text-sm text-slate-700">Sản phẩm mới</span>
-              </label>
-            </div>
-
-            {/* Status */}
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">Trạng thái</label>
-              <select
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm bg-white max-w-xs"
-              >
-                <option value="active">Hoạt động</option>
-                <option value="inactive">Không hoạt động</option>
-                <option value="draft">Bản nháp</option>
-              </select>
-            </div>
+        {/* Flags Section */}
+        <Section title="Đánh dấu" icon={<FlagIcon className="w-5 h-5" />}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" name="featured" checked={formData.featured} onChange={handleChange}
+                className="w-4 h-4 rounded border-slate-300 text-primary-600" />
+              <span className="text-sm text-slate-700">Nổi bật</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" name="bestSeller" checked={formData.bestSeller} onChange={handleChange}
+                className="w-4 h-4 rounded border-slate-300 text-primary-600" />
+              <span className="text-sm text-slate-700">Bán chạy</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" name="newProduct" checked={formData.newProduct} onChange={handleChange}
+                className="w-4 h-4 rounded border-slate-300 text-primary-600" />
+              <span className="text-sm text-slate-700">Sản phẩm mới</span>
+            </label>
           </div>
+        </Section>
+
+        {/* Status Section */}
+        <Section title="Trạng thái" icon={<StatusIcon className="w-5 h-5" />}>
+          <select name="status" value={formData.status} onChange={handleChange}
+            className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-white max-w-xs">
+            <option value="active">Hoạt động</option>
+            <option value="inactive">Không hoạt động</option>
+            <option value="draft">Bản nháp</option>
+          </select>
         </Section>
 
         {/* Form Actions */}
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
-          <button
-            type="submit"
-            disabled={submitting}
-            className="flex-1 sm:flex-none px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
-          >
+          <button type="submit" disabled={submitting}
+            className="flex-1 sm:flex-none px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 disabled:opacity-50 flex items-center justify-center gap-2">
             {submitting ? (
-              <>
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Đang cập nhật...
-              </>
+              <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Đang lưu...</>
             ) : (
-              <>
-                <SaveIcon className="w-5 h-5" />
-                Lưu thay đổi
-              </>
+              <>Lưu thay đổi</>
             )}
           </button>
-          <button
-            type="button"
-            onClick={resetForm}
-            className="flex-1 sm:flex-none px-6 py-3 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors"
-          >
-            Khôi phục
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate("/admin/products")}
-            className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
-          >
+          <button type="button" onClick={() => navigate("/admin/products")}
+            className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50">
             Hủy
           </button>
         </div>
@@ -809,88 +812,23 @@ const EditProductPage = () => {
 const Section = ({ title, icon, children }) => (
   <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
     <div className="px-5 py-4 border-b border-slate-100 bg-slate-50">
-      <h2 className="font-semibold text-slate-800 flex items-center gap-2">
-        {icon}
-        {title}
-      </h2>
+      <h2 className="font-semibold text-slate-800 flex items-center gap-2">{icon}{title}</h2>
     </div>
-    <div className="p-5">
-      {children}
-    </div>
+    <div className="p-5">{children}</div>
   </div>
 );
 
 // ========== ICONS ==========
-const InfoIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
-);
-
-const PriceIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
-);
-
-const ImageIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
-
-const DescIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-);
-
-const SpecIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-  </svg>
-);
-
-const TagIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-  </svg>
-);
-
-const UploadIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-  </svg>
-);
-
-const PlusIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-  </svg>
-);
-
-const CloseIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-  </svg>
-);
-
-const SaveIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-  </svg>
-);
-
-const BackIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-  </svg>
-);
-
-const ErrorIcon = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-  </svg>
-);
+const InfoIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const PriceIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const VariantIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>;
+const ImageIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>;
+const DescIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>;
+const SpecIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>;
+const TagIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>;
+const FlagIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>;
+const StatusIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const PlusIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>;
+const TrashIcon = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>;
 
 export default EditProductPage;

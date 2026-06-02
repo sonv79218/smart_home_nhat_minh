@@ -22,6 +22,14 @@ const saveCartToStorage = (cartItems) => {
   }
 };
 
+// Tạo unique key cho cart item (productId + variantId nếu có)
+const getCartItemKey = (item) => {
+  if (item.variantId) {
+    return `${item.id}-${item.variantId}`;
+  }
+  return item.id;
+};
+
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => loadCartFromStorage());
   const [promoCode, setPromoCode] = useState("");
@@ -33,66 +41,77 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = useCallback((product, quantity = 1) => {
     setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
+      const itemKey = getCartItemKey(product);
+      
+      // Tìm item theo key (id hoặc id-variantId)
+      const existingItem = prev.find((item) => getCartItemKey(item) === itemKey);
+      
       if (existingItem) {
         return prev.map((item) =>
-          item.id === product.id
+          getCartItemKey(item) === itemKey
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
+      
+      // Thêm item mới với đầy đủ thông tin
       return [
         ...prev,
         {
           id: product.id,
           name: product.name,
-          price: product.discountPrice > 0 && product.discountPrice < product.price 
-            ? product.discountPrice 
-            : product.price,
-          originalPrice: product.price,
           thumbnail: product.thumbnail,
+          // Variant info (nếu có)
+          ...(product.variantId && {
+            variantId: product.variantId,
+            sku: product.sku,
+            optionValues: product.optionValues,
+          }),
+          // Pricing - dùng price từ product đã được set ở ProductDetailPage
+          price: product.price || (product.discountPrice > 0 && product.discountPrice < product.price ? product.discountPrice : product.price),
+          originalPrice: product.originalPrice || product.price,
           quantity: quantity,
         },
       ];
     });
   }, []);
 
-  const removeFromCart = useCallback((productId) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== productId));
+  const removeFromCart = useCallback((itemKey) => {
+    setCartItems((prev) => prev.filter((item) => getCartItemKey(item) !== itemKey));
   }, []);
 
-  const increaseQuantity = useCallback((productId) => {
+  const increaseQuantity = useCallback((itemKey) => {
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === productId
+        getCartItemKey(item) === itemKey
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
     );
   }, []);
 
-  const decreaseQuantity = useCallback((productId) => {
+  const decreaseQuantity = useCallback((itemKey) => {
     setCartItems((prev) => {
-      const item = prev.find((i) => i.id === productId);
+      const item = prev.find((i) => getCartItemKey(i) === itemKey);
       if (item && item.quantity === 1) {
-        return prev.filter((i) => i.id !== productId);
+        return prev.filter((i) => getCartItemKey(i) !== itemKey);
       }
       return prev.map((item) =>
-        item.id === productId
+        getCartItemKey(item) === itemKey
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
     });
   }, []);
 
-  const updateQuantity = useCallback((productId, quantity) => {
+  const updateQuantity = useCallback((itemKey, quantity) => {
     if (quantity < 1) {
-      removeFromCart(productId);
+      removeFromCart(itemKey);
       return;
     }
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        getCartItemKey(item) === itemKey ? { ...item, quantity } : item
       )
     );
   }, [removeFromCart]);
@@ -104,7 +123,6 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const applyPromoCode = useCallback((code) => {
-    // Demo promo codes
     const promoCodes = {
       "GIAM10": 10,
       "GIAM20": 20,
@@ -149,8 +167,8 @@ export const CartProvider = ({ children }) => {
 
   const getShipping = useCallback(() => {
     const subtotal = getSubtotal();
-    if (subtotal >= 500000) return 0; // Free shipping over 500k
-    return 30000; // Base shipping fee
+    if (subtotal >= 500000) return 0;
+    return 30000;
   }, [getSubtotal]);
 
   const getTotalPrice = useCallback(() => {
@@ -175,6 +193,7 @@ export const CartProvider = ({ children }) => {
     discount,
     applyPromoCode,
     removePromoCode,
+    getCartItemKey,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

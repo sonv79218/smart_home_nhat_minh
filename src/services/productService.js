@@ -394,6 +394,117 @@ export const getProductsCount = async (filters = {}) => {
 };
 
 
+// ============================================
+// VARIANT HELPERS
+// ============================================
+
+/**
+ * Find variant by selected options
+ */
+export const findVariantByOptions = (variants, selectedOptions) => {
+  if (!variants || !Array.isArray(variants) || variants.length === 0) {
+    return null;
+  }
+
+  return variants.find((variant) => {
+    if (!variant.optionValues || !Array.isArray(variant.optionValues)) {
+      return false;
+    }
+    return variant.optionValues.every((val, idx) => selectedOptions[idx] === val);
+  }) || null;
+};
+
+/**
+ * Get variant by ID
+ */
+export const getVariantById = (variants, variantId) => {
+  if (!variants || !Array.isArray(variants) || !variantId) {
+    return null;
+  }
+  return variants.find((v) => v.id === variantId) || null;
+};
+
+/**
+ * Check if a variant combination is available
+ */
+export const isVariantAvailable = (variants, selectedOptions) => {
+  const variant = findVariantByOptions(variants, selectedOptions);
+  return variant ? variant.stock > 0 : false;
+};
+
+/**
+ * Get total stock from all variants
+ */
+export const getTotalVariantStock = (variants) => {
+  if (!variants || !Array.isArray(variants)) {
+    return 0;
+  }
+  return variants.reduce((total, v) => total + (Number(v.stock) || 0), 0);
+};
+
+/**
+ * Check if product has variants
+ */
+export const hasVariants = (product) => {
+  return product?.options?.length > 0 && product?.variants?.length > 0;
+};
+
+/**
+ * Get default variant (first one)
+ */
+export const getDefaultVariant = (variants) => {
+  if (!variants || !Array.isArray(variants) || variants.length === 0) {
+    return null;
+  }
+  return variants[0];
+};
+
+/**
+ * Generate variant ID from option values
+ */
+export const generateVariantId = (optionValues) => {
+  if (!Array.isArray(optionValues)) return "";
+  return optionValues
+    .map((v) => v.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""))
+    .join("-");
+};
+
+/**
+ * Validate variants data
+ */
+export const validateVariants = (options, variants) => {
+  const errors = [];
+
+  if (!Array.isArray(options) || options.length === 0) {
+    return { valid: true, errors: [] };
+  }
+
+  // Check if all options have values
+  for (const opt of options) {
+    if (!opt.name?.trim()) {
+      errors.push("Tên option không được trống");
+    }
+    if (!opt.values || !Array.isArray(opt.values) || opt.values.length === 0) {
+      errors.push(`Option "${opt.name}" phải có ít nhất 1 giá trị`);
+    }
+  }
+
+  // Check if all variants have required fields
+  for (const variant of variants) {
+    if (!variant.sku?.trim()) {
+      errors.push("SKU variant không được trống");
+    }
+    if (variant.price === undefined || variant.price === null || variant.price === "") {
+      errors.push("Giá variant không được trống");
+    }
+    if (variant.stock === undefined || variant.stock === null) {
+      errors.push("Tồn kho variant không được trống");
+    }
+  }
+
+  return { valid: errors.length === 0, errors };
+};
+
 export const getProductByIdForAdmin = async (id) => {
   try {
     const productRef = doc(db, "products", id);

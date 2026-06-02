@@ -1,14 +1,42 @@
 // ============================================
 // PRODUCT DETAIL PAGE
-// Modern E-commerce Style (Pure TailwindCSS)
+// Modern E-commerce Style with Variant Support
 // ============================================
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProductById, getProducts } from "../services/productService";
 import { getCategoryName } from "../services/categoryService";
-import { getBrands, getBrandById } from "../services/brandService";
+import { getBrandById } from "../services/brandService";
 import useCart from "../hooks/useCart";
 import ProductCard from "./home/components/ProductCard";
+import VariantSelector, { SelectedVariantInfo } from "../components/product/VariantSelector";
+
+// ============================================
+// HELPERS
+// ============================================
+const findVariantByOptions = (variants, selectedOptions) => {
+  if (!variants || variants.length === 0) return null;
+  
+  return variants.find((variant) => {
+    return variant.optionValues.every((val, idx) => {
+      const optionName = Object.keys(selectedOptions)[idx];
+      return selectedOptions[optionName] === val;
+    });
+  });
+};
+
+const isOptionAvailable = (variants, optionName, optionValue, selectedOptions) => {
+  if (!variants || variants.length === 0) return true;
+  
+  const testOptions = { ...selectedOptions, [optionName]: optionValue };
+  
+  return variants.some((variant) => {
+    return variant.optionValues.every((val, idx) => {
+      const name = Object.keys(testOptions)[idx];
+      return testOptions[name] === val;
+    });
+  });
+};
 
 // ============================================
 // BREADCRUMBS
@@ -38,7 +66,7 @@ const Breadcrumbs = ({ product, navigate }) => (
 // ============================================
 // PRODUCT GALLERY
 // ============================================
-const ProductGallery = ({ images, selectedImage, setSelectedImage, discountPercent }) => {
+const ProductGallery = ({ images, selectedImage, setSelectedImage }) => {
   const allImages = images.length > 0 ? images : [];
   const PLACEHOLDER_IMAGE =
     "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
@@ -47,20 +75,13 @@ const ProductGallery = ({ images, selectedImage, setSelectedImage, discountPerce
       {/* Main Image */}
       <div className="relative bg-white rounded-2xl overflow-hidden shadow-sm">
         <img
-          src={allImages[selectedImage] || allImages[0]||PLACEHOLDER_IMAGE}
+          src={allImages[selectedImage] || allImages[0] || PLACEHOLDER_IMAGE}
           alt="Product"
-            onError={(e) => {
+          onError={(e) => {
             e.target.src = PLACEHOLDER_IMAGE;
           }}
           className="w-full aspect-square object-contain p-4 md:p-6 transition-transform duration-300 hover:scale-105"
         />
-        
-        {/* Discount Badge */}
-        {discountPercent > 0 && (
-          <div className="absolute top-4 left-4 px-3 py-1.5 bg-red-500 text-white text-sm font-bold rounded-lg shadow-lg">
-            -{discountPercent}%
-          </div>
-        )}
       </div>
 
       {/* Thumbnails */}
@@ -93,10 +114,32 @@ const ProductGallery = ({ images, selectedImage, setSelectedImage, discountPerce
 };
 
 // ============================================
-// PRODUCT INFO
+// PRODUCT INFO (với variant support)
 // ============================================
-const ProductInfo = ({ product, discountPercent, brandName, categoryName }) => {
-  const hasDiscount = product.discountPrice > 0 && product.discountPrice < product.price;
+const ProductInfo = ({ 
+  product, 
+  selectedVariant, 
+  hasVariants,
+  brandName, 
+  categoryName 
+}) => {
+  // Nếu có variants, dùng thông tin từ variant
+  const displayPrice = hasVariants && selectedVariant 
+    ? (selectedVariant.discountPrice > 0 ? selectedVariant.discountPrice : selectedVariant.price)
+    : (product.discountPrice > 0 ? product.discountPrice : product.price);
+  
+  const displayOriginalPrice = hasVariants && selectedVariant 
+    ? selectedVariant.price
+    : product.price;
+  
+  const hasDiscount = displayOriginalPrice > displayPrice;
+  const discountPercent = hasDiscount 
+    ? Math.round(((displayOriginalPrice - displayPrice) / displayOriginalPrice) * 100)
+    : 0;
+  
+  const displayStock = hasVariants && selectedVariant 
+    ? selectedVariant.stock
+    : product.stock;
 
   return (
     <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm">
@@ -156,12 +199,12 @@ const ProductInfo = ({ product, discountPercent, brandName, categoryName }) => {
       {/* Price */}
       <div className="flex items-baseline gap-3 mb-4 flex-wrap">
         <span className="text-3xl md:text-4xl font-bold text-red-600">
-          {Number(hasDiscount ? product.discountPrice : product.price).toLocaleString()}đ
+          {Number(displayPrice).toLocaleString()}đ
         </span>
         {hasDiscount && (
           <>
             <span className="text-lg text-slate-400 line-through">
-              {Number(product.price).toLocaleString()}đ
+              {Number(displayOriginalPrice).toLocaleString()}đ
             </span>
             <span className="px-2 py-1 bg-red-50 text-red-500 text-sm font-bold rounded-lg">
               -{discountPercent}%
@@ -172,12 +215,12 @@ const ProductInfo = ({ product, discountPercent, brandName, categoryName }) => {
 
       {/* Stock & Sold */}
       <div className="flex items-center gap-4 text-sm mb-4">
-        {product.stock > 0 ? (
+        {displayStock > 0 ? (
           <div className="flex items-center gap-1.5 text-green-600 font-semibold">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M20 6L9 17l-5-5" />
             </svg>
-            <span>Còn hàng ({product.stock})</span>
+            <span>Còn hàng ({displayStock})</span>
           </div>
         ) : (
           <span className="text-red-500 font-semibold">Hết hàng</span>
@@ -212,27 +255,76 @@ const ProductInfo = ({ product, discountPercent, brandName, categoryName }) => {
 };
 
 // ============================================
-// ACTION BUTTONS (MUA NGAY / THÊM VÀO GIỎ)
+// ACTION BUTTONS
 // ============================================
-const ProductActions = ({ product, addToCart, navigate }) => {
+const ProductActions = ({ 
+  product, 
+  selectedVariant,
+  hasVariants,
+  addToCart, 
+  navigate 
+}) => {
   const [addedToCart, setAddedToCart] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const isOutOfStock = product.stock <= 0;
+  
+  // Kiểm tra stock
+  const displayStock = hasVariants && selectedVariant 
+    ? selectedVariant.stock
+    : product.stock;
+  const isOutOfStock = displayStock <= 0;
 
   const handleAddToCart = () => {
     if (isOutOfStock) return;
-    addToCart(product);
+    
+    // Tạo cart item với variant info
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      thumbnail: hasVariants && selectedVariant?.thumbnail 
+        ? selectedVariant.thumbnail 
+        : product.thumbnail,
+      // Nếu có variant, lưu variant info
+      ...(hasVariants && selectedVariant && {
+        variantId: selectedVariant.id,
+        sku: selectedVariant.sku,
+        optionValues: selectedVariant.optionValues,
+        price: selectedVariant.discountPrice > 0 ? selectedVariant.discountPrice : selectedVariant.price,
+        originalPrice: selectedVariant.price,
+      }),
+      // Fallback cho sản phẩm không có variant
+      ...(!hasVariants && {
+        price: product.discountPrice > 0 ? product.discountPrice : product.price,
+        originalPrice: product.price,
+      }),
+    };
+    
+    addToCart(cartItem);
     setAddedToCart(true);
-    setShowSuccess(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-      setShowSuccess(false);
-    }, 2000);
+    setTimeout(() => setAddedToCart(false), 2000);
   };
 
   const handleBuyNow = () => {
     if (isOutOfStock) return;
-    addToCart(product);
+    
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      thumbnail: hasVariants && selectedVariant?.thumbnail 
+        ? selectedVariant.thumbnail 
+        : product.thumbnail,
+      ...(hasVariants && selectedVariant && {
+        variantId: selectedVariant.id,
+        sku: selectedVariant.sku,
+        optionValues: selectedVariant.optionValues,
+        price: selectedVariant.discountPrice > 0 ? selectedVariant.discountPrice : selectedVariant.price,
+        originalPrice: selectedVariant.price,
+      }),
+      ...(!hasVariants && {
+        price: product.discountPrice > 0 ? product.discountPrice : product.price,
+        originalPrice: product.price,
+      }),
+    };
+    
+    addToCart(cartItem);
     navigate("/checkout");
   };
 
@@ -297,7 +389,6 @@ const ProductActions = ({ product, addToCart, navigate }) => {
       {/* Mobile Layout - Sticky Bottom Bar */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-slate-100 p-4 z-50 rounded-t-2xl shadow-lg">
         <div className="flex gap-3">
-          {/* Thêm vào giỏ */}
           <button
             onClick={handleAddToCart}
             disabled={isOutOfStock}
@@ -312,26 +403,9 @@ const ProductActions = ({ product, addToCart, navigate }) => {
               }
             `}
           >
-            {addedToCart ? (
-              <>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-                Đã thêm!
-              </>
-            ) : (
-              <>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                </svg>
-                Thêm vào giỏ
-              </>
-            )}
+            {addedToCart ? "Đã thêm!" : "Thêm vào giỏ"}
           </button>
 
-          {/* Mua ngay */}
           <button
             onClick={handleBuyNow}
             disabled={isOutOfStock}
@@ -344,9 +418,6 @@ const ProductActions = ({ product, addToCart, navigate }) => {
               }
             `}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
             Mua ngay
           </button>
         </div>
@@ -358,34 +429,35 @@ const ProductActions = ({ product, addToCart, navigate }) => {
 // ============================================
 // PRODUCT META GRID
 // ============================================
-const ProductMeta = ({ product, categoryName, brandName }) => (
-  <div className="grid grid-cols-2 gap-3 bg-white rounded-2xl p-4 shadow-sm">
-    <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
-      <span className="text-[11px] text-slate-400 font-semibold uppercase">Danh mục</span>
-      <span className="text-sm text-slate-800 font-medium">
-        {categoryName}
-      </span>
+const ProductMeta = ({ product, categoryName, brandName, selectedVariant, hasVariants }) => {
+  const displayStock = hasVariants && selectedVariant ? selectedVariant.stock : product.stock;
+  const displaySku = hasVariants && selectedVariant?.sku ? selectedVariant.sku : product.sku;
+
+  return (
+    <div className="grid grid-cols-2 gap-3 bg-white rounded-2xl p-4 shadow-sm">
+      <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
+        <span className="text-[11px] text-slate-400 font-semibold uppercase">Danh mục</span>
+        <span className="text-sm text-slate-800 font-medium">{categoryName}</span>
+      </div>
+      <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
+        <span className="text-[11px] text-slate-400 font-semibold uppercase">Thương hiệu</span>
+        <span className="text-sm text-slate-800 font-medium">{brandName}</span>
+      </div>
+      <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
+        <span className="text-[11px] text-slate-400 font-semibold uppercase">SKU</span>
+        <span className="text-sm text-slate-800 font-medium font-mono">
+          {displaySku || "N/A"}
+        </span>
+      </div>
+      <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
+        <span className="text-[11px] text-slate-400 font-semibold uppercase">Tình trạng</span>
+        <span className={`text-sm font-medium ${displayStock > 0 ? "text-green-600" : "text-red-500"}`}>
+          {displayStock > 0 ? "Còn hàng" : "Hết hàng"}
+        </span>
+      </div>
     </div>
-    <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
-      <span className="text-[11px] text-slate-400 font-semibold uppercase">Thương hiệu</span>
-      <span className="text-sm text-slate-800 font-medium">
-        {brandName}
-      </span>
-    </div>
-    <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
-      <span className="text-[11px] text-slate-400 font-semibold uppercase">SKU</span>
-      <span className="text-sm text-slate-800 font-medium">
-        {product.sku || "N/A"}
-      </span>
-    </div>
-    <div className="flex flex-col gap-1 p-3 bg-slate-50 rounded-xl">
-      <span className="text-[11px] text-slate-400 font-semibold uppercase">Tình trạng</span>
-      <span className={`text-sm font-medium ${product.stock > 0 ? "text-green-600" : "text-red-500"}`}>
-        {product.stock > 0 ? "Còn hàng" : "Hết hàng"}
-      </span>
-    </div>
-  </div>
-);
+  );
+};
 
 // ============================================
 // RELATED PRODUCTS
@@ -421,6 +493,52 @@ const ProductDetailPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [brandName, setBrandName] = useState("");
   const [categoryName, setCategoryName] = useState("");
+  
+  // Variant state
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  // Check if product has variants
+  const hasVariants = product?.options?.length > 0 && product?.variants?.length > 0;
+
+  // Find selected variant based on options
+  const selectedVariant = useMemo(() => {
+    if (!hasVariants) return null;
+    return findVariantByOptions(product.variants, selectedOptions);
+  }, [hasVariants, product?.variants, selectedOptions]);
+
+  // Get images for gallery (variant thumbnail or product images)
+  const displayImages = useMemo(() => {
+    if (selectedVariant?.thumbnail) {
+      return [selectedVariant.thumbnail, ...(product?.images || [])];
+    }
+    return product?.thumbnail 
+      ? [product.thumbnail, ...(product.images || [])]
+      : product?.images || [];
+  }, [selectedVariant, product]);
+
+  // Initialize selected options when product loads
+  useEffect(() => {
+    if (product?.options && product.options.length > 0) {
+      const initialOptions = {};
+      product.options.forEach((option) => {
+        // Auto-select first available option
+        if (option.values && option.values.length > 0) {
+          initialOptions[option.name] = option.values[0];
+        }
+      });
+      setSelectedOptions(initialOptions);
+    } else {
+      setSelectedOptions({});
+    }
+  }, [product]);
+
+  // Handle option selection
+  const handleOptionSelect = (optionName, value) => {
+    setSelectedOptions((prev) => ({
+      ...prev,
+      [optionName]: value,
+    }));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -433,7 +551,6 @@ const ProductDetailPage = () => {
         setProduct(productData);
         setSelectedImage(0);
 
-        // Get brand and category names
         if (productData?.brand) {
           const brand = await getBrandById(productData.brand);
           setBrandName(brand?.name || productData.brand);
@@ -463,14 +580,6 @@ const ProductDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);
-
-  const discountPercent = product?.discountPrice > 0 && product?.price > 0
-    ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
-    : 0;
-
-  const allImages = product?.thumbnail
-    ? [product.thumbnail, ...(product.images || [])]
-    : product?.images || [];
 
   if (loading) {
     return (
@@ -527,24 +636,44 @@ const ProductDetailPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 mb-10">
           {/* Left: Gallery */}
           <ProductGallery
-            images={allImages}
+            images={displayImages}
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
-            discountPercent={discountPercent}
           />
 
           {/* Right: Info & Actions */}
           <div className="space-y-4">
             <ProductInfo
               product={product}
-              discountPercent={discountPercent}
+              selectedVariant={selectedVariant}
+              hasVariants={hasVariants}
               brandName={brandName}
               categoryName={categoryName}
             />
 
+            {/* Variant Selector */}
+            {hasVariants && (
+              <div className="bg-white rounded-2xl p-5 shadow-sm">
+                <h3 className="text-base font-bold text-slate-800 mb-4">
+                  Lựa chọn biến thể
+                </h3>
+                <VariantSelector
+                  options={product.options}
+                  variants={product.variants}
+                  selectedOptions={selectedOptions}
+                  onSelect={handleOptionSelect}
+                />
+                {selectedVariant && (
+                  <SelectedVariantInfo variant={selectedVariant} product={product} />
+                )}
+              </div>
+            )}
+
             {/* Actions */}
             <ProductActions
               product={product}
+              selectedVariant={selectedVariant}
+              hasVariants={hasVariants}
               addToCart={addToCart}
               navigate={navigate}
             />
@@ -554,6 +683,8 @@ const ProductDetailPage = () => {
               product={product}
               categoryName={categoryName}
               brandName={brandName}
+              selectedVariant={selectedVariant}
+              hasVariants={hasVariants}
             />
           </div>
         </div>

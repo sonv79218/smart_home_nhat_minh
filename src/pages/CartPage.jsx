@@ -1,8 +1,8 @@
 // ============================================
 // CART PAGE
-// Modern E-commerce Style (Pure TailwindCSS)
+// Modern E-commerce Style with Variant Support
 // ============================================
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
@@ -33,7 +33,34 @@ const EmptyCart = () => (
 );
 
 // ============================================
-// CART ITEM (Shopee/Tiki Style - Mobile Optimized)
+// VARIANT INFO DISPLAY
+// ============================================
+const VariantInfo = ({ optionValues, sku }) => {
+  if (!optionValues || optionValues.length === 0) return null;
+  
+  return (
+    <div className="mt-1.5 space-y-1">
+      <div className="flex flex-wrap gap-1">
+        {optionValues.map((val, idx) => (
+          <span 
+            key={idx}
+            className="inline-flex items-center px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded"
+          >
+            {val}
+          </span>
+        ))}
+      </div>
+      {sku && (
+        <p className="text-[10px] text-slate-400 font-mono">
+          SKU: {sku}
+        </p>
+      )}
+    </div>
+  );
+};
+
+// ============================================
+// CART ITEM
 // ============================================
 const CartItem = ({ 
   item, 
@@ -46,10 +73,10 @@ const CartItem = ({
   const itemTotal = item.price * item.quantity;
   const originalTotal = item.originalPrice ? item.originalPrice * item.quantity : 0;
   const hasDiscount = item.originalPrice && item.originalPrice > item.price;
-  const [showDelete, setShowDelete] = useState(false);
 
   const PLACEHOLDER_IMAGE =
-  "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
+    "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
+
   return (
     <div className={`
       relative flex gap-3 p-3 bg-white rounded-xl shadow-sm
@@ -67,7 +94,7 @@ const CartItem = ({
               : "bg-slate-200 border-2 border-transparent hover:border-primary-300"
             }
           `}
-          onClick={() => onToggle(item.id)}
+          onClick={onToggle}
         >
           {isSelected && (
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
@@ -80,7 +107,7 @@ const CartItem = ({
       {/* Product Image */}
       <Link to={`/product/${item.id}`} className="flex-shrink-0">
         <img 
-          src={item.thumbnail||PLACEHOLDER_IMAGE} 
+          src={item.thumbnail || PLACEHOLDER_IMAGE} 
           alt={item.name} 
           className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg" 
           onError={(e) => {
@@ -99,6 +126,14 @@ const CartItem = ({
           {item.name}
         </Link>
 
+        {/* Variant Info */}
+        {item.variantId && (
+          <VariantInfo 
+            optionValues={item.optionValues}
+            sku={item.sku}
+          />
+        )}
+
         {/* Price on Mobile */}
         <div className="mt-1 flex items-center gap-2 sm:hidden">
           <span className="text-base font-bold text-red-600">
@@ -114,7 +149,7 @@ const CartItem = ({
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Bottom Row: Quantity & Actions */}
+        {/* Bottom Row */}
         <div className="flex items-center justify-between mt-2">
           {/* Price on Desktop */}
           <div className="hidden sm:flex flex-col items-start">
@@ -128,10 +163,10 @@ const CartItem = ({
             )}
           </div>
 
-          {/* Quantity Controls - Shopee Style */}
+          {/* Quantity Controls */}
           <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-0.5">
             <button
-              onClick={() => onDecrease(item.id)}
+              onClick={onDecrease}
               disabled={item.quantity <= 1}
               className="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-md disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
@@ -139,11 +174,11 @@ const CartItem = ({
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
             </button>
-            <span className="w-8 text-center text-sm font-semibold text-slate-800 bg-white">
+            <span className="w-8 text-center text-sm font-semibold text-slate-800 bg-white rounded-md">
               {item.quantity}
             </span>
             <button
-              onClick={() => onIncrease(item.id)}
+              onClick={onIncrease}
               className="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-md transition-all"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -155,11 +190,7 @@ const CartItem = ({
 
           {/* Delete Button */}
           <button
-            onClick={() => {
-              if (confirm("Xóa sản phẩm này?")) {
-                onRemove(item.id);
-              }
-            }}
+            onClick={onRemove}
             className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all ml-2"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -243,7 +274,7 @@ const PromoCodeInput = ({ promoCode, discount, onApply, onRemove }) => {
 };
 
 // ============================================
-// ORDER SUMMARY (Clean Desktop Component)
+// ORDER SUMMARY
 // ============================================
 const OrderSummary = ({ 
   selectedItems,
@@ -255,12 +286,14 @@ const OrderSummary = ({
   total,
   onCheckout 
 }) => {
+  const getItemKey = (item) => item.variantId ? `${item.id}-${item.variantId}` : item.id;
+  
   const selectedCount = allItems
-    .filter(item => selectedItems.includes(item.id))
+    .filter(item => selectedItems.includes(getItemKey(item)))
     .reduce((sum, item) => sum + item.quantity, 0);
   
   const savings = subtotal - allItems
-    .filter(item => selectedItems.includes(item.id))
+    .filter(item => selectedItems.includes(getItemKey(item)))
     .reduce((sum, item) => sum + (item.originalPrice || item.price) * item.quantity, 0);
 
   return (
@@ -272,7 +305,6 @@ const OrderSummary = ({
         Tóm tắt đơn hàng
       </h3>
 
-      {/* Summary Rows */}
       <div className="space-y-3 mb-4">
         <div className="flex justify-between text-sm text-slate-600">
           <span>Tạm tính ({selectedCount} sản phẩm)</span>
@@ -301,22 +333,6 @@ const OrderSummary = ({
         </div>
       </div>
 
-      {/* Free Shipping Progress */}
-      {shipping > 0 && (
-        <div className="bg-orange-50 rounded-xl p-3 mb-4">
-          <p className="text-xs text-orange-700 mb-2">
-            Mua thêm <strong className="text-orange-600">{Number(500000 - subtotal).toLocaleString()}đ</strong> để miễn phí vận chuyển
-          </p>
-          <div className="h-1.5 bg-orange-200 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-orange-500 transition-all duration-300"
-              style={{ width: `${Math.min((subtotal / 500000) * 100, 100)}%` }}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Total */}
       <div className="flex justify-between items-center mb-4 pt-3 border-t border-slate-100">
         <span className="text-base font-semibold text-slate-800">Tổng cộng</span>
         <div className="text-right">
@@ -325,7 +341,6 @@ const OrderSummary = ({
         </div>
       </div>
 
-      {/* Checkout Button */}
       <button 
         onClick={onCheckout}
         disabled={selectedCount === 0}
@@ -345,7 +360,6 @@ const OrderSummary = ({
         Thanh toán ({selectedCount})
       </button>
 
-      {/* Security Note */}
       <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-400">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -372,62 +386,74 @@ const CartPage = () => {
     discount,
     applyPromoCode,
     removePromoCode,
+    getCartItemKey,
   } = useCart();
 
-  const [selectedItems, setSelectedItems] = useState(() => new Set(cartItems.map(i => i.id)));
+  // Get item key helper
+  const getItemKey = useCallback((item) => getCartItemKey(item), [getCartItemKey]);
 
-  const cartItemIds = useMemo(() => new Set(cartItems.map(item => item.id)), [cartItems]);
+  // Create keys for all items
+  const cartItemKeys = useMemo(() => 
+    cartItems.map(item => getItemKey(item)), 
+    [cartItems, getItemKey]
+  );
 
-  // Keep selection valid for current cart without setState during render/effects.
-  const effectiveSelectedItems = useMemo(() => {
+  // Create Set for fast lookup
+  const cartItemKeySet = useMemo(() => new Set(cartItemKeys), [cartItemKeys]);
+
+  // Selection state uses cart item keys
+  const [selectedItemKeys, setSelectedItemKeys] = useState(() => new Set(cartItemKeys));
+
+  // Keep selection valid when cart changes
+  const effectiveSelectedKeys = useMemo(() => {
     const next = new Set();
-    selectedItems.forEach((id) => {
-      if (cartItemIds.has(id)) {
-        next.add(id);
+    selectedItemKeys.forEach((key) => {
+      if (cartItemKeySet.has(key)) {
+        next.add(key);
       }
     });
     return next;
-  }, [selectedItems, cartItemIds]);
+  }, [selectedItemKeys, cartItemKeySet]);
 
   // Calculate totals
   const selectedSubtotal = useMemo(() => {
     return cartItems
-      .filter(item => effectiveSelectedItems.has(item.id))
+      .filter(item => effectiveSelectedKeys.has(getItemKey(item)))
       .reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }, [cartItems, effectiveSelectedItems]);
+  }, [cartItems, effectiveSelectedKeys, getItemKey]);
 
   const selectedDiscountAmount = Math.round(selectedSubtotal * discount / 100);
   const selectedShipping = selectedSubtotal >= 500000 ? 0 : 30000;
   const selectedTotal = selectedSubtotal - selectedDiscountAmount + selectedShipping;
 
   const toggleSelectAll = () => {
-    if (effectiveSelectedItems.size === cartItems.length) {
-      setSelectedItems(new Set());
+    if (effectiveSelectedKeys.size === cartItems.length) {
+      setSelectedItemKeys(new Set());
     } else {
-      setSelectedItems(new Set(cartItems.map(i => i.id)));
+      setSelectedItemKeys(new Set(cartItemKeys));
     }
   };
 
-  const toggleItem = (id) => {
-    setSelectedItems(prev => {
+  const toggleItem = useCallback((itemKey) => {
+    setSelectedItemKeys(prev => {
       const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
+      if (newSet.has(itemKey)) {
+        newSet.delete(itemKey);
       } else {
-        newSet.add(id);
+        newSet.add(itemKey);
       }
       return newSet;
     });
-  };
+  }, []);
 
   const handleCheckout = () => {
-    if (effectiveSelectedItems.size === 0) {
+    if (effectiveSelectedKeys.size === 0) {
       alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán");
       return;
     }
     navigate("/checkout", { 
       state: { 
-        selectedItems: Array.from(effectiveSelectedItems),
+        selectedItems: Array.from(effectiveSelectedKeys),
         promoCode,
         discount 
       } 
@@ -445,15 +471,15 @@ const CartPage = () => {
     );
   }
 
-  const isAllSelected = effectiveSelectedItems.size === cartItems.length && cartItems.length > 0;
+  const isAllSelected = effectiveSelectedKeys.size === cartItems.length && cartItems.length > 0;
   const selectedCount = cartItems
-    .filter(item => effectiveSelectedItems.has(item.id))
+    .filter(item => effectiveSelectedKeys.has(getItemKey(item)))
     .reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-slate-100 pb-32 md:pb-6">
       <div className="max-w-[1200px] mx-auto px-4 pt-4 pb-6">
-        {/* Page Header - Mobile Shopee Style */}
+        {/* Page Header */}
         <div className="flex items-center justify-between mb-4">
           <h1 className="flex items-center gap-2 text-lg font-bold text-slate-800">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary-600">
@@ -483,7 +509,7 @@ const CartPage = () => {
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
           {/* Left: Cart Items */}
           <div className="flex-1">
-            {/* Select All Header - Shopee Style */}
+            {/* Select All Header */}
             <div className="flex items-center justify-between p-3 bg-white rounded-xl shadow-sm mb-3">
               <div 
                 className="flex items-center gap-2 cursor-pointer"
@@ -511,7 +537,7 @@ const CartPage = () => {
                 </span>
               </div>
               <span className="text-xs text-slate-500 font-medium">
-                {effectiveSelectedItems.size}/{cartItems.length}
+                {effectiveSelectedKeys.size}/{cartItems.length}
               </span>
             </div>
 
@@ -519,13 +545,17 @@ const CartPage = () => {
             <div className="space-y-3">
               {cartItems.map((item) => (
                 <CartItem
-                  key={item.id}
+                  key={getItemKey(item)}
                   item={item}
-                  isSelected={effectiveSelectedItems.has(item.id)}
-                  onToggle={toggleItem}
-                  onIncrease={increaseQuantity}
-                  onDecrease={decreaseQuantity}
-                  onRemove={removeFromCart}
+                  isSelected={effectiveSelectedKeys.has(getItemKey(item))}
+                  onToggle={() => toggleItem(getItemKey(item))}
+                  onIncrease={() => increaseQuantity(getItemKey(item))}
+                  onDecrease={() => decreaseQuantity(getItemKey(item))}
+                  onRemove={() => {
+                    if (window.confirm("Xóa sản phẩm này?")) {
+                      removeFromCart(getItemKey(item));
+                    }
+                  }}
                 />
               ))}
             </div>
@@ -555,7 +585,7 @@ const CartPage = () => {
                 onRemove={removePromoCode}
               />
               <OrderSummary
-                selectedItems={Array.from(effectiveSelectedItems)}
+                selectedItems={Array.from(effectiveSelectedKeys)}
                 allItems={cartItems}
                 subtotal={selectedSubtotal}
                 shipping={selectedShipping}
@@ -569,15 +599,13 @@ const CartPage = () => {
         </div>
       </div>
 
-      {/* Mobile Bottom Summary Bar - Shopee Style */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 safe-area-inset-bottom">
-        {/* Free Shipping Progress - Mobile */}
+      {/* Mobile Bottom Summary Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50">
+        {/* Free Shipping Progress */}
         {selectedShipping > 0 && (
           <div className="px-4 py-2 bg-orange-50 border-b border-orange-100">
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-orange-700">
-                Mua thêm <strong>{Number(500000 - selectedSubtotal).toLocaleString()}đ</strong> để miễn phí vận chuyển
-              </span>
+            <div className="flex items-center justify-between text-xs text-orange-700">
+              <span>Mua thêm <strong>{Number(500000 - selectedSubtotal).toLocaleString()}đ</strong> để miễn phí vận chuyển</span>
             </div>
             <div className="h-1 bg-orange-100 rounded-full mt-1.5 overflow-hidden">
               <div 
@@ -591,25 +619,23 @@ const CartPage = () => {
         <div className="flex items-center justify-between p-3">
           {/* Selected Info */}
           <div className="flex items-center gap-3">
-            <div className="relative">
-              <div 
-                className={`
-                  w-6 h-6 rounded-md flex items-center justify-center transition-all
-                  ${effectiveSelectedItems.size > 0 
-                    ? "bg-primary-600" 
-                    : "bg-slate-200"
-                  }
-                `}
-                onClick={toggleSelectAll}
-              >
-                {effectiveSelectedItems.size > 0 ? (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                ) : (
-                  <div className="w-2.5 h-2.5 bg-white rounded-sm" />
-                )}
-              </div>
+            <div 
+              className={`
+                w-6 h-6 rounded-md flex items-center justify-center transition-all cursor-pointer
+                ${effectiveSelectedKeys.size > 0 
+                  ? "bg-primary-600" 
+                  : "bg-slate-200"
+                }
+              `}
+              onClick={toggleSelectAll}
+            >
+              {effectiveSelectedKeys.size > 0 ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              ) : (
+                <div className="w-2.5 h-2.5 bg-white rounded-sm" />
+              )}
             </div>
             <div>
               <p className="text-lg font-bold text-red-600">{Number(selectedTotal).toLocaleString()}đ</p>
