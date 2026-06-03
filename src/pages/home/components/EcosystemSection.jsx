@@ -62,12 +62,19 @@ const EcosystemSection = () => {
     <section className="py-10 md:py-16 bg-white">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
         {/* Section Header - Centered */}
-        <SectionHeader
+        {/* <SectionHeader
           title="Hệ Sinh Thái Smart Home"
           subtitle="Kết nối toàn bộ thiết bị thông minh trong ngôi nhà của bạn"
           // align="center"
           size="md"
-        />
+        /> */}
+                <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />
+          <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-wide text-center whitespace-nowrap">
+            Hệ Sinh Thái Smart Home
+          </h2>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-primary-200" />
+        </div>
 
         {/* Mobile: Tabs Layout */}
         <div className="md:hidden">

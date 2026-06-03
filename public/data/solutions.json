@@ -1,0 +1,102 @@
+[
+  {
+    "id": "lighting",
+    "title": "Chiếu sáng thông minh",
+    "subtitle": "Tích hợp Apple HomeKit",
+    "image": "",
+    "slug": "chieu-sang-thong-minh",
+    "description": "Giải pháp chiếu sáng thông minh giúp điều khiển đèn linh hoạt, hẹn giờ, tạo ngữ cảnh và tích hợp hệ sinh thái nhà thông minh.",
+    "status": "active",
+    "order": 1
+  },
+  {
+    "id": "smart-lock",
+    "title": "Khóa cửa thông minh",
+    "subtitle": "Nhiều cách mở khóa",
+    "image": "",
+    "slug": "khoa-cua-thong-minh",
+    "description": "Khóa cửa thông minh hỗ trợ mở bằng vân tay, mật mã, thẻ từ, app và chìa cơ, tăng tiện nghi và an toàn cho gia đình.",
+    "status": "active",
+    "order": 2
+  },
+  {
+    "id": "energy-water",
+    "title": "Kiểm soát điện, nước",
+    "subtitle": "An toàn, tiết kiệm",
+    "image": "",
+    "slug": "kiem-soat-dien-nuoc",
+    "description": "Theo dõi và kiểm soát thiết bị điện nước trong nhà, giúp phát hiện bất thường, tối ưu chi phí và tăng độ an toàn.",
+    "status": "active",
+    "order": 3
+  },
+  {
+    "id": "smart-ac",
+    "title": "Điều hòa thông minh",
+    "subtitle": "Gắn tường, âm trần",
+    "image": "",
+    "slug": "dieu-hoa-thong-minh",
+    "description": "Điều khiển điều hòa từ xa, hẹn giờ, tự động bật tắt theo nhiệt độ hoặc ngữ cảnh sử dụng.",
+    "status": "active",
+    "order": 4
+  },
+  {
+    "id": "water-heater",
+    "title": "Điều khiển bình nước nóng",
+    "subtitle": "An toàn, tiết kiệm",
+    "image": "",
+    "slug": "dieu-khien-binh-nuoc-nong",
+    "description": "Bật tắt bình nóng lạnh từ xa, đặt lịch hoạt động và hạn chế quên tắt thiết bị.",
+    "status": "active",
+    "order": 5
+  },
+  {
+    "id": "rolling-door",
+    "title": "Điều khiển cửa cuốn",
+    "subtitle": "Công tơ động",
+    "image": "",
+    "slug": "dieu-khien-cua-cuon",
+    "description": "Điều khiển cửa cuốn bằng điện thoại, remote, nút bấm hoặc tự động hóa theo nhu cầu.",
+    "status": "active",
+    "order": 6
+  },
+  {
+    "id": "voice-assistant",
+    "title": "Trợ lý ảo",
+    "subtitle": "Âm thanh đa vùng",
+    "image": "",
+    "slug": "tro-ly-ao",
+    "description": "Điều khiển nhà thông minh bằng giọng nói, kết hợp loa thông minh và hệ thống âm thanh đa vùng.",
+    "status": "active",
+    "order": 7
+  },
+  {
+    "id": "network",
+    "title": "Hệ thống mạng cao cấp",
+    "subtitle": "Wifi Mesh, cân bằng tải",
+    "image": "",
+    "slug": "he-thong-mang-cao-cap",
+    "description": "Thiết kế hệ thống mạng ổn định cho nhà ở, biệt thự, văn phòng với Wifi Mesh và cân bằng tải.",
+    "status": "active",
+    "order": 8
+  },
+  {
+    "id": "security",
+    "title": "An ninh với",
+    "subtitle": "Camera AI và cảm biến",
+    "image": "",
+    "slug": "an-ninh-camera-ai-cam-bien",
+    "description": "Kết hợp camera AI, cảm biến cửa, cảm biến chuyển động và cảnh báo để bảo vệ không gian sống.",
+    "status": "active",
+    "order": 9
+  },
+  {
+    "id": "smart-curtain",
+    "title": "Rèm cửa thông minh",
+    "subtitle": "Tận hưởng, tiện nghi",
+    "image": "",
+    "slug": "rem-cua-thong-minh",
+    "description": "Điều khiển rèm cửa tự động theo lịch, ánh sáng, giọng nói hoặc app điện thoại.",
+    "status": "active",
+    "order": 10
+  }
+]

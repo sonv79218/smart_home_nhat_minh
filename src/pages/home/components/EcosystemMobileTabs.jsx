@@ -107,7 +107,7 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
             </div>
 
             {/* Comparison Table */}
-            <EcosystemComparisonTable ecosystem={activeEcosystem} />
+            {/* <EcosystemComparisonTable ecosystem={activeEcosystem} /> */}
 
             {/* CTA Button */}
             <Link

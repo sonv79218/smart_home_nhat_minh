@@ -13,3 +13,5 @@ export { default as ContactSection } from "./ContactSection";
 export { default as ProductCard } from "./ProductCard";
 export { default as FloatingContactButtons } from "../../../components/layout/FloatingContactButtons";
 export { default as ProjectsSection } from "./ProjectsSection";
+export { default as SolutionSection } from "./SolutionSection";
+export { default as SolutionCard } from "./SolutionCard";

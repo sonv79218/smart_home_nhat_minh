@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { getFeaturedProducts, getProductsByCategory } from "../services/productService";
 import { getCategories } from "../services/categoryService";
 import { getActiveBanners } from "../services/bannerService";
+import { getActiveSolutions } from "../services/solutionService";
 import { companyInfo, companySocial } from "../data/company";
 import { useApp } from "../contexts/AppContext";
 import OfflineNotice from "../components/common/OfflineNotice";
@@ -19,6 +20,7 @@ import {
   AboutSection,
   ContactSection,
   FloatingContactButtons,
+  SolutionSection,
 } from "./home/components";
 
 // ============================================
@@ -42,6 +44,7 @@ const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState({});
   const [categories, setCategories] = useState([]);
+  const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // ============================================
@@ -63,6 +66,10 @@ const HomePage = () => {
         // Fetch featured products
         const featured = await getFeaturedProducts(PRODUCTS_LIMIT.featured);
         setFeaturedProducts(featured);
+
+        // Fetch solutions
+        const solutionsData = await getActiveSolutions();
+        setSolutions(solutionsData);
 
         // Fetch products by category
         const categoryProducts = {};
@@ -124,6 +131,16 @@ const HomePage = () => {
       {/* ECOSYSTEM SECTION */}
       {/* ============================================ */}
       <EcosystemSection />
+
+      {/* Divider */}
+      <SectionDivider />
+
+      {/* ============================================ */}
+      {/* SOLUTIONS SECTION */}
+      {/* ============================================ */}
+      {solutions.length > 0 && (
+        <SolutionSection solutions={solutions} />
+      )}
 
       {/* Divider */}
       <SectionDivider />

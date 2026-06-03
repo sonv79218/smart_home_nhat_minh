@@ -35,7 +35,7 @@ const CategoryGridSection = ({ categories }) => {
     <section className="w-full py-4 md:py-6">
       <div className="max-w-[1400px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="flex items-end justify-between gap-3 mb-4 md:mb-5">
+        {/* <div className="flex items-end justify-between gap-3 mb-4 md:mb-5">
           <div>
             <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 tracking-tight">
               Danh mục sản phẩm
@@ -45,8 +45,14 @@ const CategoryGridSection = ({ categories }) => {
               Giải pháp Smart Home toàn diện
             </p>
           </div>
+        </div> */}
+        <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />
+          <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-wide text-center whitespace-nowrap">
+            Danh mục sản phẩm
+          </h2>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-primary-200" />
         </div>
-
         {/* Animated Grid */}
         <motion.div
           layout

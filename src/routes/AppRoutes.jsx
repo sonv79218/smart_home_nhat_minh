@@ -16,6 +16,7 @@ import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import AboutPage from "../pages/AboutPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import SolutionDetailPage from "../pages/SolutionDetailPage";
 
 // Ecosystem Pages
 import LumiPage from "../pages/ecosystem/LumiPage";
@@ -32,6 +33,7 @@ import AddProductPage from "../pages/admin/AddProductPage";
 import EditProductPage from "../pages/admin/EditProductPage";
 import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
 import AdminBannersPage from "../pages/admin/AdminBannersPage";
+import AdminSolutionsPage from "../pages/admin/AdminSolutionsPage";
 import AdminLogin from "../pages/admin/AdminLogin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 
@@ -132,6 +134,16 @@ const AppRoutes = () => {
           }
         />
 
+        {/* SOLUTION DETAIL ROUTE */}
+        <Route
+          path="/solutions/:slug"
+          element={
+            <MainLayout>
+              <SolutionDetailPage />
+            </MainLayout>
+          }
+        />
+
 
         {/* ADMIN ROUTES */}
         
@@ -185,6 +197,11 @@ const AppRoutes = () => {
   <Route
     path="banners"
     element={<AdminBannersPage />}
+  />
+
+  <Route
+    path="solutions"
+    element={<AdminSolutionsPage />}
   />
 </Route>
 

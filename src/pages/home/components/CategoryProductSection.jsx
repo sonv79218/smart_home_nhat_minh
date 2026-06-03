@@ -14,34 +14,41 @@ const PRODUCTS_PER_PAGE = 8;
 // ============================================
 
 const CategoryHeader = ({ category, productCount, viewAllLink }) => (
-  <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
-    <div className="flex items-center gap-3">
-      <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-secondary">
-        {category.name}
-      </h2>
+          <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />
+          <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-wide text-center whitespace-nowrap">
+            {category.name}
+          </h2>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-primary-200" />
+        </div>
+  // <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
+    
+  //   <div className="flex items-center gap-3">
+  //     <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-secondary">
+  //       {category.name}
+  //     </h2>
 
-      {productCount > 0 && (
-        <span className="text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
-          {productCount} sản phẩm
-        </span>
-      )}
-    </div>
-
-    <Link
-      to={viewAllLink || `/products?category=${category.id}`}
-      className="
-        flex items-center gap-1.5 
-        text-xs md:text-sm font-semibold text-primary-600 
-        px-3 py-1.5 rounded-lg 
-        hover:bg-primary-50 transition-colors
-      "
-    >
-      Xem tất cả
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M9 18l6-6-6-6" />
-      </svg>
-    </Link>
-  </div>
+  //     {productCount > 0 && (
+  //       <span className="text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
+  //         {productCount} sản phẩm
+  //       </span>
+  //     )}
+  //   </div>
+  //   <Link
+  //     to={viewAllLink || `/products?category=${category.id}`}
+  //     className="
+  //       flex items-center gap-1.5 
+  //       text-xs md:text-sm font-semibold text-primary-600 
+  //       px-3 py-1.5 rounded-lg 
+  //       hover:bg-primary-50 transition-colors
+  //     "
+  //   >
+  //     Xem tất cả
+  //     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  //       <path d="M9 18l6-6-6-6" />
+  //     </svg>
+  //   </Link>
+  // </div>
 );
 
 const CategoryBanner = ({ banner }) => {
