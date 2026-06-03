@@ -5,6 +5,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import { toInteger } from "../utils/priceUtils";
 
 // ============================================
 // EMPTY CART STATE
@@ -37,24 +38,27 @@ const EmptyCart = () => (
 // ============================================
 const VariantInfo = ({ optionValues, sku }) => {
   if (!optionValues || optionValues.length === 0) return null;
-  
+
   return (
-    <div className="mt-1.5 space-y-1">
-      <div className="flex flex-wrap gap-1">
+    <div className="mt-2">
+      <div className="inline-flex flex-wrap items-center gap-1.5 px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg">
+        <span className="text-xs text-slate-400">Phân loại:</span>
+
         {optionValues.map((val, idx) => (
-          <span 
+          <span
             key={idx}
-            className="inline-flex items-center px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded"
+            className="text-xs font-medium text-slate-700"
           >
-            {val}
+            {val}{idx < optionValues.length - 1 ? " ·" : ""}
           </span>
         ))}
       </div>
-      {sku && (
-        <p className="text-[10px] text-slate-400 font-mono">
+
+      {/* {sku && (
+        <p className="mt-1 text-[10px] text-slate-400 font-mono">
           SKU: {sku}
         </p>
-      )}
+      )} */}
     </div>
   );
 };
@@ -70,9 +74,13 @@ const CartItem = ({
   onDecrease, 
   onRemove 
 }) => {
-  const itemTotal = item.price * item.quantity;
-  const originalTotal = item.originalPrice ? item.originalPrice * item.quantity : 0;
-  const hasDiscount = item.originalPrice && item.originalPrice > item.price;
+  const itemPrice = toInteger(item.price || 0);
+  const itemQty = toInteger(item.quantity || 1);
+  const originalPrice = toInteger(item.originalPrice || 0);
+  
+  const itemTotal = itemPrice * itemQty;
+  const originalTotal = originalPrice * itemQty;
+  const hasDiscount = originalPrice > itemPrice && itemPrice > 0;
 
   const PLACEHOLDER_IMAGE =
     "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
@@ -127,21 +135,19 @@ const CartItem = ({
         </Link>
 
         {/* Variant Info */}
-        {item.variantId && (
-          <VariantInfo 
-            optionValues={item.optionValues}
-            sku={item.sku}
-          />
-        )}
+        <VariantInfo 
+          optionValues={item.optionValues}
+          sku={item.sku}
+        />
 
         {/* Price on Mobile */}
         <div className="mt-1 flex items-center gap-2 sm:hidden">
           <span className="text-base font-bold text-red-600">
-            {Number(item.price).toLocaleString()}đ
+            {itemPrice.toLocaleString()}đ
           </span>
           {hasDiscount && (
             <span className="text-xs text-slate-400 line-through">
-              {Number(item.originalPrice).toLocaleString()}đ
+              {originalPrice.toLocaleString()}đ
             </span>
           )}
         </div>
@@ -154,11 +160,11 @@ const CartItem = ({
           {/* Price on Desktop */}
           <div className="hidden sm:flex flex-col items-start">
             <span className="text-base font-bold text-red-600">
-              {Number(itemTotal).toLocaleString()}đ
+              {itemTotal.toLocaleString()}đ
             </span>
             {hasDiscount && (
               <span className="text-xs text-slate-400 line-through">
-                {Number(originalTotal).toLocaleString()}đ
+                {originalTotal.toLocaleString()}đ
               </span>
             )}
           </div>
@@ -290,11 +296,17 @@ const OrderSummary = ({
   
   const selectedCount = allItems
     .filter(item => selectedItems.includes(getItemKey(item)))
-    .reduce((sum, item) => sum + item.quantity, 0);
+    .reduce((sum, item) => sum + toInteger(item.quantity || 1), 0);
   
-  const savings = subtotal - allItems
+  const totalOriginal = allItems
     .filter(item => selectedItems.includes(getItemKey(item)))
-    .reduce((sum, item) => sum + (item.originalPrice || item.price) * item.quantity, 0);
+    .reduce((sum, item) => {
+      const price = toInteger(item.originalPrice || item.price || 0);
+      const qty = toInteger(item.quantity || 1);
+      return sum + price * qty;
+    }, 0);
+  
+  const savings = subtotal - totalOriginal;
 
   return (
     <div className="bg-white rounded-2xl shadow-sm p-5">
@@ -308,27 +320,27 @@ const OrderSummary = ({
       <div className="space-y-3 mb-4">
         <div className="flex justify-between text-sm text-slate-600">
           <span>Tạm tính ({selectedCount} sản phẩm)</span>
-          <span>{Number(subtotal).toLocaleString()}đ</span>
+          <span>{toInteger(subtotal).toLocaleString()}đ</span>
         </div>
         
         {savings > 0 && (
           <div className="flex justify-between text-sm text-green-600">
             <span>Tiết kiệm</span>
-            <span>-{Number(savings).toLocaleString()}đ</span>
+            <span>-{toInteger(savings).toLocaleString()}đ</span>
           </div>
         )}
 
         {discount > 0 && (
           <div className="flex justify-between text-sm text-red-500">
             <span>Giảm giá ({discount}%)</span>
-            <span>-{Number(discountAmount).toLocaleString()}đ</span>
+            <span>-{toInteger(discountAmount).toLocaleString()}đ</span>
           </div>
         )}
 
         <div className="flex justify-between text-sm text-slate-600">
           <span>Phí vận chuyển</span>
           <span className={shipping === 0 ? "text-green-600 font-medium" : ""}>
-            {shipping === 0 ? "Miễn phí" : `${Number(shipping).toLocaleString()}đ`}
+            {shipping === 0 ? "Miễn phí" : `${toInteger(shipping).toLocaleString()}đ`}
           </span>
         </div>
       </div>
@@ -336,7 +348,7 @@ const OrderSummary = ({
       <div className="flex justify-between items-center mb-4 pt-3 border-t border-slate-100">
         <span className="text-base font-semibold text-slate-800">Tổng cộng</span>
         <div className="text-right">
-          <span className="text-2xl font-bold text-red-600">{Number(total).toLocaleString()}đ</span>
+          <span className="text-2xl font-bold text-red-600">{toInteger(total).toLocaleString()}đ</span>
           <span className="block text-xs text-slate-400">(Đã bao gồm VAT)</span>
         </div>
       </div>
@@ -605,12 +617,12 @@ const CartPage = () => {
         {selectedShipping > 0 && (
           <div className="px-4 py-2 bg-orange-50 border-b border-orange-100">
             <div className="flex items-center justify-between text-xs text-orange-700">
-              <span>Mua thêm <strong>{Number(500000 - selectedSubtotal).toLocaleString()}đ</strong> để miễn phí vận chuyển</span>
+              <span>Mua thêm <strong>{toInteger(500000 - selectedSubtotal).toLocaleString()}đ</strong> để miễn phí vận chuyển</span>
             </div>
             <div className="h-1 bg-orange-100 rounded-full mt-1.5 overflow-hidden">
               <div 
                 className="h-full bg-orange-500 transition-all duration-300"
-                style={{ width: `${Math.min((selectedSubtotal / 500000) * 100, 100)}%` }}
+                style={{ width: `${Math.min((toInteger(selectedSubtotal) / 500000) * 100, 100)}%` }}
               />
             </div>
           </div>
@@ -638,7 +650,7 @@ const CartPage = () => {
               )}
             </div>
             <div>
-              <p className="text-lg font-bold text-red-600">{Number(selectedTotal).toLocaleString()}đ</p>
+              <p className="text-lg font-bold text-red-600">{toInteger(selectedTotal).toLocaleString()}đ</p>
               <p className="text-[10px] text-slate-500">{selectedCount} sản phẩm</p>
             </div>
           </div>

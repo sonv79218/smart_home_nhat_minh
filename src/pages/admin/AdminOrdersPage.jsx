@@ -5,16 +5,18 @@ import {
   updateOrderStatus,
   deleteOrder,
 } from "../../services/orderService";
+import { toInteger } from "../../utils/priceUtils";
 
 const ITEMS_PER_PAGE = 10;
 
-const STATUS_OPTIONS = ["pending", "processing", "shipped", "done"];
+const STATUS_OPTIONS = ["pending", "processing", "shipped", "done", "cancelled"];
 
 const STATUS_COLORS = {
   pending: "bg-amber-500",
   processing: "bg-blue-500",
   shipped: "bg-purple-500",
   done: "bg-green-500",
+  cancelled: "bg-red-500",
 };
 
 const STATUS_LABELS = {
@@ -22,6 +24,7 @@ const STATUS_LABELS = {
   processing: "Đang xử lý",
   shipped: "Đang giao",
   done: "Hoàn thành",
+  cancelled: "Đã hủy",
 };
 
 const AdminOrdersPage = () => {
@@ -88,7 +91,7 @@ const AdminOrdersPage = () => {
   };
 
   const formatPrice = (price) => {
-    return Number(price || 0).toLocaleString("vi-VN");
+    return toInteger(price).toLocaleString("vi-VN");
   };
 
   const truncateId = (id) => {
@@ -550,24 +553,24 @@ const AdminOrdersPage = () => {
         </div>
       )}
 
-      {/* MODAL */}
+      {/* MODAL - ORDER DETAIL */}
       {selectedOrder && (
         <div
           className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedOrder(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between">
+            {/* Sticky Header */}
+            <div className="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between z-10">
               <div>
                 <h2 className="text-lg font-bold text-slate-800">
                   Chi tiết đơn hàng
                 </h2>
-
-                <p className="text-xs text-slate-400 mt-0.5">
-                  ID: {selectedOrder.id}
+                <p className="text-xs text-slate-400 mt-0.5 font-mono">
+                  #{selectedOrder.id?.slice(0, 12)}...
                 </p>
               </div>
 
@@ -579,44 +582,238 @@ const AdminOrdersPage = () => {
               </button>
             </div>
 
-            <div className="p-6">
-              {/* Status */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span
-                    className={`px-3 py-1.5 rounded-full text-sm font-semibold text-white ${
-                      STATUS_COLORS[selectedOrder.status] ||
-                      "bg-slate-400"
-                    }`}
-                  >
-                    {STATUS_LABELS[selectedOrder.status] ||
-                      selectedOrder.status}
-                  </span>
-
-                  <span className="text-sm text-slate-500">
-                    {formatDate(selectedOrder.createdAt)}
-                  </span>
+            {/* Scrollable Content */}
+            <div className="overflow-y-auto flex-1 p-6">
+              <div className="space-y-6">
+                
+                {/* Status Section */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`px-3 py-1.5 rounded-full text-sm font-semibold text-white ${
+                        STATUS_COLORS[selectedOrder.status] || "bg-slate-400"
+                      }`}
+                    >
+                      {STATUS_LABELS[selectedOrder.status] || selectedOrder.status}
+                    </span>
+                    <span className="text-sm text-slate-500">
+                      {formatDate(selectedOrder.createdAt)}
+                    </span>
+                  </div>
+                  
+                  {/* Status Selector */}
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={selectedOrder.status}
+                      onChange={(e) => {
+                        const newStatus = e.target.value;
+                        setSelectedOrder(prev => ({ ...prev, status: newStatus }));
+                      }}
+                      className="px-3 py-2 border border-slate-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-primary-500 outline-none"
+                    >
+                      {STATUS_OPTIONS.map((status) => (
+                        <option key={status} value={status}>
+                          {STATUS_LABELS[status]}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      onClick={() => handleStatusChange(selectedOrder.id, selectedOrder.status)}
+                      className="px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors text-sm"
+                    >
+                      Cập nhật
+                    </button>
+                  </div>
                 </div>
 
-                {getNextStatus(selectedOrder.status) && (
-                  <button
-                    onClick={() =>
-                      handleStatusChange(
-                        selectedOrder.id,
-                        getNextStatus(selectedOrder.status)
-                      )
-                    }
-                    className="w-full py-2.5 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors"
-                  >
-                    Chuyển sang "
-                    {
-                      STATUS_LABELS[
-                        getNextStatus(selectedOrder.status)
-                      ]
-                    }
-                    "
-                  </button>
-                )}
+                {/* Customer Info Card */}
+                <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                  <h3 className="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <UserIcon className="w-5 h-5 text-primary-600" />
+                    Thông tin khách hàng
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-sm text-slate-500 min-w-[100px]">Họ tên:</span>
+                      <span className="text-sm font-medium text-slate-800">
+                        {selectedOrder.userInfo?.name || "Không có"}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-sm text-slate-500 min-w-[100px]">SĐT:</span>
+                      <span className="text-sm font-medium text-slate-800">
+                        {selectedOrder.userInfo?.phone || "Không có"}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-sm text-slate-500 min-w-[100px]">Email:</span>
+                      <span className="text-sm font-medium text-slate-800">
+                        {selectedOrder.userInfo?.email || "Không có"}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3 md:col-span-2">
+                      <span className="text-sm text-slate-500 min-w-[100px]">Địa chỉ:</span>
+                      <span className="text-sm font-medium text-slate-800">
+                        {selectedOrder.userInfo?.address || "Không có"}
+                      </span>
+                    </div>
+                    {selectedOrder.userInfo?.note && (
+                      <div className="flex items-start gap-3 md:col-span-2">
+                        <span className="text-sm text-slate-500 min-w-[100px]">Ghi chú:</span>
+                        <span className="text-sm text-slate-600 italic">
+                          {selectedOrder.userInfo.note}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Order Info Card */}
+                <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                  <h3 className="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <OrderIcon className="w-5 h-5 text-primary-600" />
+                    Thông tin đơn hàng
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="p-3 bg-slate-50 rounded-lg">
+                      <span className="text-xs text-slate-500 block mb-1">Mã đơn</span>
+                      <span className="text-sm font-mono font-semibold text-slate-800">
+                        #{selectedOrder.id?.slice(0, 8).toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="p-3 bg-slate-50 rounded-lg">
+                      <span className="text-xs text-slate-500 block mb-1">Ngày đặt</span>
+                      <span className="text-sm font-medium text-slate-800">
+                        {formatDate(selectedOrder.createdAt)}
+                      </span>
+                    </div>
+                    <div className="p-3 bg-slate-50 rounded-lg">
+                      <span className="text-xs text-slate-500 block mb-1">Số sản phẩm</span>
+                      <span className="text-sm font-semibold text-slate-800">
+                        {selectedOrder.items?.length || 0}
+                      </span>
+                    </div>
+                    <div className="p-3 bg-slate-50 rounded-lg">
+                      <span className="text-xs text-slate-500 block mb-1">Tổng tiền</span>
+                      <span className="text-sm font-bold text-green-600">
+                        {formatPrice(selectedOrder.totalPrice)}đ
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Products List Card */}
+                <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                  <h3 className="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <PackageIcon className="w-5 h-5 text-primary-600" />
+                    Sản phẩm đã đặt
+                  </h3>
+                  <div className="space-y-4">
+                    {selectedOrder.items?.map((item, index) => {
+                      const itemTotal = (item.price || 0) * (item.quantity || 1);
+                      
+                      return (
+                        <div 
+                          key={item.variantId || item.id || index}
+                          className="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100"
+                        >
+                          {/* Product Image */}
+                          <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-white border border-slate-200">
+                            <img
+                              src={item.thumbnail || "https://via.placeholder.com/80?text=No+Image"}
+                              alt={item.name}
+                              className="w-full h-full object-contain p-1"
+                              onError={(e) => {
+                                e.currentTarget.src = "https://via.placeholder.com/80?text=No+Image";
+                              }}
+                            />
+                          </div>
+
+                          {/* Product Info */}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-sm font-semibold text-slate-800 line-clamp-2">
+                              {item.name || "Sản phẩm không tên"}
+                            </h4>
+                            
+                            {/* SKU */}
+                            {item.sku && (
+                              <p className="text-xs text-slate-400 mt-1 font-mono">
+                                SKU: {item.sku}
+                              </p>
+                            )}
+
+                            {/* Variant Info */}
+                            {item.optionValues && item.optionValues.length > 0 && (
+                              <div className="mt-2 flex flex-wrap gap-1">
+                                {item.optionValues.map((val, idx) => (
+                                  <span 
+                                    key={idx}
+                                    className="px-2 py-0.5 bg-primary-50 text-primary-700 text-xs rounded-md"
+                                  >
+                                    {val}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Price & Quantity */}
+                            <div className="flex items-center gap-4 mt-2">
+                              <span className="text-xs text-slate-500">
+                                Giá: <span className="font-medium text-slate-700">{formatPrice(item.price)}đ</span>
+                              </span>
+                              <span className="text-xs text-slate-500">
+                                SL: <span className="font-medium text-slate-700">{item.quantity || 1}</span>
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Item Total */}
+                          <div className="flex-shrink-0 text-right">
+                            <span className="text-xs text-slate-500 block">Tạm tính</span>
+                            <span className="text-sm font-bold text-red-600">
+                              {formatPrice(itemTotal)}đ
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Order Summary Card */}
+                <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                  <h3 className="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <ReceiptIcon className="w-5 h-5 text-primary-600" />
+                    Tổng kết đơn hàng
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-slate-500">Tạm tính</span>
+                      <span className="font-medium text-slate-700">
+                        {formatPrice(selectedOrder.subtotal || selectedOrder.totalPrice || 0)}đ
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-slate-500">Phí vận chuyển</span>
+                      <span className="font-medium text-slate-700">
+                        {formatPrice(selectedOrder.shippingFee || 0)}đ
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-slate-500">Giảm giá</span>
+                      <span className="font-medium text-green-600">
+                        -{formatPrice(selectedOrder.discount || 0)}đ
+                      </span>
+                    </div>
+                    <div className="border-t border-slate-200 pt-3 flex justify-between items-center">
+                      <span className="text-base font-semibold text-slate-800">Tổng thanh toán</span>
+                      <span className="text-xl font-bold text-green-600">
+                        {formatPrice(selectedOrder.totalPrice || 0)}đ
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -744,6 +941,70 @@ const CloseIcon = ({ className }) => (
       strokeLinejoin="round"
       strokeWidth={2}
       d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+);
+
+const UserIcon = ({ className }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+    />
+  </svg>
+);
+
+const OrderIcon = ({ className }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+    />
+  </svg>
+);
+
+const PackageIcon = ({ className }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+    />
+  </svg>
+);
+
+const ReceiptIcon = ({ className }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"
     />
   </svg>
 );

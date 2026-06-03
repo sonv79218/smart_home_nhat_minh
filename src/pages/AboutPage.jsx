@@ -381,7 +381,7 @@ const AboutPage = () => {
             <div className="space-y-4 mb-8">
               <div className="flex gap-3">
                 <MapPin className="w-5 h-5 text-sky-300 shrink-0" />
-                <span>Địa chỉ: Đang cập nhật</span>
+                <span>Địa chỉ: Phù Lưu, Phường Từ Sơn, Tỉnh Bắc Ninh, Việt Nam</span>
               </div>
               <div className="flex gap-3">
                 <Phone className="w-5 h-5 text-sky-300 shrink-0" />

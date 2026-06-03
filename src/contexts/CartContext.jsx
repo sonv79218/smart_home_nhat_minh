@@ -54,22 +54,22 @@ export const CartProvider = ({ children }) => {
         );
       }
       
-      // Thêm item mới với đầy đủ thông tin
+      // Thêm item mới với đầy đủ thông tin variant
       return [
         ...prev,
         {
           id: product.id,
           name: product.name,
           thumbnail: product.thumbnail,
-          // Variant info (nếu có)
+          // Variant info
           ...(product.variantId && {
             variantId: product.variantId,
             sku: product.sku,
-            optionValues: product.optionValues,
+            optionValues: product.optionValues || [],
           }),
-          // Pricing - dùng price từ product đã được set ở ProductDetailPage
-          price: product.price || (product.discountPrice > 0 && product.discountPrice < product.price ? product.discountPrice : product.price),
-          originalPrice: product.originalPrice || product.price,
+          // Pricing - dùng price là giá bán, originalPrice là giá gốc
+          price: product.price || 0,
+          originalPrice: product.originalPrice || product.price || 0,
           quantity: quantity,
         },
       ];
@@ -78,6 +78,12 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = useCallback((itemKey) => {
     setCartItems((prev) => prev.filter((item) => getCartItemKey(item) !== itemKey));
+  }, []);
+
+  const removeMultipleFromCart = useCallback((itemKeys) => {
+    setCartItems((prev) =>
+      prev.filter((item) => !itemKeys.includes(getCartItemKey(item)))
+    );
   }, []);
 
   const increaseQuantity = useCallback((itemKey) => {
@@ -179,6 +185,7 @@ export const CartProvider = ({ children }) => {
     cartItems,
     addToCart,
     removeFromCart,
+    removeMultipleFromCart,
     increaseQuantity,
     decreaseQuantity,
     updateQuantity,

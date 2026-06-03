@@ -6,6 +6,8 @@
 // Use categoryService.js and brandService.js instead
 // ============================================
 
+import { toInteger } from "../utils/priceUtils";
+
 export const PRODUCT_STATUS = [
   { id: "active", name: "Hoạt động", color: "#27ae60" },
   { id: "inactive", name: "Không hoạt động", color: "#95a5a6" },
@@ -67,10 +69,13 @@ export const sanitizeProductData = (data) => {
 
 export const formatPrice = (price) => {
   if (!price && price !== 0) return "0đ";
-  return Number(price).toLocaleString("vi-VN") + "đ";
+  return toInteger(price).toLocaleString("vi-VN") + "đ";
 };
 
 export const calculateDiscountPercent = (price, discountPrice) => {
-  if (!price || !discountPrice || discountPrice >= price) return 0;
-  return Math.round(((price - discountPrice) / price) * 100);
+  if (!price || !discountPrice) return 0;
+  const p = toInteger(price);
+  const d = toInteger(discountPrice);
+  if (d >= p) return 0;
+  return Math.round(((p - d) / p) * 100);
 };

@@ -3,6 +3,7 @@
 // Hiển thị lựa chọn biến thể sản phẩm
 // ============================================
 import { useMemo } from "react";
+import { toInteger } from "../../utils/priceUtils";
 
 /**
  * Tìm variant phù hợp với các option đã chọn
@@ -147,9 +148,11 @@ export const SelectedVariantInfo = ({ variant, product }) => {
     );
   }
 
-  const hasDiscount = variant.discountPrice > 0 && variant.discountPrice < variant.price;
+  const variantPrice = toInteger(variant.price || 0);
+  const variantOriginalPrice = toInteger(variant.originalPrice || variant.discountPrice || 0);
+  const hasDiscount = variantOriginalPrice > variantPrice && variantPrice > 0;
   const discountPercent = hasDiscount 
-    ? Math.round(((variant.price - variant.discountPrice) / variant.price) * 100) 
+    ? Math.round(((variantOriginalPrice - variantPrice) / variantOriginalPrice) * 100) 
     : 0;
 
   return (
@@ -165,12 +168,12 @@ export const SelectedVariantInfo = ({ variant, product }) => {
       {/* Price */}
       <div className="flex items-baseline gap-2 flex-wrap">
         <span className="text-2xl font-bold text-red-600">
-          {Number(hasDiscount ? variant.discountPrice : variant.price).toLocaleString()}đ
+          {variantPrice.toLocaleString()}đ
         </span>
         {hasDiscount && (
           <>
             <span className="text-base text-slate-400 line-through">
-              {Number(variant.price).toLocaleString()}đ
+              {variantOriginalPrice.toLocaleString()}đ
             </span>
             <span className="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-bold rounded">
               -{discountPercent}%

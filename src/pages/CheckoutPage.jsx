@@ -1,15 +1,28 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { createOrder } from "../services/orderService";
+import { toInteger } from "../utils/priceUtils";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  const { cartItems, getTotalPrice, getShipping, clearCart } = useCart();
+  const location = useLocation();
+  const { cartItems, removeMultipleFromCart, getCartItemKey } = useCart();
+
+  // Lấy selectedItems từ state được truyền từ CartPage
+  const selectedItemKeys = location.state?.selectedItems || [];
+
+  // Lọc chỉ các sản phẩm được chọn
+  const checkoutItems = useMemo(() => {
+    return cartItems.filter(item =>
+      selectedItemKeys.includes(getCartItemKey(item))
+    );
+  }, [cartItems, selectedItemKeys, getCartItemKey]);
 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    email: "",
     address: "",
     note: "",
   });
@@ -17,10 +30,45 @@ const CheckoutPage = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const totalPrice = getTotalPrice();
-  const shippingFee = getShipping();
+  // Tính tổng tiền từ checkoutItems
+  const subtotal = useMemo(() => {
+    return checkoutItems.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0);
+  }, [checkoutItems]);
 
-  if (cartItems.length === 0) {
+  const shippingFee = subtotal >= 500000 ? 0 : 30000;
+  const totalPrice = subtotal + shippingFee;
+
+  // Redirect về cart nếu không có sản phẩm được chọn
+  if (cartItems.length > 0 && checkoutItems.length === 0) {
+    return (
+      <>
+        <style>{checkoutStyles}</style>
+        <div className="checkout-page">
+          <div className="checkout-container">
+            <div className="empty-state">
+              <div className="empty-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+              </div>
+              <h2>Chưa chọn sản phẩm</h2>
+              <p>Vui lòng quay lại giỏ hàng để chọn sản phẩm</p>
+              <Link to="/cart" className="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                Quay lại giỏ hàng
+              </Link>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (checkoutItems.length === 0) {
     return (
       <>
         <style>{checkoutStyles}</style>
@@ -91,16 +139,20 @@ const CheckoutPage = () => {
         userInfo: {
           name: formData.name.trim() || "",
           phone: formData.phone.trim() || "",
+          email: formData.email.trim() || "",
           address: formData.address.trim() || "",
           note: formData.note.trim() || "",
         },
 
-        items: cartItems.map((item) => ({
+        items: checkoutItems.map((item) => ({
           id: item.id || "",
           name: item.name || "",
           price: item.price || 0,
           thumbnail: item.thumbnail || "",
           quantity: item.quantity || 1,
+          variantId: item.variantId || null,
+          sku: item.sku || "",
+          optionValues: item.optionValues || [],
         })),
 
         totalPrice: totalPrice || 0,
@@ -111,7 +163,8 @@ const CheckoutPage = () => {
 
       await createOrder(order);
 
-      clearCart();
+      // Chỉ xóa các sản phẩm đã thanh toán, không xóa toàn bộ giỏ hàng
+      removeMultipleFromCart(selectedItemKeys);
 
       alert("Đặt hàng thành công! Cảm ơn bạn đã mua sắm.");
       navigate("/products");
@@ -188,6 +241,17 @@ const CheckoutPage = () => {
                     {errors.phone && <span className="error-text">{errors.phone}</span>}
                   </div>
 
+                  <div className="form-group">
+                    <label>Email (tùy chọn)</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="email@example.com"
+                    />
+                  </div>
+
                   <div className="form-group full-width">
                     <label>
                       Địa chỉ giao hàng <span className="required">*</span>
@@ -226,25 +290,41 @@ const CheckoutPage = () => {
                     <line x1="3" y1="6" x2="21" y2="6" />
                     <path d="M16 10a4 4 0 0 1-8 0" />
                   </svg>
-                  Đơn hàng của bạn
+                  Đơn hàng của bạn ({checkoutItems.length} sản phẩm)
                 </h3>
 
                 {/* Items */}
                 <div className="summary-items">
-                  {cartItems.map((item) => (
-                    <div key={item.id} className="summary-item">
+                  {checkoutItems.map((item) => (
+                    <div key={item.variantId ? `${item.id}-${item.variantId}` : item.id} className="summary-item">
                       <div className="item-image">
-                        <img src={item.thumbnail} alt={item.name} />
-                        {/* <span className="item-qty">{item.quantity}</span> */}
+                        <img 
+                          src={item.thumbnail || "https://via.placeholder.com/56"} 
+                          alt={item.name}
+                          onError={(e) => { e.target.src = "https://via.placeholder.com/56"; }}
+                        />
+                        {/* <span className="item-qty-badge">{item.quantity}</span> */}
                       </div>
                       <div className="item-info">
                         <span className="item-name">{item.name}</span>
+                        
+                        {/* Variant Info */}
+                        {item.optionValues && item.optionValues.length > 0 && (
+                          <span className="item-variant">
+                            Phân loại: {item.optionValues.join(" · ")}
+                          </span>
+                        )}
+                        
+                        {/* {item.sku && (
+                          <span className="item-sku">SKU: {item.sku}</span>
+                        )} */}
+                        
                         <span className="item-price">
-                          {item.quantity} x {Number(item.price).toLocaleString()}đ
+                          SL: {toInteger(item.quantity)} × {toInteger(item.price).toLocaleString()}đ
                         </span>
                       </div>
                       <span className="item-total">
-                        {Number(item.price * item.quantity).toLocaleString()}đ
+                        {toInteger(item.price * item.quantity).toLocaleString()}đ
                       </span>
                     </div>
                   ))}
@@ -254,12 +334,12 @@ const CheckoutPage = () => {
                 <div className="summary-rows">
                   <div className="summary-row">
                     <span>Tạm tính</span>
-                    <span>{Number(totalPrice - shippingFee).toLocaleString()}đ</span>
+                    <span>{toInteger(subtotal).toLocaleString()}đ</span>
                   </div>
                   <div className="summary-row">
                     <span>Phí vận chuyển</span>
                     <span className={shippingFee === 0 ? "free" : ""}>
-                      {shippingFee === 0 ? "Miễn phí" : `${Number(shippingFee).toLocaleString()}đ`}
+                      {shippingFee === 0 ? "Miễn phí" : `${toInteger(shippingFee).toLocaleString()}đ`}
                     </span>
                   </div>
                   {shippingFee > 0 && (
@@ -278,7 +358,7 @@ const CheckoutPage = () => {
                 <div className="summary-total">
                   <span>Tổng cộng</span>
                   <div className="total-right">
-                    <span className="total-price">{Number(totalPrice).toLocaleString()}đ</span>
+                    <span className="total-price">{toInteger(totalPrice).toLocaleString()}đ</span>
                     <span className="total-note">(Đã bao gồm VAT)</span>
                   </div>
                 </div>
@@ -527,14 +607,21 @@ const checkoutStyles = `
     padding-bottom: 16px;
     border-bottom: 1px solid #e2e8f0;
     margin-bottom: 16px;
-    max-height: 280px;
+    max-height: 320px;
     overflow-y: auto;
   }
 
   .summary-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #f1f5f9;
+  }
+
+  .summary-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   .item-image {
@@ -545,6 +632,7 @@ const checkoutStyles = `
     overflow: hidden;
     background: #f8fafc;
     flex-shrink: 0;
+    border: 1px solid #e2e8f0;
   }
 
   .item-image img {
@@ -553,20 +641,21 @@ const checkoutStyles = `
     object-fit: cover;
   }
 
-  .item-qty {
+  .item-qty-badge {
     position: absolute;
     top: -6px;
     right: -6px;
-    width: 20px;
+    min-width: 20px;
     height: 20px;
     background: #2563eb;
     color: #ffffff;
-    border-radius: 50%;
+    border-radius: 10px;
     font-size: 11px;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 4px;
   }
 
   .item-info {
@@ -586,11 +675,26 @@ const checkoutStyles = `
     overflow: hidden;
   }
 
+  .item-variant {
+    display: block;
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+
+  .item-sku {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+    font-family: monospace;
+    margin-top: 1px;
+  }
+
   .item-price {
     display: block;
     font-size: 12px;
     color: #64748b;
-    margin-top: 2px;
+    margin-top: 4px;
   }
 
   .item-total {
@@ -598,6 +702,7 @@ const checkoutStyles = `
     font-weight: 600;
     color: #0f172a;
     flex-shrink: 0;
+    text-align: right;
   }
 
   /* Summary Rows */

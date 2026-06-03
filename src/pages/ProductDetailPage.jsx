@@ -10,6 +10,7 @@ import { getBrandById } from "../services/brandService";
 import useCart from "../hooks/useCart";
 import ProductCard from "./home/components/ProductCard";
 import VariantSelector, { SelectedVariantInfo } from "../components/product/VariantSelector";
+import { toInteger } from "../utils/priceUtils";
 
 // ============================================
 // HELPERS
@@ -206,12 +207,12 @@ const ProductInfo = ({
       {/* Price */}
       <div className="flex items-baseline gap-3 mb-4 flex-wrap">
         <span className="text-3xl md:text-4xl font-bold text-red-600">
-          {Number(displayPrice).toLocaleString()}đ
+          {toInteger(displayPrice).toLocaleString()}đ
         </span>
         {hasDiscount && (
           <>
             <span className="text-lg text-slate-400 line-through">
-              {Number(displayOriginalPrice).toLocaleString()}đ
+              {toInteger(displayOriginalPrice).toLocaleString()}đ
             </span>
             <span className="px-2 py-1 bg-red-50 text-red-500 text-sm font-bold rounded-lg">
               -{discountPercent}%
@@ -289,18 +290,14 @@ const ProductActions = ({
       thumbnail: hasVariants && selectedVariant?.thumbnail 
         ? selectedVariant.thumbnail 
         : product.thumbnail,
-      // Sử dụng price làm giá bán, originalPrice làm giá gốc
-      ...(hasVariants && selectedVariant && {
+      // Pricing - dùng price là giá bán, originalPrice là giá gốc
+      price: selectedVariant?.price || product.price || 0,
+      originalPrice: selectedVariant?.originalPrice || selectedVariant?.discountPrice || product.originalPrice || product.discountPrice || product.price || 0,
+      // Variant info
+      ...(selectedVariant && {
         variantId: selectedVariant.id,
         sku: selectedVariant.sku,
-        optionValues: selectedVariant.optionValues,
-        price: selectedVariant.price || 0,
-        originalPrice: selectedVariant.originalPrice || selectedVariant.discountPrice || 0,
-      }),
-      // Fallback cho sản phẩm không có variant
-      ...(!hasVariants && {
-        price: product.price || 0,
-        originalPrice: product.originalPrice || product.discountPrice || 0,
+        optionValues: selectedVariant.optionValues || [],
       }),
     };
     
@@ -318,17 +315,14 @@ const ProductActions = ({
       thumbnail: hasVariants && selectedVariant?.thumbnail 
         ? selectedVariant.thumbnail 
         : product.thumbnail,
-      // Sử dụng price làm giá bán, originalPrice làm giá gốc
-      ...(hasVariants && selectedVariant && {
+      // Pricing - dùng price là giá bán, originalPrice là giá gốc
+      price: selectedVariant?.price || product.price || 0,
+      originalPrice: selectedVariant?.originalPrice || selectedVariant?.discountPrice || product.originalPrice || product.discountPrice || product.price || 0,
+      // Variant info
+      ...(selectedVariant && {
         variantId: selectedVariant.id,
         sku: selectedVariant.sku,
-        optionValues: selectedVariant.optionValues,
-        price: selectedVariant.price || 0,
-        originalPrice: selectedVariant.originalPrice || selectedVariant.discountPrice || 0,
-      }),
-      ...(!hasVariants && {
-        price: product.price || 0,
-        originalPrice: product.originalPrice || product.discountPrice || 0,
+        optionValues: selectedVariant.optionValues || [],
       }),
     };
     

@@ -7,6 +7,7 @@ import {
 } from "../../services/productService";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
+import { toInteger } from "../../utils/priceUtils";
 
 import {
   PRODUCT_STATUS,
@@ -114,9 +115,7 @@ setProducts(productsWithVariants);
   };
 
   const formatPrice = (price) => {
-    return Number(price || 0).toLocaleString(
-      "vi-VN"
-    );
+    return toInteger(price).toLocaleString("vi-VN");
   };
 
   // FILTER PRODUCTS

@@ -6,6 +6,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
+import { toInteger } from "../../../utils/priceUtils";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -14,15 +15,15 @@ const ProductCard = ({ product }) => {
   const [imgError, setImgError] = useState(false);
 
   // Check for discount (originalPrice > price means there's a discount)
-  const displayPrice = product.price || 0;
-  const originalPriceValue = product.originalPrice || product.discountPrice || 0;
+  const displayPrice = toInteger(product.price || 0);
+  const originalPriceValue = toInteger(product.originalPrice || product.discountPrice || 0);
   const hasDiscount = originalPriceValue > displayPrice && displayPrice > 0;
   const discountPercent = hasDiscount && originalPriceValue > 0
     ? Math.round(((originalPriceValue - displayPrice) / originalPriceValue) * 100)
     : 0;
 
   const formatPrice = (price) => {
-    return Number(price || 0).toLocaleString("vi-VN");
+    return toInteger(price).toLocaleString("vi-VN");
   };
 
   const handleAddToCart = (e) => {

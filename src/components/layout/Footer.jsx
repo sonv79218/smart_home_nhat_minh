@@ -30,7 +30,6 @@ const Footer = () => {
     "Camera thông minh",
     "Rèm thông minh",
     "Ổ cắm thông minh",
-    "Loa thông minh",
   ];
 
   const brandLinks = [
@@ -132,7 +131,8 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-cyan-400 mt-1" />
                 <p>
-                  Từ Sơn - Bắc Ninh
+                  Nhà số 01 ngõ Giếng Vàng, Khu phố Phù Lưu, Phường Từ Sơn, Tỉnh Bắc Ninh, Việt
+Nam
                 </p>
               </div>
             </div>
@@ -165,16 +165,16 @@ const Footer = () => {
           <div className="space-y-3 text-gray-400 leading-7">
             <p>
               <span className="text-white font-medium">
-                Công ty TNHH TM & DV Giải pháp IOT Việt Nam
+                CÔNG TY TNHH NHẬT MINH CÔNG NGHỆ GROUP
               </span>
             </p>
 
             <p>
-              GPĐKKD: 0901045126 — MST: 0901045126
+              GPĐKKD: 2301374027 — MST: 2301374027
             </p>
 
             <p>
-              Địa chỉ: Từ Sơn - Bắc Ninh
+              Địa chỉ: Nhà số 01 ngõ Giếng Vàng, Khu phố Phù Lưu, Phường Từ Sơn, Tỉnh Bắc Ninh, Việt Nam
             </p>
 
 
