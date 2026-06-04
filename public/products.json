@@ -1,5 +1,37 @@
 [
   {
+    "id": "01vxSP2GPStTCWHnPeWi",
+    "name": "Bóng đèn thông minh Aqara T2 Bulb E27 Trắng Vàng",
+    "sku": "SMA-BNGN-1009",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 590000,
+    "discountPrice": 0,
+    "stock": 0,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 189,
+    "shortDescription": "Bóng đèn thông minh Aqara T2 Bulb E27 Trắng Vàng là giải pháp chiếu sáng hiện đại với khả năng điều chỉnh độ sáng và nhiệt độ màu linh hoạt. Sản phẩm mang đến ánh sáng chất lượng cao với chỉ số hoàn màu Ra90, giúp tái tạo màu sắc chân thực và tạo không gian sống thoải mái, phù hợp cho mọi nhu cầu sinh hoạt hằng ngày.",
+    "description": "Aqara T2 Bulb E27 Trắng Vàng là bóng đèn LED thông minh được thiết kế để nâng cao trải nghiệm chiếu sáng trong gia đình. Với chuẩn đui E27 phổ biến, sản phẩm dễ dàng lắp đặt và thay thế cho các bóng đèn truyền thống mà không cần thay đổi hệ thống điện hiện có.\n\nBóng đèn sở hữu độ sáng lên đến 1100 lumen, đáp ứng tốt nhu cầu chiếu sáng cho phòng khách, phòng ngủ, phòng làm việc hoặc các không gian sinh hoạt chung. Khả năng điều chỉnh độ sáng (Dimming) giúp người dùng linh hoạt thay đổi cường độ ánh sáng theo từng thời điểm và mục đích sử dụng.\n\nVới chỉ số hoàn màu Ra90, Aqara T2 Bulb E27 mang lại chất lượng ánh sáng chân thực, giúp màu sắc của đồ vật và nội thất được hiển thị tự nhiên hơn. Đồng thời, người dùng có thể tùy chỉnh nhiệt độ màu từ ánh sáng vàng ấm thư giãn đến ánh sáng trắng phục vụ học tập và làm việc.\n\nSản phẩm hoạt động với dải điện áp rộng từ 100V đến 240V, phù hợp với nhiều hệ thống điện khác nhau. Khi kết hợp cùng hệ sinh thái nhà thông minh Aqara, bóng đèn có thể tham gia vào các kịch bản tự động hóa, điều khiển từ xa hoặc điều khiển bằng giọng nói thông qua các nền tảng tương thích.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bóng đèn thông minh Aqara T2 Bulb E27 Trắng Vàng\nLoại đui đèn: E27\nCông suất định mức: 10.5W\nĐộ sáng: 1100 lm\nĐiều chỉnh độ sáng (Dim): Có\nChỉ số hoàn màu (CRI): Ra90\nNhiệt độ màu: Trắng – Vàng (điều chỉnh được)\nĐiện áp hoạt động: 100 – 240V AC\nCông nghệ chiếu sáng: LED\nỨng dụng: Chiếu sáng thông minh trong nhà\n\nTÍNH NĂNG NỔI BẬT\n\nĐộ sáng cao lên đến 1100 lumen\nĐiều chỉnh độ sáng linh hoạt theo nhu cầu\nÁnh sáng trắng vàng tùy chỉnh dễ dàng\nChỉ số hoàn màu Ra90 cho màu sắc chân thực\nTiết kiệm điện năng với công nghệ LED hiện đại\nĐui E27 phổ biến, dễ dàng lắp đặt\nTương thích với hệ sinh thái nhà thông minh Aqara\nPhù hợp cho phòng khách, phòng ngủ và không gian làm việc",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "bong-en-thong-minh-aqara-t2-bulb-e27-trang-vang",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385666/pg4h7s0s6jbgrpltj4kp.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385666/btw0d1mqyyqqw12qgh6w.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385667/d8qllbufsipsqpndmmql.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385667/pcyvh5c77new8kg2maop.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385667/iifim57pljhu2dbzlfvt.png"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T07:34:29.856Z",
+    "updatedAt": "2026-06-02T07:34:29.856Z"
+  },
+  {
     "id": "0dnoZiR3g4uT5EDHmtE1",
     "name": "Động cơ rèm sáo lật lá, kéo ngang Aqara H1",
     "sku": "CUR-NGCR-7042",
@@ -37,7 +69,6 @@
     "brand": "aqara",
     "category": "smart-lock",
     "price": 4190000,
-    "discountPrice": 890000,
     "stock": 60,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -62,7 +93,8 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T10:07:33.889Z",
-    "updatedAt": "2026-06-01T10:07:33.889Z"
+    "discountPrice": 0,
+    "updatedAt": "2026-06-02T07:18:31.642Z"
   },
   {
     "id": "4A6zFKGh2BZQ526svJPm",
@@ -99,7 +131,7 @@
     "createdAt": "2026-06-02T02:37:41.134Z",
     "stock": 25,
     "price": 11490000,
-    "updatedAt": "2026-06-02T02:42:41.133Z"
+    "updatedAt": "2026-06-02T04:17:56.328Z"
   },
   {
     "id": "5CheRDpnLFPwioD6V01U",
@@ -425,7 +457,6 @@
     "brand": "aqara",
     "category": "smart-lock",
     "price": 2990000,
-    "discountPrice": 690000,
     "stock": 15,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -452,7 +483,8 @@
     "createdAt": "2026-06-01T10:21:54.137Z",
     "name": "Khóa vân tay thông minh Aqara N100 bản Zigbee",
     "slug": "khoa-van-tay-thong-minh-aqara-n100-ban-zigbee",
-    "updatedAt": "2026-06-02T01:21:12.673Z"
+    "discountPrice": 0,
+    "updatedAt": "2026-06-02T07:17:44.082Z"
   },
   {
     "id": "FsVTEeN10xoWINLkhnCX",
@@ -559,16 +591,131 @@
     "updatedAt": "2026-06-01T07:50:56.582Z"
   },
   {
+    "id": "GwNRP9PaSoo3IVJ9yhfq",
+    "name": "Mặt ốp thay thế chính hãng cho công tắc D1",
+    "sku": "SMA-MTPT-7941",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 190000,
+    "originalPrice": 0,
+    "stock": 60,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 260,
+    "shortDescription": "Mặt ốp thay thế chính hãng cho công tắc Aqara D1 là phụ kiện giúp làm mới hoặc thay đổi màu sắc công tắc một cách nhanh chóng và tiện lợi. Sản phẩm được sản xuất chính hãng, có nhiều tùy chọn số nút và màu sắc, đảm bảo độ tương thích hoàn hảo với dòng công tắc Aqara D1.",
+    "description": "Mặt ốp thay thế Aqara D1 được thiết kế chuyên dụng dành cho các dòng công tắc thông minh Aqara D1, giúp người dùng dễ dàng thay thế khi mặt công tắc cũ bị trầy xước, hư hỏng hoặc muốn thay đổi màu sắc để phù hợp với phong cách nội thất.\n\nSản phẩm được sản xuất theo tiêu chuẩn chính hãng Aqara, đảm bảo độ hoàn thiện cao, màu sắc đồng nhất và khả năng lắp ráp chính xác với thiết bị gốc. Thiết kế tháo lắp đơn giản giúp việc thay thế trở nên nhanh chóng mà không cần thay đổi phần công tắc bên trong hay hệ thống điện hiện có.\n\nMặt ốp có nhiều lựa chọn gồm phiên bản 1 kênh, 2 kênh và 3 kênh, đáp ứng nhu cầu sử dụng đa dạng của người dùng. Bên cạnh đó, các tùy chọn màu sắc như xám và vàng giúp dễ dàng phối hợp với nhiều phong cách nội thất từ hiện đại đến cao cấp.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Mặt ốp thay thế chính hãng cho công tắc Aqara D1\nTương thích: Công tắc thông minh Aqara D1\nSố nút:\n+ 1 kênh\n+ 2 kênh\n+ 3 kênh\nMàu sắc:\nXám\nVàng\nChất liệu: Nhựa cao cấp\nLoại phụ kiện: Mặt ốp thay thế\nNhà sản xuất: Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nPhụ kiện chính hãng Aqara\nTương thích hoàn hảo với công tắc D1\nDễ dàng tháo lắp và thay thế\nNhiều lựa chọn 1, 2 hoặc 3 kênh\nMàu sắc hiện đại, tăng tính thẩm mỹ\nGiúp làm mới hoặc cá nhân hóa công tắc\nĐộ hoàn thiện cao, bền bỉ theo thời gian",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "mat-op-thay-the-chinh-hang-cho-cong-tac-d1",
+    "discountPrice": 0,
+    "options": [
+      {
+        "name": "Màu sắc",
+        "values": [
+          "vàng nhạt",
+          "xám"
+        ]
+      },
+      {
+        "name": "Phân loại",
+        "values": [
+          "1 nút",
+          "2 nút",
+          "3 nút"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "vng-nht-1-nt",
+        "sku": "SKU-VNG-NHT-1-NT",
+        "optionValues": [
+          "vàng nhạt",
+          "1 nút"
+        ],
+        "price": 190000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "vng-nht-2-nt",
+        "sku": "SKU-VNG-NHT-2-NT",
+        "optionValues": [
+          "vàng nhạt",
+          "2 nút"
+        ],
+        "price": 210000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "vng-nht-3-nt",
+        "sku": "SKU-VNG-NHT-3-NT",
+        "optionValues": [
+          "vàng nhạt",
+          "3 nút"
+        ],
+        "price": 220000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "xm-1-nt",
+        "sku": "SKU-XM-1-NT",
+        "optionValues": [
+          "xám",
+          "1 nút"
+        ],
+        "price": 190000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "xm-2-nt",
+        "sku": "SKU-XM-2-NT",
+        "optionValues": [
+          "xám",
+          "2 nút"
+        ],
+        "price": 210000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "xm-3-nt",
+        "sku": "SKU-XM-3-NT",
+        "optionValues": [
+          "xám",
+          "3 nút"
+        ],
+        "price": 220000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T08:02:19.138Z",
+    "updatedAt": "2026-06-02T08:02:19.138Z"
+  },
+  {
     "id": "H2Wnn4w1oPBBpmymmPT6",
     "name": "Cảm biến chuyển động Aqara P2",
     "sku": "SEN-CMBI-5264",
     "brand": "aqara",
     "category": "sensor",
     "price": 680000,
-    "discountPrice": 149999,
     "stock": 25,
     "minStockAlert": 5,
-    "rating": 0,
     "sold": 50,
     "shortDescription": "Cảm biến chuyển động Aqara P2 là thiết bị cảm biến thế hệ mới hỗ trợ chuẩn Matter over Thread, cho phép phát hiện chuyển động chính xác đồng thời đo cường độ ánh sáng môi trường. Thiết bị dễ dàng tích hợp với các hệ sinh thái nhà thông minh phổ biến như Apple HomeKit, Google Home, Amazon Alexa và Samsung SmartThings, mang đến khả năng tự động hóa linh hoạt và trải nghiệm điều khiển thông minh hiện đại.",
     "description": "Cảm biến chuyển động và ánh sáng Aqara P2 được trang bị cảm biến hồng ngoại PIR kết hợp cảm biến ánh sáng độc lập, cho phép theo dõi cả chuyển động của con người và mức độ chiếu sáng trong khu vực lắp đặt. Nhờ đó, người dùng có thể thiết lập các kịch bản tự động hóa thông minh như bật đèn khi có người di chuyển trong điều kiện thiếu sáng, điều khiển rèm cửa theo độ sáng hoặc kích hoạt các chế độ an ninh khi phát hiện chuyển động bất thường.\n\nThiết bị sử dụng kết nối Thread kết hợp Bluetooth Low Energy (BLE), mang lại khả năng truyền tải ổn định, độ trễ thấp và tiêu thụ điện năng tối ưu. Chuẩn Matter over Thread giúp Aqara P2 tương thích đa nền tảng, dễ dàng kết nối với Apple HomeKit, Google Home, Amazon Alexa và Samsung SmartThings thông qua các Thread Border Router tương thích mà không cần sử dụng giao thức Zigbee truyền thống.\n\nNgoài khả năng phát hiện chuyển động với góc quét rộng lên tới 170° và khoảng cách phát hiện lên đến 7 mét, Aqara P2 còn sở hữu thiết kế nhỏ gọn, đi kèm giá đỡ linh hoạt giúp dễ dàng lắp đặt trên tường, trần nhà hoặc các vị trí cần giám sát. Cảm biến ánh sáng tích hợp hoạt động độc lập, giúp mở rộng đáng kể các ngữ cảnh tự động hóa trong hệ sinh thái nhà thông minh.\n\nThông số kỹ thuật nổi bật\nKết nối không dây: Thread, BLE (Bluetooth Low Energy)\nTích hợp: Cảm biến chuyển động PIR + cảm biến ánh sáng độc lập\nLoại pin: CR2450 × 2\nTương thích: Apple HomeKit, Matter, Thread, Google Home, Amazon Alexa, Samsung SmartThings\nTuổi thọ pin: Lên đến 2 năm sử dụng*\nGóc phát hiện: 170° ngang, 45° dọc\nKhoảng cách phát hiện: Tối đa 7 mét\nKích thước: 33.1 × 33.1 × 41.6 mm\nNhiệt độ hoạt động: -10°C đến 55°C\nĐộ ẩm hoạt động: 0 – 95% RH (không ngưng tụ)",
@@ -587,7 +734,9 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T01:57:27.517Z",
-    "updatedAt": "2026-06-01T01:57:27.517Z"
+    "rating": 4.8,
+    "discountPrice": 1150000,
+    "updatedAt": "2026-06-02T04:13:03.224Z"
   },
   {
     "id": "HTy2ibWYZzqlru6o3LPI",
@@ -629,8 +778,6 @@
     "price": 4190000,
     "discountPrice": 5990000,
     "minStockAlert": 5,
-    "rating": 0,
-    "sold": 0,
     "shortDescription": "Bộ điều nhiệt Aqara Thermostat W400 VRF là thiết bị điều khiển nhiệt độ thông minh, hỗ trợ kết nối Zigbee, Wi-Fi và BLE, giúp quản lý điều hòa, sưởi sàn và hệ thống gió tươi một cách linh hoạt. Sản phẩm mang đến khả năng điều khiển chính xác, tiết kiệm năng lượng và dễ dàng tích hợp vào hệ sinh thái nhà thông minh.",
     "description": "Aqara Thermostat W400 VRF là bộ điều khiển nhiệt độ đa năng được thiết kế dành cho các hệ thống điều hòa trung tâm VRF, điều hòa cục bộ, sưởi sàn và hệ thống thông gió. Thiết bị cho phép người dùng kiểm soát nhiệt độ trong không gian sống một cách chính xác và tiện lợi thông qua ứng dụng trên điện thoại hoặc bảng điều khiển trực tiếp.\n\nSản phẩm hỗ trợ nhiều chuẩn kết nối hiện đại như Zigbee, Wi-Fi và BLE, giúp đảm bảo khả năng kết nối ổn định và linh hoạt trong nhiều hệ sinh thái nhà thông minh khác nhau. Người dùng có thể dễ dàng thiết lập lịch hoạt động, điều chỉnh nhiệt độ theo từng khung giờ hoặc tạo các kịch bản tự động hóa để tối ưu hóa trải nghiệm sử dụng và tiết kiệm năng lượng.\n\nNgoài khả năng điều khiển điều hòa, Aqara W400 VRF còn hỗ trợ điều khiển hệ thống sưởi sàn và gió tươi, đồng thời có thể mở rộng để điều khiển các thiết bị khác trong hệ thống nhà thông minh. Thiết kế vuông chuẩn 86 × 86 mm giúp sản phẩm dễ dàng lắp đặt thay thế công tắc truyền thống, phù hợp với nhiều không gian nội thất hiện đại.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bộ điều nhiệt Aqara Thermostat W400 VRF\nKết nối: Zigbee / Wi-Fi / BLE\nỨng dụng: Điều khiển điều hòa, sưởi sàn, hệ thống gió tươi\nĐiều khiển thiết bị khác: Có hỗ trợ mở rộng\nNguồn điện: 220–250VAC, 50/60Hz\nKích thước: 86 × 86 × 44 mm\nKiểu lắp đặt: Âm tường chuẩn 86\nTương thích: Hệ sinh thái Aqara và các thiết bị smart home tương thích\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển điều hòa, sưởi sàn và gió tươi thông minh\nHỗ trợ 3 chuẩn kết nối: Zigbee, Wi-Fi, BLE\nĐiều khiển từ xa qua ứng dụng điện thoại\nThiết lập lịch trình hoạt động linh hoạt\nTối ưu tiết kiệm năng lượng trong sử dụng\nThiết kế chuẩn 86 × 86 dễ dàng lắp đặt thay thế công tắc cũ\nKhả năng mở rộng điều khiển thiết bị trong hệ sinh thái smart home",
     "featured": false,
@@ -653,7 +800,9 @@
     "specifications": [],
     "createdAt": "2026-06-02T02:12:01.043Z",
     "stock": 16,
-    "updatedAt": "2026-06-02T02:12:20.422Z"
+    "sold": 94,
+    "rating": 4.8,
+    "updatedAt": "2026-06-02T04:19:20.552Z"
   },
   {
     "id": "IK1OfP730VA2AiTeoqHA",
@@ -784,17 +933,113 @@
     "updatedAt": "2026-06-01T02:23:40.320Z"
   },
   {
+    "id": "KsUroKMbCzdm0Uv5psYz",
+    "name": "Công tắc âm tường Aqara- H1 - Phiên bản màu xám EU Quốc Tế",
+    "sku": "SMA-CNGT-6798",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 650000,
+    "originalPrice": 0,
+    "stock": 20,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 246,
+    "shortDescription": "Công tắc âm tường Aqara H1 màu xám là giải pháp điều khiển thông minh cao cấp dành cho ngôi nhà hiện đại. Sản phẩm hỗ trợ đo điện năng tiêu thụ, bảo vệ quá tải và quá nhiệt, giúp vận hành an toàn và tiết kiệm điện. Thiết kế sang trọng, độ bền lên đến 100.000 lần đóng ngắt cùng khả năng kết nối hệ sinh thái nhà thông minh Aqara mang đến trải nghiệm tiện nghi và hiện đại cho người dùng.",
+    "description": "Công tắc âm tường Aqara H1 phiên bản màu xám được thiết kế với phong cách tối giản, hiện đại, dễ dàng hòa hợp với nhiều không gian nội thất. Sản phẩm có các tùy chọn 1 kênh và 2 kênh, đáp ứng đa dạng nhu cầu điều khiển hệ thống chiếu sáng trong gia đình.\n\nAqara H1 tích hợp tính năng đo điện năng tiêu thụ, giúp người dùng theo dõi và quản lý lượng điện sử dụng hiệu quả. Bên cạnh đó, công tắc còn được trang bị cơ chế bảo vệ quá tải và quá nhiệt, tăng cường độ an toàn cho thiết bị điện và hệ thống điện trong nhà.\n\nNhờ kết nối Zigbee ổn định, Aqara H1 có thể kết hợp với các thiết bị trong hệ sinh thái nhà thông minh để tạo ra các kịch bản tự động như bật/tắt đèn theo lịch trình, điều khiển từ xa qua điện thoại hoặc kích hoạt bằng giọng nói.\n\nThông số kỹ thuật\n\nSố kênh: 1 kênh / 2 kênh\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nBảo vệ quá tải: Có\nĐộ bền: 100.000 lần đóng ngắt\nNguồn điện: 100-250VAC, 50/60Hz\nCông suất tối đa: 3A / 600W\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 85.8 × 86 × 37.55 mm\nKết nối: Zigbee\nMàu sắc: Xám",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-am-tuong-aqara-h1-phien-ban-mau-xam-eu-quoc-te",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780450387/s4zvwtbentscmwkapte6.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780450388/pefykfx26ymxz41tutxq.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780450389/hb0v8fdgc2t8firaoa7s.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780450389/ysapqbjt1jyvg9azgciu.png"
+    ],
+    "options": [
+      {
+        "name": "Tính Năng Dây Nguội",
+        "values": [
+          "Có N",
+          "Không  N"
+        ]
+      },
+      {
+        "name": "Số Nút",
+        "values": [
+          "1 nút",
+          "2 nút"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "c-n-1-nt",
+        "sku": "SKU-C-N-1-NT",
+        "optionValues": [
+          "Có N",
+          "1 nút"
+        ],
+        "price": 650000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "c-n-2-nt",
+        "sku": "SKU-C-N-2-NT",
+        "optionValues": [
+          "Có N",
+          "2 nút"
+        ],
+        "price": 750000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "khng-n-1-nt",
+        "sku": "SKU-KHNG-N-1-NT",
+        "optionValues": [
+          "Không  N",
+          "1 nút"
+        ],
+        "price": 690000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "khng-n-2-nt",
+        "sku": "SKU-KHNG-N-2-NT",
+        "optionValues": [
+          "Không  N",
+          "2 nút"
+        ],
+        "price": 790000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T01:33:09.905Z",
+    "updatedAt": "2026-06-03T01:33:09.905Z"
+  },
+  {
     "id": "L5Yfh0kTC2EsJypRZ9If",
     "name": "Lõi khóa thay thế cho khóa U200",
     "sku": "SMA-LIKH-6927",
     "brand": "aqara",
     "category": "smart-lock",
     "price": 990000,
-    "discountPrice": 850000,
     "stock": 36,
     "minStockAlert": 5,
     "rating": 4.9,
-    "sold": 125000,
     "shortDescription": "Lõi khóa thay thế Aqara U200 được thiết kế chuyên dụng để tương thích hoàn hảo với khóa thông minh Aqara U200. Sản phẩm có khả năng điều chỉnh kích thước linh hoạt, phù hợp với nhiều loại cửa khác nhau, đồng thời đảm bảo độ an toàn cao và hỗ trợ mở khóa khẩn cấp khi cần thiết.",
     "description": "Lõi khóa thay thế Aqara U200 là phụ kiện chính hãng được phát triển dành riêng cho khóa thông minh Aqara U200, giúp nâng cao khả năng tương thích và đảm bảo hiệu suất vận hành ổn định trong quá trình sử dụng. Với thiết kế tiêu chuẩn và độ hoàn thiện cao, sản phẩm mang đến giải pháp thay thế lý tưởng cho các trường hợp nâng cấp hoặc thay mới lõi khóa hiện có.\n\nSản phẩm sở hữu thiết kế điều chỉnh linh hoạt, cho phép thay đổi kích thước để phù hợp với nhiều loại cửa và kết cấu khóa khác nhau. Nhờ đó, việc lắp đặt trở nên dễ dàng hơn mà vẫn đảm bảo tính thẩm mỹ và độ chắc chắn sau khi hoàn thiện.\n\nLõi khóa được trang bị chức năng khẩn cấp, cho phép mở cửa từ bên ngoài trong những tình huống cần thiết, góp phần tăng cường sự an toàn và tiện lợi cho người sử dụng. Bộ sản phẩm đi kèm đầy đủ phụ kiện lắp đặt và hướng dẫn chi tiết, giúp quá trình thay thế diễn ra nhanh chóng và thuận tiện.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Lõi khóa thay thế cho Aqara U200\nTương thích: Khóa thông minh Aqara U200\nKích thước tối thiểu: 70 × 17 × 33 mm\nKích thước tối đa: 110 × 17 × 33 mm\nThiết kế: Điều chỉnh kích thước linh hoạt\nTính năng:\nTương thích hoàn hảo với Aqara U200\nHỗ trợ mở khóa khẩn cấp từ bên ngoài\nDễ dàng lắp đặt và thay thế\nĐi kèm đầy đủ công cụ lắp đặt và hướng dẫn sử dụng\n\nTÍNH NĂNG NỔI BẬT\n\nThiết kế chuyên dụng dành cho Aqara U200\nĐiều chỉnh chiều dài linh hoạt theo từng loại cửa\nHỗ trợ mở khóa khẩn cấp an toàn\nLắp đặt nhanh chóng, không cần thay đổi kết cấu cửa\nChất liệu bền bỉ, vận hành ổn định và lâu dài",
     "featured": false,
@@ -811,7 +1056,9 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T01:40:28.362Z",
-    "updatedAt": "2026-06-02T01:40:28.362Z"
+    "sold": 273,
+    "discountPrice": 0,
+    "updatedAt": "2026-06-02T07:15:27.970Z"
   },
   {
     "id": "LN8SUp97IEGLyI2DI72T",
@@ -880,6 +1127,106 @@
     "updatedAt": "2026-06-01T09:36:09.949Z"
   },
   {
+    "id": "LtEUzaSspz9UIqwUNYkx",
+    "name": "Công tắc âm tường Aqara Q1 Zigbee",
+    "sku": "SMA-CNGT-2404",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 670000,
+    "originalPrice": 0,
+    "stock": 24,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 159,
+    "shortDescription": "Công tắc âm tường Aqara Q1 Zigbee là thiết bị điều khiển thông minh với thiết kế hiện đại, hỗ trợ kết nối Zigbee và tích hợp đầy đủ các tính năng an toàn như đo điện năng, bảo vệ quá nhiệt và quá tải. Sản phẩm phù hợp cho nhiều hệ thống điện dân dụng với cả hai phiên bản có dây trung tính (có N) và không có dây trung tính (không N).",
+    "description": "Aqara Q1 Zigbee là dòng công tắc âm tường thông minh được thiết kế nhằm nâng cấp hệ thống điện truyền thống thành hệ thống điều khiển hiện đại, tiện lợi và an toàn hơn. Với thiết kế nhỏ gọn và chuẩn âm tường, sản phẩm dễ dàng lắp đặt trong nhiều không gian như căn hộ, nhà phố, văn phòng hoặc công trình thương mại.\n\nCông tắc sử dụng giao thức Zigbee giúp đảm bảo kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng. Người dùng có thể điều khiển đèn và thiết bị điện từ xa thông qua ứng dụng Aqara Home, đồng thời thiết lập các kịch bản tự động hóa khi kết hợp với các thiết bị khác trong hệ sinh thái Aqara.\n\nSản phẩm được trang bị tính năng đo điện năng tiêu thụ, giúp theo dõi mức sử dụng điện một cách trực quan và hiệu quả. Bên cạnh đó, các cơ chế bảo vệ quá nhiệt và quá tải giúp tăng độ an toàn trong quá trình vận hành, bảo vệ thiết bị điện và hệ thống điện trong nhà.\n\nAqara Q1 hỗ trợ cả hai phiên bản có dây trung tính (Có N) và không dây trung tính (Không N), giúp tương thích với nhiều hệ thống điện khác nhau. Người dùng có thể lựa chọn phiên bản 1 kênh hoặc 2 kênh tùy theo nhu cầu sử dụng thực tế.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Công tắc âm tường Aqara Q1 Zigbee\nSố kênh:\n+ 1 kênh\n+ 2 kênh\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nBảo vệ quá tải: Có\nĐộ bền cơ học: 100.000 lần đóng/ngắt\nĐiện áp hoạt động: 100 – 250VAC, 50/60Hz\nCông suất tải tối đa: 3A / 600W\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 120 × 74 × 36.5 mm\nPhiên bản:\nCó dây trung tính (Có N)\nKhông dây trung tính (Không N)\n\nTÍNH NĂNG NỔI BẬT\n\nKết nối Zigbee ổn định, phản hồi nhanh\nHỗ trợ điều khiển từ xa qua ứng dụng Aqara Home\nTheo dõi điện năng tiêu thụ theo thời gian thực\nBảo vệ quá nhiệt và quá tải an toàn\nĐộ bền cao lên đến 100.000 lần đóng ngắt\nHỗ trợ cả phiên bản có N và không N\nThiết kế chuẩn âm tường dễ lắp đặt\nPhù hợp cho nhà ở, căn hộ và văn phòng hiện đại",
+    "featured": true,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-am-tuong-aqara-q1-zigbee",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780393001/lpbdevpiqoce4xwxxlud.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780393002/klklgxgmeuinhqafxdbq.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780393002/zml1zhciobuoh829p5mw.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780393002/ibrimj8flephmn3zcquo.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780393002/h5mcfqbjhud2l4qlijxi.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780393002/koomv8tp3avrwo6rzwfe.jpg"
+    ],
+    "options": [
+      {
+        "name": "Số Nút",
+        "values": [
+          "1 nút",
+          "2 nút"
+        ]
+      },
+      {
+        "name": "Tính Năng Dây Nguội",
+        "values": [
+          "Có N",
+          "Không N"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "1-nt-c-n",
+        "sku": "SKU-1-NT-C-N",
+        "optionValues": [
+          "1 nút",
+          "Có N"
+        ],
+        "price": 670000,
+        "originalPrice": 0,
+        "stock": 6,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-khng-n",
+        "sku": "SKU-1-NT-KHNG-N",
+        "optionValues": [
+          "1 nút",
+          "Không N"
+        ],
+        "price": 670000,
+        "originalPrice": 0,
+        "stock": 6,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-c-n",
+        "sku": "SKU-2-NT-C-N",
+        "optionValues": [
+          "2 nút",
+          "Có N"
+        ],
+        "price": 760000,
+        "originalPrice": 0,
+        "stock": 6,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-khng-n",
+        "sku": "SKU-2-NT-KHNG-N",
+        "optionValues": [
+          "2 nút",
+          "Không N"
+        ],
+        "price": 760000,
+        "originalPrice": 0,
+        "stock": 6,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T09:36:45.112Z",
+    "updatedAt": "2026-06-02T09:36:45.112Z"
+  },
+  {
     "id": "MAUjWZD2Lp0O4lWbb3Yd",
     "name": "Động cơ rèm cao cấp Aqara C3",
     "sku": "CUR-NGCR-5217",
@@ -946,6 +1293,46 @@
     "updatedAt": "2026-06-01T09:23:41.137Z"
   },
   {
+    "id": "N3AHVCgxfrGVefCT9cB7",
+    "name": "Cảm biến Gas Aqara thông minh, bản quốc tế JT-BZ-03AQ/A",
+    "sku": "SEN-CMBI-8781",
+    "brand": "aqara",
+    "category": "sensor",
+    "price": 990000,
+    "originalPrice": 1390000,
+    "stock": 24,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 103,
+    "shortDescription": "Cảm biến Gas Aqara JT-BZ-03AQ/A là thiết bị cảnh báo rò rỉ khí gas thông minh phiên bản quốc tế, giúp phát hiện sớm các nguy cơ rò rỉ khí đốt trong gia đình và gửi cảnh báo kịp thời đến người dùng. Sản phẩm hỗ trợ kết nối Zigbee, tương thích Apple HomeKit và Aqara Home, đồng thời tích hợp còi báo động công suất lớn 85dB giúp nâng cao an toàn cho ngôi nhà.",
+    "description": "Cảm biến Gas Aqara JT-BZ-03AQ/A được thiết kế để giám sát liên tục nồng độ khí gas trong không khí, giúp phát hiện sớm các dấu hiệu rò rỉ và kích hoạt cảnh báo ngay lập tức nhằm hạn chế các nguy cơ cháy nổ.\n\nKhi phát hiện nồng độ khí gas vượt ngưỡng an toàn, thiết bị sẽ kích hoạt còi báo động âm lượng lớn lên đến 85dB, đồng thời gửi thông báo đến điện thoại thông qua ứng dụng Aqara Home khi được kết nối với Aqara Hub. Điều này giúp người dùng nhanh chóng nắm bắt tình hình và xử lý sự cố dù đang ở nhà hay ở xa.\n\nCảm biến hỗ trợ giao thức Zigbee giúp kết nối ổn định, phản hồi nhanh và tiêu thụ năng lượng thấp. Ngoài ra, sản phẩm còn tương thích với Apple HomeKit và hệ sinh thái Aqara, cho phép tạo các ngữ cảnh tự động như bật quạt thông gió, ngắt nguồn thiết bị điện hoặc kích hoạt hệ thống báo động khi phát hiện rò rỉ gas.\n\nVới thiết kế nhỏ gọn, đạt các tiêu chuẩn chứng nhận an toàn quốc tế và dễ dàng lắp đặt, Aqara Gas Sensor là giải pháp bảo vệ hiệu quả cho căn hộ, nhà phố, biệt thự, nhà hàng hoặc các khu vực sử dụng khí gas.\n\nTính năng nổi bật\n\nPhát hiện rò rỉ khí gas nhanh chóng và chính xác.\nCảnh báo bằng còi báo động tích hợp âm lượng lên đến 85dB.\nGửi thông báo đến điện thoại khi kết nối với Aqara Hub.\nHỗ trợ tạo ngữ cảnh và tự động hóa thông minh.\nTương thích Apple HomeKit và Aqara Home.\nKết nối Zigbee ổn định, phản hồi nhanh.\nĐạt chứng nhận an toàn theo tiêu chuẩn quốc tế.\nDễ dàng lắp đặt và sử dụng.\nHoạt động liên tục để bảo vệ an toàn cho gia đình.\n\nThông số kỹ thuật\n\nModel: JT-BZ-03AQ/A\nPhiên bản: Quốc tế\nLoại cảm biến: Cảm biến phát hiện khí gas\nKết nối không dây: Zigbee\nÂm lượng báo động: 85dB\nỨng dụng hỗ trợ: Aqara Home\nTương thích: Apple HomeKit\nYêu cầu Hub: Aqara Hub để nhận cảnh báo từ xa và tạo ngữ cảnh thông minh\nChức năng: Phát hiện rò rỉ khí gas, cảnh báo tại chỗ và từ xa\n\nỨng dụng thực tế\n\nGiám sát rò rỉ gas trong nhà bếp.\nKết hợp quạt hút hoặc hệ thống thông gió để tự động xử lý khi phát hiện khí gas.\nGửi cảnh báo đến điện thoại khi không có mặt tại nhà.\nTăng cường an toàn cho gia đình, căn hộ, nhà hàng và các khu vực sử dụng khí đốt.",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cam-bien-gas-aqara-thong-minh-ban-quoc-te-jt-bz-03aqa",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452351/sk08t9ujqjkq2c9wnjy9.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/vifaj8xlv5uzidfekgww.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/dlc4tk490ljugj9fluhg.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/tcv99ywisj4iids9xmmo.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/eptyfxzy3xnkpyyg7i8o.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/mpumnnfxjggwe55dakig.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/mdrcpchrbsm4u4eowydz.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452352/dp6awkhvuwzzmhxrukww.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452353/skstgk2pjm9e0vusn7nh.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452353/i1kxnttsb4d9qxjezbsv.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452353/hblofrpetgp5yz0fwmft.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452353/nhvwyckeu3odhqnccbmg.jpg"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T02:05:53.786Z",
+    "updatedAt": "2026-06-03T02:05:53.786Z"
+  },
+  {
     "id": "O90i7Sl5sCLi4ypwr6Sl",
     "sku": "DOO-CHUN-4561",
     "brand": "aqara",
@@ -983,7 +1370,6 @@
     "brand": "aqara",
     "category": "sensor",
     "price": 450000,
-    "discountPrice": 150000,
     "stock": 12,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -1006,7 +1392,8 @@
       "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780281017/nghdnk8u7mdthcnsm728.jpg",
       "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780281076/a2hcrs9fdhzqfigiauvd.jpg"
     ],
-    "updatedAt": "2026-06-01T02:31:20.547Z"
+    "discountPrice": 600000,
+    "updatedAt": "2026-06-02T04:16:00.408Z"
   },
   {
     "id": "OMnSUg4OETuanqHkJAXG",
@@ -1018,8 +1405,6 @@
     "discountPrice": 0,
     "stock": 15,
     "minStockAlert": 5,
-    "rating": 0,
-    "sold": 0,
     "shortDescription": "Máy cho thú cưng ăn tự động Aqara Smart Pet Feeder C1 là giải pháp chăm sóc thú cưng thông minh, giúp bạn quản lý bữa ăn của chó mèo mọi lúc mọi nơi thông qua ứng dụng trên điện thoại. Thiết bị hỗ trợ hẹn giờ cho ăn tự động, kiểm soát khẩu phần ăn chính xác và đảm bảo thức ăn luôn khô ráo nhờ hệ thống chống ẩm hiệu quả.",
     "description": "Aqara Smart Pet Feeder C1 được thiết kế dành cho những người bận rộn nhưng vẫn muốn đảm bảo thú cưng được ăn uống đúng giờ và đủ dinh dưỡng mỗi ngày. Thông qua ứng dụng Aqara Home, người dùng có thể dễ dàng thiết lập lịch cho ăn, theo dõi và điều chỉnh khẩu phần ăn từ xa chỉ với vài thao tác đơn giản.\n\nThiết bị cho phép cài đặt nhiều khung giờ cho ăn trong ngày cùng lượng thức ăn cố định cho từng bữa. Điều này giúp hình thành thói quen ăn uống khoa học cho thú cưng, đồng thời hỗ trợ kiểm soát cân nặng và chế độ dinh dưỡng hiệu quả hơn.\n\nAqara Smart Pet Feeder C1 được trang bị hệ thống bảo quản thức ăn khô với khả năng chống ẩm, giúp duy trì độ tươi ngon và hạn chế tình trạng vón cục của thức ăn. Thiết kế khay chứa và các bộ phận tiếp xúc với thực phẩm có thể tháo rời dễ dàng, thuận tiện cho việc vệ sinh và bảo dưỡng định kỳ.\n\nNgoài nguồn điện chính, sản phẩm còn hỗ trợ sử dụng pin AA dự phòng, đảm bảo thiết bị vẫn hoạt động bình thường trong trường hợp mất điện, giúp thú cưng không bị gián đoạn bữa ăn theo lịch đã cài đặt.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Aqara Smart Pet Feeder C1\nChức năng: Máy cho thú cưng ăn tự động\nĐiều khiển: Qua ứng dụng Aqara Home\nHẹn giờ cho ăn: Có\nThiết lập khẩu phần ăn: Có\nQuản lý từ xa: Có\nHệ thống chống ẩm thức ăn: Có\nThiết kế tháo rời để vệ sinh: Có\nNguồn điện chính: Adapter nguồn\nNguồn dự phòng: Pin AA\nTương thích: Hệ sinh thái nhà thông minh Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển và quản lý từ xa qua điện thoại\nHẹn giờ cho ăn tự động theo lịch trình\nThiết lập chính xác lượng thức ăn cho từng bữa\nGiúp duy trì chế độ ăn khoa học cho thú cưng\nHệ thống chống ẩm giữ thức ăn luôn khô ráo\nDễ dàng tháo lắp và vệ sinh định kỳ\nHỗ trợ pin AA dự phòng khi mất điện\nPhù hợp cho chó và mèo sử dụng thức ăn khô",
     "featured": false,
@@ -1040,7 +1425,9 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T02:01:29.110Z",
-    "updatedAt": "2026-06-02T02:01:29.110Z"
+    "sold": 240,
+    "rating": 4.9,
+    "updatedAt": "2026-06-02T04:23:41.241Z"
   },
   {
     "id": "OvpyOG1fRtlKxXJa3QYz",
@@ -1078,6 +1465,182 @@
     "updatedAt": "2026-06-01T08:00:25.896Z"
   },
   {
+    "id": "QM6UqrzQu1gg7WUqJMX3",
+    "name": "Bóng đèn thông minh Aqara T2 Gu10 - Trắng vàng",
+    "sku": "SMA-BNGN-9774",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 550000,
+    "discountPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 160,
+    "shortDescription": "Bóng đèn thông minh Aqara T2 GU10 Trắng Vàng là giải pháp chiếu sáng hiện đại dành cho các loại đèn spotlight và đèn âm trần sử dụng đui GU10. Sản phẩm hỗ trợ điều chỉnh độ sáng và nhiệt độ màu linh hoạt, mang đến không gian ánh sáng phù hợp cho nhiều nhu cầu sinh hoạt, làm việc và thư giãn.",
+    "description": "Aqara T2 GU10 Trắng Vàng là bóng đèn LED thông minh được thiết kế dành cho các hệ thống chiếu sáng điểm nhấn như đèn rọi ray, đèn spotlight hoặc đèn âm trần sử dụng chuẩn đui GU10. Với thiết kế nhỏ gọn và khả năng điều khiển thông minh, sản phẩm giúp nâng cao trải nghiệm chiếu sáng trong không gian sống hiện đại.\n\nBóng đèn hỗ trợ điều chỉnh nhiệt độ màu từ ánh sáng vàng ấm đến ánh sáng trắng, giúp người dùng dễ dàng thay đổi bầu không khí theo từng thời điểm trong ngày. Ánh sáng vàng tạo cảm giác thư giãn, ấm cúng, trong khi ánh sáng trắng phù hợp cho các hoạt động học tập, làm việc hoặc cần độ tập trung cao.\n\nSản phẩm được trang bị khả năng điều chỉnh độ sáng (Dimming), cho phép người dùng thiết lập cường độ ánh sáng phù hợp với từng nhu cầu sử dụng. Chỉ số hoàn màu Ra90 giúp tái hiện màu sắc của đồ vật chân thực hơn, mang lại chất lượng chiếu sáng cao cấp cho không gian nội thất.\n\nVới mức tiêu thụ điện năng thấp chỉ 4.9W cùng công nghệ LED hiện đại, Aqara T2 GU10 vừa tiết kiệm điện vừa đảm bảo tuổi thọ sử dụng lâu dài. Sản phẩm hoạt động ổn định trên dải điện áp rộng từ 100V đến 240V, phù hợp với nhiều hệ thống điện khác nhau.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bóng đèn thông minh Aqara T2 GU10 Trắng Vàng\nLoại đui đèn: GU10\nCông suất định mức: 4.9W\nĐộ sáng: 1100 lm\nĐiều chỉnh độ sáng (Dim): Có\nChỉ số hoàn màu (CRI): Ra90\nNhiệt độ màu: Trắng – Vàng (điều chỉnh được)\nĐiện áp hoạt động: 100 – 240V AC\nCông nghệ chiếu sáng: LED\nỨng dụng: Đèn spotlight, đèn rọi, đèn âm trần GU10\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều chỉnh nhiệt độ màu từ trắng đến vàng\nHỗ trợ điều chỉnh độ sáng linh hoạt\nChỉ số hoàn màu Ra90 cho ánh sáng chân thực\nTiết kiệm điện năng với công suất chỉ 4.9W\nThiết kế chuẩn GU10 dễ dàng thay thế và lắp đặt\nPhù hợp cho chiếu sáng điểm nhấn và trang trí nội thất\nTuổi thọ cao, hoạt động ổn định\nTích hợp hệ sinh thái nhà thông minh Aqara",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bong-en-thong-minh-aqara-t2-gu10-trang-vang",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385967/zono9xrevlca7hxzixx9.png",
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T07:39:29.788Z",
+    "updatedAt": "2026-06-02T07:39:29.788Z"
+  },
+  {
+    "id": "QNqUHnEzWCosHTxWh9iP",
+    "name": "Công tắc âm tường Aqara Z1 Pro",
+    "sku": "SMA-CNGT-3416",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 690000,
+    "originalPrice": 0,
+    "stock": 96,
+    "minStockAlert": 5,
+    "rating": 4.7,
+    "sold": 257,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-am-tuong-aqara-z1-pro",
+    "discountPrice": 0,
+    "options": [
+      {
+        "name": "Số Nút",
+        "values": [
+          "1 nút",
+          "2 nút",
+          "3 nút",
+          "4 nút"
+        ]
+      },
+      {
+        "name": "Màu sắc",
+        "values": [
+          "Đen",
+          "Xám"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "1-nt-en",
+        "sku": "SKU-1-NT-EN",
+        "optionValues": [
+          "1 nút",
+          "Đen"
+        ],
+        "price": 690000,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-xm",
+        "sku": "SKU-1-NT-XM",
+        "optionValues": [
+          "1 nút",
+          "Xám"
+        ],
+        "price": 689998,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-en",
+        "sku": "SKU-2-NT-EN",
+        "optionValues": [
+          "2 nút",
+          "Đen"
+        ],
+        "price": 730000,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-xm",
+        "sku": "SKU-2-NT-XM",
+        "optionValues": [
+          "2 nút",
+          "Xám"
+        ],
+        "price": 730000,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-en",
+        "sku": "SKU-3-NT-EN",
+        "optionValues": [
+          "3 nút",
+          "Đen"
+        ],
+        "price": 770000,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-xm",
+        "sku": "SKU-3-NT-XM",
+        "optionValues": [
+          "3 nút",
+          "Xám"
+        ],
+        "price": 770000,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      },
+      {
+        "id": "4-nt-en",
+        "sku": "SKU-4-NT-EN",
+        "optionValues": [
+          "4 nút",
+          "Đen"
+        ],
+        "price": 810000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "4-nt-xm",
+        "sku": "SKU-4-NT-XM",
+        "optionValues": [
+          "4 nút",
+          "Xám"
+        ],
+        "price": 810000,
+        "originalPrice": 0,
+        "stock": 12,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T08:22:10.683Z",
+    "featured": true,
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389377/llz0uz4f6nhoicv9weoi.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389377/djn8gkkwpuypuxcboewn.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389378/rajjimu0plu1tfgdipds.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389377/qumia76xxirjlfbxudeq.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389377/kpbvyon63vthtt2yf9to.jpg"
+    ],
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389376/kijtyddnqj5ylgksu3sf.png",
+    "description": "Aqara Z1 Pro được thiết kế để nâng cấp trải nghiệm điều khiển điện trong gia đình với khả năng kết hợp giữa công tắc vật lý truyền thống và hệ thống nhà thông minh hiện đại. Sản phẩm có các phiên bản 1 kênh, 2 kênh và 3 kênh vật lý, đáp ứng đa dạng nhu cầu điều khiển đèn chiếu sáng và thiết bị điện trong nhiều không gian khác nhau.\n\nMột trong những điểm nổi bật của Aqara Z1 Pro là khả năng điều khiển đèn thông minh mà không làm mất nguồn điện của thiết bị. Điều này giúp các loại đèn thông minh luôn duy trì kết nối với hệ thống và hoạt động ổn định ngay cả khi được điều khiển bằng công tắc trên tường.\n\nSản phẩm được tích hợp tính năng đo điện năng tiêu thụ, cho phép người dùng theo dõi mức sử dụng điện của từng thiết bị hoặc khu vực trong nhà thông qua ứng dụng. Ngoài ra, tính năng thiết lập đảo chiều nhanh giúp việc thay đổi chức năng nút bấm hoặc cấu hình điều khiển trở nên đơn giản và thuận tiện hơn.\n\nVới khả năng chịu tải lên đến 10A (2200W), độ bền cơ học 100.000 lần đóng ngắt cùng khả năng hoạt động ổn định trong nhiều điều kiện môi trường khác nhau, Aqara Z1 Pro là giải pháp lý tưởng cho các căn hộ, nhà phố, biệt thự và công trình nhà thông minh hiện đại.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Công tắc âm tường Aqara Z1 Pro\nPhiên bản:\n+ 1 kênh vật lý\n+ 2 kênh vật lý\n+ 3 kênh vật lý\nHỗ trợ đo điện năng: Có\nĐiều khiển đèn thông minh: Có\nThiết lập đảo chiều nhanh: Có\nĐộ bền cơ học: 100.000 lần đóng/ngắt\nĐiện áp hoạt động: 100 – 250VAC, 50/60Hz\nCông suất tối đa: 10A / 2200W\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 86 × 86 × 33.5 mm\n\nTÍNH NĂNG NỔI BẬT\n\nHỗ trợ 1, 2 hoặc 3 kênh điều khiển vật lý\nĐiều khiển đèn thông minh mà không làm mất kết nối thiết bị\nTheo dõi điện năng tiêu thụ trực tiếp trên ứng dụng\nThiết lập đảo chiều nhanh, linh hoạt trong cấu hình\nCông suất tải lớn lên đến 2200W\nĐộ bền cao với 100.000 lần đóng ngắt\nThiết kế mỏng, hiện đại và sang trọng\nPhù hợp cho hệ sinh thái nhà thông minh Aqara\nDễ dàng lắp đặt cho nhà ở và công trình hiện đại",
+    "shortDescription": "Công tắc âm tường Aqara Z1 Pro là dòng công tắc thông minh cao cấp với thiết kế hiện đại, hỗ trợ điều khiển thiết bị điện và đèn thông minh trong cùng một hệ thống. Sản phẩm tích hợp tính năng đo điện năng tiêu thụ, thiết lập đảo chiều nhanh và độ bền lên đến 100.000 lần đóng ngắt, mang lại sự tiện lợi và ổn định cho ngôi nhà thông minh",
+    "updatedAt": "2026-06-02T08:36:20.647Z"
+  },
+  {
     "id": "QmaQM0kp6wDDkZPwEv1d",
     "name": "Hộp hình khối Aqara cube điều khiển thông minh",
     "sku": "SMA-HPHN-1929",
@@ -1108,6 +1671,129 @@
     "specifications": [],
     "createdAt": "2026-06-01T03:46:11.066Z",
     "updatedAt": "2026-06-01T03:46:11.066Z"
+  },
+  {
+    "id": "R0m10fn4uLTEPi5RRiWh",
+    "name": "Công tắc âm tường cao cấp Aqara H1 Pro có dây nguội",
+    "sku": "SMA-CNGT-1531",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 1790000,
+    "originalPrice": 0,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 293,
+    "shortDescription": "Công tắc âm tường cao cấp Aqara H1 Pro là dòng công tắc thông minh sở hữu thiết kế sang trọng với hai phiên bản màu Xám Đen và Vàng Gold, phù hợp cho các không gian nội thất cao cấp. Sản phẩm tích hợp khả năng đo điện năng tiêu thụ, nhiều lớp bảo vệ an toàn và độ bền lên đến 100.000 lần đóng ngắt, mang đến trải nghiệm điều khiển thông minh và ổn định lâu dài.",
+    "description": "Aqara H1 Pro là dòng công tắc âm tường cao cấp được thiết kế dành cho những công trình hiện đại yêu cầu cả tính thẩm mỹ và hiệu năng sử dụng. Với mặt kính sang trọng cùng các tùy chọn màu Xám Đen và Vàng Gold, sản phẩm dễ dàng trở thành điểm nhấn tinh tế trong mọi không gian từ căn hộ, biệt thự đến văn phòng cao cấp.\n\nCông tắc hỗ trợ các phiên bản 1 kênh, 2 kênh và 3 kênh, đáp ứng đa dạng nhu cầu điều khiển hệ thống chiếu sáng và thiết bị điện trong gia đình. Bên cạnh khả năng điều khiển thông minh, Aqara H1 Pro còn được tích hợp chức năng đo điện năng tiêu thụ, giúp người dùng theo dõi và quản lý mức sử dụng điện hiệu quả hơn.\n\nSản phẩm được trang bị nhiều công nghệ bảo vệ tiên tiến như bảo vệ quá nhiệt, chống sét lan truyền và bảo vệ quá tải, giúp đảm bảo an toàn cho thiết bị điện cũng như hệ thống điện trong nhà. Với tuổi thọ cơ học lên đến 100.000 lần đóng ngắt, Aqara H1 Pro mang lại độ bền vượt trội và khả năng vận hành ổn định trong thời gian dài.\n\nThiết kế chuẩn âm tường kích thước 86 giúp công tắc dễ dàng lắp đặt tại các công trình dân dụng và thương mại. Đây là lựa chọn lý tưởng cho những ai đang tìm kiếm một giải pháp điều khiển điện thông minh kết hợp giữa công nghệ hiện đại và thiết kế đẳng cấp.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Công tắc âm tường cao cấp Aqara H1 Pro\nPhiên bản màu sắc:\nXám Đen\nVàng Gold\nSố kênh:\n+ 1 kênh\n+ 2 kênh\n+ 3 kênh\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nChống sét lan truyền: Có\nBảo vệ quá tải: Có\nĐộ bền cơ học: 100.000 lần đóng/ngắt\nĐiện áp hoạt động: 100 – 250VAC, 50/60Hz\nCông suất tối đa: 10A / 2200W\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 86 × 86 × 43.7 mm\n\nTÍNH NĂNG NỔI BẬT\n\nThiết kế cao cấp với màu Xám Đen và Vàng Gold sang trọng\nHỗ trợ phiên bản 1, 2 và 3 kênh\nTheo dõi điện năng tiêu thụ theo thời gian thực\nBảo vệ quá nhiệt giúp tăng độ an toàn khi sử dụng\nChống sét lan truyền bảo vệ thiết bị điện\nTích hợp bảo vệ quá tải thông minh\nTuổi thọ lên đến 100.000 lần đóng ngắt\nCông suất tải lớn lên đến 2200W\nPhù hợp cho nhà ở, căn hộ và biệt thự cao cấp",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-am-tuong-cao-cap-aqara-h1-pro-co-day-nguoi",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780388064/pbimw8jk8srqghrxkwpf.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780388065/aoqp4sdhfhlgsdrahevw.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780388065/ias23uyh3suxyryfjhl4.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780388066/l3b8taarvrt0g4axvl97.png"
+    ],
+    "options": [
+      {
+        "name": "Số Nút",
+        "values": [
+          "1 nút",
+          "2 nút",
+          "3 nút"
+        ]
+      },
+      {
+        "name": "Màu Sắc",
+        "values": [
+          "Đen mờ",
+          "Gold"
+        ]
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T08:14:28.410Z",
+    "variants": [
+      {
+        "id": "1-nt-en-m",
+        "sku": "SKU-1-NT-EN-M",
+        "optionValues": [
+          "1 nút",
+          "Đen mờ"
+        ],
+        "price": 1790000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-gold",
+        "sku": "SKU-1-NT-GOLD",
+        "optionValues": [
+          "1 nút",
+          "Gold"
+        ],
+        "price": 1790000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-en-m",
+        "sku": "SKU-2-NT-EN-M",
+        "optionValues": [
+          "2 nút",
+          "Đen mờ"
+        ],
+        "price": 1890000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-gold",
+        "sku": "SKU-2-NT-GOLD",
+        "optionValues": [
+          "2 nút",
+          "Gold"
+        ],
+        "price": 1890000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-en-m",
+        "sku": "SKU-3-NT-EN-M",
+        "optionValues": [
+          "3 nút",
+          "Đen mờ"
+        ],
+        "price": 1990000,
+        "originalPrice": 0,
+        "stock": 10,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-gold",
+        "sku": "SKU-3-NT-GOLD",
+        "optionValues": [
+          "3 nút",
+          "Gold"
+        ],
+        "price": 1990000,
+        "originalPrice": 0,
+        "stock": 11,
+        "thumbnail": ""
+      }
+    ],
+    "stock": 60,
+    "updatedAt": "2026-06-02T08:15:09.842Z"
   },
   {
     "id": "RW8sjVEumwUz5hPkcoXm",
@@ -1176,13 +1862,258 @@
     "updatedAt": "2026-06-01T09:41:16.390Z"
   },
   {
+    "id": "S2Po6WpTW7VSwhMV0TUj",
+    "name": "Bóng đèn thông minh Aqara T2 Bulb - E27  RGB",
+    "sku": "SMA-BNGN-7006",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 690000,
+    "discountPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 128,
+    "shortDescription": "Bóng đèn thông minh Aqara T2 Bulb E27 RGB là giải pháp chiếu sáng thông minh đa sắc màu, cho phép tùy chỉnh hàng triệu màu sắc cùng độ sáng linh hoạt để tạo nên không gian sống sinh động và cá tính. Với độ sáng lên đến 1100 lumen và chỉ số hoàn màu Ra90, sản phẩm mang đến chất lượng ánh sáng chân thực, phù hợp cho cả nhu cầu chiếu sáng và trang trí.",
+    "description": "Aqara T2 Bulb E27 RGB là bóng đèn LED thông minh được thiết kế dành cho những người yêu thích trải nghiệm ánh sáng hiện đại và khả năng cá nhân hóa không gian sống. Với chuẩn đui E27 phổ biến, sản phẩm dễ dàng lắp đặt vào hầu hết các loại đèn gia đình mà không cần thay đổi hệ thống điện hiện có.\n\nBóng đèn hỗ trợ hiển thị hàng triệu màu sắc RGB kết hợp cùng ánh sáng trắng và vàng, giúp người dùng linh hoạt tạo ra nhiều bầu không khí khác nhau cho phòng khách, phòng ngủ, phòng giải trí hoặc không gian làm việc. Từ ánh sáng thư giãn nhẹ nhàng đến những hiệu ứng màu sắc sống động cho các buổi tiệc, Aqara T2 Bulb E27 RGB đều đáp ứng tốt.\n\nVới độ sáng tối đa 1100 lumen và khả năng điều chỉnh độ sáng (Dimming), người dùng có thể dễ dàng thiết lập mức ánh sáng phù hợp cho từng thời điểm trong ngày. Chỉ số hoàn màu Ra90 giúp tái hiện màu sắc vật thể một cách chân thực, mang lại trải nghiệm chiếu sáng chất lượng cao.\n\nSản phẩm hoạt động ổn định trong dải điện áp rộng từ 100V đến 240V và có thể tích hợp vào hệ sinh thái nhà thông minh Aqara để điều khiển từ xa, tạo lịch hoạt động hoặc xây dựng các kịch bản tự động hóa thông minh theo nhu cầu sử dụng.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bóng đèn thông minh Aqara T2 Bulb E27 RGB\nLoại đui đèn: E27\nCông suất định mức: 10.5W\nĐộ sáng: 1100 lm\nĐiều chỉnh độ sáng (Dim): Có\nChỉ số hoàn màu (CRI): Ra90\nMàu sắc ánh sáng: RGB đa màu + Trắng/Vàng\nĐiện áp hoạt động: 100 – 240V AC\nCông nghệ chiếu sáng: LED\nỨng dụng: Chiếu sáng và trang trí thông minh\n\nTÍNH NĂNG NỔI BẬT\n\nHỗ trợ hàng triệu màu sắc RGB sống động\nĐiều chỉnh độ sáng linh hoạt theo nhu cầu\nĐộ sáng cao lên đến 1100 lumen\nChỉ số hoàn màu Ra90 cho màu sắc chân thực\nKết hợp ánh sáng trắng, vàng và RGB trong một thiết bị\nTiết kiệm điện năng với công nghệ LED hiện đại\nĐui E27 phổ biến, dễ dàng lắp đặt\nTích hợp vào hệ sinh thái nhà thông minh Aqara\nPhù hợp cho chiếu sáng, trang trí và tạo không gian giải trí",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bong-en-thong-minh-aqara-t2-bulb-e27-rgb",
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780385789/cehu5id5n7gbmzbcfmfk.png",
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T07:36:31.409Z",
+    "updatedAt": "2026-06-02T07:36:31.409Z"
+  },
+  {
+    "id": "SCYvDsTzt11hHdZpUcPE",
+    "name": "Công tắc âm tường Aqara Zigbee - D1 - màu trắng",
+    "sku": "SMA-CNGT-3699",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 399000,
+    "originalPrice": 0,
+    "stock": 69,
+    "minStockAlert": 5,
+    "rating": 4.7,
+    "sold": 27,
+    "shortDescription": "Công tắc âm tường Aqara Zigbee D1 màu trắng là thiết bị điều khiển thông minh được thiết kế theo phong cách tối giản, hiện đại, phù hợp với nhiều không gian nội thất. Sản phẩm hỗ trợ đo điện năng tiêu thụ, tích hợp nhiều tính năng bảo vệ an toàn và có đầy đủ các phiên bản 1, 2, 3 kênh dành cho hệ thống điện có hoặc không có dây trung tính.",
+    "description": "Aqara Zigbee D1 màu trắng là một trong những dòng công tắc thông minh được sử dụng phổ biến trong hệ sinh thái Aqara Smart Home. Với thiết kế thanh lịch, màu trắng tinh tế cùng kích thước chuẩn âm tường, sản phẩm dễ dàng lắp đặt cho căn hộ, nhà phố, biệt thự và văn phòng hiện đại.\n\nCông tắc sử dụng giao thức Zigbee giúp kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng hơn so với các chuẩn kết nối thông thường. Người dùng có thể điều khiển thiết bị điện từ xa thông qua ứng dụng Aqara Home, đồng thời xây dựng các ngữ cảnh tự động hóa thông minh kết hợp với cảm biến, camera và các thiết bị Aqara khác.\n\nSản phẩm được tích hợp tính năng đo điện năng tiêu thụ giúp người dùng dễ dàng theo dõi mức sử dụng điện của từng thiết bị. Bên cạnh đó, các công nghệ bảo vệ quá nhiệt và quá tải giúp nâng cao độ an toàn cho hệ thống điện trong quá trình vận hành.\n\nAqara D1 màu trắng có hai phiên bản gồm có dây trung tính (Có N) và không dây trung tính (Không N), đáp ứng nhu cầu lắp đặt cho hầu hết các hệ thống điện dân dụng hiện nay. Người dùng có thể lựa chọn các phiên bản 1 kênh, 2 kênh hoặc 3 kênh tùy theo số lượng thiết bị cần điều khiển.\n\nTHÔNG SỐ KỸ THUẬT – PHIÊN BẢN CÓ DÂY TRUNG TÍNH (CÓ N)\n\nSố kênh:\n+ 1 kênh\n+ 2 kênh\n+ 3 kênh\nTải tối thiểu: 3W\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nBảo vệ quá tải: Có\nĐộ bền cơ học: 50.000 lần đóng/ngắt\nĐiện áp hoạt động: 100–250VAC, 50/60Hz\nCông suất tải:\n+ 800W – 1600W (tùy phiên bản)\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 86 × 86 × 42.85 mm\n\nTHÔNG SỐ KỸ THUẬT – PHIÊN BẢN KHÔNG DÂY TRUNG TÍNH (KHÔNG N)\n\nSố kênh:\n+ 1 kênh\n+ 2 kênh\n+ 3 kênh\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nBảo vệ quá tải: Có\nĐộ bền cơ học: 50.000 lần đóng/ngắt\nĐiện áp hoạt động: 100–250VAC, 50/60Hz\nCông suất tối đa: 10A / 2200W\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 86 × 86 × 42.85 mm\n\nTÍNH NĂNG NỔI BẬT\n\nThiết kế màu trắng hiện đại, phù hợp nhiều không gian\nHỗ trợ phiên bản có N và không N\nTùy chọn 1, 2 hoặc 3 kênh điều khiển\nKết nối Zigbee ổn định và tiết kiệm năng lượng\nĐiều khiển từ xa qua ứng dụng Aqara Home\nTheo dõi điện năng tiêu thụ theo thời gian thực\nBảo vệ quá nhiệt và quá tải an toàn\nĐộ bền lên đến 50.000 lần đóng ngắt\nDễ dàng tích hợp vào hệ sinh thái nhà thông minh Aqara",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-am-tuong-aqara-zigbee-d1-mau-trang",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391378/aies6vf6yzku5qb8yc8x.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391379/i2hzdvdnntgb8lkupswb.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/m9crrkz2vuzxk7vjlw9j.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/jmjsotrbu90xqoo0qw9g.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/nk9agrywwyathrx93soj.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/whylocn7l2ylmtpwhmrk.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/cdnsvpasw55t4j1za7l0.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/fcmuknsmfbseicgqgz9s.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391380/xobjs6cbpoo28yuopbnx.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780391381/sudndzebaibgv56yd2is.jpg"
+    ],
+    "options": [
+      {
+        "name": "Số Nút",
+        "values": [
+          "1 nút",
+          "2 nút",
+          "3 nút"
+        ]
+      },
+      {
+        "name": "Tính Năng Dây Nguội",
+        "values": [
+          "Có N",
+          "Không N"
+        ]
+      },
+      {
+        "name": "Mã Hàng",
+        "values": [
+          "Nội Địa",
+          "Quốc Tế"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "1-nt-c-n-ni-a",
+        "sku": "SKU-1-NT-C-N-NI-A",
+        "optionValues": [
+          "1 nút",
+          "Có N",
+          "Nội Địa"
+        ],
+        "price": 399000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-c-n-quc-t",
+        "sku": "SKU-1-NT-C-N-QUC-T",
+        "optionValues": [
+          "1 nút",
+          "Có N",
+          "Quốc Tế"
+        ],
+        "price": 549000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-khng-n-ni-a",
+        "sku": "SKU-1-NT-KHNG-N-NI-A",
+        "optionValues": [
+          "1 nút",
+          "Không N",
+          "Nội Địa"
+        ],
+        "price": 569000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-khng-n-quc-t",
+        "sku": "SKU-1-NT-KHNG-N-QUC-T",
+        "optionValues": [
+          "1 nút",
+          "Không N",
+          "Quốc Tế"
+        ],
+        "price": 598999,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-c-n-ni-a",
+        "sku": "SKU-2-NT-C-N-NI-A",
+        "optionValues": [
+          "2 nút",
+          "Có N",
+          "Nội Địa"
+        ],
+        "price": 469000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-c-n-quc-t",
+        "sku": "SKU-2-NT-C-N-QUC-T",
+        "optionValues": [
+          "2 nút",
+          "Có N",
+          "Quốc Tế"
+        ],
+        "price": 599000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-khng-n-ni-a",
+        "sku": "SKU-2-NT-KHNG-N-NI-A",
+        "optionValues": [
+          "2 nút",
+          "Không N",
+          "Nội Địa"
+        ],
+        "price": 619000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-khng-n-quc-t",
+        "sku": "SKU-2-NT-KHNG-N-QUC-T",
+        "optionValues": [
+          "2 nút",
+          "Không N",
+          "Quốc Tế"
+        ],
+        "price": 649000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-c-n-ni-a",
+        "sku": "SKU-3-NT-C-N-NI-A",
+        "optionValues": [
+          "3 nút",
+          "Có N",
+          "Nội Địa"
+        ],
+        "price": 550000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-c-n-quc-t",
+        "sku": "SKU-3-NT-C-N-QUC-T",
+        "optionValues": [
+          "3 nút",
+          "Có N",
+          "Quốc Tế"
+        ],
+        "price": 688999,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-khng-n-ni-a",
+        "sku": "SKU-3-NT-KHNG-N-NI-A",
+        "optionValues": [
+          "3 nút",
+          "Không N",
+          "Nội Địa"
+        ],
+        "price": 650000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-khng-n-quc-t",
+        "sku": "SKU-3-NT-KHNG-N-QUC-T",
+        "optionValues": [
+          "3 nút",
+          "Không N",
+          "Quốc Tế"
+        ],
+        "price": 699000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T09:09:43.970Z",
+    "updatedAt": "2026-06-02T09:09:43.970Z"
+  },
+  {
     "id": "SVUxRiVmfkXvTrui7GlA",
     "name": "Khóa thông minh Aqara A100 bản Zigbee",
     "sku": "SMA-KHAT-4414",
     "brand": "aqara",
     "category": "smart-lock",
     "price": 3490000,
-    "discountPrice": 500000,
     "stock": 26,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -1210,7 +2141,8 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T01:28:48.282Z",
-    "updatedAt": "2026-06-02T01:28:48.282Z"
+    "discountPrice": 0,
+    "updatedAt": "2026-06-02T07:17:25.698Z"
   },
   {
     "id": "U1Cxyy39imOsTtsB7nmC",
@@ -1281,6 +2213,130 @@
     "updatedAt": "2026-06-01T02:11:05.713Z"
   },
   {
+    "id": "VAqKnhXnvy1hYuuhNhGX",
+    "name": "Công tắc âm tường Aqara Zigbee - D1 - màu đen",
+    "sku": "SMA-CNGT-9748",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "originalPrice": 0,
+    "stock": 60,
+    "minStockAlert": 5,
+    "rating": 5,
+    "sold": 243,
+    "shortDescription": "Công tắc âm tường Aqara Zigbee D1 màu đen là giải pháp điều khiển thiết bị điện thông minh với thiết kế hiện đại, sang trọng và khả năng tích hợp sâu vào hệ sinh thái nhà thông minh Aqara. Sản phẩm hỗ trợ đo điện năng tiêu thụ, bảo vệ quá nhiệt, quá tải và có nhiều phiên bản phù hợp với cả hệ thống điện có dây trung tính (có N) và không dây trung tính (không N).",
+    "description": "Aqara Zigbee D1 là dòng công tắc thông minh được thiết kế dành cho các công trình nhà ở hiện đại, giúp nâng cấp hệ thống điện truyền thống thành hệ thống điều khiển thông minh dễ dàng và hiệu quả. Với màu đen sang trọng cùng kiểu dáng tối giản, sản phẩm phù hợp với nhiều phong cách nội thất khác nhau.\n\nCông tắc sử dụng giao thức Zigbee giúp kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng. Người dùng có thể điều khiển đèn và các thiết bị điện từ xa thông qua ứng dụng Aqara Home hoặc thiết lập các ngữ cảnh tự động hóa khi kết hợp với các thiết bị khác trong hệ sinh thái Aqara.\n\nSản phẩm được tích hợp tính năng đo điện năng tiêu thụ, giúp người dùng theo dõi và quản lý lượng điện sử dụng hiệu quả hơn. Ngoài ra, các cơ chế bảo vệ quá nhiệt và quá tải giúp đảm bảo an toàn cho thiết bị cũng như hệ thống điện trong gia đình.\n\nAqara D1 có hai phiên bản gồm có dây trung tính (có N) và không dây trung tính (không N), phù hợp với nhiều hệ thống điện khác nhau. Đồng thời, người dùng có thể lựa chọn các phiên bản 1 kênh, 2 kênh hoặc 3 kênh tùy theo nhu cầu sử dụng.\n\nTHÔNG SỐ KỸ THUẬT – PHIÊN BẢN KHÔNG DÂY TRUNG TÍNH (KHÔNG N)\n\nSản phẩm: Công tắc âm tường Aqara Zigbee D1 màu đen\nPhiên bản:\n+ 1 kênh\n+ 2 kênh\n+ 3 kênh\nTải tối thiểu: 3W\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nBảo vệ quá tải: Có\nĐộ bền cơ học: 50.000 lần đóng/ngắt\nĐiện áp hoạt động: 100 – 250VAC, 50/60Hz\nCông suất tải:\nTừ 800W đến 1600W (tùy phiên bản)\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 86 × 86 × 42.85 mm\n\nTHÔNG SỐ KỸ THUẬT – PHIÊN BẢN CÓ DÂY TRUNG TÍNH (CÓ N)\n\nSản phẩm: Công tắc âm tường Aqara Zigbee D1 màu đen\nPhiên bản:\n+ 1 kênh\n+ 2 kênh\n+ 3 kênh\nHỗ trợ đo điện năng: Có\nBảo vệ quá nhiệt: Có\nBảo vệ quá tải: Có\nĐộ bền cơ học: 50.000 lần đóng/ngắt\nĐiện áp hoạt động: 100 – 250VAC, 50/60Hz\nCông suất tối đa: 10A / 2200W\nNhiệt độ hoạt động: -10°C đến +55°C\nKích thước: 86 × 86 × 42.85 mm\n\nTÍNH NĂNG NỔI BẬT\n\nHỗ trợ phiên bản có N và không N\nTùy chọn 1, 2 hoặc 3 kênh điều khiển\nKết nối Zigbee ổn định, tiết kiệm năng lượng\nĐiều khiển từ xa qua ứng dụng Aqara Home\nTheo dõi điện năng tiêu thụ theo thời gian thực\nBảo vệ quá nhiệt và quá tải an toàn\nThiết kế màu đen sang trọng, hiện đại\nTuổi thọ lên đến 50.000 lần đóng ngắt",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "cong-tac-am-tuong-aqara-zigbee-d1-mau-en",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389836/bktnsmy0oj7qev8camvq.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389837/bvsnbsuootnl8klmofmx.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389838/hbddhi6q2dijawpinxuh.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389838/g2zp7lbic9dsh9pnvkkm.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780389838/yysrpfypk7hijx5uqoo9.png"
+    ],
+    "options": [
+      {
+        "name": "Số Nút",
+        "values": [
+          "1 nút",
+          "2 nút",
+          "3 nút"
+        ]
+      },
+      {
+        "name": "Tính Năng Dây Nguội",
+        "values": [
+          "Có N",
+          "Không N"
+        ]
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T08:44:01.056Z",
+    "price": 549000,
+    "variants": [
+      {
+        "id": "1-nt-c-n",
+        "sku": "SKU-1-NT-C-N",
+        "optionValues": [
+          "1 nút",
+          "Có N"
+        ],
+        "price": 549000,
+        "originalPrice": 0,
+        "stock": 20,
+        "thumbnail": ""
+      },
+      {
+        "id": "1-nt-khng-n",
+        "sku": "SKU-1-NT-KHNG-N",
+        "optionValues": [
+          "1 nút",
+          "Không N"
+        ],
+        "price": 599000,
+        "originalPrice": 0,
+        "stock": 20,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-c-n",
+        "sku": "SKU-2-NT-C-N",
+        "optionValues": [
+          "2 nút",
+          "Có N"
+        ],
+        "price": 599000,
+        "originalPrice": 0,
+        "stock": 20,
+        "thumbnail": ""
+      },
+      {
+        "id": "2-nt-khng-n",
+        "sku": "SKU-2-NT-KHNG-N",
+        "optionValues": [
+          "2 nút",
+          "Không N"
+        ],
+        "price": 649000,
+        "originalPrice": 0,
+        "stock": 18,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-c-n",
+        "sku": "SKU-3-NT-C-N",
+        "optionValues": [
+          "3 nút",
+          "Có N"
+        ],
+        "price": 689000,
+        "originalPrice": 0,
+        "stock": 20,
+        "thumbnail": ""
+      },
+      {
+        "id": "3-nt-khng-n",
+        "sku": "SKU-3-NT-KHNG-N",
+        "optionValues": [
+          "3 nút",
+          "Không N"
+        ],
+        "price": 699000,
+        "originalPrice": 0,
+        "stock": 20,
+        "thumbnail": ""
+      }
+    ],
+    "updatedAt": "2026-06-03T01:36:37.908Z"
+  },
+  {
     "id": "WPoW1gwWSoJeQDOekT5C",
     "name": "Thẻ từ NFC Aqara",
     "sku": "OTH-THTN-3465",
@@ -1291,7 +2347,6 @@
     "stock": 950,
     "minStockAlert": 5,
     "rating": 4.9,
-    "sold": 1800000,
     "shortDescription": "Thẻ NFC Aqara là phụ kiện mở khóa thông minh tiện lợi, giúp người dùng mở cửa chỉ bằng một thao tác chạm đơn giản. Sản phẩm được trang bị chip bảo mật EAL5+ cùng công nghệ chống sao chép tiên tiến, mang đến khả năng bảo vệ cao và trải nghiệm sử dụng an toàn cho mọi thành viên trong gia đình.",
     "description": "Thẻ NFC Aqara được thiết kế dành riêng cho hệ thống khóa cửa thông minh Aqara, mang đến phương thức mở khóa nhanh chóng, thuận tiện và dễ sử dụng. Chỉ cần đưa thẻ lại gần khu vực nhận diện trên khóa, người dùng có thể mở cửa ngay lập tức mà không cần ghi nhớ mật khẩu hay sử dụng điện thoại.\n\nSản phẩm được tích hợp công nghệ chống sao chép vượt trội kết hợp với chip bảo mật EAL5+, một trong những tiêu chuẩn bảo mật cao được ứng dụng trong các thiết bị điện tử hiện đại. Điều này giúp bảo vệ dữ liệu xác thực và hạn chế tối đa nguy cơ làm giả hoặc sao chép trái phép.\n\nVới thiết kế nhỏ gọn, độ bền cao và thao tác sử dụng đơn giản, thẻ NFC Aqara đặc biệt phù hợp cho người lớn tuổi, trẻ em hoặc những người không quen sử dụng các thiết bị công nghệ. Đồng thời, người dùng có thể dễ dàng quản lý, cấp quyền hoặc xóa quyền truy cập của từng thẻ thông qua ứng dụng Aqara Home, giúp kiểm soát việc ra vào hiệu quả và an toàn hơn.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Thẻ NFC Aqara\nCông nghệ kết nối: NFC\nChip bảo mật: EAL5+\nCông nghệ bảo mật: Chống sao chép dữ liệu tiên tiến\nTương thích: Các dòng khóa thông minh Aqara hỗ trợ NFC\nQuản lý: Thông qua ứng dụng Aqara Home\nChất liệu: Nhựa ABS cao cấp\nMàu sắc: Trắng\n\nTÍNH NĂNG NỔI BẬT\n\nMở khóa nhanh chóng chỉ với một lần chạm\nTích hợp chip bảo mật EAL5+ cấp độ cao\nCông nghệ chống sao chép giúp tăng cường an toàn\nDễ sử dụng cho người già và trẻ nhỏ\nQuản lý quyền truy cập thuận tiện trên ứng dụng\nThiết kế nhỏ gọn, dễ mang theo bên mình",
     "featured": false,
@@ -1307,7 +2362,8 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T01:44:31.201Z",
-    "updatedAt": "2026-06-02T01:44:31.201Z"
+    "sold": 174,
+    "updatedAt": "2026-06-02T07:19:42.130Z"
   },
   {
     "id": "WRyXqta6Z9ktsHjbaSRf",
@@ -1316,7 +2372,6 @@
     "brand": "aqara",
     "category": "smart-lock",
     "price": 7690000,
-    "discountPrice": 950000,
     "stock": 46,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -1337,7 +2392,8 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T01:35:34.165Z",
-    "updatedAt": "2026-06-02T01:35:34.165Z"
+    "discountPrice": 0,
+    "updatedAt": "2026-06-02T07:16:30.539Z"
   },
   {
     "id": "XGGaRVDhExEeSC1asv6F",
@@ -1366,6 +2422,69 @@
     "updatedAt": "2026-06-01T09:56:30.963Z"
   },
   {
+    "id": "XIZiChKZEdBIA4qy3ZQc",
+    "name": "Bộ Điều Khiển Module Dimmer Aqara T2",
+    "sku": "OTH-BIUK-6083",
+    "brand": "aqara",
+    "category": "other",
+    "originalPrice": 0,
+    "stock": 50,
+    "minStockAlert": 5,
+    "rating": 5,
+    "sold": 174,
+    "shortDescription": "Module Dimmer Aqara T2 là bộ điều khiển độ sáng thông minh dành cho hệ thống đèn LED điện áp thấp, cho phép điều chỉnh độ sáng mượt mà và tích hợp vào hệ sinh thái nhà thông minh Aqara. Sản phẩm hỗ trợ kết nối Zigbee, tương thích Apple HomeKit và phù hợp với các loại đèn Downlight, Spotlight hiện đại.",
+    "description": "Aqara Dimmer T2 là giải pháp điều khiển ánh sáng thông minh giúp nâng cấp hệ thống đèn LED truyền thống thành hệ thống chiếu sáng có thể điều chỉnh độ sáng linh hoạt. Thiết bị được thiết kế nhỏ gọn, dễ dàng lắp đặt bên trong trần hoặc hộp kỹ thuật, phù hợp cho các công trình nhà ở, căn hộ, biệt thự và văn phòng hiện đại.\n\nSử dụng giao thức Zigbee, Dimmer T2 mang đến khả năng kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng. Người dùng có thể điều khiển độ sáng của đèn từ xa thông qua ứng dụng Aqara Home, tạo lịch chiếu sáng hoặc kết hợp với các cảm biến và thiết bị Aqara khác để xây dựng các kịch bản tự động hóa thông minh.\n\nModule hỗ trợ điều khiển nhiều loại đèn LED điện áp thấp như Downlight và Spotlight, giúp tạo nên không gian ánh sáng phù hợp với từng nhu cầu sử dụng. Từ ánh sáng dịu nhẹ cho phòng ngủ đến ánh sáng mạnh cho khu vực làm việc, người dùng đều có thể tùy chỉnh dễ dàng chỉ với vài thao tác.\n\nĐặc biệt, Aqara Dimmer T2 tương thích với Apple HomeKit, cho phép điều khiển bằng iPhone, iPad hoặc giọng nói thông qua Siri. Thiết bị có nhiều tùy chọn công suất 15W hoặc 24W, đáp ứng linh hoạt cho từng hệ thống chiếu sáng khác nhau.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Module Dimmer Aqara T2\nKết nối không dây: Zigbee\nĐiện áp đầu vào: 220V AC\nĐiện áp đầu ra: Tối đa 50V DC\nCông suất:\nPhiên bản 15W\nPhiên bản 24W\nLoại đèn tương thích:\nLED Downlight\nLED Spotlight\nHỗ trợ điều chỉnh độ sáng (Dimming): Có\nHỗ trợ hệ sinh thái:\nApple HomeKit\nAqara Home\nKích thước: 17 × 40 × 30 mm\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều chỉnh độ sáng đèn LED mượt mà và chính xác\nKết nối Zigbee ổn định, tiết kiệm năng lượng\nĐiều khiển từ xa qua ứng dụng Aqara Home\nTương thích Apple HomeKit và Siri\nHỗ trợ đèn Downlight và Spotlight điện áp thấp\nThiết kế siêu nhỏ gọn, dễ dàng lắp đặt\nTạo ngữ cảnh và kịch bản chiếu sáng thông minh\nCó nhiều lựa chọn công suất 15W và 24W phù hợp nhiều nhu cầu sử dụng",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bo-ieu-khien-module-dimmer-aqara-t2",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780386931/tjyf24ezzsg84izw3ikh.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780386931/yxn6fgmdpiqxj2kyr3oa.jpg"
+    ],
+    "options": [
+      {
+        "name": "Mã hàng",
+        "values": [
+          "15W",
+          "24W"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "15w",
+        "sku": "SKU-15W",
+        "optionValues": [
+          "15W"
+        ],
+        "price": 990000,
+        "originalPrice": 1290000,
+        "stock": 25,
+        "thumbnail": ""
+      },
+      {
+        "id": "24w",
+        "sku": "SKU-24W",
+        "optionValues": [
+          "24W"
+        ],
+        "price": 1190000,
+        "originalPrice": 1490000,
+        "stock": 25,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T07:55:34.017Z",
+    "price": 990000,
+    "updatedAt": "2026-06-02T07:56:02.641Z"
+  },
+  {
     "id": "YZS62kGZVSjiVPX0cLX6",
     "name": "Máy sưởi nhà tắm đa năng Aqara T1",
     "sku": "OTH-MYSI-5993",
@@ -1375,8 +2494,6 @@
     "discountPrice": 5990000,
     "stock": 25,
     "minStockAlert": 5,
-    "rating": 0,
-    "sold": 0,
     "shortDescription": "Máy sưởi nhà tắm đa năng Aqara Bathroom Heater T1 là thiết bị sưởi ấm và chiếu sáng thông minh được thiết kế dành riêng cho không gian phòng tắm. Với công suất sưởi mạnh mẽ 2800W, công nghệ sưởi gốm PTC cùng 2 động cơ thổi gió tốc độ cao, sản phẩm mang lại khả năng làm ấm nhanh chóng, đồng thời hỗ trợ điều khiển thông minh qua Apple HomeKit và hệ sinh thái Aqara.",
     "description": "Aqara Bathroom Heater T1 là giải pháp lý tưởng giúp mang lại sự thoải mái cho người dùng trong những ngày thời tiết lạnh hoặc tại các khu vực có độ ẩm cao. Sản phẩm được trang bị hệ thống sưởi gốm PTC công suất 2800W kết hợp cùng 2 động cơ thổi khí hiệu suất cao, giúp luồng khí ấm được phân bổ nhanh và đồng đều khắp không gian phòng tắm.\n\nBên cạnh chức năng sưởi ấm, thiết bị còn tích hợp hệ thống đèn LED chiếu sáng hiện đại với khả năng điều chỉnh nhiệt độ màu từ 2700K đến 6500K. Người dùng có thể linh hoạt lựa chọn ánh sáng vàng ấm, trung tính hoặc trắng sáng tùy theo nhu cầu sử dụng và thời điểm trong ngày.\n\nMáy sưởi nhà tắm Aqara T1 hỗ trợ kết nối với hệ sinh thái nhà thông minh Aqara và Apple HomeKit, cho phép điều khiển từ xa, thiết lập lịch hoạt động hoặc tạo các kịch bản tự động hóa thông minh. Người dùng có thể kết hợp với cảm biến hiện diện, cảm biến nhiệt độ hoặc các thiết bị Aqara khác để tối ưu hóa trải nghiệm sử dụng.\n\nVới thiết kế âm trần hiện đại, kiểu dáng mỏng gọn và sang trọng, Aqara Bathroom Heater T1 phù hợp với nhiều phong cách nội thất phòng tắm khác nhau. Sản phẩm đặc biệt thích hợp cho các không gian có diện tích từ 10 đến 20m², đáp ứng hiệu quả nhu cầu sưởi ấm và chiếu sáng trong gia đình.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Máy sưởi nhà tắm đa năng Aqara T1\nCông suất sưởi: 2800W\nCông nghệ sưởi: Gốm PTC\nHệ thống quạt: 2 động cơ thổi khí ấm\nĐiều khiển thông minh: Aqara Home, Apple HomeKit\nNhiệt độ màu ánh sáng: 2700K – 6500K\nKích thước: 300 × 600 × 34 mm\nDiện tích sử dụng phù hợp: 10 – 20 m²\nKiểu lắp đặt: Âm trần\nTương thích: Apple HomeKit, hệ sinh thái Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nCông suất sưởi mạnh mẽ 2800W làm ấm nhanh chóng\nCông nghệ sưởi gốm PTC an toàn và tiết kiệm điện\n2 động cơ thổi khí giúp phân bổ nhiệt đều khắp phòng\nTích hợp đèn LED chiếu sáng và điều chỉnh nhiệt độ màu\nHỗ trợ điều khiển thông minh qua Apple HomeKit\nTạo kịch bản tự động hóa với các thiết bị Aqara\nThiết kế âm trần hiện đại, tiết kiệm không gian\nPhù hợp cho phòng tắm có diện tích từ 10 đến 20m²",
     "featured": false,
@@ -1396,7 +2513,9 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T02:08:06.717Z",
-    "updatedAt": "2026-06-02T02:08:06.717Z"
+    "sold": 195,
+    "rating": 5,
+    "updatedAt": "2026-06-02T04:21:49.056Z"
   },
   {
     "id": "ZJ5exXptvP5KJ0h3MPcL",
@@ -1405,7 +2524,6 @@
     "brand": "aqara",
     "category": "other",
     "price": 1190000,
-    "discountPrice": 890000,
     "stock": 53,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -1429,7 +2547,111 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T01:49:20.379Z",
-    "updatedAt": "2026-06-02T01:49:20.379Z"
+    "discountPrice": 2500000,
+    "updatedAt": "2026-06-02T04:27:00.855Z"
+  },
+  {
+    "id": "aE5QhIENBrw0Gn7a2smO",
+    "name": "Đèn LED ray cao cấp Aqara V1 Luxury",
+    "sku": "SMA-NLED-8761",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 1550000,
+    "originalPrice": 0,
+    "stock": 44,
+    "minStockAlert": 5,
+    "rating": 4.7,
+    "sold": 264,
+    "shortDescription": "Đèn LED ray thông minh Aqara Track Light V1 là giải pháp chiếu sáng hiện đại dành cho không gian sống và thương mại. Sản phẩm hỗ trợ điều chỉnh nhiệt độ màu từ 2700K đến 6000K, nhiều phiên bản công suất lựa chọn và tích hợp hệ sinh thái nhà thông minh, mang đến khả năng chiếu sáng linh hoạt, thẩm mỹ cao và tiện nghi vượt trội.",
+    "description": "Aqara Track Light V1 được thiết kế theo phong cách tối giản nhưng sang trọng, phù hợp với nhiều không gian như phòng khách, showroom, cửa hàng thời trang, văn phòng hoặc khu trưng bày sản phẩm. Hệ thống đèn ray cho phép bố trí linh hoạt, dễ dàng thay đổi vị trí và hướng chiếu sáng để tạo điểm nhấn cho từng khu vực.\n\nĐèn hỗ trợ dải nhiệt độ màu từ 2700K đến 6000K, giúp người dùng dễ dàng chuyển đổi giữa ánh sáng vàng ấm áp và ánh sáng trắng rõ nét tùy theo nhu cầu sử dụng. Với nhiều phiên bản công suất từ 6W đến 12W, sản phẩm đáp ứng đa dạng yêu cầu chiếu sáng trong từng không gian khác nhau.\n\nAqara Track Light V1 tương thích Apple HomeKit, cho phép người dùng điều khiển đèn từ xa, thiết lập ngữ cảnh tự động hóa hoặc kết hợp với các thiết bị IoT khác trong hệ sinh thái Aqara để tạo nên không gian sống thông minh, tiện nghi và hiện đại.\n\nHệ thống ray đèn không chỉ đóng vai trò chiếu sáng mà còn là phụ kiện hỗ trợ thiết bị IoT, giúp tối ưu hóa việc lắp đặt và mở rộng hệ thống chiếu sáng thông minh trong tương lai.\n\nTính năng nổi bật\n\nThiết kế đèn ray hiện đại, sang trọng.\nĐiều chỉnh nhiệt độ màu từ 2700K – 6000K.\nNhiều phiên bản công suất 6W – 12W.\nHỗ trợ điều khiển thông minh qua Apple HomeKit.\nDễ dàng điều chỉnh vị trí và hướng chiếu sáng.\nTích hợp hệ sinh thái thiết bị IoT Aqara.\nPhù hợp cho nhà ở, showroom, cửa hàng và văn phòng.\nTạo ngữ cảnh ánh sáng thông minh theo nhu cầu.\n\nThông số kỹ thuật\n\nLoại sản phẩm: Đèn LED ray thông minh\nThiết kế: Track Light V1\nNguồn cấp: 220V AC\nCông suất: 6W – 12W (tùy phiên bản)\nDải nhiệt độ màu: 2700K – 6000K\nĐiều khiển: Thông minh qua hệ sinh thái Aqara\nTương thích: Apple HomeKit\nỨng dụng: Chiếu sáng nhà ở, showroom, cửa hàng, văn phòng",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "en-led-ray-cao-cap-aqara-v1-luxury",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780458565/g5lommjgkkyksr42eqci.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780458566/ryjsgfav5ocn56csijak.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780458566/tajan0s4eumw0detzqz8.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780458566/mw8xkamxnzac06vdxk5c.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780458566/ig7h6m7nzdy9zr3a7pry.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780458566/un25ywdxvkzklesswdbr.png"
+    ],
+    "options": [
+      {
+        "name": "Phiên bản",
+        "values": [
+          "Led ray 24 bóng",
+          "Spotlight 24°",
+          "Led ray 12 bóng",
+          "Led ray 30 cm",
+          "Led ray 60 cm"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "led-ray-24-bng",
+        "sku": "SKU-LED-RAY-24-BNG",
+        "optionValues": [
+          "Led ray 24 bóng"
+        ],
+        "price": 1890000,
+        "originalPrice": 0,
+        "stock": 8,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-24",
+        "sku": "SKU-SPOTLIGHT-24",
+        "optionValues": [
+          "Spotlight 24°"
+        ],
+        "price": 1690000,
+        "originalPrice": 0,
+        "stock": 8,
+        "thumbnail": ""
+      },
+      {
+        "id": "led-ray-12-bng",
+        "sku": "SKU-LED-RAY-12-BNG",
+        "optionValues": [
+          "Led ray 12 bóng"
+        ],
+        "price": 1690000,
+        "originalPrice": 0,
+        "stock": 8,
+        "thumbnail": ""
+      },
+      {
+        "id": "led-ray-30-cm",
+        "sku": "SKU-LED-RAY-30-CM",
+        "optionValues": [
+          "Led ray 30 cm"
+        ],
+        "price": 1550000,
+        "originalPrice": 0,
+        "stock": 8,
+        "thumbnail": ""
+      },
+      {
+        "id": "led-ray-60-cm",
+        "sku": "SKU-LED-RAY-60-CM",
+        "optionValues": [
+          "Led ray 60 cm"
+        ],
+        "price": 1890000,
+        "originalPrice": 0,
+        "stock": 8,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T03:49:27.281Z",
+    "updatedAt": "2026-06-03T10:25:13.241Z"
   },
   {
     "id": "aG29yfQ4e5eicbLbLIQN",
@@ -1495,6 +2717,40 @@
     "updatedAt": "2026-06-01T02:21:24.697Z"
   },
   {
+    "id": "c1diLDZ3dQE7eETGZTVv",
+    "name": "Cảm biến độ nhạy cao Aqara High Precision Motion Sensor",
+    "sku": "SEN-CMBI-1452",
+    "brand": "aqara",
+    "category": "sensor",
+    "price": 1100000,
+    "originalPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 87,
+    "shortDescription": "Aqara High Precision Motion Sensor là cảm biến chuyển động độ chính xác cao sử dụng kết nối Zigbee 3.0, cho phép phát hiện chuyển động nhanh và ổn định trong phạm vi lên đến 5m. Sản phẩm hỗ trợ điều chỉnh 3 mức độ nhạy (Cao, Trung Bình, Thấp), tương thích Apple HomeKit và Aqara Home, giúp xây dựng các kịch bản tự động hóa và an ninh thông minh hiệu quả trong nhà.",
+    "description": "Aqara High Precision Motion Sensor được thiết kế để mang đến khả năng phát hiện chuyển động chính xác hơn cho hệ thống nhà thông minh. Với công nghệ Zigbee 3.0, cảm biến hoạt động ổn định, phản hồi nhanh và tiêu thụ điện năng thấp. Người dùng có thể tùy chỉnh độ nhạy cảm biến theo 3 mức Cao, Trung Bình hoặc Thấp để phù hợp với từng không gian và nhu cầu sử dụng, hạn chế các kích hoạt không mong muốn.\n\nSản phẩm hỗ trợ tích hợp với Apple HomeKit và ứng dụng Aqara Home, cho phép kết hợp với đèn thông minh, công tắc, camera hoặc các thiết bị Aqara khác để tạo nên nhiều kịch bản tự động như bật đèn khi có người đi qua, gửi cảnh báo khi phát hiện chuyển động hoặc kích hoạt chế độ an ninh khi vắng nhà.\n\nCảm biến có phạm vi phát hiện tối đa 5m cùng góc quét hình nón 60 độ, phù hợp lắp đặt tại hành lang, phòng khách, phòng ngủ, cầu thang hoặc các khu vực cần giám sát chuyển động trong nhà.\n\nCông dụng\n\nPhát hiện chuyển động của người trong khu vực giám sát.\nTự động bật/tắt đèn khi có người di chuyển.\nKích hoạt cảnh báo an ninh khi phát hiện chuyển động bất thường.\nLiên kết với các thiết bị Aqara để xây dựng hệ thống nhà thông minh.\nHỗ trợ tiết kiệm điện năng thông qua các kịch bản tự động hóa.\n\nThông số kỹ thuật\n\nKết nối không dây: Zigbee 3.0\nTương thích: Apple HomeKit, Aqara Home\nĐộ nhạy cảm biến: Cao / Trung Bình / Thấp\nKhoảng cách phát hiện tối đa: 5m\nGóc quét phát hiện: 60°\nVùng phát hiện: Hình nón\nYêu cầu Hub Zigbee 3.0:\nAqara Hub M1S\nAqara Hub M2\nXiaomi Hub Zigbee 3.0\nMôi trường sử dụng: Trong nhà\nKhông hỗ trợ sử dụng ngoài trời.",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": true,
+    "status": "active",
+    "slug": "cam-bien-o-nhay-cao-aqara-high-precision-motion-sensor",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780539683/xergq9cwcznspdlonef6.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780539683/eord0ef87oqo4joeodb6.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780539684/pp4kgqkmjtyqbcmxu3nn.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780539684/axsoxjamtuzqtnmaqqsc.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780539684/ilybmcqikc5bpkvrdeyd.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780539684/vghxrrhvpsja5bucn8pc.jpg"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-04T02:21:24.900Z",
+    "updatedAt": "2026-06-04T02:21:24.900Z"
+  },
+  {
     "id": "c7EqOIVOhvFEJmwUl6zG",
     "name": "Ổ cắm âm tường thông minh Aqara H2 E",
     "sku": "SMA-CMMT-7327",
@@ -1523,6 +2779,125 @@
     "specifications": [],
     "createdAt": "2026-06-01T04:23:07.342Z",
     "updatedAt": "2026-06-01T04:23:07.342Z"
+  },
+  {
+    "id": "cTULfx3D5Z97Il2JBBIo",
+    "name": "Đèn âm trần Downlight/Spotlight Aqara T2 Lite",
+    "sku": "SMA-NMTR-7759",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 990000,
+    "originalPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 4.7,
+    "sold": 283,
+    "shortDescription": "Đèn âm trần Aqara T2 Lite là giải pháp chiếu sáng thông minh hiện đại với khả năng điều chỉnh nhiệt độ màu từ 2700K đến 6000K, đáp ứng mọi nhu cầu sử dụng từ thư giãn đến làm việc. Sản phẩm sử dụng kết nối Zigbee ổn định, hỗ trợ điều khiển từ xa, thiết lập ngữ cảnh thông minh và dễ dàng tích hợp vào hệ sinh thái nhà thông minh Aqara.",
+    "description": "Đèn âm trần Downlight/Spotlight Aqara T2 Lite được thiết kế dành cho các không gian sống hiện đại, mang đến khả năng chiếu sáng linh hoạt và tiết kiệm năng lượng. Với thiết kế âm trần tinh tế, sản phẩm phù hợp lắp đặt tại phòng khách, phòng ngủ, hành lang, văn phòng, showroom hoặc các không gian thương mại.\n\nAqara T2 Lite hỗ trợ điều chỉnh nhiệt độ màu từ 2700K đến 6000K, cho phép người dùng dễ dàng chuyển đổi giữa ánh sáng vàng ấm áp để thư giãn và ánh sáng trắng sáng rõ phục vụ học tập, làm việc hoặc sinh hoạt hàng ngày.\n\nNhờ kết nối Zigbee, đèn có khả năng phản hồi nhanh, hoạt động ổn định và tiết kiệm năng lượng hơn. Khi kết hợp với Aqara Hub, người dùng có thể điều khiển từ xa bằng điện thoại, tạo lịch trình bật/tắt tự động hoặc xây dựng các ngữ cảnh thông minh như \"Xem phim\", \"Đọc sách\", \"Tiếp khách\" hay \"Đi ngủ\".\n\nĐèn còn sở hữu hệ số công suất cao 0.9 giúp tối ưu hiệu quả sử dụng điện năng, giảm hao phí điện và nâng cao tuổi thọ hệ thống chiếu sáng.\n\nTính năng nổi bật\n\nĐiều chỉnh nhiệt độ màu từ 2700K đến 6000K.\nKết nối Zigbee ổn định, phản hồi nhanh.\nĐiều khiển từ xa qua ứng dụng khi kết hợp Aqara Hub.\nHỗ trợ thiết lập ngữ cảnh và tự động hóa thông minh.\nÁnh sáng dịu mắt, phù hợp nhiều không gian sử dụng.\nThiết kế âm trần hiện đại, thẩm mỹ cao.\nTiết kiệm điện năng với hệ số công suất 0.9.\nTích hợp dễ dàng vào hệ sinh thái nhà thông minh Aqara.\n\nThông số kỹ thuật\n\nLoại sản phẩm: Đèn âm trần Downlight/Spotlight thông minh\nNguồn cấp: 220V AC\nKết nối: Zigbee\nDải nhiệt độ màu: 2700K – 6000K\nKích thước khoét lỗ: Φ75mm\nHệ số công suất (PF): 0.9\nĐiều khiển từ xa: Có (thông qua Aqara Hub)\nTương thích: Aqara Home và các hệ sinh thái hỗ trợ Aqara\n\nỨng dụng thực tế\n\nChiếu sáng phòng khách, phòng ngủ, phòng làm việc.\nTạo các ngữ cảnh ánh sáng theo nhu cầu sử dụng.\nKết hợp cảm biến để tự động bật/tắt đèn.\nĐiều khiển toàn bộ hệ thống chiếu sáng từ điện thoại.\nNâng cấp không gian sống thành hệ thống chiếu sáng thông minh hiện đại.",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "en-am-tran-downlightspotlight-aqara-t2-lite",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452793/eldyyptful8xyl6xhzmb.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452794/espxytwiw8qsu4neeqe0.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780452795/qbaqcv6zaf4ijjj0avov.png"
+    ],
+    "options": [
+      {
+        "name": "Phiên bản",
+        "values": [
+          "Downlight T2 Lite（80°)",
+          "Spotlight T2 Lite（15°)",
+          "Spotlight T2 Lite（24°)",
+          "Spotlight T2 Lite（36°)"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "downlight-t2-lite80",
+        "sku": "SKU-DOWNLIGHT-T2-LITE80",
+        "optionValues": [
+          "Downlight T2 Lite（80°)"
+        ],
+        "price": 990000,
+        "originalPrice": 0,
+        "stock": 25,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-t2-lite15",
+        "sku": "SKU-SPOTLIGHT-T2-LITE15",
+        "optionValues": [
+          "Spotlight T2 Lite（15°)"
+        ],
+        "price": 990000,
+        "originalPrice": 0,
+        "stock": 25,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-t2-lite24",
+        "sku": "SKU-SPOTLIGHT-T2-LITE24",
+        "optionValues": [
+          "Spotlight T2 Lite（24°)"
+        ],
+        "price": 990000,
+        "originalPrice": 0,
+        "stock": 25,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-t2-lite36",
+        "sku": "SKU-SPOTLIGHT-T2-LITE36",
+        "optionValues": [
+          "Spotlight T2 Lite（36°)"
+        ],
+        "price": 990000,
+        "originalPrice": 0,
+        "stock": 25,
+        "thumbnail": ""
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T02:13:16.017Z",
+    "updatedAt": "2026-06-03T02:13:16.017Z"
+  },
+  {
+    "id": "cXBOhk2MbRtF2IU4WWx4",
+    "name": "Mô Đun Công Tắc Điều Khiển Aqara T2 - 2 kênh",
+    "sku": "SMA-MUNC-5104",
+    "brand": "aqara",
+    "category": "smart-switch",
+    "price": 690000,
+    "originalPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 229,
+    "shortDescription": "Mô Đun Công Tắc Điều Khiển Aqara T2 2 Kênh là giải pháp thông minh giúp nâng cấp các thiết bị điện truyền thống thành thiết bị điều khiển từ xa qua điện thoại. Với thiết kế nhỏ gọn, hỗ trợ 2 kênh điều khiển độc lập và tiếp điểm khô (Dry Contact), Aqara T2 phù hợp để điều khiển đèn chiếu sáng, cửa cuốn, cổng tự động, rèm điện và nhiều thiết bị khác trong hệ thống nhà thông minh.",
+    "description": "Aqara T2 2 Kênh là mô đun điều khiển thông minh được thiết kế để lắp đặt ẩn phía sau công tắc hoặc bên trong tủ điện, giúp chuyển đổi các thiết bị điện thông thường thành thiết bị thông minh mà không làm thay đổi hệ thống điện hiện có.\n\nSản phẩm hỗ trợ 2 kênh điều khiển độc lập, cho phép bật/tắt đồng thời nhiều thiết bị trên cùng một mô đun. Nhờ khả năng kết nối với hệ sinh thái nhà thông minh Aqara, người dùng có thể điều khiển thiết bị từ xa thông qua điện thoại, thiết lập lịch trình hoạt động hoặc tạo các ngữ cảnh tự động hóa theo nhu cầu.\n\nĐặc biệt, Aqara T2 được trang bị tiếp điểm khô (Dry Contact), cho phép điều khiển các thiết bị yêu cầu tín hiệu đóng/ngắt như cửa cuốn, cổng tự động, rèm điện, khóa điện từ và nhiều hệ thống điều khiển khác. Đây là giải pháp lý tưởng cho các công trình nhà ở, văn phòng và hệ thống tự động hóa hiện đại.\n\nTính năng nổi bật\n\nĐiều khiển 2 thiết bị độc lập trên cùng một mô đun.\nHỗ trợ điều khiển từ xa qua điện thoại.\nTạo ngữ cảnh và tự động hóa thông minh.\nHỗ trợ tiếp điểm khô (Dry Contact).\nĐiều khiển cửa cuốn, cổng tự động, rèm điện và các thiết bị điều khiển tín hiệu.\nKích thước nhỏ gọn, dễ dàng lắp đặt âm tường hoặc trong tủ điện.\nHoạt động ổn định, an toàn và tiết kiệm năng lượng.\nTương thích với hệ sinh thái nhà thông minh Aqara.\n\nThông số kỹ thuật\n\nSố kênh: 2 kênh\nNguồn điện: 100-250VAC, 50/60Hz\nCông suất tối đa: 10A ~ 2200W\nNhiệt độ làm việc: -10℃ ~ +55℃\nHỗ trợ tiếp điểm khô (Dry Contact): Có\nỨng dụng: Điều khiển đèn, quạt, cửa cuốn, cổng tự động, rèm điện và các thiết bị điện khác",
+    "featured": true,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "mo-un-cong-tac-ieu-khien-aqara-t2-2-kenh",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451517/xw6fhfl3etem64jangen.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451517/p5mnyshlbbogdkfrfcsq.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451518/x7euxdyk18xdpwbcpag0.png"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T01:51:58.724Z",
+    "updatedAt": "2026-06-03T01:51:58.724Z"
   },
   {
     "id": "dPNeweSEXd8TXzE9OM3a",
@@ -1651,6 +3026,42 @@
     "updatedAt": "2026-06-01T07:32:04.340Z"
   },
   {
+    "id": "h7LhIlc2IIZd0pT32JwV",
+    "name": "Hộp hình khối Aqara cube T1 Pro  điều khiển ngữ cảnh thông minh",
+    "sku": "OTH-HPHN-7776",
+    "brand": "aqara",
+    "category": "other",
+    "price": 385000,
+    "originalPrice": 510000,
+    "stock": 16,
+    "minStockAlert": 5,
+    "rating": 4.7,
+    "sold": 45,
+    "shortDescription": "Hộp điều khiển thông minh Aqara Cube T1 Pro là phiên bản nâng cấp mới với khả năng tương thích Apple HomeKit, Amazon Alexa và hệ sinh thái nhà thông minh Aqara. Chỉ với các thao tác đơn giản như xoay, lắc, nghiêng hoặc chạm, người dùng có thể điều khiển đèn, rèm cửa, thiết bị điện và kích hoạt các ngữ cảnh thông minh một cách nhanh chóng, tiện lợi.",
+    "description": "Aqara Cube T1 Pro là thiết bị điều khiển ngữ cảnh thông minh độc đáo được thiết kế dưới dạng hình khối nhỏ gọn, mang đến trải nghiệm tương tác hoàn toàn mới cho ngôi nhà thông minh. Thay vì sử dụng nút bấm truyền thống, người dùng có thể thực hiện các thao tác trực quan trên khối lập phương để điều khiển các thiết bị hoặc kích hoạt những kịch bản tự động hóa đã được thiết lập sẵn.\n\nPhiên bản T1 Pro được nâng cấp khả năng tương thích với Apple HomeKit, Amazon Alexa và hệ sinh thái Aqara, giúp kết nối linh hoạt với nhiều nền tảng nhà thông minh phổ biến hiện nay. Thiết bị hỗ trợ tới 6 ngữ cảnh điều khiển khác nhau, cho phép người dùng dễ dàng tùy chỉnh theo nhu cầu sử dụng.\n\nVới kích thước nhỏ gọn, thiết kế tối giản và thời lượng pin dài, Aqara Cube T1 Pro có thể đặt tại bàn làm việc, phòng khách, phòng ngủ hoặc mang theo để điều khiển hệ thống nhà thông minh một cách thuận tiện.\n\nTính năng nổi bật\n\nĐiều khiển nhà thông minh bằng các cử chỉ trực quan.\nHỗ trợ 6 ngữ cảnh điều khiển khác nhau.\nXoay, lắc, nghiêng, chạm hoặc lật để kích hoạt các tác vụ.\nTương thích Apple HomeKit và Amazon Alexa.\nKết hợp dễ dàng với hệ sinh thái Aqara.\nTạo ngữ cảnh tự động hóa thông minh chỉ với một thao tác.\nThiết kế nhỏ gọn, hiện đại, dễ dàng bố trí ở mọi không gian.\nTiêu thụ năng lượng thấp, thời lượng pin dài.\n\nThông số kỹ thuật\n\nNgữ cảnh điều khiển: 6 cách điều khiển\nNhiệt độ làm việc: -10℃ ~ +55℃\nPin: CR2450\nKích thước: 45 × 45 × 45 mm\nKết nối: Zigbee 3.0\nTương thích: Apple HomeKit, Amazon Alexa, Aqara Home\n\nỨng dụng thực tế\n\nBật/tắt toàn bộ đèn trong nhà.\nĐiều khiển rèm cửa thông minh.\nKích hoạt chế độ \"Về nhà\", \"Đi ngủ\", \"Xem phim\" hoặc \"Ra ngoài\".\nĐiều khiển các thiết bị điện thông minh Aqara.\nTạo các kịch bản tự động hóa chỉ bằng một thao tác cử chỉ.",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "hop-hinh-khoi-aqara-cube-t1-pro-ieu-khien-ngu-canh-thong-minh",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451948/kk9kzhqsjqgklfmrym94.jpg",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451949/lpns6taqjn4onqcoggrg.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451949/kordow3bszlfto5m0cxt.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451950/aswfjbrlkwwaxozaq0mr.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451949/mn5swtv7txry4ofdvgin.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451949/zdfaqldsxlgti4ucijwz.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451949/eh8olincnizsvevits88.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780451949/ogv83bvuabeg5cbvt8xo.jpg"
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T01:59:10.569Z",
+    "updatedAt": "2026-06-03T01:59:10.569Z"
+  },
+  {
     "id": "hNgOm05kJluv3kms6Flk",
     "name": "Công tắc âm tường thông minh Aqara V1 Display Màu Trắng",
     "sku": "SMA-CNGT-1023",
@@ -1686,13 +3097,10 @@
   },
   {
     "id": "jxAA6pZTgAdEL9FrK78S",
-    "name": "Đèn âm trần Downlight / Spotlight Aqara T2",
     "sku": "SMA-NMTR-9099",
     "brand": "aqara",
     "category": "smart-light",
     "price": 1150000,
-    "discountPrice": 0,
-    "stock": 0,
     "minStockAlert": 5,
     "rating": 4.8,
     "sold": 71,
@@ -1700,7 +3108,6 @@
     "bestSeller": false,
     "newProduct": false,
     "status": "active",
-    "slug": "en-am-tran-downlight-spotlight-aqara-t2",
     "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371866/rflke2w58519pb3wa0fe.png",
     "images": [
       "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780371867/kvvytwo8zy7h0fzn1zva.png",
@@ -1748,165 +3155,432 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T03:44:30.657Z",
+    "description": "Aqara Downlight/Spotlight T2 Pro là dòng đèn âm trần thông minh thế hệ mới, kết hợp giữa chiếu sáng thẩm mỹ và công nghệ điều khiển thông minh. Sản phẩm hỗ trợ hai chế độ chiếu sáng gồm Downlight (ánh sáng tỏa rộng) và Spotlight (ánh sáng chiếu điểm), giúp người dùng linh hoạt tạo hiệu ứng ánh sáng theo từng không gian nội thất.\n\nĐèn sử dụng công nghệ kết nối Zigbee và BLE, cho phép điều khiển từ xa thông qua ứng dụng Aqara Home hoặc tích hợp với các hệ sinh thái nhà thông minh như Apple HomeKit. Người dùng có thể dễ dàng điều chỉnh độ sáng, nhiệt độ màu hoặc tạo kịch bản chiếu sáng tự động theo thời gian và nhu cầu sử dụng.\n\nSản phẩm có dải nhiệt độ màu rộng từ 2700K đến 6000K, cho phép chuyển đổi linh hoạt từ ánh sáng vàng ấm đến ánh sáng trắng lạnh. Thân đèn được thiết kế bằng nhôm giúp tản nhiệt hiệu quả, đảm bảo độ bền và tuổi thọ cao trong quá trình sử dụng.\n\nAqara T2 Pro có hai phiên bản công suất, phù hợp với nhiều nhu cầu lắp đặt khác nhau: phiên bản 12W dành cho lỗ khoét Φ75mm và phiên bản 8W dành cho lỗ khoét Φ55mm, giúp dễ dàng thi công và thay thế trong nhiều loại trần khác nhau.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Đèn âm trần Aqara Downlight/Spotlight T2 Pro\nCông suất:\n+ 12W (lỗ khoét Φ75mm)\n+ 8W (lỗ khoét Φ55mm)\nNguồn điện: 220V\nKết nối: Zigbee / BLE\nNhiệt độ màu: 2700K – 6000K\nChế độ chiếu sáng: Downlight / Spotlight\nHệ số công suất: 0.9\nVật liệu tản nhiệt: Nhôm\nĐiều khiển: Qua ứng dụng Aqara Home\nTương thích: Hệ sinh thái Aqara, Apple HomeKit\n\nTÍNH NĂNG NỔI BẬT\n\nHỗ trợ 2 chế độ ánh sáng: chiếu tỏa và chiếu điểm\nĐiều chỉnh nhiệt độ màu linh hoạt 2700K–6000K\nKết nối Zigbee và BLE ổn định, tiết kiệm năng lượng\nĐiều khiển thông minh qua app và giọng nói\nThiết kế tản nhiệt nhôm giúp tăng độ bền\nDễ dàng lắp đặt với nhiều kích thước khoét trần\nTích hợp hệ sinh thái nhà thông minh Aqara",
+    "shortDescription": "Đèn âm trần thông minh Aqara Downlight/Spotlight T2 Pro là giải pháp chiếu sáng hiện đại, hỗ trợ kết nối Zigbee và BLE, cho phép điều khiển thông minh qua app và hệ sinh thái nhà Aqara. Sản phẩm có khả năng thay đổi nhiệt độ màu linh hoạt từ 2700K đến 6000K, phù hợp cho nhiều không gian như phòng khách, phòng ngủ và hành lang.",
+    "stock": 7,
+    "name": "Đèn âm trần Downlight / Spotlight Aqara T2 Pro ",
+    "slug": "en-am-tran-downlight-spotlight-aqara-t2-pro-",
+    "discountPrice": 0,
+    "originalPrice": 1800000,
     "variants": [
       {
-        "id": "75-12w-trng-spotlight-36",
-        "sku": "SKU-75-12W-TRNG-SPOTLIGHT-36",
+        "id": "spotlight-24-embedded-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-EMBEDDED-EN-55-8W",
+        "optionValues": [
+          "Spotlight 24° Embedded",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-24-embedded-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-EMBEDDED-EN-75-12W",
         "optionValues": [
           "Spotlight 24° Embedded",
           "Đen",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 12,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371297017-2039qptlx",
-        "sku": "SKU-VAR-1780371297017-2039QPTLX",
+        "id": "spotlight-24-embedded-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-EMBEDDED-TRNG-55-8W",
+        "optionValues": [
+          "Spotlight 24° Embedded",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-24-embedded-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-EMBEDDED-TRNG-75-12W",
+        "optionValues": [
+          "Spotlight 24° Embedded",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-36-embedded-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-EMBEDDED-EN-55-8W",
+        "optionValues": [
+          "Spotlight 36° Embedded",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-36-embedded-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-EMBEDDED-EN-75-12W",
         "optionValues": [
           "Spotlight 36° Embedded",
           "Đen",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 15,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371323528-equfgs769",
-        "sku": "SKU-VAR-1780371323528-EQUFGS769",
+        "id": "spotlight-36-embedded-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-EMBEDDED-TRNG-55-8W",
+        "optionValues": [
+          "Spotlight 36° Embedded",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-36-embedded-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-EMBEDDED-TRNG-75-12W",
+        "optionValues": [
+          "Spotlight 36° Embedded",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-EN-55-8W",
+        "optionValues": [
+          "Spotlight 55°",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-EN-75-12W",
+        "optionValues": [
+          "Spotlight 55°",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-TRNG-55-8W",
+        "optionValues": [
+          "Spotlight 55°",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-TRNG-75-12W",
+        "optionValues": [
+          "Spotlight 55°",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-embedded-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-EMBEDDED-EN-55-8W",
+        "optionValues": [
+          "Spotlight 55° Embedded",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-embedded-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-EMBEDDED-EN-75-12W",
         "optionValues": [
           "Spotlight 55° Embedded",
           "Đen",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 13,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371323728-wibw79hsp",
-        "sku": "SKU-VAR-1780371323728-WIBW79HSP",
+        "id": "spotlight-55-embedded-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-EMBEDDED-TRNG-55-8W",
+        "optionValues": [
+          "Spotlight 55° Embedded",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-55-embedded-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-55-EMBEDDED-TRNG-75-12W",
+        "optionValues": [
+          "Spotlight 55° Embedded",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "downlight-60-en-55-8w",
+        "sku": "SMA-NMTR-9099-DOWNLIGHT-60-EN-55-8W",
+        "optionValues": [
+          "Downlight 60°",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "downlight-60-en-75-12w",
+        "sku": "SMA-NMTR-9099-DOWNLIGHT-60-EN-75-12W",
         "optionValues": [
           "Downlight 60°",
           "Đen",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 12,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371323896-8dod26mm0",
-        "sku": "SKU-VAR-1780371323896-8DOD26MM0",
+        "id": "downlight-60-trng-55-8w",
+        "sku": "SMA-NMTR-9099-DOWNLIGHT-60-TRNG-55-8W",
+        "optionValues": [
+          "Downlight 60°",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "downlight-60-trng-75-12w",
+        "sku": "SMA-NMTR-9099-DOWNLIGHT-60-TRNG-75-12W",
         "optionValues": [
           "Downlight 60°",
           "Trắng",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 14,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371324072-ezf3jskiy",
-        "sku": "SKU-VAR-1780371324072-EZF3JSKIY",
+        "id": "spotlight-15-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-15-EN-55-8W",
+        "optionValues": [
+          "Spotlight 15°",
+          "Đen",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-15-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-15-EN-75-12W",
         "optionValues": [
           "Spotlight 15°",
           "Đen",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 15,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371324225-mgzffi4iy",
-        "sku": "SKU-VAR-1780371324225-MGZFFI4IY",
+        "id": "spotlight-15-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-15-TRNG-55-8W",
         "optionValues": [
-          "Spotlight 24°",
-          "Đen",
-          "¤75-12W"
+          "Spotlight 15°",
+          "Trắng",
+          "¤55-8W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 16,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371324392-jc4lp79nu",
-        "sku": "SKU-VAR-1780371324392-JC4LP79NU",
+        "id": "spotlight-15-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-15-TRNG-75-12W",
         "optionValues": [
-          "Spotlight 24°",
+          "Spotlight 15°",
           "Trắng",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 0,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371500608-qgy2od3sn",
-        "sku": "SKU-VAR-1780371500608-QGY2OD3SN",
+        "id": "spotlight-24-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-EN-55-8W",
         "optionValues": [
           "Spotlight 24°",
           "Đen",
           "¤55-8W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 20,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371500768-0djw3h9p0",
-        "sku": "SKU-VAR-1780371500768-0DJW3H9P0",
+        "id": "spotlight-24-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-EN-75-12W",
+        "optionValues": [
+          "Spotlight 24°",
+          "Đen",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-24-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-TRNG-55-8W",
+        "optionValues": [
+          "Spotlight 24°",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-24-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-24-TRNG-75-12W",
+        "optionValues": [
+          "Spotlight 24°",
+          "Trắng",
+          "¤75-12W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-36-en-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-EN-55-8W",
         "optionValues": [
           "Spotlight 36°",
           "Đen",
           "¤55-8W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 16,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371500920-2270rnth2",
-        "sku": "SKU-VAR-1780371500920-2270RNTH2",
+        "id": "spotlight-36-en-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-EN-75-12W",
         "optionValues": [
           "Spotlight 36°",
           "Đen",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 12,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       },
       {
-        "id": "var-1780371501096-axos5lehv",
-        "sku": "SKU-VAR-1780371501096-AXOS5LEHV",
+        "id": "spotlight-36-trng-55-8w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-TRNG-55-8W",
+        "optionValues": [
+          "Spotlight 36°",
+          "Trắng",
+          "¤55-8W"
+        ],
+        "price": 1150000,
+        "originalPrice": 1800000,
+        "stock": 7,
+        "thumbnail": ""
+      },
+      {
+        "id": "spotlight-36-trng-75-12w",
+        "sku": "SMA-NMTR-9099-SPOTLIGHT-36-TRNG-75-12W",
         "optionValues": [
           "Spotlight 36°",
           "Trắng",
           "¤75-12W"
         ],
         "price": 1150000,
-        "discountPrice": 0,
-        "stock": 10,
+        "originalPrice": 1800000,
+        "stock": 7,
         "thumbnail": ""
       }
     ],
-    "updatedAt": "2026-06-02T03:45:28.967Z"
+    "updatedAt": "2026-06-02T07:37:46.660Z"
   },
   {
     "id": "k7m3lbT3Ez5V0hft4jYD",
@@ -2077,7 +3751,6 @@
     "category": "other",
     "price": 1290000,
     "discountPrice": 0,
-    "stock": 0,
     "minStockAlert": 5,
     "rating": 4.8,
     "sold": 236,
@@ -2105,6 +3778,12 @@
         ]
       }
     ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T03:08:03.631Z",
+    "stock": 76,
+    "originalPrice": 0,
     "variants": [
       {
         "id": "100w-en",
@@ -2114,7 +3793,7 @@
           "Đen"
         ],
         "price": 1290000,
-        "discountPrice": 250000,
+        "originalPrice": 0,
         "stock": 25,
         "thumbnail": ""
       },
@@ -2126,7 +3805,7 @@
           "Trắng"
         ],
         "price": 1290000,
-        "discountPrice": 250000,
+        "originalPrice": 0,
         "stock": 15,
         "thumbnail": ""
       },
@@ -2138,7 +3817,7 @@
           "Đen"
         ],
         "price": 1690000,
-        "discountPrice": 150000,
+        "originalPrice": 0,
         "stock": 23,
         "thumbnail": ""
       },
@@ -2150,16 +3829,12 @@
           "Trắng"
         ],
         "price": 1690000,
-        "discountPrice": 150000,
+        "originalPrice": 0,
         "stock": 22,
         "thumbnail": ""
       }
     ],
-    "ratingCount": 0,
-    "tags": [],
-    "specifications": [],
-    "createdAt": "2026-06-02T03:08:03.631Z",
-    "updatedAt": "2026-06-02T03:11:30.132Z"
+    "updatedAt": "2026-06-02T07:34:24.451Z"
   },
   {
     "id": "pHoJ0610PuWKKb6zx3xe",
@@ -2389,6 +4064,158 @@
     "updatedAt": "2026-06-02T01:45:42.759Z"
   },
   {
+    "id": "suVIO8KDZ8sBSLCowkV7",
+    "name": "Đèn Spotlight gắn nổi Aqara Surface T1",
+    "sku": "SMA-NSPO-2734",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 890000,
+    "originalPrice": 0,
+    "stock": 25,
+    "minStockAlert": 5,
+    "rating": 4.8,
+    "sold": 212,
+    "shortDescription": "Đèn Spotlight gắn nổi Aqara Surface T1 là giải pháp chiếu sáng thông minh cao cấp với thiết kế hiện đại, phù hợp cho nhà ở, văn phòng, showroom và các không gian thương mại. Sản phẩm hỗ trợ kết nối Zigbee, điều chỉnh nhiệt độ màu linh hoạt từ 2700K đến 6000K, chỉ số hoàn màu CRI Ra90 cao giúp tái hiện màu sắc chân thực, mang đến trải nghiệm chiếu sáng chất lượng và thẩm mỹ vượt trội.",
+    "description": "Aqara Surface T1 là đèn spotlight gắn nổi thông minh được thiết kế dành cho các không gian yêu cầu tính thẩm mỹ cao và khả năng chiếu sáng linh hoạt. Với kiểu dáng hiện đại cùng chất liệu nhôm cao cấp, sản phẩm không chỉ tạo điểm nhấn cho không gian mà còn đảm bảo khả năng tản nhiệt hiệu quả, giúp kéo dài tuổi thọ của đèn.\n\nĐèn được trang bị công suất 10W cùng khả năng điều chỉnh nhiệt độ màu từ 2700K đến 6000K, cho phép người dùng dễ dàng thay đổi giữa ánh sáng vàng ấm thư giãn và ánh sáng trắng phục vụ làm việc, học tập hoặc trưng bày sản phẩm.\n\nChỉ số hoàn màu CRI Ra90 giúp tái tạo màu sắc trung thực, rõ nét và tự nhiên hơn, đặc biệt phù hợp cho các khu vực cần độ chính xác màu sắc cao như phòng khách, phòng trưng bày, cửa hàng thời trang hoặc studio.\n\nThông qua kết nối Zigbee và hệ sinh thái Aqara, người dùng có thể điều khiển đèn từ xa bằng điện thoại, thiết lập lịch trình hoạt động hoặc tạo các ngữ cảnh chiếu sáng thông minh phù hợp với từng thời điểm trong ngày.\n\nTính năng nổi bật\n\nThiết kế spotlight gắn nổi hiện đại, sang trọng.\nĐiều chỉnh nhiệt độ màu từ 2700K đến 6000K.\nChỉ số hoàn màu CRI Ra90 cho màu sắc chân thực.\nKết nối Zigbee ổn định, phản hồi nhanh.\nĐiều khiển từ xa qua ứng dụng khi kết hợp Aqara Hub.\nHỗ trợ thiết lập ngữ cảnh và tự động hóa thông minh.\nCông suất 10W tiết kiệm điện năng.\nVỏ nhôm cao cấp giúp tản nhiệt hiệu quả.\nHệ số công suất 0.9 giúp tối ưu hiệu suất sử dụng điện.\n\nThông số kỹ thuật\n\nLoại sản phẩm: Đèn Spotlight gắn nổi thông minh\nNguồn cấp: 220V AC\nKết nối: Zigbee\nCông suất: 10W\nChỉ số hoàn màu (CRI): Ra90\nDải nhiệt độ màu: 2700K – 6000K\nHệ số công suất (PF): 0.9\nVật liệu tản nhiệt: Nhôm\nĐiều khiển từ xa: Có (khi kết hợp Aqara Hub)\n\nỨng dụng thực tế\n\nChiếu sáng phòng khách, phòng ngủ và phòng làm việc.\nTạo điểm nhấn cho tranh ảnh, kệ trang trí hoặc nội thất.\nSử dụng trong showroom, cửa hàng, studio hoặc văn phòng.\nKết hợp với hệ thống nhà thông minh để tự động hóa chiếu sáng.\nThiết lập các ngữ cảnh như tiếp khách, xem phim, thư giãn hoặc làm việc.",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "en-spotlight-gan-noi-aqara-surface-t1",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780453318/kjlpc7wzqbld8eyepvqa.png",
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780453318/fpqcaptcdhqlx1ibbpsy.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780453319/hkvdh1cthxrlsqbdkkfh.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780453319/pthz8bcjhxu0hetmukhe.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780453319/ds2h6ry6bq9doerrtqsu.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780453319/fbwht9hldaby3wtlnzzo.png"
+    ],
+    "options": [
+      {
+        "name": "Màu sắc",
+        "values": [
+          "Đen",
+          "Trắng"
+        ]
+      },
+      {
+        "name": "Phiên bản",
+        "values": [
+          "Spotlight 24°",
+          "Spotlight 36°",
+          "Downlight 60°"
+        ]
+      }
+    ],
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-03T02:22:00.357Z",
+    "variants": [
+      {
+        "id": "en-spotlight-24",
+        "sku": "SMA-NSPO-2734-EN-SPOTLIGHT-24",
+        "optionValues": [
+          "Đen",
+          "Spotlight 24°"
+        ],
+        "price": 890000,
+        "originalPrice": 0,
+        "stock": 0,
+        "thumbnail": ""
+      },
+      {
+        "id": "en-spotlight-36",
+        "sku": "SKU-EN-SPOTLIGHT-36",
+        "optionValues": [
+          "Đen",
+          "Spotlight 36°"
+        ],
+        "price": 890000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "en-downlight-60",
+        "sku": "SKU-EN-DOWNLIGHT-60",
+        "optionValues": [
+          "Đen",
+          "Downlight 60°"
+        ],
+        "price": 890000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "trng-spotlight-24",
+        "sku": "SKU-TRNG-SPOTLIGHT-24",
+        "optionValues": [
+          "Trắng",
+          "Spotlight 24°"
+        ],
+        "price": 890000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "trng-spotlight-36",
+        "sku": "SKU-TRNG-SPOTLIGHT-36",
+        "optionValues": [
+          "Trắng",
+          "Spotlight 36°"
+        ],
+        "price": 890000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      },
+      {
+        "id": "trng-downlight-60",
+        "sku": "SKU-TRNG-DOWNLIGHT-60",
+        "optionValues": [
+          "Trắng",
+          "Downlight 60°"
+        ],
+        "price": 890000,
+        "originalPrice": 0,
+        "stock": 5,
+        "thumbnail": ""
+      }
+    ],
+    "updatedAt": "2026-06-03T10:24:29.586Z"
+  },
+  {
+    "id": "tyh5aY4T62X9ybCh4RlX",
+    "name": "Bóng đèn thông minh Aqara T2 Gu10 - RGB",
+    "sku": "SMA-BNGN-7065",
+    "brand": "aqara",
+    "category": "smart-light",
+    "price": 650000,
+    "originalPrice": 0,
+    "minStockAlert": 5,
+    "rating": 4.9,
+    "sold": 155,
+    "shortDescription": "Bóng đèn thông minh Aqara T2 GU10 RGB mang đến trải nghiệm chiếu sáng đa sắc màu với khả năng hiển thị hàng triệu màu sắc cùng độ sáng có thể điều chỉnh linh hoạt. Thiết kế chuẩn đui GU10 giúp sản phẩm dễ dàng lắp đặt cho các hệ thống đèn spotlight, đèn rọi và đèn âm trần, tạo điểm nhấn ấn tượng cho mọi không gian sống.",
+    "description": "Aqara T2 GU10 RGB là bóng đèn LED thông minh được thiết kế dành cho các ứng dụng chiếu sáng điểm nhấn, trang trí nội thất và tạo hiệu ứng ánh sáng theo sở thích cá nhân. Với chuẩn đui GU10 phổ biến, sản phẩm dễ dàng thay thế các bóng đèn truyền thống mà không cần thay đổi hệ thống đèn hiện có.\n\nBóng đèn hỗ trợ hàng triệu màu sắc RGB cùng khả năng điều chỉnh độ sáng linh hoạt, giúp người dùng dễ dàng tạo nên nhiều phong cách ánh sáng khác nhau. Từ không gian thư giãn ấm cúng, khu vực làm việc tập trung cho đến những bữa tiệc sôi động với hiệu ứng màu sắc nổi bật, Aqara T2 GU10 RGB đều đáp ứng một cách hiệu quả.\n\nSản phẩm được trang bị chỉ số hoàn màu Ra90, mang lại khả năng tái tạo màu sắc chân thực và tự nhiên hơn. Nhờ đó, đồ nội thất, tranh ảnh và các vật dụng trang trí trong nhà được hiển thị với màu sắc sống động và chính xác hơn.\n\nVới công suất tiêu thụ chỉ 4.9W cùng công nghệ LED hiện đại, bóng đèn vừa tiết kiệm điện năng vừa đảm bảo hiệu quả chiếu sáng cao. Aqara T2 GU10 RGB hoạt động ổn định trong dải điện áp rộng từ 100V đến 240V, phù hợp với nhiều môi trường sử dụng khác nhau.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bóng đèn thông minh Aqara T2 GU10 RGB\nLoại đui đèn: GU10\nCông suất định mức: 4.9W\nĐộ sáng: 1100 lm\nĐiều chỉnh độ sáng (Dim): Có\nChỉ số hoàn màu (CRI): Ra90\nMàu sắc ánh sáng: RGB đa màu\nĐiện áp hoạt động: 100 – 240V AC\nCông nghệ chiếu sáng: LED\nỨng dụng: Đèn spotlight, đèn rọi, đèn âm trần GU10\n\nTÍNH NĂNG NỔI BẬT\n\nHỗ trợ hàng triệu màu sắc RGB sống động\nĐiều chỉnh độ sáng linh hoạt theo nhu cầu\nChỉ số hoàn màu Ra90 cho màu sắc chân thực\nThiết kế chuẩn GU10 dễ dàng lắp đặt và thay thế\nTiết kiệm điện năng với công suất chỉ 4.9W\nPhù hợp cho chiếu sáng trang trí và tạo điểm nhấn\nTạo nhiều kịch bản ánh sáng theo sở thích\nTích hợp với hệ sinh thái nhà thông minh Aqara\nTuổi thọ cao, vận hành ổn định",
+    "featured": false,
+    "bestSeller": false,
+    "newProduct": false,
+    "status": "active",
+    "slug": "bong-en-thong-minh-aqara-t2-gu10-rgb",
+    "discountPrice": 0,
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780386479/gkcjws7i5ck9gkzjwa0n.png",
+    "ratingCount": 0,
+    "tags": [],
+    "specifications": [],
+    "createdAt": "2026-06-02T07:48:02.046Z",
+    "stock": 22,
+    "updatedAt": "2026-06-02T07:56:16.488Z"
+  },
+  {
     "id": "wbldKt92kRkYdTafJy0Y",
     "name": "Bộ điều khiển trung tâm Aqara Hub M200",
     "sku": "OTH-BIUK-2253",
@@ -2461,7 +4288,6 @@
     "brand": "aqara",
     "category": "smart-lock",
     "price": 11900000,
-    "discountPrice": 1200000,
     "stock": 37,
     "minStockAlert": 5,
     "rating": 4.9,
@@ -2487,7 +4313,8 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T10:15:32.824Z",
-    "updatedAt": "2026-06-01T10:15:32.824Z"
+    "discountPrice": 0,
+    "updatedAt": "2026-06-02T07:18:00.754Z"
   },
   {
     "id": "zJj706Q7g58vz2u7Wowe",

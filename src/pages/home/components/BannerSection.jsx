@@ -175,7 +175,7 @@ const BannerSection = ({ banners, current, setCurrent }) => {
           <div className="banner-overlay" />
           
           {/* Seamless Gradient Fade to next section */}
-          <div className="banner-seamless-fade" />
+          {/* <div className="banner-seamless-fade" /> */}
 
           {/* Floating Badges */}
           <div className="banner-badges">

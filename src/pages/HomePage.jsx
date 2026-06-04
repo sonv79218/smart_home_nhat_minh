@@ -21,6 +21,7 @@ import {
   ContactSection,
   FloatingContactButtons,
   SolutionSection,
+  CategorySidebar,
 } from "./home/components";
 
 // ============================================
@@ -106,26 +107,34 @@ const HomePage = () => {
       {offlineMode && <OfflineNotice />}
 
       {/* ============================================ */}
-      {/* HERO: Banner + Categories */}
+      {/* HERO: Sidebar + Banner + Categories */}
       {/* ============================================ */}
-      <div className="w-full">
-        {/* Banner */}
-        <BannerSection
-          banners={banners}
-          current={current}
-          setCurrent={setCurrent}
-        />
+      <div className="w-full flex">
+        {/* Category Sidebar - Desktop only (hidden on mobile) */}
+        <CategorySidebar categories={categories} />
 
-        {/* Category Grid - Connected with gradient */}
-        <div className="w-full bg-gradient-to-b from-slate-50 to-white">
-          {topCategories.length > 0 && (
-            <CategoryGridSection categories={topCategories} />
-          )}
+        {/* Main Content */}
+        <div className="flex-1 min-w-0">
+          {/* Banner */}
+          <BannerSection
+            banners={banners}
+            current={current}
+            setCurrent={setCurrent}
+          />
+
+
         </div>
       </div>
 
       {/* Divider */}
       <SectionDivider />
+          {/* Category Grid - Connected with gradient */}
+          <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+            {topCategories.length > 0 && (
+              <CategoryGridSection categories={topCategories} />
+            )}
+          </div>
+      {/* <CategoryGridSection/> */}
 
       {/* ============================================ */}
       {/* ECOSYSTEM SECTION */}

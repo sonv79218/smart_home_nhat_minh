@@ -23,7 +23,7 @@ import {
 // CONFIG - SWITCH BETWEEN DATA SOURCES
 // ============================================
 const DEBUG_MODE = true; // Set to true to enable debug logs
-const USE_FIREBASE_FOR_USER = true; // Set to false to use JSON
+const USE_FIREBASE_FOR_USER = false; // Set to false to use JSON
 const PRODUCTS_JSON_URL = "/products.json";
 
 const log = (message, data) => {

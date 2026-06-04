@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Home,
@@ -16,91 +17,245 @@ import {
   ClipboardCheck,
   Wrench,
   Handshake,
+  XCircle,
+  X,
+  Hotel,
+  Coffee,
 } from "lucide-react";
+
+const filters = [
+  { id: "all", label: "Tất cả" },
+  { id: "nha-o", label: "Nhà ở" },
+  { id: "biet-thu", label: "Biệt thự" },
+  { id: "chung-cu", label: "Chung cư" },
+  { id: "van-phong", label: "Văn phòng" },
+  { id: "showroom", label: "Showroom" },
+  { id: "shop", label: "Shop" },
+  { id: "homestay", label: "Homestay" },
+  { id: "nha-tro", label: "Nhà trọ" },
+  { id: "cafe", label: "Cafe" },
+];
 
 const houseTypes = [
   {
+    type: "nha-o",
     icon: Home,
-    title: "Nhà phố",
-    budget: "Phổ thông",
-    desc: "Phù hợp nhà nhiều tầng, cần quản lý đèn, camera, khóa cửa, cảm biến và thiết bị điện theo từng khu vực.",
-    items: [
-      "Công tắc thông minh từng tầng",
-      "Khóa cửa vân tay",
-      "Camera cổng / sân",
-      "Cảm biến cầu thang",
-      "Rèm tự động phòng khách",
-      "Ngữ cảnh ra khỏi nhà / đi ngủ",
+    title: "Nhà thông minh",
+    budget: "Rất phổ biến",
+    image:
+      "../../../assets/images/solutions/nha_o.png",
+    before: [
+      "Đèn bật tắt thủ công",
+      "Công tắc truyền thống",
+      "Không có camera",
+      "Không có rèm tự động",
     ],
-  },
-  {
-    icon: Landmark,
-    title: "Biệt thự",
-    budget: "Cao cấp",
-    desc: "Phù hợp công trình diện tích lớn, nhiều phòng, cần hệ thống đồng bộ, sang trọng và dễ quản lý.",
-    items: [
-      "Chiếu sáng thông minh toàn nhà",
-      "Rèm tự động nhiều khu vực",
-      "An ninh sân vườn",
-      "Camera và cảm biến",
-      "Điều khiển điều hòa / bình nóng lạnh",
-      "Kịch bản tiếp khách / nghỉ ngơi",
-    ],
-  },
-  {
-    icon: Building2,
-    title: "Chung cư",
-    budget: "Tiết kiệm",
-    desc: "Phù hợp căn hộ cần gọn gàng, dễ lắp đặt, không can thiệp quá nhiều vào hạ tầng.",
-    items: [
-      "Công tắc thông minh",
+    after: [
+      "Đèn tự động theo ngữ cảnh",
+      "Camera AI",
       "Rèm tự động",
+      "Điều khiển bằng điện thoại",
+    ],
+    benefits: [
+      "Phù hợp nhà nhiều tầng",
+      "Dễ quản lý từng khu vực",
+      "Tăng an toàn khi đi vắng",
+    ],
+    suggestedDevices: [
+      "Công tắc thông minh",
+      "Camera AI",
+      "Rèm tự động",
+      "Cảm biến chuyển động",
+    ],
+  },
+  {
+    type: "biet-thu",
+    icon: Landmark,
+    title: "Biệt thự thông minh",
+    budget: "Cao cấp",
+    image:
+      "../../../assets/images/solutions/biet_thu.png",
+    before: [
+      "Hệ thống điện riêng lẻ",
+      "Điều hòa bật thủ công",
+      "Tưới cây thủ công",
+    ],
+    after: [
+      "Kịch bản đón khách",
+      "Tưới cây tự động",
+      "Điều hòa tự động",
+      "Điều khiển toàn bộ biệt thự",
+    ],
+    benefits: [
+      "Đồng bộ toàn bộ không gian",
+      "Tăng sự sang trọng",
+      "Quản lý dễ dàng dù diện tích lớn",
+    ],
+    suggestedDevices: [
+      "Hệ thống chiếu sáng thông minh",
+      "Tưới cây tự động",
+      "Camera sân vườn",
+      "Điều khiển điều hòa",
+    ],
+  },
+  {
+    type: "chung-cu",
+    icon: Building2,
+    title: "Căn hộ Chung cư",
+    budget: "Phổ biến",
+    image:
+      "../../../assets/images/solutions/chung_cu.png",
+    before: ["Công tắc thường", "Khóa cơ", "Không có cảnh báo"],
+    after: [
+      "Khóa thông minh",
       "Cảm biến cửa",
       "Camera trong nhà",
-      "Điều khiển qua app",
-      "Ngữ cảnh về nhà / đi ngủ",
+      "Điều khiển qua điện thoại",
+    ],
+    benefits: [
+      "Gọn gàng, ít can thiệp hạ tầng",
+      "Dễ dùng cho gia đình",
+      "Tăng an toàn khi ở chung cư",
+    ],
+    suggestedDevices: [
+      "Khóa cửa thông minh",
+      "Cảm biến cửa",
+      "Camera trong nhà",
+      "Công tắc thông minh",
     ],
   },
   {
-    icon: Home,
-    title: "Nhà cấp 4",
-    budget: "Tiết kiệm",
-    desc: "Phù hợp gia đình muốn bắt đầu Smart Home với chi phí dễ tiếp cận, tập trung vào tiện ích thiết thực.",
-    items: [
+    type: "van-phong",
+    icon: Building2,
+    title: "Văn phòng thông minh",
+    budget: "Doanh nghiệp",
+    image:
+      "../../../assets/images/solutions/van_phong.png",
+    before: ["Bật đèn toàn bộ văn phòng", "Điều hòa thủ công"],
+    after: [
+      "Đèn theo khu vực",
+      "Điều hòa tự động",
+      "Chấm công thông minh",
+      "Quản lý năng lượng",
+    ],
+    benefits: [
+      "Tối ưu chi phí vận hành",
+      "Không gian làm việc hiện đại",
+      "Quản lý thiết bị tập trung",
+    ],
+    suggestedDevices: [
+      "Đèn thông minh",
+      "Cảm biến hiện diện",
+      "Điều khiển điều hòa",
+      "Camera văn phòng",
+    ],
+  },
+  {
+    type: "showroom",
+    icon: Store,
+    title: "Showroom thông minh",
+    budget: "Kinh doanh",
+    image:
+      "../../../assets/images/solutions/show_room.png",
+    before: ["Khách tự xem sản phẩm", "Đèn cố định"],
+    after: [
+      "Kịch bản đón khách",
+      "Điều khiển demo",
+      "Màn hình điều khiển trung tâm",
+    ],
+    benefits: [
+      "Tăng trải nghiệm khách hàng",
+      "Demo thiết bị trực quan",
+      "Không gian trưng bày chuyên nghiệp",
+    ],
+    suggestedDevices: [
+      "Màn hình điều khiển trung tâm",
+      "Đèn thông minh",
+      "Công tắc demo",
+      "Camera showroom",
+    ],
+  },
+  {
+    type: "shop",
+    icon: Store,
+    title: "Cửa hàng / Shop",
+    budget: "Kinh doanh",
+    image:
+      "../../../assets/images/solutions/cua_hang.png",
+    before: ["Mở cửa thủ công", "Camera cơ bản"],
+    after: ["Camera AI", "Báo động chống trộm", "Điều khiển từ xa"],
+    benefits: [
+      "Giám sát cửa hàng từ xa",
+      "Cảnh báo khi có bất thường",
+      "Quản lý an ninh tốt hơn",
+    ],
+    suggestedDevices: ["Camera AI", "Cảm biến cửa", "Báo động", "Ổ cắm thông minh"],
+  },
+  {
+    type: "homestay",
+    icon: Hotel,
+    title: "Khách sạn / Homestay",
+    budget: "Dịch vụ",
+    image:
+      "../../../assets/images/solutions/home_stay.png",
+    before: ["Khách dùng chìa khóa"],
+    after: ["Khóa mật khẩu", "Check-in tự động", "Tiết kiệm điện"],
+    benefits: [
+      "Giảm công quản lý phòng",
+      "Giao mã mở cửa từ xa",
+      "Tăng trải nghiệm khách thuê",
+    ],
+    suggestedDevices: [
+      "Khóa mật khẩu",
+      "Cảm biến cửa",
+      "Công tắc thông minh",
+      "Điều khiển điều hòa",
+    ],
+  },
+  {
+    type: "cafe",
+    icon: Coffee,
+    title: "Quán Cafe",
+    budget: "Dịch vụ",
+    image:
+      "../../../assets/images/solutions/quan_ca_phe.png",
+    before: ["Bật đèn thủ công"],
+    after: [
+      "Điều khiển đèn theo khu vực",
+      "Điều khiển loa",
+      "Camera quản lý",
+    ],
+    benefits: [
+      "Tạo không gian đẹp hơn",
+      "Dễ đổi ánh sáng theo khung giờ",
+      "Quản lý từ xa tiện lợi",
+    ],
+    suggestedDevices: [
       "Đèn thông minh",
       "Công tắc thông minh",
-      "Camera an ninh",
-      "Khóa cửa thông minh",
-      "Cảm biến chuyển động",
-      "Điều khiển từ xa qua điện thoại",
+      "Camera quản lý",
+      "Ổ cắm thông minh",
     ],
   },
   {
-    icon: Store,
-    title: "Showroom / Văn phòng",
-    budget: "Phổ thông",
-    desc: "Phù hợp không gian kinh doanh cần kiểm soát ánh sáng, an ninh, thiết bị điện và tạo trải nghiệm chuyên nghiệp.",
-    items: [
-      "Điều khiển đèn khu vực",
-      "Camera giám sát",
-      "Cảm biến cửa",
-      "Hẹn giờ thiết bị điện",
-      "Rèm tự động",
-      "Kịch bản mở cửa / đóng cửa",
-    ],
-  },
-  {
+    type: "nha-tro",
     icon: KeyRound,
-    title: "Căn hộ cho thuê",
-    budget: "Tiết kiệm",
-    desc: "Phù hợp chủ nhà muốn tăng giá trị căn hộ, quản lý ra vào và thiết bị từ xa.",
-    items: [
-      "Khóa cửa thông minh",
-      "Camera cửa ra vào",
-      "Công tắc thông minh",
+    title: "Nhà trọ",
+    budget: "Đầu tư",
+    image:
+      "../../../assets/images/solutions/nha_tro.png",
+    before: ["Khóa cơ", "Khó quản lý"],
+    after: ["Khóa thông minh", "Camera hành lang", "Quản lý từ xa"],
+    benefits: [
+      "Dễ quản lý nhiều phòng",
+      "Tăng an ninh hành lang",
+      "Giao mã mở cửa không cần gặp trực tiếp",
+    ],
+    suggestedDevices: [
+      "Khóa thông minh",
+      "Camera hành lang",
       "Cảm biến cửa",
-      "Quản lý từ xa",
-      "Mã mở cửa tạm thời",
+      "Công tắc thông minh",
     ],
   },
 ];
@@ -128,29 +283,194 @@ const processSteps = [
   },
 ];
 
-const packages = [
+const benefits = [
   {
-    name: "Gói cơ bản",
-    desc: "Dành cho người mới bắt đầu làm nhà thông minh.",
-    devices: "Công tắc, camera, khóa cửa",
+    icon: Lightbulb,
+    title: "Tiện nghi hơn",
+    desc: "Điều khiển đèn, rèm, thiết bị điện chỉ bằng điện thoại hoặc giọng nói.",
   },
   {
-    name: "Gói phổ thông",
-    desc: "Dành cho gia đình muốn tự động hóa nhiều khu vực.",
-    devices: "Công tắc, cảm biến, rèm, camera, khóa",
+    icon: ShieldCheck,
+    title: "An toàn hơn",
+    desc: "Camera, khóa cửa và cảm biến giúp kiểm soát ngôi nhà tốt hơn.",
   },
   {
-    name: "Gói cao cấp",
-    desc: "Dành cho biệt thự, nhà phố lớn, showroom.",
-    devices: "Hệ thống đồng bộ nhiều phòng, nhiều tầng, nhiều ngữ cảnh",
+    icon: Blinds,
+    title: "Tự động hơn",
+    desc: "Tạo ngữ cảnh về nhà, đi ngủ, ra ngoài, tiếp khách theo nhu cầu.",
+  },
+  {
+    icon: Camera,
+    title: "Dễ quản lý hơn",
+    desc: "Theo dõi và điều khiển thiết bị từ xa, phù hợp cả nhà ở và cho thuê.",
   },
 ];
 
+const DetailModal = ({ solution, onClose }) => {
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [onClose]);
+
+  if (!solution) return null;
+
+  const Icon = solution.icon;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm px-4 py-5 md:py-8 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="max-w-5xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="relative h-64 md:h-96">
+          <img
+            src={solution.image}
+            alt={solution.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 w-11 h-11 rounded-full bg-white/90 text-slate-900 flex items-center justify-center hover:bg-white transition"
+          >
+            <X size={22} />
+          </button>
+
+          <div className="absolute left-5 right-5 bottom-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs font-bold mb-3">
+              <Icon size={16} />
+              {solution.budget}
+            </div>
+            <h3 className="text-3xl md:text-5xl font-black text-white">
+              {solution.title}
+            </h3>
+          </div>
+        </div>
+
+        <div className="p-5 md:p-8">
+          <div className="grid lg:grid-cols-2 gap-5">
+            <div className="rounded-3xl bg-red-50 border border-red-100 p-5 md:p-6">
+              <h4 className="flex items-center gap-2 font-black text-red-600 text-xl mb-4">
+                <XCircle size={22} />
+                Trước khi lắp đặt
+              </h4>
+
+              <div className="space-y-3">
+                {solution.before.map((text) => (
+                  <div key={text} className="flex gap-3">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+                    <span className="font-semibold text-slate-700">{text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl bg-emerald-50 border border-emerald-100 p-5 md:p-6">
+              <h4 className="flex items-center gap-2 font-black text-emerald-600 text-xl mb-4">
+                <CheckCircle size={22} />
+                Sau khi lắp đặt
+              </h4>
+
+              <div className="space-y-3">
+                {solution.after.map((text) => (
+                  <div key={text} className="flex gap-3">
+                    <CheckCircle
+                      size={18}
+                      className="text-emerald-600 shrink-0 mt-0.5"
+                    />
+                    <span className="font-semibold text-slate-700">{text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-5 mt-5">
+            <div className="rounded-3xl bg-blue-50 border border-blue-100 p-5 md:p-6">
+              <h4 className="font-black text-blue-700 text-xl mb-4">
+                Lợi ích chính
+              </h4>
+
+              <div className="space-y-3">
+                {solution.benefits.map((text) => (
+                  <div key={text} className="flex gap-3">
+                    <CheckCircle
+                      size={18}
+                      className="text-blue-600 shrink-0 mt-0.5"
+                    />
+                    <span className="font-semibold text-slate-700">{text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl bg-slate-50 border border-slate-200 p-5 md:p-6">
+              <h4 className="font-black text-slate-900 text-xl mb-4">
+                Thiết bị gợi ý
+              </h4>
+
+              <div className="flex flex-wrap gap-2">
+                {solution.suggestedDevices.map((device) => (
+                  <span
+                    key={device}
+                    className="px-3 py-2 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700"
+                  >
+                    {device}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-end">
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-100 text-slate-700 font-extrabold hover:bg-slate-200 transition"
+            >
+              Đóng
+            </button>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition"
+            >
+              Nhận tư vấn giải pháp này
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const SolutionsByHousePage = () => {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [selectedSolution, setSelectedSolution] = useState(null);
+
+  const filteredHouseTypes = useMemo(() => {
+    if (activeFilter === "all") return houseTypes;
+    return houseTypes.filter((item) => item.type === activeFilter);
+  }, [activeFilter]);
+
   return (
     <main className="bg-white text-slate-900">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-slate-950">
+      {/* <section className="relative overflow-hidden bg-slate-950">
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950" />
         <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-blue-500/25 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[360px] h-[360px] rounded-full bg-cyan-400/20 blur-3xl" />
@@ -166,9 +486,9 @@ const SolutionsByHousePage = () => {
           </h1>
 
           <p className="mt-6 max-w-3xl mx-auto text-slate-300 text-base md:text-xl leading-relaxed">
-            Nhất Minh Smart Home tư vấn và thi công giải pháp nhà thông minh
-            theo từng loại công trình: nhà phố, biệt thự, chung cư, nhà cấp 4,
-            showroom và văn phòng.
+            So sánh trước và sau khi lắp đặt nhà thông minh cho từng loại công
+            trình: nhà ống, nhà cấp 4, biệt thự, chung cư, văn phòng, showroom
+            và cửa hàng.
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
@@ -189,131 +509,124 @@ const SolutionsByHousePage = () => {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* STATS */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {[
-              ["6+", "Loại công trình"],
-              ["100+", "Thiết bị tương thích"],
-              ["3", "Mức ngân sách"],
-              ["Tận nơi", "Khảo sát & tư vấn"],
-            ].map(([number, label]) => (
-              <div
-                key={label}
-                className="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 text-center shadow-sm"
-              >
-                <div className="text-3xl md:text-4xl font-black text-blue-600">
-                  {number}
-                </div>
-                <div className="mt-2 text-sm md:text-base text-slate-600 font-semibold">
-                  {label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* HOUSE TYPES */}
+
       <section className="py-16 md:py-24 bg-slate-50">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <p className="text-blue-600 font-extrabold mb-3">
-              Chọn loại nhà của bạn
-            </p>
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            {/* <p className="text-blue-600 font-extrabold mb-3">
+              Chọn nhanh loại công trình
+            </p> */}
 
             <h2 className="text-3xl md:text-5xl font-black leading-tight">
-              Mỗi kiểu nhà sẽ có một cách triển khai Smart Home khác nhau
+              Tìm giải pháp giống ngôi nhà của bạn
             </h2>
 
-            <p className="mt-4 text-slate-600 leading-relaxed">
-              Bạn chỉ cần chọn đúng loại công trình, Nhất Minh sẽ tư vấn thiết bị,
-              vị trí lắp đặt và ngữ cảnh phù hợp.
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {houseTypes.map((item) => {
+          <div className="sticky top-0 z-20 -mx-5 md:mx-0 px-5 md:px-0 py-4 bg-slate-50/95 backdrop-blur">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              {filters.map((filter) => {
+                const isActive = activeFilter === filter.id;
+
+                return (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    onClick={() => setActiveFilter(filter.id)}
+                    className={`shrink-0 px-4 py-2.5 rounded-full text-sm font-extrabold border transition ${
+                      isActive
+                        ? "bg-blue-600 text-white border-blue-600 shadow-md"
+                        : "bg-white text-slate-700 border-slate-200 hover:border-blue-200 hover:text-blue-600"
+                    }`}
+                  >
+                    {filter.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-5 grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {filteredHouseTypes.map((item) => {
               const Icon = item.icon;
 
               return (
-                <div
+                <article
                   key={item.title}
-                  className="group bg-white rounded-[2rem] border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
+                  className="group bg-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
-                      <Icon size={28} />
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+
+                    <div className="absolute left-5 right-5 bottom-5">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs font-bold mb-3">
+                        <Icon size={15} />
+                        {item.budget}
+                      </div>
+
+                      <h3 className="text-2xl font-black text-white">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <h4 className="text-sm font-black text-slate-500 uppercase tracking-wide mb-3">
+                      Sau khi lắp đặt
+                    </h4>
+
+                    <div className="space-y-3">
+                      {item.after.slice(0, 3).map((feature) => (
+                        <div key={feature} className="flex gap-3">
+                          <CheckCircle
+                            size={18}
+                            className="text-emerald-600 shrink-0 mt-0.5"
+                          />
+                          <span className="text-sm font-semibold text-slate-700">
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
                     </div>
 
-                    <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
-                      {item.budget}
-                    </span>
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedSolution(item)}
+                        className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-slate-100 text-slate-800 font-extrabold hover:bg-slate-200 transition"
+                      >
+                        Xem chi tiết
+                      </button>
+
+                      <Link
+                        to="/contact"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition"
+                      >
+                        Tư vấn
+                        <ArrowRight size={16} />
+                      </Link>
+                    </div>
                   </div>
-
-                  <h3 className="mt-5 text-2xl font-black">{item.title}</h3>
-
-                  <p className="mt-3 text-slate-600 leading-relaxed">
-                    {item.desc}
-                  </p>
-
-                  <div className="mt-5 space-y-3">
-                    {item.items.map((feature) => (
-                      <div key={feature} className="flex gap-3">
-                        <CheckCircle
-                          size={18}
-                          className="text-blue-600 shrink-0 mt-0.5"
-                        />
-                        <span className="text-sm font-semibold text-slate-700">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Link
-                    to="/contact"
-                    className="mt-6 inline-flex items-center gap-2 font-extrabold text-blue-600 group-hover:gap-3 transition-all"
-                  >
-                    Xem giải pháp
-                    <ArrowRight size={17} />
-                  </Link>
-                </div>
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* BENEFIT STRIP */}
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="grid lg:grid-cols-4 gap-5">
-            {[
-              {
-                icon: Lightbulb,
-                title: "Tiện nghi hơn",
-                desc: "Điều khiển đèn, rèm, thiết bị điện chỉ bằng điện thoại hoặc giọng nói.",
-              },
-              {
-                icon: ShieldCheck,
-                title: "An toàn hơn",
-                desc: "Camera, khóa cửa và cảm biến giúp kiểm soát ngôi nhà tốt hơn.",
-              },
-              {
-                icon: Blinds,
-                title: "Tự động hơn",
-                desc: "Tạo ngữ cảnh về nhà, đi ngủ, ra ngoài, tiếp khách theo nhu cầu.",
-              },
-              {
-                icon: Camera,
-                title: "Dễ quản lý hơn",
-                desc: "Theo dõi và điều khiển thiết bị từ xa, phù hợp cả nhà ở và cho thuê.",
-              },
-            ].map((item) => {
+            {benefits.map((item) => {
               const Icon = item.icon;
 
               return (
@@ -333,7 +646,6 @@ const SolutionsByHousePage = () => {
         </div>
       </section>
 
-      {/* PROCESS */}
       <section className="py-16 md:py-24 bg-slate-950 text-white">
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mb-12">
@@ -375,65 +687,7 @@ const SolutionsByHousePage = () => {
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-blue-600 font-extrabold mb-3">
-              Gợi ý gói triển khai
-            </p>
-
-            <h2 className="text-3xl md:text-5xl font-black leading-tight">
-              Chọn theo ngân sách và nhu cầu sử dụng
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {packages.map((item, index) => (
-              <div
-                key={item.name}
-                className={`rounded-[2rem] border p-7 shadow-sm ${
-                  index === 1
-                    ? "border-blue-200 bg-blue-50"
-                    : "border-slate-200 bg-white"
-                }`}
-              >
-                {index === 1 && (
-                  <span className="inline-flex px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold mb-4">
-                    Được chọn nhiều
-                  </span>
-                )}
-
-                <h3 className="text-2xl font-black">{item.name}</h3>
-
-                <p className="mt-3 text-slate-600 leading-relaxed">
-                  {item.desc}
-                </p>
-
-                <div className="mt-5 rounded-2xl bg-white border border-slate-200 p-4">
-                  <p className="text-sm text-slate-500 font-semibold">
-                    Thiết bị gợi ý
-                  </p>
-                  <p className="mt-1 font-bold text-slate-800">
-                    {item.devices}
-                  </p>
-                </div>
-
-                <Link
-                  to="/contact"
-                  className="mt-6 inline-flex items-center gap-2 font-extrabold text-blue-600"
-                >
-                  Nhận tư vấn gói này
-                  <ArrowRight size={17} />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-r from-blue-600 to-indigo-700 overflow-hidden">
+      {/* <section className="relative py-20 md:py-28 bg-gradient-to-r from-blue-600 to-indigo-700 overflow-hidden">
         <div className="absolute -right-20 -top-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute left-0 bottom-0 w-72 h-72 bg-cyan-300/20 rounded-full blur-3xl" />
 
@@ -443,8 +697,8 @@ const SolutionsByHousePage = () => {
           </h2>
 
           <p className="mt-5 text-blue-100 text-base md:text-lg leading-relaxed">
-            Nhất Minh Smart Home sẽ khảo sát, tư vấn thiết bị phù hợp với nhu cầu,
-            loại công trình và ngân sách của bạn.
+            Nhất Minh Smart Home sẽ khảo sát, tư vấn thiết bị phù hợp với nhu
+            cầu, loại công trình và ngân sách của bạn.
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
@@ -465,7 +719,14 @@ const SolutionsByHousePage = () => {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      {selectedSolution && (
+        <DetailModal
+          solution={selectedSolution}
+          onClose={() => setSelectedSolution(null)}
+        />
+      )}
     </main>
   );
 };
