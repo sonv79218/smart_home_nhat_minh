@@ -24,16 +24,15 @@ import {
 } from "lucide-react";
 
 const filters = [
-  { id: "all", label: "Tất cả" },
-  { id: "nha-o", label: "Nhà ở" },
-  { id: "biet-thu", label: "Biệt thự" },
-  { id: "chung-cu", label: "Chung cư" },
-  { id: "van-phong", label: "Văn phòng" },
-  { id: "showroom", label: "Showroom" },
-  { id: "shop", label: "Shop" },
-  { id: "homestay", label: "Homestay" },
-  { id: "nha-tro", label: "Nhà trọ" },
-  { id: "cafe", label: "Cafe" },
+  { id: "nha-o", label: "Nhà ở", icon: Home },
+  { id: "biet-thu", label: "Biệt thự", icon: Landmark },
+  { id: "chung-cu", label: "Chung cư", icon: Building2 },
+  { id: "van-phong", label: "Văn phòng", icon: Building2 },
+  { id: "showroom", label: "Showroom", icon: Store },
+  { id: "shop", label: "Shop", icon: Store },
+  { id: "homestay", label: "Homestay", icon: Hotel },
+  { id: "nha-tro", label: "Nhà trọ", icon: Home },
+  { id: "cafe", label: "Cafe", icon: Coffee },
 ];
 
 const houseTypes = [
@@ -460,11 +459,10 @@ const DetailModal = ({ solution, onClose }) => {
 };
 
 const SolutionsByHousePage = () => {
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState("nha-o");
   const [selectedSolution, setSelectedSolution] = useState(null);
 
   const filteredHouseTypes = useMemo(() => {
-    if (activeFilter === "all") return houseTypes;
     return houseTypes.filter((item) => item.type === activeFilter);
   }, [activeFilter]);
 
@@ -527,8 +525,9 @@ const SolutionsByHousePage = () => {
           </div>
 
           <div className="sticky top-0 z-20 -mx-5 md:mx-0 px-5 md:px-0 py-4 bg-slate-50/95 backdrop-blur">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2 md:gap-3">
               {filters.map((filter) => {
+                const Icon = filter.icon;
                 const isActive = activeFilter === filter.id;
 
                 return (
@@ -536,13 +535,52 @@ const SolutionsByHousePage = () => {
                     key={filter.id}
                     type="button"
                     onClick={() => setActiveFilter(filter.id)}
-                    className={`shrink-0 px-4 py-2.5 rounded-full text-sm font-extrabold border transition ${
-                      isActive
-                        ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                        : "bg-white text-slate-700 border-slate-200 hover:border-blue-200 hover:text-blue-600"
-                    }`}
+                    className={`
+                      flex flex-col items-center justify-center gap-1.5 md:gap-2
+                      p-2.5 md:p-3
+                      rounded-xl md:rounded-2xl
+                      border-2
+                      transition-all duration-200
+                      ${
+                        isActive
+                          ? "bg-gradient-to-br from-blue-500 to-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02]"
+                          : "bg-white border-slate-200 text-slate-600 hover:border-blue-200 hover:bg-blue-50 hover:scale-[1.02]"
+                      }
+                    `}
                   >
-                    {filter.label}
+                    <div
+                      className={`
+                        w-8 h-8 md:w-10 md:h-10
+                        rounded-lg md:rounded-xl
+                        flex items-center justify-center
+                        transition-all duration-200
+                        ${
+                          isActive
+                            ? "bg-white/20"
+                            : "bg-slate-100 md:bg-slate-50"
+                        }
+                      `}
+                    >
+                      <Icon
+                        size={16}
+                        strokeWidth={isActive ? 2 : 1.8}
+                        className={isActive ? "text-white" : "text-slate-500"}
+                      />
+                    </div>
+                    <span
+                      className={`
+                        text-[10px] md:text-xs
+                        font-bold
+                        text-center leading-tight
+                        ${
+                          isActive
+                            ? "text-white"
+                            : "text-slate-600"
+                        }
+                      `}
+                    >
+                      {filter.label}
+                    </span>
                   </button>
                 );
               })}

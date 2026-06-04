@@ -22,6 +22,7 @@ import {
   FloatingContactButtons,
   SolutionSection,
   CategorySidebar,
+  MegaCategoryMenu,
 } from "./home/components";
 
 // ============================================
@@ -47,6 +48,7 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
 
   // ============================================
   // DATA FETCHING
@@ -107,34 +109,60 @@ const HomePage = () => {
       {offlineMode && <OfflineNotice />}
 
       {/* ============================================ */}
-      {/* HERO: Sidebar + Banner + Categories */}
+      {/* HERO: Sidebar + Banner + Mega Menu */}
       {/* ============================================ */}
-      <div className="w-full flex">
-        {/* Category Sidebar - Desktop only (hidden on mobile) */}
-        <CategorySidebar categories={categories} />
+      {/* <div className="max-w-[1400px] mx-auto px-0 lg:px-4 xl:px-6 pt-4"> */}
+      <div className="max-w-[1400px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
+        {/* Desktop Hero Grid */}
+        <div
+          className="relative hidden lg:grid grid-cols-[300px_1fr] h-[420px] xl:h-[460px] overflow-hidden rounded-2xl"
+          onMouseLeave={() => setHoveredCategory(null)}
+        >
+          {/* Category Sidebar */}
+          <CategorySidebar
+            categories={categories}
+            hoveredCategory={hoveredCategory}
+            setHoveredCategory={setHoveredCategory}
+          />
 
-        {/* Main Content */}
-        <div className="flex-1 min-w-0">
-          {/* Banner */}
+          {/* Hero Banner */}
+          <div className="h-full overflow-hidden rounded-r-2xl">
+            <BannerSection
+              className="h-full"
+              banners={banners}
+              current={current}
+              setCurrent={setCurrent}
+            />
+          </div>
+
+          {/* Mega Category Menu - overlays entire hero area */}
+          {hoveredCategory && (
+            <MegaCategoryMenu
+              category={hoveredCategory}
+              products={productsByCategory[hoveredCategory.id] || []}
+            />
+          )}
+        </div>
+
+        {/* Mobile Banner (shown when lg grid is hidden) */}
+        <div className="lg:hidden">
           <BannerSection
             banners={banners}
             current={current}
             setCurrent={setCurrent}
           />
-
-
         </div>
       </div>
 
       {/* Divider */}
       <SectionDivider />
-          {/* Category Grid - Connected with gradient */}
-          <div className="w-full bg-gradient-to-b from-slate-50 to-white">
-            {topCategories.length > 0 && (
-              <CategoryGridSection categories={topCategories} />
-            )}
-          </div>
-      {/* <CategoryGridSection/> */}
+
+      {/* Category Grid */}
+      <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+        {topCategories.length > 0 && (
+          <CategoryGridSection categories={topCategories} />
+        )}
+      </div>
 
       {/* ============================================ */}
       {/* ECOSYSTEM SECTION */}

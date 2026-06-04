@@ -2,35 +2,15 @@
 // PREMIUM BANNER SECTION COMPONENT
 // Seamless landing page hero with gradient transition
 // ============================================
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  BANNER_COLORS,
-  BANNER_DIMENSIONS,
-  BANNER_SHADOW,
-} from "../../../styles/bannerStyles";
-
-// ============================================
-// SUB-COMPONENTS
-// ============================================
+import { BANNER_COLORS } from "../../../styles/bannerStyles";
 
 // Floating Badge Component
 const FloatingBadge = ({ text, icon }) => (
   <div className="banner-floating-badge">
     <span className="badge-icon">{icon}</span>
     <span className="badge-text">{text}</span>
-  </div>
-);
-
-// Stats Component
-const BannerStats = ({ stats }) => (
-  <div className="banner-stats">
-    {stats.map((stat, index) => (
-      <div key={index} className="stat-item">
-        <span className="stat-value">{stat.value}</span>
-        <span className="stat-label">{stat.label}</span>
-      </div>
-    ))}
   </div>
 );
 
@@ -51,52 +31,92 @@ const BannerDots = ({ total, current, onChange }) => (
   </div>
 );
 
-// Navigation Arrows
+// Navigation Arrows - Desktop only
 const BannerArrows = ({ onPrev, onNext }) => (
   <>
-    <button className="banner-arrow arrow-left" onClick={onPrev} aria-label="Previous slide">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <button
+      onClick={onPrev}
+      aria-label="Previous slide"
+      className="
+        hidden md:flex
+        absolute left-5 top-1/2 -translate-y-1/2 z-20
+        p-2
+        text-white
+        opacity-70
+        transition-all duration-300
+        hover:opacity-100
+        hover:scale-125
+      "
+    >
+      <svg
+        className="w-8 h-8 drop-shadow-lg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+      >
         <polyline points="15 18 9 12 15 6" />
       </svg>
     </button>
-    <button className="banner-arrow arrow-right" onClick={onNext} aria-label="Next slide">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+
+    <button
+      onClick={onNext}
+      aria-label="Next slide"
+      className="
+        hidden md:flex
+        absolute right-5 top-1/2 -translate-y-1/2 z-20
+        p-2
+        text-white
+        opacity-70
+        transition-all duration-300
+        hover:opacity-100
+        hover:scale-125
+      "
+    >
+      <svg
+        className="w-8 h-8 drop-shadow-lg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+      >
         <polyline points="9 18 15 12 9 6" />
       </svg>
     </button>
   </>
 );
 
-// ============================================
-// MAIN BANNER SECTION
-// ============================================
-const BannerSection = ({ banners, current, setCurrent }) => {
+const BannerSection = ({ banners, current, setCurrent, className = "" }) => {
   const navigate = useNavigate();
+
   const [isHovered, setIsHovered] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Handle slide change with transition
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
   const handleSlideChange = (newIndex) => {
     if (newIndex === current || isTransitioning) return;
+
     setIsTransitioning(true);
+
     setTimeout(() => {
       setCurrent(newIndex);
-      setTimeout(() => setIsTransitioning(false), 50);
+      setTimeout(() => setIsTransitioning(false), 80);
     }, 300);
   };
 
-  // Auto slide
   useEffect(() => {
-    if (banners.length <= 1) return;
+    if (!banners || banners.length <= 1) return;
 
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % banners.length);
+      const nextIndex = (current + 1) % banners.length;
+      handleSlideChange(nextIndex);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [banners.length, setCurrent]);
+  }, [banners, banners?.length, current]);
 
-  // Navigation handlers
   const handlePrev = (e) => {
     e.stopPropagation();
     const newIndex = (current - 1 + banners.length) % banners.length;
@@ -109,9 +129,38 @@ const BannerSection = ({ banners, current, setCurrent }) => {
     handleSlideChange(newIndex);
   };
 
-  // Handle banner click
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = null;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (distance > minSwipeDistance) {
+      const nextIndex = (current + 1) % banners.length;
+      handleSlideChange(nextIndex);
+    }
+
+    if (distance < -minSwipeDistance) {
+      const prevIndex = (current - 1 + banners.length) % banners.length;
+      handleSlideChange(prevIndex);
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   const handleBannerClick = () => {
     const banner = banners[current];
+
     if (banner?.link) {
       if (banner.link.startsWith("/")) {
         navigate(banner.link);
@@ -121,28 +170,11 @@ const BannerSection = ({ banners, current, setCurrent }) => {
     }
   };
 
-  // Handle CTA button click
-  const handleCTA = (e) => {
-    e.stopPropagation();
-    const banner = banners[current];
-    if (banner?.link) {
-      if (banner.link.startsWith("/")) {
-        navigate(banner.link);
-      } else {
-        window.location.href = banner.link;
-      }
-    } else {
-      navigate("/products");
-    }
-  };
-
-  // Empty state
   if (!banners || banners.length === 0) {
     return (
-      <section className="banner-section banner-section-empty">
+      <section className={`banner-section banner-section-empty ${className}`}>
         <style>{bannerStyles}</style>
         <div className="banner-wrapper-empty">
-          {/* Gradient background for empty state */}
           <div className="banner-empty-gradient" />
         </div>
       </section>
@@ -154,45 +186,55 @@ const BannerSection = ({ banners, current, setCurrent }) => {
   return (
     <>
       <style>{bannerStyles}</style>
-      <section className="banner-section">
+
+      <section className={`banner-section ${className}`}>
         <div
           className={`banner-wrapper ${isHovered ? "hovered" : ""}`}
           onClick={handleBannerClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
-          {/* Background Glow Effect */}
           <div className="banner-glow" />
 
-          {/* Banner Image */}
           <img
             src={currentBanner.image}
             alt={currentBanner.title}
             className={`banner-image ${isTransitioning ? "transitioning" : ""}`}
+            draggable="false"
           />
 
-          {/* Gradient Overlay - Extended for seamless transition */}
           <div className="banner-overlay" />
-          
-          {/* Seamless Gradient Fade to next section */}
-          {/* <div className="banner-seamless-fade" /> */}
 
-          {/* Floating Badges */}
+          {/* Mobile gradient fade to next section */}
+          <div
+            className="
+              absolute inset-x-0 bottom-0
+              h-12 md:hidden
+              bg-gradient-to-b
+              from-transparent
+              via-slate-5/60
+              to-slate-50
+              z-[3]
+              pointer-events-none
+            "
+          />
+
           <div className="banner-badges">
             {currentBanner.badges?.map((badge, index) => (
               <FloatingBadge key={index} text={badge.text} icon={badge.icon} />
             ))}
           </div>
 
-          {/* Content Container */}
           <div className="banner-content">
-            {/* Title with Highlight */}
             <h1 className="banner-title">
               {currentBanner.title?.split(" ").map((word, index, arr) => {
-                const isHighlight =
-                  currentBanner.highlightWords?.some((hw) =>
-                    word.toLowerCase().includes(hw.toLowerCase())
-                  );
+                const isHighlight = currentBanner.highlightWords?.some((hw) =>
+                  word.toLowerCase().includes(hw.toLowerCase())
+                );
+
                 return (
                   <span key={index}>
                     <span className={isHighlight ? "title-highlight" : ""}>
@@ -204,16 +246,11 @@ const BannerSection = ({ banners, current, setCurrent }) => {
               })}
             </h1>
 
-            {/* Subtitle - Mobile */}
             <p className="banner-subtitle show-mobile">
               {currentBanner.subtitle}
             </p>
-
-            {/* Stats */}
-            <BannerStats stats={BANNER_STATS} />
           </div>
 
-          {/* Navigation Controls */}
           {banners.length > 1 && (
             <>
               <BannerDots
@@ -221,6 +258,7 @@ const BannerSection = ({ banners, current, setCurrent }) => {
                 current={current}
                 onChange={handleSlideChange}
               />
+
               <BannerArrows onPrev={handlePrev} onNext={handleNext} />
             </>
           )}
@@ -230,30 +268,32 @@ const BannerSection = ({ banners, current, setCurrent }) => {
   );
 };
 
-// ============================================
-// CSS STYLES
-// ============================================
-const BANNER_STATS = [
-  { value: "5000+", label: "Khách hàng" },
-  { value: "100+", label: "Sản phẩm Smart" },
-  { value: "24/7", label: "Hỗ trợ" },
-];
-
 const bannerStyles = `
-  /* ==================== BANNER SECTION ==================== */
   .banner-section {
     position: relative;
     width: 100%;
   }
 
-  .banner-section-empty {
-    height: 320px;
-  }
-
-  .banner-wrapper-empty {
+  .banner-section-empty .banner-wrapper-empty {
     width: 100%;
     height: 100%;
     position: relative;
+  }
+
+  .banner-section:not(.h-full) .banner-section-empty .banner-wrapper-empty {
+    height: 260px;
+  }
+
+  @media (min-width: 480px) {
+    .banner-section:not(.h-full) .banner-section-empty .banner-wrapper-empty {
+      height: 320px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .banner-section:not(.h-full) .banner-section-empty .banner-wrapper-empty {
+      height: 400px;
+    }
   }
 
   .banner-empty-gradient {
@@ -265,40 +305,43 @@ const bannerStyles = `
   .banner-wrapper {
     position: relative;
     width: 100%;
+    height: 100%;
     overflow: hidden;
     cursor: pointer;
-  }
-
-  /* Responsive Heights */
-  .banner-wrapper {
-    height: 260px;
+    touch-action: pan-y;
+    user-select: none;
   }
 
   @media (min-width: 480px) {
-    .banner-wrapper {
+    .banner-section:not(.h-full) .banner-wrapper {
       height: 320px;
     }
   }
 
   @media (min-width: 768px) {
-    .banner-wrapper {
+    .banner-section:not(.h-full) .banner-wrapper {
       height: 400px;
     }
   }
 
   @media (min-width: 1024px) {
-    .banner-wrapper {
+    .banner-section:not(.h-full) .banner-wrapper {
       height: 480px;
     }
   }
 
   @media (min-width: 1280px) {
-    .banner-wrapper {
+    .banner-section:not(.h-full) .banner-wrapper {
       height: 520px;
     }
   }
 
-  /* ==================== BACKGROUND GLOW ==================== */
+  @media (max-width: 479px) {
+    .banner-section:not(.h-full) .banner-wrapper {
+      height: 260px;
+    }
+  }
+
   .banner-glow {
     position: absolute;
     top: -50%;
@@ -316,21 +359,28 @@ const bannerStyles = `
   }
 
   @keyframes glowPulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.05); }
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
   }
 
-  /* ==================== BANNER IMAGE ==================== */
   .banner-image {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     z-index: 0;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.35s ease,
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .banner-wrapper.hovered .banner-image {
@@ -338,17 +388,13 @@ const bannerStyles = `
   }
 
   .banner-image.transitioning {
-    opacity: 0.7;
-    transform: scale(1.01);
+    opacity: 0.55;
+    transform: scale(1.02);
   }
 
-  /* ==================== GRADIENT OVERLAY ==================== */
   .banner-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: linear-gradient(
       90deg,
       ${BANNER_COLORS.overlay} 0%,
@@ -358,30 +404,6 @@ const bannerStyles = `
     z-index: 2;
   }
 
-  /* Seamless fade to next section */
-  .banner-seamless-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(
-      to bottom,
-      rgba(248, 250, 252, 0) 0%,
-      rgba(248, 250, 252, 0.6) 40%,
-      rgba(248, 250, 252, 1) 100%
-    );
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  @media (min-width: 768px) {
-    .banner-seamless-fade {
-      height: 100px;
-    }
-  }
-
-  /* ==================== FLOATING BADGES ==================== */
   .banner-badges {
     position: absolute;
     top: 16px;
@@ -425,13 +447,26 @@ const bannerStyles = `
     }
   }
 
-  .banner-badges .banner-floating-badge:nth-child(1) { animation-delay: 0s; }
-  .banner-badges .banner-floating-badge:nth-child(2) { animation-delay: 0.5s; }
-  .banner-badges .banner-floating-badge:nth-child(3) { animation-delay: 1s; }
+  .banner-badges .banner-floating-badge:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .banner-badges .banner-floating-badge:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .banner-badges .banner-floating-badge:nth-child(3) {
+    animation-delay: 1s;
+  }
 
   @keyframes floatBadge {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    0%, 100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
   }
 
   .badge-icon {
@@ -444,7 +479,6 @@ const bannerStyles = `
     }
   }
 
-  /* ==================== CONTENT ==================== */
   .banner-content {
     position: absolute;
     top: 50%;
@@ -467,13 +501,13 @@ const bannerStyles = `
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(-50%);
     }
   }
 
-  /* ==================== TITLE ==================== */
   .banner-title {
     font-size: clamp(22px, 5vw, 56px);
     font-weight: 800;
@@ -495,7 +529,6 @@ const bannerStyles = `
     text-shadow: 0 0 20px ${BANNER_COLORS.glowAccent};
   }
 
-  /* ==================== SUBTITLE ==================== */
   .banner-subtitle {
     font-size: clamp(12px, 2vw, 18px);
     color: ${BANNER_COLORS.textWhite};
@@ -510,52 +543,6 @@ const bannerStyles = `
     }
   }
 
-  /* ==================== STATS ==================== */
-  .banner-stats {
-    display: none;
-    gap: 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-  }
-
-  @media (min-width: 640px) {
-    .banner-stats {
-      display: flex;
-      gap: 28px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .banner-stats {
-      gap: 32px;
-      padding-top: 24px;
-    }
-  }
-
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .stat-value {
-    font-size: clamp(18px, 3vw, 28px);
-    font-weight: 800;
-    color: white;
-    background: linear-gradient(135deg, ${BANNER_COLORS.primary}, ${BANNER_COLORS.accent});
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: ${BANNER_COLORS.textMuted};
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  /* ==================== DOTS ==================== */
   .banner-dots {
     position: absolute;
     bottom: 12px;
@@ -603,65 +590,7 @@ const bannerStyles = `
     }
   }
 
-  /* ==================== ARROWS ==================== */
-  .banner-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (min-width: 768px) {
-    .banner-arrow {
-      width: 48px;
-      height: 48px;
-    }
-  }
-
-  .banner-arrow:hover {
-    background: ${BANNER_COLORS.accent};
-    border-color: ${BANNER_COLORS.accent};
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 8px 25px ${BANNER_COLORS.glowAccent};
-  }
-
-  .arrow-left {
-    left: 10px;
-  }
-
-  .arrow-right {
-    right: 10px;
-  }
-
-  @media (min-width: 768px) {
-    .arrow-left {
-      left: 20px;
-    }
-
-    .arrow-right {
-      right: 20px;
-    }
-  }
-
-  /* ==================== RESPONSIVE - MOBILE FIRST ==================== */
-
-  /* Mobile Only */
   @media (max-width: 767px) {
-    /* Content - Center on mobile */
     .banner-content {
       text-align: center;
       left: 50%;
@@ -671,12 +600,10 @@ const bannerStyles = `
       max-width: 100%;
     }
 
-    /* Title - Smaller on mobile */
     .banner-title {
       margin-bottom: 6px;
     }
 
-    /* Subtitle - Show on mobile */
     .banner-subtitle.show-mobile {
       display: block;
       font-size: 12px;
@@ -685,12 +612,6 @@ const bannerStyles = `
       opacity: 0.85;
     }
 
-    /* Stats - Hidden on mobile */
-    .banner-stats {
-      display: none;
-    }
-
-    /* Floating Badges - Compact on mobile */
     .banner-badges {
       top: 10px;
       right: 10px;
@@ -711,37 +632,11 @@ const bannerStyles = `
       font-size: 10px;
     }
 
-    /* Arrows - Smaller on mobile */
-    .banner-arrow {
-      width: 32px;
-      height: 32px;
-    }
-
-    .banner-arrow svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .arrow-left {
-      left: 6px;
-    }
-
-    .arrow-right {
-      right: 6px;
-    }
-
-    /* Glow - Less prominent on mobile */
     .banner-glow {
       opacity: 0.4;
     }
-
-    /* Seamless fade - shorter on mobile */
-    .banner-seamless-fade {
-      height: 60px;
-    }
   }
 
-  /* Large Desktop */
   @media (min-width: 1400px) {
     .banner-content {
       left: 100px;
@@ -753,12 +648,9 @@ const bannerStyles = `
     }
   }
 
-  /* Touch Devices - Disable hover effects */
   @media (hover: none) {
-    .cta-primary:hover,
-    .cta-secondary:hover,
-    .banner-arrow:hover {
-      transform: translateY(-50%);
+    .banner-wrapper.hovered .banner-image {
+      transform: none;
     }
   }
 `;

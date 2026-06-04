@@ -16,3 +16,4 @@ export { default as ProjectsSection } from "./ProjectsSection";
 export { default as SolutionSection } from "./SolutionSection";
 export { default as SolutionCard } from "./SolutionCard";
 export { default as CategorySidebar } from "./CategorySidebar";
+export { default as MegaCategoryMenu } from "./MegaCategoryMenu";
