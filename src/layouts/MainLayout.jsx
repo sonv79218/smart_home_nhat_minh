@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
       </main>
 
       <Footer />
-      {/* <FloatingContactButtons /> */}
+      <FloatingContactButtons />
     </div>
   );
 };

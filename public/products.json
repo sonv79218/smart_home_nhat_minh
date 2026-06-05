@@ -705,7 +705,15 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T08:02:19.138Z",
-    "updatedAt": "2026-06-02T08:02:19.138Z"
+    "images": [
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780563595/hos5ama13enrv3ggudpn.png",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780563596/td1agj9ycbuhjifwljab.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780563596/mtqmdrs0v8bogekm6cac.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780563596/peqwbu2szballagulk3u.jpg",
+      "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780563596/touqfhmahfwaioava0ai.jpg"
+    ],
+    "thumbnail": "https://res.cloudinary.com/dwmfqzmf9/image/upload/v1780563594/qc5mtabwcpaphc2qfsuw.png",
+    "updatedAt": "2026-06-04T08:59:57.221Z"
   },
   {
     "id": "H2Wnn4w1oPBBpmymmPT6",

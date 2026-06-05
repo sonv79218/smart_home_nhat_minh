@@ -316,9 +316,9 @@ const CheckoutPage = () => {
                         className="w-full h-full object-cover"
                         onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
                       />
-                      <span className="absolute -top-2 -right-2 min-w-[20px] h-5 px-1.5 bg-blue-600 text-white text-[11px] font-bold rounded-full flex items-center justify-center">
+                      {/* <span className="absolute -top-2 -right-2 min-w-[20px] h-5 px-1.5 bg-blue-600 text-white text-[11px] font-bold rounded-full flex items-center justify-center">
                         {item.quantity}
-                      </span>
+                      </span> */}
                     </div>
                     <div className="flex-1 min-w-0">
                       <span className="block text-sm font-semibold text-slate-900 line-clamp-2 leading-tight">
@@ -329,6 +329,9 @@ const CheckoutPage = () => {
                           {item.optionValues.join(" · ")}
                         </span>
                       )}
+                      <div className="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-medium">
+  SL: {item.quantity}
+</div>
                     </div>
                     <span className="text-sm font-semibold text-slate-900 shrink-0">
                       {toInteger(item.price * item.quantity).toLocaleString()}đ

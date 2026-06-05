@@ -32,31 +32,16 @@ const MegaCategoryMenu = ({ category, products = [] }) => {
       {/* Product Grid - scrollable if many products */}
       <div className="flex-1 overflow-y-auto min-h-0">
         {products.length > 0 ? (
-          <div className="grid grid-cols-3 xl:grid-cols-5 gap-x-4 gap-y-4">
+          <div className="grid grid-cols-5 gap-5">
             {products.map((product) => (
               <button
                 key={product.id}
                 type="button"
                 onClick={() => handleProductClick(product)}
-                className="
-                  group/product
-                  text-center
-                  rounded-xl
-                  p-2
-                  hover:bg-slate-50
-                  transition-all duration-200
-                "
+                className="group/product text-center"
               >
-                <div
-                  className="
-                    w-full aspect-square
-                    flex items-center justify-center
-                    rounded-xl
-                    bg-slate-50
-                    overflow-hidden
-                    mb-2
-                  "
-                >
+                {/* Image wrapper with fixed aspect ratio */}
+                <div className="w-full aspect-square flex items-center justify-center bg-white rounded-xl overflow-hidden">
                   <img
                     src={
                       product.thumbnail ||
@@ -66,27 +51,16 @@ const MegaCategoryMenu = ({ category, products = [] }) => {
                       "/placeholder-product.png"
                     }
                     alt={product.name}
-                    className="
-                      max-w-full max-h-full
-                      object-contain
-                      transition-transform duration-200
-                      group-hover/product:scale-105
-                    "
+                    className="w-full h-full object-contain p-3 transition-transform duration-200 group-hover/product:scale-105"
                   />
                 </div>
 
-                <div
-                  className="
-                    text-sm
-                    text-slate-700
-                    leading-snug
-                    line-clamp-2
-                    group-hover/product:text-sky-700
-                  "
-                >
+                {/* Product name with line-clamp-2 */}
+                <div className="text-sm text-slate-700 line-clamp-2 text-center mt-3 min-h-[40px]">
                   {product.name}
                 </div>
 
+                {/* Price */}
                 {product.price && (
                   <div className="text-xs font-semibold text-sky-600 mt-1">
                     {typeof product.price === "number"

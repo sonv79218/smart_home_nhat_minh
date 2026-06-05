@@ -89,16 +89,35 @@ const ProductCard = ({ product }) => {
         {/* Badge Tags */}
         {(product.bestSeller || product.newProduct) && (
           <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
-            {product.bestSeller && (
-              <span className="px-1.5 py-0.5 bg-orange-500 text-white text-[9px] font-bold uppercase rounded-sm">
-                Hot
-              </span>
-            )}
-            {product.newProduct && (
-              <span className="px-1.5 py-0.5 bg-primary-600 text-white text-[9px] font-bold uppercase rounded-sm">
-                Mới
-              </span>
-            )}
+{product.bestSeller && (
+  <span
+    className="
+      px-3 py-1
+      bg-orange-500
+      text-white
+      text-xs
+      font-bold
+      uppercase
+      rounded-md
+    "
+  >
+    Hot
+  </span>
+)}
+{product.newProduct && (
+  <span
+    className="
+      px-3 py-1
+      bg-primary-600
+      text-white
+      text-xs
+      font-bold
+      rounded-md
+    "
+  >
+    Mới
+  </span>
+)}
           </div>
         )}
 

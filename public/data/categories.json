@@ -98,7 +98,7 @@
     "banner": {
       "title": "Camera Thông Minh",
       "subtitle": "Giám sát ngôi nhà 24/7 với hình ảnh sắc nét và cảnh báo thông minh",
-      "image": "/assets/category/banner_khoa.png",
+      "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=1400&h=400&fit=crop",
       "buttonText": "Xem camera",
       "link": "/products?category=camera"
     }
