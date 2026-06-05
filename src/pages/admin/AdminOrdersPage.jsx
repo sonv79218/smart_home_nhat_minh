@@ -5,6 +5,7 @@ import {
   updateOrderStatus,
   deleteOrder,
 } from "../../services/orderService";
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 import { toInteger } from "../../utils/priceUtils";
 
 const ITEMS_PER_PAGE = 10;
@@ -28,6 +29,8 @@ const STATUS_LABELS = {
 };
 
 const AdminOrdersPage = () => {
+  const toast = useToast();
+  const { confirm } = useConfirm();
   // =========================
   // STATES
   // =========================
@@ -171,12 +174,21 @@ const AdminOrdersPage = () => {
       }
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Cập nhật trạng thái thất bại");
+      toast.error("Không thể cập nhật trạng thái đơn hàng.", {
+        title: "Cập nhật trạng thái thất bại",
+      });
     }
   };
 
   const handleDelete = async (orderId) => {
-    if (!window.confirm("Bạn có chắc muốn xóa đơn hàng này?")) return;
+    const accepted = await confirm({
+      title: "Xóa đơn hàng",
+      message: "Bạn có chắc muốn xóa đơn hàng này không?",
+      confirmText: "Xóa đơn hàng",
+      cancelText: "Hủy",
+    });
+
+    if (!accepted) return;
 
     try {
       await deleteOrder(orderId);
@@ -188,9 +200,15 @@ const AdminOrdersPage = () => {
       if (selectedOrder?.id === orderId) {
         setSelectedOrder(null);
       }
+
+      toast.success("Đơn hàng đã được xóa khỏi hệ thống.", {
+        title: "Xóa đơn hàng thành công",
+      });
     } catch (error) {
       console.error("Error deleting order:", error);
-      alert("Xóa đơn hàng thất bại");
+      toast.error("Không thể xóa đơn hàng lúc này.", {
+        title: "Xóa đơn hàng thất bại",
+      });
     }
   };
 

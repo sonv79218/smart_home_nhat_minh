@@ -7,6 +7,7 @@ import { getProductByIdForAdmin, updateProduct } from "../../services/productSer
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
+import { useToast } from "../../contexts/ToastContext";
 
 // ============================================
 // RANDOM HELPERS
@@ -22,6 +23,7 @@ const getRandomSold = () => {
 const EditProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const toast = useToast();
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -381,7 +383,9 @@ const EditProductPage = () => {
     e.preventDefault();
 
     if (!formData.name || !formData.price || !formData.category || !formData.brand) {
-      alert("Vui lòng điền đầy đủ thông tin bắt buộc");
+      toast.warning("Vui lòng điền đầy đủ các trường bắt buộc của sản phẩm.", {
+        title: "Thiếu thông tin",
+      });
       return;
     }
 
@@ -461,11 +465,15 @@ const EditProductPage = () => {
 
       await updateProduct(id, productData);
 
-      alert("Cập nhật sản phẩm thành công!");
+      toast.success("Thông tin sản phẩm đã được cập nhật.", {
+        title: "Cập nhật sản phẩm thành công",
+      });
       navigate("/admin/products");
     } catch (err) {
       console.error("Error updating product:", err);
-      alert("Có lỗi xảy ra khi cập nhật sản phẩm");
+      toast.error("Không thể cập nhật sản phẩm lúc này. Vui lòng thử lại.", {
+        title: "Cập nhật sản phẩm thất bại",
+      });
     } finally {
       setSubmitting(false);
     }

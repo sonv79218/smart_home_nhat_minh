@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useCallback, useMemo } from "react";
+import { useToast } from "./ToastContext";
 
 const CartContext = createContext();
 
@@ -34,19 +35,22 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => loadCartFromStorage());
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
+  const toast = useToast();
 
   useEffect(() => {
     saveCartToStorage(cartItems);
   }, [cartItems]);
 
   const addToCart = useCallback((product, quantity = 1) => {
+    const existingItem = cartItems.find((item) => getCartItemKey(item) === getCartItemKey(product));
+
     setCartItems((prev) => {
       const itemKey = getCartItemKey(product);
       
       // Tìm item theo key (id hoặc id-variantId)
-      const existingItem = prev.find((item) => getCartItemKey(item) === itemKey);
+      const existingItemInPrev = prev.find((item) => getCartItemKey(item) === itemKey);
       
-      if (existingItem) {
+      if (existingItemInPrev) {
         return prev.map((item) =>
           getCartItemKey(item) === itemKey
             ? { ...item, quantity: item.quantity + quantity }
@@ -74,11 +78,28 @@ export const CartProvider = ({ children }) => {
         },
       ];
     });
-  }, []);
+
+    if (existingItem) {
+      toast.success(`Đã cập nhật số lượng cho "${product.name}" trong giỏ hàng.`, {
+        title: "Giỏ hàng đã cập nhật",
+      });
+    } else {
+      toast.success(`Đã thêm "${product.name}" vào giỏ hàng.`, {
+        title: "Thêm vào giỏ thành công",
+      });
+    }
+  }, [cartItems, toast]);
 
   const removeFromCart = useCallback((itemKey) => {
+    const removedItem = cartItems.find((item) => getCartItemKey(item) === itemKey);
     setCartItems((prev) => prev.filter((item) => getCartItemKey(item) !== itemKey));
-  }, []);
+
+    if (removedItem) {
+      toast.info(`Đã xóa "${removedItem.name}" khỏi giỏ hàng.`, {
+        title: "Đã xóa sản phẩm",
+      });
+    }
+  }, [cartItems, toast]);
 
   const removeMultipleFromCart = useCallback((itemKeys) => {
     setCartItems((prev) =>
@@ -87,28 +108,54 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const increaseQuantity = useCallback((itemKey) => {
+    let updatedItem = null;
+
     setCartItems((prev) =>
-      prev.map((item) =>
-        getCartItemKey(item) === itemKey
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
+      prev.map((item) => {
+        if (getCartItemKey(item) === itemKey) {
+          updatedItem = { ...item, quantity: item.quantity + 1 };
+          return updatedItem;
+        }
+        return item;
+      })
     );
-  }, []);
+
+    if (updatedItem) {
+      toast.success(`Số lượng "${updatedItem.name}" đã tăng lên ${updatedItem.quantity}.`, {
+        title: "Cập nhật số lượng",
+      });
+    }
+  }, [toast]);
 
   const decreaseQuantity = useCallback((itemKey) => {
+    let removedItem = null;
+    let updatedItem = null;
+
     setCartItems((prev) => {
       const item = prev.find((i) => getCartItemKey(i) === itemKey);
       if (item && item.quantity === 1) {
+        removedItem = item;
         return prev.filter((i) => getCartItemKey(i) !== itemKey);
       }
-      return prev.map((item) =>
-        getCartItemKey(item) === itemKey
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      );
+      return prev.map((item) => {
+        if (getCartItemKey(item) === itemKey) {
+          updatedItem = { ...item, quantity: item.quantity - 1 };
+          return updatedItem;
+        }
+        return item;
+      });
     });
-  }, []);
+
+    if (removedItem) {
+      toast.info(`Đã xóa "${removedItem.name}" khỏi giỏ hàng.`, {
+        title: "Đã xóa sản phẩm",
+      });
+    } else if (updatedItem) {
+      toast.success(`Số lượng "${updatedItem.name}" đã giảm còn ${updatedItem.quantity}.`, {
+        title: "Cập nhật số lượng",
+      });
+    }
+  }, [toast]);
 
   const updateQuantity = useCallback((itemKey, quantity) => {
     if (quantity < 1) {

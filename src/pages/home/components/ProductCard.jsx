@@ -6,11 +6,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
+import { useToast } from "../../../contexts/ToastContext";
 import { toInteger } from "../../../utils/priceUtils";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const toast = useToast();
   const [isHovered, setIsHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -28,7 +30,12 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    if (product.stock === 0) return;
+    if (product.stock === 0) {
+      toast.warning(`Sản phẩm "${product.name}" hiện đang hết hàng.`, {
+        title: "Không thể thêm vào giỏ",
+      });
+      return;
+    }
     addToCart(product);
   };
 

@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { getBanners, addBanner, updateBanner, deleteBanner } from "../../services/bannerService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 
 const AdminBannersPage = () => {
   const [banners, setBanners] = useState([]);
@@ -11,6 +12,8 @@ const AdminBannersPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingBanner, setEditingBanner] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const toast = useToast();
+  const { confirm } = useConfirm();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -51,7 +54,9 @@ const AdminBannersPage = () => {
       setFormData((prev) => ({ ...prev, image: url }));
     } catch (error) {
       console.error("Error uploading image:", error);
-      alert("Upload ảnh thất bại");
+      toast.error("Không thể tải ảnh banner lên. Vui lòng thử lại.", {
+        title: "Upload ảnh thất bại",
+      });
     } finally {
       setUploading(false);
     }
@@ -61,7 +66,9 @@ const AdminBannersPage = () => {
     e.preventDefault();
 
     if (!formData.title || !formData.subtitle || !formData.image) {
-      alert("Vui lòng điền đầy đủ thông tin");
+      toast.warning("Vui lòng điền đầy đủ tiêu đề, phụ đề và hình ảnh banner.", {
+        title: "Thiếu thông tin",
+      });
       return;
     }
 
@@ -71,17 +78,23 @@ const AdminBannersPage = () => {
         setBanners((prev) =>
           prev.map((b) => (b.id === editingBanner.id ? { ...b, ...formData } : b))
         );
-        alert("Cập nhật banner thành công!");
+        toast.success("Banner đã được cập nhật thành công.", {
+          title: "Cập nhật banner thành công",
+        });
       } else {
         const docRef = await addBanner(formData);
         setBanners((prev) => [{ id: docRef.id, ...formData, createdAt: new Date() }, ...prev]);
-        alert("Thêm banner thành công!");
+        toast.success("Banner mới đã được thêm vào hệ thống.", {
+          title: "Thêm banner thành công",
+        });
       }
 
       resetForm();
     } catch (error) {
       console.error("Error saving banner:", error);
-      alert("Lưu banner thất bại");
+      toast.error("Không thể lưu banner lúc này. Vui lòng thử lại.", {
+        title: "Lưu banner thất bại",
+      });
     }
   };
 
@@ -98,15 +111,26 @@ const AdminBannersPage = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Bạn có chắc muốn xóa banner này?")) return;
+    const accepted = await confirm({
+      title: "Xóa banner",
+      message: "Bạn có chắc muốn xóa banner này không?",
+      confirmText: "Xóa banner",
+      cancelText: "Hủy",
+    });
+
+    if (!accepted) return;
 
     try {
       await deleteBanner(id);
       setBanners((prev) => prev.filter((b) => b.id !== id));
-      alert("Xóa banner thành công!");
+      toast.success("Banner đã được xóa khỏi hệ thống.", {
+        title: "Xóa banner thành công",
+      });
     } catch (error) {
       console.error("Error deleting banner:", error);
-      alert("Xóa banner thất bại");
+      toast.error("Không thể xóa banner lúc này.", {
+        title: "Xóa banner thất bại",
+      });
     }
   };
 
@@ -119,7 +143,9 @@ const AdminBannersPage = () => {
       );
     } catch (error) {
       console.error("Error toggling banner status:", error);
-      alert("Cập nhật trạng thái thất bại");
+      toast.error("Không thể cập nhật trạng thái banner.", {
+        title: "Cập nhật trạng thái thất bại",
+      });
     }
   };
 

@@ -8,6 +8,7 @@ import { uploadImageToCloudinary } from "../../services/cloudinaryService";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
 import { generateSlug, generateSKU } from "../../constants/productMeta";
+import { useToast } from "../../contexts/ToastContext";
 
 // ============================================
 // RANDOM HELPERS
@@ -43,6 +44,7 @@ const getInitialFormData = () => ({
 
 const AddProductPage = () => {
   const navigate = useNavigate();
+  const toast = useToast();
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
 
@@ -308,14 +310,18 @@ const AddProductPage = () => {
     e.preventDefault();
 
     if (!formData.name || !formData.price || !formData.category || !formData.brand) {
-      alert("Vui lòng điền đầy đủ thông tin bắt buộc");
+      toast.warning("Vui lòng điền đầy đủ các trường bắt buộc của sản phẩm.", {
+        title: "Thiếu thông tin",
+      });
       return;
     }
 
     if (hasVariants && options.some(opt => opt.name.trim() && opt.values.length > 0)) {
       const validOptions = options.filter(opt => opt.name.trim() && opt.values.length > 0);
       if (validOptions.length === 0) {
-        alert("Vui lòng thêm ít nhất 1 option hợp lệ");
+        toast.warning("Vui lòng thêm ít nhất một option hợp lệ cho biến thể.", {
+          title: "Thiếu option biến thể",
+        });
         return;
       }
     }
@@ -403,11 +409,15 @@ const AddProductPage = () => {
 
       await addProduct(productData);
 
-      alert("Thêm sản phẩm thành công!");
+      toast.success("Sản phẩm mới đã được thêm vào hệ thống.", {
+        title: "Thêm sản phẩm thành công",
+      });
       navigate("/admin/products");
     } catch (error) {
       console.error("Error adding product:", error);
-      alert("Có lỗi xảy ra khi thêm sản phẩm");
+      toast.error("Không thể thêm sản phẩm lúc này. Vui lòng thử lại.", {
+        title: "Thêm sản phẩm thất bại",
+      });
     } finally {
       setLoading(false);
     }

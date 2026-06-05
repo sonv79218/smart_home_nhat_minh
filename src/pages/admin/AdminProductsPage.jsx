@@ -7,6 +7,7 @@ import {
 } from "../../services/productService";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 import { toInteger } from "../../utils/priceUtils";
 
 import {
@@ -16,6 +17,8 @@ import {
 const PRODUCTS_PER_PAGE = 10;
 
 const AdminProductsPage = () => {
+  const toast = useToast();
+  const { confirm } = useConfirm();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -88,11 +91,14 @@ setProducts(productsWithVariants);
     id,
     name
   ) => {
-    if (
-      !window.confirm(
-        `Bạn có chắc muốn xóa sản phẩm "${name}"?`
-      )
-    ) {
+    const accepted = await confirm({
+      title: "Xóa sản phẩm",
+      message: `Bạn có chắc muốn xóa sản phẩm "${name}" không?`,
+      confirmText: "Xóa sản phẩm",
+      cancelText: "Hủy",
+    });
+
+    if (!accepted) {
       return;
     }
 
@@ -104,13 +110,19 @@ setProducts(productsWithVariants);
           (item) => item.id !== id
         )
       );
+
+      toast.success(`Sản phẩm "${name}" đã được xóa khỏi hệ thống.`, {
+        title: "Xóa sản phẩm thành công",
+      });
     } catch (error) {
       console.error(
         "Error deleting product:",
         error
       );
 
-      alert("Xóa sản phẩm thất bại");
+      toast.error("Không thể xóa sản phẩm lúc này.", {
+        title: "Xóa sản phẩm thất bại",
+      });
     }
   };
 

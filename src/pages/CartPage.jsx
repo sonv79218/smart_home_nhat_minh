@@ -5,6 +5,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import { useToast, useConfirm } from "../contexts/ToastContext";
 import { toInteger } from "../utils/priceUtils";
 
 // ============================================
@@ -388,6 +389,8 @@ const OrderSummary = ({
 // ============================================
 const CartPage = () => {
   const navigate = useNavigate();
+  const toast = useToast();
+  const { confirm } = useConfirm();
   const {
     cartItems,
     removeFromCart,
@@ -460,7 +463,9 @@ const CartPage = () => {
 
   const handleCheckout = () => {
     if (effectiveSelectedKeys.size === 0) {
-      alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán");
+      toast.warning("Vui lòng chọn ít nhất một sản phẩm để thanh toán.", {
+        title: "Chưa chọn sản phẩm",
+      });
       return;
     }
     navigate("/checkout", { 
@@ -563,8 +568,15 @@ const CartPage = () => {
                   onToggle={() => toggleItem(getItemKey(item))}
                   onIncrease={() => increaseQuantity(getItemKey(item))}
                   onDecrease={() => decreaseQuantity(getItemKey(item))}
-                  onRemove={() => {
-                    if (window.confirm("Xóa sản phẩm này?")) {
+                  onRemove={async () => {
+                    const accepted = await confirm({
+                      title: "Xóa sản phẩm khỏi giỏ hàng",
+                      message: `Bạn có chắc muốn xóa "${item.name}" khỏi giỏ hàng không?`,
+                      confirmText: "Xóa sản phẩm",
+                      cancelText: "Giữ lại",
+                    });
+
+                    if (accepted) {
                       removeFromCart(getItemKey(item));
                     }
                   }}

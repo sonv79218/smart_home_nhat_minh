@@ -4,6 +4,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import { useToast } from "../contexts/ToastContext";
 import { createOrder } from "../services/orderService";
 import { toInteger } from "../utils/priceUtils";
 import { ArrowLeft, User, Truck, CreditCard, Package, Shield, Check } from "lucide-react";
@@ -11,6 +12,7 @@ import { ArrowLeft, User, Truck, CreditCard, Package, Shield, Check } from "luci
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const toast = useToast();
   const { cartItems, removeMultipleFromCart, getCartItemKey } = useCart();
 
   const selectedItemKeys = location.state?.selectedItems || [];
@@ -160,11 +162,15 @@ const CheckoutPage = () => {
 
       removeMultipleFromCart(selectedItemKeys);
 
-      alert("Đặt hàng thành công! Cảm ơn bạn đã mua sắm.");
+      toast.success("Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ sớm để xác nhận.", {
+        title: "Đặt hàng thành công",
+      });
       navigate("/products");
     } catch (error) {
       console.error("Lỗi khi đặt hàng:", error);
-      alert("Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại.");
+      toast.error("Không thể hoàn tất đơn hàng lúc này. Vui lòng thử lại sau.", {
+        title: "Đặt hàng thất bại",
+      });
     } finally {
       setIsLoading(false);
     }

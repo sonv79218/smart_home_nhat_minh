@@ -4,11 +4,13 @@
 import { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 import { useNavigate } from "react-router-dom";
 const AdminPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout, adminUser } = useAuth();
+  const toast = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Close sidebar on route change (mobile)
@@ -29,7 +31,18 @@ const AdminPage = () => {
   }, [isSidebarOpen]);
 
   const handleLogout = async () => {
-    await logout();
+    const result = await logout();
+
+    if (result?.success) {
+      toast.info("Bạn đã đăng xuất khỏi khu vực quản trị.", {
+        title: "Đăng xuất thành công",
+      });
+    } else {
+      toast.error(result?.error || "Không thể đăng xuất lúc này.", {
+        title: "Đăng xuất thất bại",
+      });
+    }
+
     navigate("/admin/login");
   };
 

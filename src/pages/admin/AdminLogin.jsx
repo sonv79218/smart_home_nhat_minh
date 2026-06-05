@@ -2,13 +2,15 @@
 // ADMIN LOGIN PAGE
 // ============================================
 import { useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../contexts/ToastContext";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, adminUser, loading } = useAuth();
+  const toast = useToast();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,13 +33,22 @@ const AdminLogin = () => {
       const result = await login(email, password);
 
       if (result.success) {
+        toast.success("Chào mừng bạn quay lại trang quản trị Smart Home Nhật Minh.", {
+          title: "Đăng nhập thành công",
+        });
         const from = location.state?.from?.pathname || "/admin/dashboard";
         navigate(from, { replace: true });
       } else {
         setError(result.error);
+        toast.error(result.error || "Không thể đăng nhập vào hệ thống quản trị.", {
+          title: "Đăng nhập thất bại",
+        });
       }
     } catch (err) {
       setError("Đã xảy ra lỗi. Vui lòng thử lại.");
+      toast.error("Đã xảy ra lỗi. Vui lòng thử lại.", {
+        title: "Đăng nhập thất bại",
+      });
     } finally {
       setIsSubmitting(false);
     }

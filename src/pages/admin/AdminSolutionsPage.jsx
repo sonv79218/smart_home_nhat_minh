@@ -14,6 +14,7 @@ import {
 import { DATA_SOURCE } from "../../config/dataSource";
 import { generateSlug } from "../../constants/productMeta";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 
 const AdminSolutionsPage = () => {
   const [solutions, setSolutions] = useState([]);
@@ -21,6 +22,8 @@ const AdminSolutionsPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const toast = useToast();
+  const { confirm } = useConfirm();
 
   // Form state
   const [formData, setFormData] = useState({
@@ -111,7 +114,9 @@ const AdminSolutionsPage = () => {
       setFormData((prev) => ({ ...prev, image: imageUrl }));
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Upload ảnh thất bại");
+      toast.error("Không thể tải ảnh giải pháp lên. Vui lòng thử lại.", {
+        title: "Upload ảnh thất bại",
+      });
     } finally {
       setUploading(false);
     }
@@ -121,7 +126,9 @@ const AdminSolutionsPage = () => {
     e.preventDefault();
 
     if (!formData.title.trim()) {
-      alert("Vui lòng nhập tiêu đề");
+      toast.warning("Vui lòng nhập tiêu đề giải pháp.", {
+        title: "Thiếu thông tin",
+      });
       return;
     }
 
@@ -132,27 +139,44 @@ const AdminSolutionsPage = () => {
     try {
       if (editingId) {
         await updateSolution(editingId, formData);
-        alert("Cập nhật thành công!");
+        toast.success("Giải pháp đã được cập nhật thành công.", {
+          title: "Cập nhật giải pháp thành công",
+        });
       } else {
         await addSolution(formData);
-        alert("Thêm mới thành công!");
+        toast.success("Giải pháp mới đã được thêm vào hệ thống.", {
+          title: "Thêm giải pháp thành công",
+        });
       }
       resetForm();
       fetchSolutions();
     } catch (error) {
-      alert(error.message || "Đã xảy ra lỗi");
+      toast.error(error.message || "Không thể lưu giải pháp lúc này.", {
+        title: "Lưu giải pháp thất bại",
+      });
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Bạn có chắc muốn xóa giải pháp này?")) return;
+    const accepted = await confirm({
+      title: "Xóa giải pháp",
+      message: "Bạn có chắc muốn xóa giải pháp này không?",
+      confirmText: "Xóa giải pháp",
+      cancelText: "Hủy",
+    });
+
+    if (!accepted) return;
 
     try {
       await deleteSolution(id);
-      alert("Xóa thành công!");
+      toast.success("Giải pháp đã được xóa khỏi hệ thống.", {
+        title: "Xóa giải pháp thành công",
+      });
       fetchSolutions();
     } catch (error) {
-      alert(error.message || "Đã xảy ra lỗi");
+      toast.error(error.message || "Không thể xóa giải pháp lúc này.", {
+        title: "Xóa giải pháp thất bại",
+      });
     }
   };
 
@@ -161,7 +185,9 @@ const AdminSolutionsPage = () => {
       await toggleSolutionStatus(solution.id, solution.status);
       fetchSolutions();
     } catch (error) {
-      alert(error.message || "Đã xảy ra lỗi");
+      toast.error(error.message || "Không thể cập nhật trạng thái giải pháp.", {
+        title: "Cập nhật trạng thái thất bại",
+      });
     }
   };
 
