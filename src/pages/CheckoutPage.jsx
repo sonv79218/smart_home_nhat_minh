@@ -1,18 +1,20 @@
+// ============================================
+// CHECKOUT PAGE - TAILWIND CSS
+// ============================================
 import { useState, useMemo } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { createOrder } from "../services/orderService";
 import { toInteger } from "../utils/priceUtils";
+import { ArrowLeft, User, Truck, CreditCard, Package, Shield, Check } from "lucide-react";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cartItems, removeMultipleFromCart, getCartItemKey } = useCart();
 
-  // Lấy selectedItems từ state được truyền từ CartPage
   const selectedItemKeys = location.state?.selectedItems || [];
 
-  // Lọc chỉ các sản phẩm được chọn
   const checkoutItems = useMemo(() => {
     return cartItems.filter(item =>
       selectedItemKeys.includes(getCartItemKey(item))
@@ -30,7 +32,6 @@ const CheckoutPage = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Tính tổng tiền từ checkoutItems
   const subtotal = useMemo(() => {
     return checkoutItems.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0);
   }, [checkoutItems]);
@@ -38,62 +39,56 @@ const CheckoutPage = () => {
   const shippingFee = subtotal >= 500000 ? 0 : 30000;
   const totalPrice = subtotal + shippingFee;
 
-  // Redirect về cart nếu không có sản phẩm được chọn
+  // Empty state if no items selected
   if (cartItems.length > 0 && checkoutItems.length === 0) {
     return (
-      <>
-        <style>{checkoutStyles}</style>
-        <div className="checkout-page">
-          <div className="checkout-container">
-            <div className="empty-state">
-              <div className="empty-icon">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                </svg>
-              </div>
-              <h2>Chưa chọn sản phẩm</h2>
-              <p>Vui lòng quay lại giỏ hàng để chọn sản phẩm</p>
-              <Link to="/cart" className="btn btn-primary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                Quay lại giỏ hàng
-              </Link>
-            </div>
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
+        <div className="max-w-md w-full text-center p-10 bg-white rounded-3xl shadow-lg">
+          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
           </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Chưa chọn sản phẩm</h2>
+          <p className="text-slate-500 mb-6">Vui lòng quay lại giỏ hàng để chọn sản phẩm</p>
+          <Link
+            to="/cart"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
+          >
+            <ArrowLeft size={18} />
+            Quay lại giỏ hàng
+          </Link>
         </div>
-      </>
+      </div>
     );
   }
 
   if (checkoutItems.length === 0) {
     return (
-      <>
-        <style>{checkoutStyles}</style>
-        <div className="checkout-page">
-          <div className="checkout-container">
-            <div className="empty-state">
-              <div className="empty-icon">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                </svg>
-              </div>
-              <h2>Giỏ hàng trống</h2>
-              <p>Vui lòng thêm sản phẩm vào giỏ hàng trước khi đặt hàng</p>
-              <Link to="/products" className="btn btn-primary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                Tiếp tục mua sắm
-              </Link>
-            </div>
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
+        <div className="max-w-md w-full text-center p-10 bg-white rounded-3xl shadow-lg">
+          <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
           </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Giỏ hàng trống</h2>
+          <p className="text-slate-500 mb-6">Vui lòng thêm sản phẩm vào giỏ hàng trước khi đặt hàng</p>
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            Tiếp tục mua sắm
+          </Link>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -163,7 +158,6 @@ const CheckoutPage = () => {
 
       await createOrder(order);
 
-      // Chỉ xóa các sản phẩm đã thanh toán, không xóa toàn bộ giỏ hàng
       removeMultipleFromCart(selectedItemKeys);
 
       alert("Đặt hàng thành công! Cảm ơn bạn đã mua sắm.");
@@ -176,837 +170,246 @@ const CheckoutPage = () => {
     }
   };
 
+  const PLACEHOLDER_IMAGE = "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop";
+
   return (
-    <>
-      <style>{checkoutStyles}</style>
-      <div className="checkout-page">
-        <div className="checkout-container">
-          {/* Header */}
-          <div className="checkout-header">
-            <button className="back-link" onClick={() => navigate("/cart")}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-              </svg>
-              Quay lại giỏ hàng
-            </button>
-            <h1 className="checkout-title">Thanh toán</h1>
+    <div className="min-h-screen bg-slate-50 py-8 lg:py-12 pb-20 lg:pb-12">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="mb-8">
+          <button
+            onClick={() => navigate("/cart")}
+            className="flex items-center gap-2 text-slate-500 hover:text-blue-600 text-sm font-medium mb-4 transition-colors"
+          >
+            <ArrowLeft size={20} />
+            Quay lại giỏ hàng
+          </button>
+          <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900">Thanh toán</h1>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 items-start">
+          {/* Left: Form */}
+          <div className="space-y-6">
+            {/* Contact Info */}
+            <div className="bg-white rounded-3xl p-6 lg:p-8 shadow-sm">
+              <div className="flex items-start gap-4 mb-6 pb-6 border-b border-slate-100">
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0">
+                  <User size={22} className="text-blue-600" />
+                </div>
+                <div>
+                  <h2 className="text-lg lg:text-xl font-bold text-slate-900 mb-1">Thông tin giao hàng</h2>
+                  <p className="text-sm text-slate-500">Điền thông tin để chúng tôi giao hàng đến bạn</p>
+                </div>
+              </div>
+
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="flex flex-col gap-2 md:col-span-2 lg:col-span-1">
+                  <label className="text-sm font-semibold text-slate-700">
+                    Họ và tên <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Nhập họ và tên"
+                    className={`
+                      px-4 py-3.5 border-2 rounded-xl text-sm bg-slate-50
+                      focus:outline-none transition-all
+                      ${errors.name
+                        ? "border-red-400 bg-red-50"
+                        : "border-slate-200 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                      }
+                    `}
+                  />
+                  {errors.name && <span className="text-xs text-red-500">{errors.name}</span>}
+                </div>
+
+                <div className="flex flex-col gap-2 md:col-span-2 lg:col-span-1">
+                  <label className="text-sm font-semibold text-slate-700">
+                    Số điện thoại <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="0xxxxxxxxx"
+                    className={`
+                      px-4 py-3.5 border-2 rounded-xl text-sm bg-slate-50
+                      focus:outline-none transition-all
+                      ${errors.phone
+                        ? "border-red-400 bg-red-50"
+                        : "border-slate-200 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                      }
+                    `}
+                  />
+                  {errors.phone && <span className="text-xs text-red-500">{errors.phone}</span>}
+                </div>
+
+                <div className="flex flex-col gap-2 md:col-span-2">
+                  <label className="text-sm font-semibold text-slate-700">Email (tùy chọn)</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="email@example.com"
+                    className="px-4 py-3.5 border-2 border-slate-200 rounded-xl text-sm bg-slate-50 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2 md:col-span-2">
+                  <label className="text-sm font-semibold text-slate-700">
+                    Địa chỉ <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố"
+                    className={`
+                      px-4 py-3.5 border-2 rounded-xl text-sm bg-slate-50
+                      focus:outline-none transition-all
+                      ${errors.address
+                        ? "border-red-400 bg-red-50"
+                        : "border-slate-200 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                      }
+                    `}
+                  />
+                  {errors.address && <span className="text-xs text-red-500">{errors.address}</span>}
+                </div>
+
+                <div className="flex flex-col gap-2 md:col-span-2">
+                  <label className="text-sm font-semibold text-slate-700">Ghi chú (tùy chọn)</label>
+                  <textarea
+                    name="note"
+                    value={formData.note}
+                    onChange={handleChange}
+                    placeholder="Ghi chú về đơn hàng, ví dụ: thời gian giao hàng mong muốn"
+                    rows={3}
+                    className="px-4 py-3.5 border-2 border-slate-200 rounded-xl text-sm bg-slate-50 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition-all resize-vertical min-h-[80px]"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
 
-          {/* Main Content */}
-          <div className="checkout-content">
-            {/* Left: Form */}
-            <div className="checkout-form">
-              <div className="form-section">
-                <div className="section-header">
-                  <div className="section-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h2>Thông tin giao hàng</h2>
-                    <p>Điền thông tin để chúng tôi giao hàng đến bạn</p>
-                  </div>
-                </div>
+          {/* Right: Summary */}
+          <div className="lg:sticky lg:top-24 space-y-4">
+            <div className="bg-white rounded-3xl p-6 lg:p-7 shadow-sm">
+              <h3 className="flex items-center gap-2.5 text-lg font-bold text-slate-900 mb-5">
+                <Package size={20} className="text-blue-600" />
+                Tóm tắt đơn hàng
+              </h3>
 
-                <form onSubmit={handleSubmit} className="form-grid">
-                  <div className="form-group">
-                    <label>
-                      Họ và tên <span className="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Nhập họ và tên"
-                      className={errors.name ? "error" : ""}
-                    />
-                    {errors.name && <span className="error-text">{errors.name}</span>}
-                  </div>
-
-                  <div className="form-group">
-                    <label>
-                      Số điện thoại <span className="required">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="0xxxxxxxxx"
-                      className={errors.phone ? "error" : ""}
-                    />
-                    {errors.phone && <span className="error-text">{errors.phone}</span>}
-                  </div>
-
-                  <div className="form-group">
-                    <label>Email (tùy chọn)</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="email@example.com"
-                    />
-                  </div>
-
-                  <div className="form-group full-width">
-                    <label>
-                      Địa chỉ giao hàng <span className="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleChange}
-                      placeholder="Số nhà, đường, phường/xã, quận/huyện, thành phố"
-                      className={errors.address ? "error" : ""}
-                    />
-                    {errors.address && <span className="error-text">{errors.address}</span>}
-                  </div>
-
-                  <div className="form-group full-width">
-                    <label>Ghi chú (tùy chọn)</label>
-                    <textarea
-                      name="note"
-                      value={formData.note}
-                      onChange={handleChange}
-                      placeholder="Ghi chú thêm cho đơn hàng (VD: giao giờ hành chính)"
-                      rows="3"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            {/* Right: Order Summary */}
-            <div className="checkout-summary">
-              <div className="summary-card">
-                <h3 className="summary-title">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
-                  </svg>
-                  Đơn hàng của bạn ({checkoutItems.length} sản phẩm)
-                </h3>
-
-                {/* Items */}
-                <div className="summary-items">
-                  {checkoutItems.map((item) => (
-                    <div key={item.variantId ? `${item.id}-${item.variantId}` : item.id} className="summary-item">
-                      <div className="item-image">
-                        <img 
-                          src={item.thumbnail || "https://via.placeholder.com/56"} 
-                          alt={item.name}
-                          onError={(e) => { e.target.src = "https://via.placeholder.com/56"; }}
-                        />
-                        {/* <span className="item-qty-badge">{item.quantity}</span> */}
-                      </div>
-                      <div className="item-info">
-                        <span className="item-name">{item.name}</span>
-                        
-                        {/* Variant Info */}
-                        {item.optionValues && item.optionValues.length > 0 && (
-                          <span className="item-variant">
-                            Phân loại: {item.optionValues.join(" · ")}
-                          </span>
-                        )}
-                        
-                        {/* {item.sku && (
-                          <span className="item-sku">SKU: {item.sku}</span>
-                        )} */}
-                        
-                        <span className="item-price">
-                          SL: {toInteger(item.quantity)} × {toInteger(item.price).toLocaleString()}đ
-                        </span>
-                      </div>
-                      <span className="item-total">
-                        {toInteger(item.price * item.quantity).toLocaleString()}đ
+              {/* Items */}
+              <div className="flex flex-col gap-3 pb-4 border-b border-slate-100 mb-4 max-h-80 overflow-y-auto">
+                {checkoutItems.map((item) => (
+                  <div key={item.variantId ? `${item.id}-${item.variantId}` : item.id} className="flex items-start gap-3 pb-3 border-b border-dashed border-slate-100 last:border-b-0 last:pb-0">
+                    <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-slate-50 border border-slate-200 shrink-0">
+                      <img
+                        src={item.thumbnail || PLACEHOLDER_IMAGE}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
+                      />
+                      <span className="absolute -top-2 -right-2 min-w-[20px] h-5 px-1.5 bg-blue-600 text-white text-[11px] font-bold rounded-full flex items-center justify-center">
+                        {item.quantity}
                       </span>
                     </div>
-                  ))}
-                </div>
-
-                {/* Summary Rows */}
-                <div className="summary-rows">
-                  <div className="summary-row">
-                    <span>Tạm tính</span>
-                    <span>{toInteger(subtotal).toLocaleString()}đ</span>
-                  </div>
-                  <div className="summary-row">
-                    <span>Phí vận chuyển</span>
-                    <span className={shippingFee === 0 ? "free" : ""}>
-                      {shippingFee === 0 ? "Miễn phí" : `${toInteger(shippingFee).toLocaleString()}đ`}
+                    <div className="flex-1 min-w-0">
+                      <span className="block text-sm font-semibold text-slate-900 line-clamp-2 leading-tight">
+                        {item.name}
+                      </span>
+                      {item.optionValues?.length > 0 && (
+                        <span className="block text-xs text-slate-500 mt-0.5">
+                          {item.optionValues.join(" · ")}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-sm font-semibold text-slate-900 shrink-0">
+                      {toInteger(item.price * item.quantity).toLocaleString()}đ
                     </span>
                   </div>
-                  {shippingFee > 0 && (
-                    <div className="shipping-note">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="16" x2="12" y2="12" />
-                        <line x1="12" y1="8" x2="12.01" y2="8" />
-                      </svg>
-                      Miễn phí vận chuyển khi đơn hàng từ 500.000đ
-                    </div>
-                  )}
-                </div>
+                ))}
+              </div>
 
-                {/* Total */}
-                <div className="summary-total">
-                  <span>Tổng cộng</span>
-                  <div className="total-right">
-                    <span className="total-price">{toInteger(totalPrice).toLocaleString()}đ</span>
-                    <span className="total-note">(Đã bao gồm VAT)</span>
-                  </div>
+              {/* Summary Rows */}
+              <div className="space-y-3 pb-4 border-b border-slate-100 mb-4">
+                <div className="flex justify-between text-sm text-slate-600">
+                  <span>Tạm tính ({checkoutItems.length} sản phẩm)</span>
+                  <span className="font-semibold text-slate-900">{toInteger(subtotal).toLocaleString()}đ</span>
                 </div>
-
-                {/* Submit Button */}
-                <button
-                  className="submit-btn"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <span className="spinner" />
-                      Đang xử lý...
-                    </>
+                <div className="flex justify-between text-sm text-slate-600">
+                  <span>Phí vận chuyển</span>
+                  {shippingFee === 0 ? (
+                    <span className="text-green-600 font-semibold">Miễn phí</span>
                   ) : (
-                    <>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                      </svg>
-                      Đặt hàng ngay
-                    </>
+                    <span className="font-semibold text-slate-900">{toInteger(shippingFee).toLocaleString()}đ</span>
                   )}
-                </button>
-
-                {/* Security Note */}
-                <div className="security-note">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                  <span>Thanh toán an toàn & bảo mật</span>
                 </div>
+              </div>
+
+              {/* Shipping Note */}
+              {shippingFee > 0 && (
+                <div className="flex items-center gap-2 text-xs text-slate-500 p-2.5 bg-slate-50 rounded-lg mb-4">
+                  <Truck size={14} className="text-blue-600 shrink-0" />
+                  <span>Mua thêm {toInteger(500000 - subtotal).toLocaleString()}đ để miễn phí vận chuyển</span>
+                </div>
+              )}
+
+              {/* Total */}
+              <div className="flex justify-between items-start mb-5">
+                <span className="text-base font-semibold text-slate-900">Tổng cộng</span>
+                <div className="text-right">
+                  <span className="text-2xl lg:text-3xl font-extrabold text-red-500">
+                    {toInteger(totalPrice).toLocaleString()}đ
+                  </span>
+                  <span className="block text-xs text-slate-400">(Đã bao gồm VAT)</span>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                onClick={handleSubmit}
+                disabled={isLoading}
+                className="
+                  w-full flex items-center justify-center gap-2.5
+                  py-4 px-6
+                  bg-gradient-to-r from-blue-600 to-sky-500 text-white
+                  border-none rounded-2xl
+                  text-base lg:text-lg font-bold
+                  shadow-lg shadow-blue-500/40
+                  hover:shadow-xl hover:shadow-blue-500/50 hover:-translate-y-0.5
+                  active:scale-[0.98]
+                  transition-all duration-200
+                  disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0
+                "
+              >
+                {isLoading ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <Check size={20} />
+                    Đặt hàng ngay
+                  </>
+                )}
+              </button>
+
+              {/* Security Note */}
+              <div className="flex items-center justify-center gap-2 mt-4 text-xs text-slate-400">
+                <Shield size={14} className="text-green-500" />
+                <span>Thanh toán an toàn & bảo mật</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
-
-const checkoutStyles = `
-  /* ==================== PAGE LAYOUT ==================== */
-  .checkout-page {
-    min-height: 100vh;
-    background: #f8fafc;
-    padding: 32px 0 60px;
-  }
-
-  .checkout-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ==================== HEADER ==================== */
-  .checkout-header {
-    margin-bottom: 32px;
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 0;
-    background: none;
-    border: none;
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    margin-bottom: 16px;
-  }
-
-  .back-link:hover {
-    color: #2563eb;
-  }
-
-  .checkout-title {
-    font-size: 32px;
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0;
-  }
-
-  /* ==================== MAIN CONTENT ==================== */
-  .checkout-content {
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 32px;
-    align-items: start;
-  }
-
-  /* ==================== FORM SECTION ==================== */
-  .checkout-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .form-section {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 28px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .section-icon {
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(56, 189, 248, 0.1));
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .section-icon svg {
-    color: #2563eb;
-  }
-
-  .section-header h2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 4px;
-  }
-
-  .section-header p {
-    font-size: 14px;
-    color: #64748b;
-    margin: 0;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .form-group.full-width {
-    grid-column: span 2;
-  }
-
-  .form-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #334155;
-  }
-
-  .required {
-    color: #ef4444;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 14px 16px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-size: 15px;
-    transition: all 0.2s ease;
-    background: #f8fafc;
-    color: #0f172a;
-  }
-
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: #94a3b8;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: #2563eb;
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-  }
-
-  .form-group input.error,
-  .form-group textarea.error {
-    border-color: #ef4444;
-    background: #fef2f2;
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-
-  .error-text {
-    font-size: 12px;
-    color: #ef4444;
-  }
-
-  /* ==================== SUMMARY CARD ==================== */
-  .checkout-summary {
-    position: sticky;
-    top: 90px;
-  }
-
-  .summary-card {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 28px;
-    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
-  }
-
-  .summary-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 20px;
-  }
-
-  .summary-title svg {
-    color: #2563eb;
-  }
-
-  /* Items */
-  .summary-items {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 16px;
-    max-height: 320px;
-    overflow-y: auto;
-  }
-
-  .summary-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed #f1f5f9;
-  }
-
-  .summary-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .item-image {
-    position: relative;
-    width: 56px;
-    height: 56px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #f8fafc;
-    flex-shrink: 0;
-    border: 1px solid #e2e8f0;
-  }
-
-  .item-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .item-qty-badge {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    min-width: 20px;
-    height: 20px;
-    background: #2563eb;
-    color: #ffffff;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 4px;
-  }
-
-  .item-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .item-name {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: #0f172a;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .item-variant {
-    display: block;
-    font-size: 11px;
-    color: #64748b;
-    margin-top: 2px;
-  }
-
-  .item-sku {
-    display: block;
-    font-size: 10px;
-    color: #94a3b8;
-    font-family: monospace;
-    margin-top: 1px;
-  }
-
-  .item-price {
-    display: block;
-    font-size: 12px;
-    color: #64748b;
-    margin-top: 4px;
-  }
-
-  .item-total {
-    font-size: 14px;
-    font-weight: 600;
-    color: #0f172a;
-    flex-shrink: 0;
-    text-align: right;
-  }
-
-  /* Summary Rows */
-  .summary-rows {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 16px;
-  }
-
-  .summary-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #64748b;
-  }
-
-  .summary-row span:last-child {
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .summary-row .free {
-    color: #22c55e;
-    font-weight: 600;
-  }
-
-  .shipping-note {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #94a3b8;
-    padding: 8px 12px;
-    background: #f8fafc;
-    border-radius: 8px;
-  }
-
-  .shipping-note svg {
-    color: #2563eb;
-    flex-shrink: 0;
-  }
-
-  /* Total */
-  .summary-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
-
-  .summary-total > span:first-child {
-    font-size: 16px;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .total-right {
-    text-align: right;
-  }
-
-  .total-price {
-    display: block;
-    font-size: 28px;
-    font-weight: 800;
-    color: #ef4444;
-  }
-
-  .total-note {
-    font-size: 12px;
-    color: #94a3b8;
-  }
-
-  /* Submit Button */
-  .submit-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 18px 24px;
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    color: #ffffff;
-    border: none;
-    border-radius: 16px;
-    font-size: 17px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
-    margin-bottom: 16px;
-  }
-
-  .submit-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 40px rgba(37, 99, 235, 0.5);
-  }
-
-  .submit-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-
-  .spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ffffff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* Security Note */
-  .security-note {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #94a3b8;
-  }
-
-  .security-note svg {
-    color: #22c55e;
-  }
-
-  /* ==================== EMPTY STATE ==================== */
-  .empty-state {
-    text-align: center;
-    padding: 80px 40px;
-    background: #ffffff;
-    border-radius: 28px;
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
-  }
-
-  .empty-icon {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 24px;
-    color: #94a3b8;
-  }
-
-  .empty-state h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0 0 8px;
-  }
-
-  .empty-state p {
-    font-size: 15px;
-    color: #64748b;
-    margin: 0 0 24px;
-  }
-
-  /* ==================== BUTTONS ==================== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 28px;
-    border-radius: 14px;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #2563eb, #38bdf8);
-    color: #ffffff;
-    border: none;
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45);
-  }
-
-  /* ==================== RESPONSIVE ==================== */
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .checkout-content {
-      grid-template-columns: 1fr;
-    }
-
-    .checkout-summary {
-      position: static;
-      order: -1;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .checkout-container {
-      padding: 0 16px;
-    }
-
-    .checkout-page {
-      padding: 20px 0 40px;
-    }
-
-    .checkout-title {
-      font-size: 26px;
-    }
-
-    .form-section {
-      padding: 24px;
-      border-radius: 20px;
-    }
-
-    .section-header {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-    }
-
-    .section-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-    }
-
-    .section-header h2 {
-      font-size: 18px;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    .form-group.full-width {
-      grid-column: span 1;
-    }
-
-    .summary-card {
-      padding: 20px;
-      border-radius: 20px;
-    }
-
-    .summary-title {
-      font-size: 16px;
-    }
-
-    .total-price {
-      font-size: 24px;
-    }
-
-    .submit-btn {
-      padding: 16px 20px;
-      font-size: 16px;
-      border-radius: 14px;
-    }
-
-    .empty-state {
-      padding: 60px 24px;
-      border-radius: 20px;
-    }
-
-    .empty-icon {
-      width: 80px;
-      height: 80px;
-    }
-
-    .empty-state h2 {
-      font-size: 20px;
-    }
-  }
-
-  /* Small Mobile */
-  @media (max-width: 480px) {
-    .checkout-title {
-      font-size: 22px;
-    }
-
-    .form-section {
-      padding: 20px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      padding: 12px 14px;
-      font-size: 14px;
-    }
-
-    .summary-items {
-      max-height: 220px;
-    }
-  }
-`;
 
 export default CheckoutPage;

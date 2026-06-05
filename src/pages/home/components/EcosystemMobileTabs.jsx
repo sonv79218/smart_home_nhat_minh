@@ -1,29 +1,13 @@
 // ============================================
-// ECOSYSTEM MOBILE TABS - Mobile-only Component
+// ECOSYSTEM MOBILE TABS - TAILWIND CSS
 // ============================================
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import EcosystemComparisonTable from "./EcosystemComparisonTable";
 
 const EcosystemMobileTabs = ({ ecosystems }) => {
   const [activeTab, setActiveTab] = useState(ecosystems[0]?.id || "");
 
   const activeEcosystem = ecosystems.find((e) => e.id === activeTab) || ecosystems[0];
-
-  const getTabStyles = (ecosystem, isActive) => {
-    if (isActive) {
-      return {
-        backgroundColor: ecosystem.color,
-        color: "white",
-        borderColor: ecosystem.color,
-      };
-    }
-    return {
-      backgroundColor: "white",
-      color: "#64748b",
-      borderColor: "#e2e8f0",
-    };
-  };
 
   return (
     <div className="w-full">
@@ -31,7 +15,6 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
       <div className="flex gap-2 p-1 bg-slate-100 rounded-2xl mb-6">
         {ecosystems.map((ecosystem) => {
           const isActive = activeTab === ecosystem.id;
-          const styles = getTabStyles(ecosystem, isActive);
 
           return (
             <button
@@ -44,9 +27,12 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
                 transition-all duration-300
                 border-2
                 flex items-center justify-center gap-2
-                ${isActive ? "shadow-md" : "hover:bg-slate-50"}
+                ${isActive
+                  ? "shadow-md text-white"
+                  : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                }
               `}
-              style={styles}
+              style={isActive ? { backgroundColor: ecosystem.color, borderColor: ecosystem.color } : undefined}
             >
               <span className="w-2 h-2 rounded-full bg-current opacity-80" />
               {ecosystem.name}
@@ -81,7 +67,7 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
           <div className="p-5 space-y-5">
             {/* Title & Description */}
             <div>
-              <h3 className="text-2xl font-bold text-secondary mb-2">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">
                 {activeEcosystem.name}
               </h3>
               <p className="text-sm text-slate-500 leading-relaxed">
@@ -94,20 +80,19 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
               {activeEcosystem.features.map((feature, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1.5 rounded-full text-xs font-semibold border"
+                  className="px-3 py-1.5 rounded-full text-xs font-semibold"
                   style={{
                     borderColor: `${activeEcosystem.color}30`,
                     color: activeEcosystem.color,
                     backgroundColor: `${activeEcosystem.color}08`,
+                    borderWidth: "1px",
+                    borderStyle: "solid",
                   }}
                 >
                   {feature}
                 </span>
               ))}
             </div>
-
-            {/* Comparison Table */}
-            {/* <EcosystemComparisonTable ecosystem={activeEcosystem} /> */}
 
             {/* CTA Button */}
             <Link
@@ -126,14 +111,7 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
               }}
             >
               <span>Khám phá hệ sinh thái</span>
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>
