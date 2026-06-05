@@ -41,7 +41,7 @@ const Footer = () => {
   return (
     <footer className="bg-slate-950 text-gray-300 border-t border-slate-800">
       {/* TOP */}
-      <div className="max-w-[1400px] mx-auto px-6 py-14">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-6 py-14">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}

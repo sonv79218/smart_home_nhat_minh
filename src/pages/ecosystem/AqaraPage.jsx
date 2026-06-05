@@ -104,7 +104,7 @@ const AqaraPage = () => {
         <div className="absolute -right-20 top-20 w-96 h-96 rounded-full bg-blue-400/30 blur-3xl" />
         <div className="absolute left-10 bottom-10 w-72 h-72 rounded-full bg-indigo-400/20 blur-3xl" />
 
-        <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
+        <div className="relative z-10 w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
           <div className="max-w-3xl pt-20">
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold mb-6"
@@ -150,7 +150,7 @@ const AqaraPage = () => {
 
       {/* INTRO */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <ImageBox
             src={aqaraImages.intro}
             label="Ảnh giới thiệu Aqara"
@@ -186,7 +186,7 @@ const AqaraPage = () => {
 
       {/* WHY */}
       <section className="py-16 md:py-24 bg-blue-50/70">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <p className="font-extrabold mb-3" style={{ color: aqaraBlue }}>
               Vì sao Nhất Minh tư vấn Aqara?
@@ -214,7 +214,7 @@ const AqaraPage = () => {
 
       {/* SOLUTIONS */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mb-10">
             <p className="font-extrabold mb-3" style={{ color: aqaraBlue }}>
               Giải pháp Aqara
@@ -250,7 +250,7 @@ const AqaraPage = () => {
 
       {/* FIT */}
       <section className="py-16 bg-slate-950 text-white">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-blue-300 font-extrabold mb-3">
@@ -281,7 +281,7 @@ const AqaraPage = () => {
 
       {/* PROJECTS */}
       <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <p className="font-extrabold mb-3" style={{ color: aqaraBlue }}>
               Công trình Aqara

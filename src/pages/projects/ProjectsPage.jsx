@@ -473,7 +473,7 @@ const SolutionsByHousePage = () => {
         <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-blue-500/25 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[360px] h-[360px] rounded-full bg-cyan-400/20 blur-3xl" />
 
-        <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 py-24 md:py-32 text-center">
+        <div className="relative z-10 w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 py-24 md:py-32 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 font-bold mb-6">
             <Sparkles size={16} />
             Giải pháp Smart Home theo công trình
@@ -512,7 +512,7 @@ const SolutionsByHousePage = () => {
 
 
       <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mx-auto text-center mb-8">
             {/* <p className="text-blue-600 font-extrabold mb-3">
               Chọn nhanh loại công trình
@@ -662,7 +662,7 @@ const SolutionsByHousePage = () => {
       </section>
 
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="grid lg:grid-cols-4 gap-5">
             {benefits.map((item) => {
               const Icon = item.icon;
@@ -685,7 +685,7 @@ const SolutionsByHousePage = () => {
       </section>
 
       <section className="py-16 md:py-24 bg-slate-950 text-white">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mb-12">
             <p className="text-blue-300 font-extrabold mb-3">
               Quy trình thi công Smart Home

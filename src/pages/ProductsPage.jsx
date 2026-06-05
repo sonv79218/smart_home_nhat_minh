@@ -198,7 +198,7 @@ const ProductsPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 py-6 md:py-8">
-      <div className="w-full mx-auto max-w-[1400px] xl:max-w-[1500px] 2xl:max-w-[1800px] px-4 md:px-6 lg:px-8">
+      <div className="w-full mx-auto w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] xl:max-w-[1500px] 2xl:max-w-[1800px] px-4 md:px-6 lg:px-8">
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
           <div>

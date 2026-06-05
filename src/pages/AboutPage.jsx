@@ -154,7 +154,7 @@ const AboutPage = () => {
     <main className="bg-white text-slate-900">
       {/* HERO */}
       <section className="pt-28 pb-16 md:pt-36 md:pb-24 bg-slate-950 text-white overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-sm font-semibold mb-6">
               <Home size={16} />
@@ -199,7 +199,7 @@ const AboutPage = () => {
 
       {/* ABOUT */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <ImageBox
             src={IMAGES.showroom}
             label="Ảnh showroom / văn phòng / đội ngũ"
@@ -235,7 +235,7 @@ const AboutPage = () => {
       </section>
       {/* OFFICE */}
 <section className="py-16 md:py-24 bg-slate-50">
-  <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+  <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
     <div className="text-center max-w-2xl mx-auto mb-12">
       <p className="text-sky-500 font-bold mb-3">
         Văn phòng & Showroom
@@ -274,7 +274,7 @@ const AboutPage = () => {
 
       {/* PROJECTS */}
       <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
             {/* <p className="text-sky-500 font-bold mb-3">Công trình thực tế</p> */}
             <h2 className="text-3xl md:text-5xl font-extrabold">
@@ -298,7 +298,7 @@ const AboutPage = () => {
 
       {/* PROCESS */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <p className="text-sky-500 font-bold mb-3">Quy trình làm việc</p>
             <h2 className="text-3xl md:text-5xl font-extrabold">
@@ -382,7 +382,7 @@ const AboutPage = () => {
 
       {/* GALLERY */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <p className="text-sky-500 font-bold mb-3">Thư viện hình ảnh</p>
             <h2 className="text-3xl md:text-5xl font-extrabold">
@@ -403,7 +403,7 @@ const AboutPage = () => {
 
       {/* TEAM + COMMITMENT */}
       <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10">
           <div>
             <p className="text-sky-500 font-bold mb-3">Đội ngũ</p>
             <h2 className="text-3xl md:text-5xl font-extrabold mb-8">
@@ -442,7 +442,7 @@ const AboutPage = () => {
       </section>
 {/* TEAM */}
 <section className="py-16 md:py-24">
-  <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+  <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
     <div className="text-center max-w-2xl mx-auto mb-12">
       <p className="text-sky-500 font-bold mb-3">
         Đội ngũ Nhật Minh Smart Home
@@ -494,7 +494,7 @@ const AboutPage = () => {
 </section>
       {/* CONTACT CTA */}
       <section className="py-16 md:py-24 bg-slate-950 text-white">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <p className="text-sky-300 font-bold mb-3">Liên hệ</p>
             <h2 className="text-3xl md:text-5xl font-extrabold mb-5">

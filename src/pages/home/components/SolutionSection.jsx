@@ -38,7 +38,7 @@ const SolutionSection = ({ solutions: propSolutions }) => {
 
   return (
     <div className="w-full py-12 md:py-16 bg-slate-50">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />

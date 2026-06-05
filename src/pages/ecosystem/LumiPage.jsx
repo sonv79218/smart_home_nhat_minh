@@ -100,7 +100,7 @@ const LumiPage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-emerald-900/20" />
         <div className="absolute -right-20 top-20 w-96 h-96 rounded-full bg-emerald-500/30 blur-3xl" />
 
-        <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
+        <div className="relative z-10 w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
           <div className="max-w-3xl pt-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 text-sm font-bold mb-6">
               <Home size={16} />
@@ -139,7 +139,7 @@ const LumiPage = () => {
 
       {/* INTRO */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <ImageBox
             src={lumiImages.intro}
             label="Ảnh giới thiệu Lumi"
@@ -175,7 +175,7 @@ const LumiPage = () => {
 
       {/* WHY */}
       <section className="py-16 md:py-24 bg-emerald-50/60">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
               Vì sao Nhật Minh tư vấn Lumi?
@@ -203,7 +203,7 @@ const LumiPage = () => {
 
       {/* SOLUTIONS */}
       <section className="py-16 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mb-10">
             <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
               Giải pháp Lumi
@@ -235,7 +235,7 @@ const LumiPage = () => {
 
       {/* FIT */}
       <section className="py-16 bg-slate-950 text-white">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-emerald-300 font-extrabold mb-3">
@@ -266,7 +266,7 @@ const LumiPage = () => {
 
       {/* PROJECTS */}
       <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
               Công trình Lumi

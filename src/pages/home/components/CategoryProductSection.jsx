@@ -192,7 +192,7 @@ const CategoryProductSection = ({
 
   return (
     <section className="py-8 md:py-12">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         {/* Header */}
         <CategoryHeader
           category={category}

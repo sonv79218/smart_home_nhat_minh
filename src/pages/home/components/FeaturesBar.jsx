@@ -35,7 +35,7 @@ const features = [
 const FeaturesBar = () => {
   return (
     <section className="py-8 md:py-10">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4">
           {features.map((feature) => {
             const Icon = feature.icon;

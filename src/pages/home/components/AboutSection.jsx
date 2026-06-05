@@ -75,7 +75,7 @@ const AboutSection = ({ companyInfo }) => {
 
   return (
     <section className="py-10 md:py-16 bg-slate-50">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         {/* Header with Badge */}
         <SectionHeader
           badge="Về Nhật Minh Smart Home"

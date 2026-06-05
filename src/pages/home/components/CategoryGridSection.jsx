@@ -33,7 +33,7 @@ const CategoryGridSection = ({ categories }) => {
 
   return (
     <section className="w-full py-4 md:py-6">
-      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
         {/* <div className="flex items-end justify-between gap-3 mb-4 md:mb-5">
           <div>

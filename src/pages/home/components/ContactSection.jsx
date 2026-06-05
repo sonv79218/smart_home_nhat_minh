@@ -61,7 +61,7 @@ const ContactSection = ({ companyInfo, companySocial }) => {
 
   return (
     <section className="py-6 md:py-8">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         <div className="text-center">
           <h3 className="text-sm md:text-base font-bold text-secondary mb-4">
             Theo dõi chúng tôi

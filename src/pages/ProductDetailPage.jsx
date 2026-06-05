@@ -619,7 +619,7 @@ const ProductDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-28 md:pb-16">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6 py-6">
         {/* Back Button */}
         <button 
           onClick={() => navigate(-1)} 

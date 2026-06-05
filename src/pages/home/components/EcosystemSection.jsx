@@ -60,7 +60,7 @@ const ecosystems = [
 const EcosystemSection = () => {
   return (
     <section className="py-10 md:py-16 bg-white">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         {/* Section Header - Centered */}
         {/* <SectionHeader
           title="Hệ Sinh Thái Smart Home"

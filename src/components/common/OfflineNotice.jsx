@@ -14,7 +14,7 @@ const OfflineNotice = ({ className = "" }) => {
         ${className}
       `}
     >
-      <div className="max-w-[1400px] mx-auto">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
           {/* Icon */}
           <div className="flex items-center gap-2 flex-shrink-0">

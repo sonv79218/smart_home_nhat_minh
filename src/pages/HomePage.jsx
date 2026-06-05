@@ -111,8 +111,8 @@ const HomePage = () => {
       {/* ============================================ */}
       {/* HERO: Sidebar + Banner + Mega Menu */}
       {/* ============================================ */}
-      {/* <div className="max-w-[1400px] mx-auto px-0 lg:px-4 xl:px-6 pt-4"> */}
-      <div className="max-w-[1400px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
+      {/* <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 lg:px-4 xl:px-6 pt-4"> */}
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
         {/* Desktop Hero Grid */}
         <div
           className="relative hidden lg:grid grid-cols-[300px_1fr] h-[420px] xl:h-[460px] overflow-hidden rounded-2xl"
@@ -190,7 +190,7 @@ const HomePage = () => {
       {/* ============================================ */}
       {/* CATEGORY PRODUCTS */}
       {/* ============================================ */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
         {topCategories.map((category, index) => {
           const categoryProducts = productsByCategory[category.id] || [];
           if (categoryProducts.length === 0) return null;
