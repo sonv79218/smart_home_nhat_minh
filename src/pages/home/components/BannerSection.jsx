@@ -93,6 +93,9 @@ const BannerSection = ({ banners, current, setCurrent, className = "" }) => {
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
 
+  // Responsive height - used when parent doesn't set h-full
+  const isFullHeight = className.includes("h-full");
+
   const handleSlideChange = (newIndex) => {
     if (newIndex === current || isTransitioning) return;
 
@@ -171,10 +174,10 @@ const BannerSection = ({ banners, current, setCurrent, className = "" }) => {
   if (!banners || banners.length === 0) {
     return (
       <section className={`relative w-full ${className}`}>
-        <div className="
-          relative w-full h-[260px] sm:h-[320px] md:h-[400px]
-          overflow-hidden
-        ">
+        <div className={`
+          relative w-full overflow-hidden
+          ${isFullHeight ? "h-full" : "h-[260px] sm:h-[320px] md:h-[400px] lg:h-[480px] xl:h-[520px]"}
+        `}>
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-700" />
         </div>
       </section>
@@ -188,10 +191,9 @@ const BannerSection = ({ banners, current, setCurrent, className = "" }) => {
       {/* Banner Wrapper */}
       <div
         className={`
-          relative w-full h-full
-          overflow-hidden cursor-pointer
-          touch-pan-y select-none
-          ${isHovered ? "" : ""}
+          relative w-full overflow-hidden cursor-pointer
+          select-none
+          ${isFullHeight ? "h-full" : "h-[260px] sm:h-[320px] md:h-[400px] lg:h-[480px] xl:h-[520px]"}
         `}
         onClick={handleBannerClick}
         onMouseEnter={() => setIsHovered(true)}

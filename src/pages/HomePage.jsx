@@ -145,11 +145,12 @@ const HomePage = () => {
         </div>
 
         {/* Mobile Banner (shown when lg grid is hidden) */}
-        <div className="lg:hidden">
+        <div className="lg:hidden h-[260px] sm:h-[320px] md:h-[400px]">
           <BannerSection
             banners={banners}
             current={current}
             setCurrent={setCurrent}
+            className="h-full"
           />
         </div>
       </div>
