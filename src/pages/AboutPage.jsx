@@ -23,16 +23,16 @@ import {
 } from "lucide-react";
 
 const IMAGES = {
-  hero: "../../assets/images/showroom/show_room.png",
-  showroom: "../../assets/images/showroom/show_room.png",
-  office1: "../../assets/images/showroom/phong_ky_thuat.png",
-  office2: "../../assets/images/showroom/show_room_trung_bay.png",
-  office3: "../../assets/images/showroom/show_room_trung_bay_2.png",
+  hero: "https://cdn.phototourl.com/free/2026-06-05-38389b9c-7a29-484b-b66c-2c87a1e9f322.png",
+  showroom: "https://cdn.phototourl.com/free/2026-06-05-61b9f2c8-83ec-437e-ab81-b92be369ae5e.png",
+  office1: "https://cdn.phototourl.com/free/2026-06-05-13431516-5687-4700-a17b-103e56d84b73.png",
+  office2: "https://cdn.phototourl.com/free/2026-06-05-8dce2a55-eba2-4521-85c6-9fc52c858e73.png",
+  office3: "https://cdn.phototourl.com/free/2026-06-05-61b9f2c8-83ec-437e-ab81-b92be369ae5e.png",
 
-  project1: "../../assets/images/projects/biet_thu_thong_minh.png",
-  project2: "../../assets/images/projects/nha_pho_thong_minh.png",
-  project3: "../../assets/images/projects/can_ho_thong_minh.png",
-  project4: "../../assets/images/projects/van_phong_thong_minh.png",
+  project1: "https://cdn.phototourl.com/free/2026-06-05-3a7cf6bd-8982-470f-a245-187c47c5b501.png",
+  project2: "https://cdn.phototourl.com/free/2026-06-05-3a7cf6bd-8982-470f-a245-187c47c5b501.png",
+  project3: "https://cdn.phototourl.com/free/2026-06-05-3a7cf6bd-8982-470f-a245-187c47c5b501.png",
+  project4: "https://cdn.phototourl.com/free/2026-06-05-3a7cf6bd-8982-470f-a245-187c47c5b501.png",
 
   process1: "../../assets/images/process/khao_sat.png",
   process2: "../../assets/images/process/tu_van.png",
@@ -40,16 +40,16 @@ const IMAGES = {
   process4: "../../assets/images/process/thi_cong.png",
   process5: "../../assets/images/process/ban_giao.png",
   process6: "../../assets/images/process/bao_hanh.png",
-  gallery1: "../../assets/images/gallery/gallery_1.png",
-  gallery2: "../../assets/images/gallery/gallery_2.png",
-  gallery3: "../../assets/images/gallery/gallery_3.png",
-  gallery4: "../../assets/images/gallery/gallery_4.png",
-  gallery5: "../../assets/images/gallery/gallery_5.png",
-  gallery6: "../../assets/images/gallery/gallery_6.png",
-  team1: "../../assets/images/team/team_1.png",
-  team2: "",
-  team3: "",
-  contact: "",
+  gallery1: "https://cdn.phototourl.com/free/2026-06-05-e01d53ba-2a00-49e7-a78a-f19d4183b5a4.png",
+  gallery2: "https://cdn.phototourl.com/free/2026-06-05-a7176776-1153-4556-86fb-fe52f63d4cd7.jpg",
+  gallery3: "https://cdn.phototourl.com/free/2026-06-05-230e8e27-db9e-4a12-aca9-57882348c0db.png",
+  gallery4: "https://cdn.phototourl.com/free/2026-06-05-cd701e76-f924-41a4-a20b-1b2f48af6358.jpg",
+  gallery5: "https://cdn.phototourl.com/free/2026-06-05-a974a7eb-b90c-4167-8842-13a01d72e2c4.jpg",
+  gallery6: "https://cdn.phototourl.com/free/2026-06-05-d64ccf77-7d7f-4e67-9635-36a708012a33.jpg",
+  team1: "https://cdn.phototourl.com/free/2026-06-05-230e8e27-db9e-4a12-aca9-57882348c0db.png",
+  team2: "https://cdn.phototourl.com/free/2026-06-05-a974a7eb-b90c-4167-8842-13a01d72e2c4.jpg",
+  team3: "https://cdn.phototourl.com/free/2026-06-05-230e8e27-db9e-4a12-aca9-57882348c0db.png",
+  contact: "https://cdn.phototourl.com/free/2026-06-05-230e8e27-db9e-4a12-aca9-57882348c0db.png",
 };
 
 const ImageBox = ({ src, label, className = "" }) => {

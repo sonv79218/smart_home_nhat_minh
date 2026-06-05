@@ -115,7 +115,13 @@ const HomePage = () => {
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
         {/* Desktop Hero Grid */}
         <div
-          className="relative hidden lg:grid grid-cols-[300px_1fr] h-[420px] xl:h-[460px] overflow-hidden rounded-2xl"
+          // className="relative hidden lg:grid grid-cols-[300px_1fr] h-[420px] xl:h-[460px] overflow-hidden rounded-2xl"
+            className="
+    relative hidden lg:grid
+    grid-cols-[300px_1fr]
+    h-[clamp(475px,28vw,600px)]
+    overflow-hidden rounded-2xl
+  "
           onMouseLeave={() => setHoveredCategory(null)}
         >
           {/* Category Sidebar */}
@@ -186,7 +192,7 @@ const HomePage = () => {
       {/* ============================================ */}
       {/* FLOATING CONTACT BUTTONS */}
       {/* ============================================ */}
-      <FloatingContactButtons />
+      {/* <FloatingContactButtons /> */}
 
       {/* ============================================ */}
       {/* CATEGORY PRODUCTS */}
