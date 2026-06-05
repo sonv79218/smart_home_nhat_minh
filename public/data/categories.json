@@ -2,12 +2,12 @@
   {
     "id": "hub",
     "name": "Bộ điều khiển trung tâm",
-    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-05-55abb62a-2a84-403c-9d19-5d0414bd8b6e.png",
     "description": "Hub trung tâm, gateway, bộ điều khiển hệ sinh thái Smart Home",
     "banner": {
       "title": "Bộ Điều Khiển Trung Tâm",
       "subtitle": "Kết nối và quản lý toàn bộ thiết bị thông minh trong nhà",
-      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-05-55abb62a-2a84-403c-9d19-5d0414bd8b6e.png",
       "buttonText": "Khám phá Hub",
       "link": "/products?category=hub"
     }
@@ -15,12 +15,12 @@
   {
     "id": "sensor",
     "name": "Cảm biến các loại",
-    "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-05-ac576bcd-796c-4859-a56d-0182f26c32ad.png",
     "description": "Cảm biến hiện diện, chuyển động, cửa, khói, nhiệt độ, độ ẩm",
     "banner": {
       "title": "Cảm Biến Thông Minh",
       "subtitle": "Tự động hóa và bảo vệ ngôi nhà chính xác hơn",
-      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-05-ac576bcd-796c-4859-a56d-0182f26c32ad.png",
       "buttonText": "Xem cảm biến",
       "link": "/products?category=sensor"
     }

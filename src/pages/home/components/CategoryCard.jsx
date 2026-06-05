@@ -37,7 +37,7 @@ const CategoryCard = ({ category }) => {
     className="
       text-primary-600
       w-4 h-4
-      md:w-10 md:h-10
+      md:w-6 md:h-10
     "
   />
 </div>

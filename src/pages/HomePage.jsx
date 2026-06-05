@@ -160,31 +160,46 @@ const HomePage = () => {
           />
         </div>
       </div>
-
       {/* Divider */}
       <SectionDivider />
+{/* MOBILE: Category trước Solution */}
+<div className="lg:hidden">
+  <SectionDivider />
 
-      {/* Category Grid */}
-      <div className="w-full bg-gradient-to-b from-slate-50 to-white">
-        {topCategories.length > 0 && (
-          <CategoryGridSection categories={topCategories} />
-        )}
-      </div>
+  <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+    {topCategories.length > 0 && (
+      <CategoryGridSection categories={topCategories} />
+    )}
+  </div>
 
+  <SectionDivider />
+
+  {solutions.length > 0 && (
+    <SolutionSection solutions={solutions} />
+  )}
+</div>
+
+{/* DESKTOP: Solution trước Category */}
+<div className="hidden lg:block">
+  <SectionDivider />
+
+  {solutions.length > 0 && (
+    <SolutionSection solutions={solutions} />
+  )}
+
+  <SectionDivider />
+
+  <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+    {topCategories.length > 0 && (
+      <CategoryGridSection categories={topCategories} />
+    )}
+  </div>
+</div>
       {/* ============================================ */}
       {/* ECOSYSTEM SECTION */}
       {/* ============================================ */}
       <EcosystemSection />
 
-      {/* Divider */}
-      <SectionDivider />
-
-      {/* ============================================ */}
-      {/* SOLUTIONS SECTION */}
-      {/* ============================================ */}
-      {solutions.length > 0 && (
-        <SolutionSection solutions={solutions} />
-      )}
 
       {/* Divider */}
       <SectionDivider />

@@ -59,7 +59,7 @@ const CategoryGridSection = ({ categories }) => {
           className="
             grid
             grid-cols-4
-            sm:grid-cols-5
+            sm:grid-cols-10
             gap-2.5 sm:gap-3 md:gap-4
           "
         >
