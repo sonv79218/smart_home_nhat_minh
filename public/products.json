@@ -206,7 +206,6 @@
     "price": 1190000,
     "discountPrice": 0,
     "minStockAlert": 5,
-    "rating": 4.9,
     "shortDescription": "Cảm biến hiện diện Aqara FP300 là cảm biến hiện diện thế hệ mới sử dụng công nghệ radar mmWave kết hợp cảm biến hồng ngoại PIR, giúp phát hiện chính xác sự hiện diện của con người ngay cả khi đứng yên. Thiết bị hỗ trợ kết nối Thread, Zigbee và Bluetooth, mang đến khả năng tích hợp linh hoạt với các hệ sinh thái nhà thông minh phổ biến như Aqara Home, Apple HomeKit, Google Home, Amazon Alexa và Matter over Bridge.",
     "description": "Aqara FP300 được thiết kế để nâng cao trải nghiệm tự động hóa trong ngôi nhà thông minh nhờ khả năng phát hiện hiện diện chính xác và ổn định. Thiết bị sử dụng công nghệ radar mmWave tiên tiến kết hợp cảm biến PIR, giúp nhận biết sự hiện diện của con người trong không gian ngay cả khi người dùng đang ngồi làm việc, đọc sách hoặc ngủ mà không có nhiều chuyển động.\n\nNhờ hỗ trợ đồng thời các giao thức Thread, Zigbee và Bluetooth, Aqara FP300 mang đến khả năng kết nối linh hoạt với nhiều hệ sinh thái và thiết bị thông minh khác nhau. Người dùng có thể dễ dàng xây dựng các kịch bản tự động như bật đèn khi có người bước vào phòng, điều chỉnh điều hòa theo trạng thái hiện diện hoặc kích hoạt các chế độ tiết kiệm năng lượng khi không có người sử dụng.\n\nThiết bị có thiết kế nhỏ gọn, dễ dàng lắp đặt trên tường hoặc trần nhà, phù hợp với nhiều không gian như phòng khách, phòng ngủ, văn phòng hoặc khu vực hành lang. Kết hợp với hệ sinh thái Aqara, FP300 giúp nâng cao độ chính xác của các ngữ cảnh tự động hóa và cải thiện khả năng quản lý năng lượng trong gia đình.\n\nThông số kỹ thuật nổi bật\nKết nối không dây: Thread, Zigbee, Bluetooth\nCông nghệ cảm biến: Radar mmWave kết hợp PIR\nNguồn cấp: 2 × pin CR2450\nTương thích: Aqara Home, Apple HomeKit, Google Home, Amazon Alexa, Matter over Bridge\nPhát hiện hiện diện: Có người / Không có người theo thời gian thực\nTự động hóa thông minh: Hỗ trợ kích hoạt ngữ cảnh dựa trên hiện diện\nLắp đặt: Gắn tường hoặc trần nhà\nỨng dụng: Phòng khách, phòng ngủ, văn phòng, hành lang và các khu vực sinh hoạt khác\nTiết kiệm năng lượng: Thiết kế tối ưu điện năng với thời lượng pin dài\nƯu điểm nổi bật\n\n✔ Công nghệ radar mmWave giúp phát hiện người ngay cả khi đứng yên.\n✔ Kết hợp cảm biến PIR giúp tăng độ chính xác và giảm cảnh báo giả.\n✔ Hỗ trợ đồng thời Thread, Zigbee và Bluetooth.\n✔ Tương thích Apple HomeKit, Google Home, Alexa và Matter over Bridge.\n✔ Sử dụng 2 pin CR2450, không cần cấp nguồn dây điện.\n✔ Phù hợp cho các hệ thống nhà thông minh hiện đại với khả năng tự động hóa nâng cao.",
     "featured": false,
@@ -227,10 +226,12 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T02:04:24.639Z",
-    "sold": 1900000,
     "bestSeller": true,
     "stock": 180,
-    "updatedAt": "2026-06-02T01:45:16.535Z"
+    "sold": 123,
+    "originalPrice": 1990000,
+    "rating": 4.8,
+    "updatedAt": "2026-06-05T07:22:22.404Z"
   },
   {
     "id": "7D34JJf14e59o0Fd0APZ",
@@ -362,7 +363,6 @@
     "name": "Bộ điều khiển trung tâm Aqara Hub M3",
     "sku": "OTH-BIUK-7598",
     "brand": "aqara",
-    "price": 3489998,
     "discountPrice": 0,
     "stock": 12,
     "minStockAlert": 5,
@@ -386,7 +386,9 @@
     "specifications": [],
     "createdAt": "2026-05-30T09:55:02.885Z",
     "category": "hub",
-    "updatedAt": "2026-06-01T04:29:08.020Z"
+    "originalPrice": 0,
+    "price": 3490000,
+    "updatedAt": "2026-06-05T07:21:19.610Z"
   },
   {
     "id": "Dy3qqYut3ZZdMw9LY69k",
@@ -397,7 +399,6 @@
     "discountPrice": 0,
     "stock": 12,
     "minStockAlert": 5,
-    "rating": 4.9,
     "shortDescription": "Aqara Hub M1S là bộ điều khiển trung tâm thông minh sử dụng chuẩn Zigbee 3.0, cho phép kết nối và quản lý lên đến 128 thiết bị trong hệ sinh thái Aqara. Sản phẩm tích hợp loa báo động công suất lớn, đèn LED RGB đa màu và hỗ trợ Apple HomeKit, Google Home, Amazon Alexa, mang đến giải pháp điều khiển nhà thông minh ổn định, tiện lợi và an toàn.",
     "description": "Aqara Hub M1S được thiết kế như trung tâm điều khiển của toàn bộ hệ sinh thái nhà thông minh Aqara, sử dụng giao thức Zigbee 3.0 giúp kết nối nhanh hơn, ổn định hơn và tiết kiệm năng lượng hơn so với các thế hệ trước. Thiết bị hỗ trợ quản lý tối đa 128 thiết bị Zigbee, phù hợp cho căn hộ, nhà phố hoặc hệ thống nhà thông minh quy mô lớn.\n\nĐiểm nổi bật của Hub M1S là loa báo động tích hợp công suất 2W, có thể hoạt động như còi báo động chống đột nhập, chuông cửa hoặc phát các thông báo tự động theo kịch bản được thiết lập trong ứng dụng Aqara Home. Điều này giúp tăng cường khả năng bảo vệ và cảnh báo trong ngôi nhà thông minh.\n\nBên cạnh đó, thiết bị còn được trang bị đèn LED RGB đa màu với khả năng điều chỉnh màu sắc và độ sáng linh hoạt. Đèn có thể hoạt động như đèn ngủ, đèn cảnh báo hoặc đèn hiệu thông minh trong các ngữ cảnh tự động hóa khác nhau. Hub M1S còn tích hợp cảm biến ánh sáng giúp kích hoạt các kịch bản thông minh dựa trên điều kiện môi trường.\n\nNhờ khả năng tương thích rộng rãi với các nền tảng nhà thông minh phổ biến như Apple HomeKit, Google Home và Amazon Alexa, người dùng có thể dễ dàng điều khiển bằng giọng nói, xây dựng các ngữ cảnh tự động hóa và quản lý thiết bị trên nhiều hệ sinh thái khác nhau.\n\nThông số nổi bật\nHỗ trợ kết nối lên đến 128 thiết bị Zigbee\nChuẩn kết nối Zigbee 3.0\nTích hợp loa báo động 2W\nTích hợp đèn LED RGB đa màu\nCảm biến ánh sáng tích hợp\nKết nối Wi-Fi 2.4GHz\nHỗ trợ điều khiển tự động hóa cục bộ\nTương thích Apple HomeKit, Google Home, Amazon Alexa\nHỗ trợ các chế độ báo động thông minh và hệ thống an ninh gia đình.",
     "featured": false,
@@ -415,10 +416,12 @@
     "specifications": [],
     "createdAt": "2026-05-30T10:01:38.480Z",
     "category": "hub",
-    "sold": 98000,
     "bestSeller": true,
     "newProduct": false,
-    "updatedAt": "2026-06-02T02:02:42.503Z"
+    "sold": 257,
+    "originalPrice": 0,
+    "rating": 4.8,
+    "updatedAt": "2026-06-05T07:22:50.402Z"
   },
   {
     "id": "EANvjLsfKzybVxM4qO7B",
@@ -853,10 +856,8 @@
     "brand": "aqara",
     "category": "smart-lock",
     "price": 3990000,
-    "discountPrice": 900000,
     "stock": 34,
     "minStockAlert": 5,
-    "rating": 4.9,
     "shortDescription": "Khóa cửa thông minh Aqara U200 là giải pháp an ninh hiện đại hỗ trợ tới 8 phương thức mở khóa, bao gồm vân tay, Apple Home, NFC, mật mã, chìa cơ, mã từ xa, Bluetooth và Matter. Sản phẩm mang đến trải nghiệm mở cửa nhanh chóng, an toàn và linh hoạt, phù hợp cho nhà ở và căn hộ thông minh.",
     "description": "Aqara U200 là dòng khóa cửa thông minh thế hệ mới được thiết kế nhằm tối ưu sự tiện lợi, bảo mật và khả năng kết nối trong hệ sinh thái nhà thông minh. Thiết bị hỗ trợ tới 8 phương thức mở khóa gồm vân tay, Apple Home (Home Key), chìa cơ truyền thống, NFC, mật mã, mã mở khóa từ xa, Bluetooth và chuẩn Matter, giúp người dùng linh hoạt trong mọi tình huống sử dụng.\n\nKhóa hỗ trợ lưu trữ tối đa 20 dấu vân tay, đáp ứng nhu cầu cơ bản cho gia đình hoặc văn phòng nhỏ. Người dùng có thể dễ dàng quản lý quyền truy cập, cấp quyền tạm thời hoặc theo dõi lịch sử mở cửa thông qua ứng dụng Aqara Home hoặc các nền tảng tương thích Matter.\n\nAqara U200 sử dụng kết nối BLE và Thread, mang lại khả năng truyền tải ổn định, phản hồi nhanh và tiết kiệm năng lượng. Nhờ hỗ trợ Matter, thiết bị có thể tích hợp dễ dàng với nhiều hệ sinh thái nhà thông minh phổ biến như Apple Home, Google Home hoặc Alexa thông qua hub tương thích.\n\nThiết bị được trang bị pin với thời lượng sử dụng khoảng 6 tháng trong điều kiện vận hành thông thường, giúp giảm tần suất sạc và đảm bảo trải nghiệm sử dụng liên tục. Khi cần, người dùng có thể sử dụng nguồn dự phòng để mở khóa trong trường hợp khẩn cấp.\n\nVới thiết kế hiện đại và đa dạng phương thức mở khóa, Aqara U200 là lựa chọn phù hợp cho người dùng muốn trải nghiệm khóa cửa thông minh linh hoạt, dễ sử dụng và tích hợp sâu vào hệ sinh thái nhà thông minh.\n\n🔹 Thông số kỹ thuật\nPhương thức mở khóa: Vân tay, Apple Home, chìa cơ, NFC, mật mã, mã từ xa, Bluetooth, Matter\nLưu trữ vân tay: Tối đa 20 dấu vân tay\nKết nối: BLE, Thread\nTương thích: Matter, Apple Home, Google Home, Alexa (qua hub)\nThời lượng pin: ~6 tháng\nNguồn: Pin sạc/lithium (tùy cấu hình thị trường)\nỨng dụng: Nhà ở, căn hộ, văn phòng\nTính năng: Mở khóa đa phương thức, quản lý người dùng, tự động hóa nhà thông minh",
     "featured": true,
@@ -874,8 +875,11 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T10:03:16.997Z",
-    "sold": 159000,
-    "updatedAt": "2026-06-02T01:40:44.960Z"
+    "sold": 22,
+    "originalPrice": 900000,
+    "discountPrice": 0,
+    "rating": 4.8,
+    "updatedAt": "2026-06-05T07:18:45.898Z"
   },
   {
     "id": "JHYihRsoG0tZDnnkCYt4",
@@ -2535,7 +2539,6 @@
     "stock": 53,
     "minStockAlert": 5,
     "rating": 4.9,
-    "sold": 190000000,
     "shortDescription": "Bộ điều khiển van thông minh Aqara Valve Controller T1 là giải pháp tự động hóa giúp điều khiển đóng/mở van nước từ xa thông qua điện thoại. Sản phẩm sử dụng kết nối Zigbee ổn định, vận hành bằng pin và có khả năng kết hợp với các cảm biến thông minh để tự động ngắt nguồn nước khi phát hiện rò rỉ, góp phần bảo vệ ngôi nhà an toàn hơn.",
     "description": "Aqara Valve Controller T1 được thiết kế để tự động hóa việc kiểm soát nguồn nước trong gia đình, căn hộ, văn phòng hoặc các khu vực cần quản lý hệ thống cấp nước. Thiết bị cho phép người dùng điều khiển đóng hoặc mở van nước từ xa thông qua ứng dụng Aqara Home trên điện thoại, mang đến sự tiện lợi và chủ động trong quá trình sử dụng.\n\nNhờ sử dụng giao thức Zigbee, Valve Controller T1 đảm bảo kết nối ổn định, phản hồi nhanh và tiết kiệm năng lượng. Khi kết hợp với Aqara Hub và cảm biến rò rỉ nước Aqara, thiết bị có thể tự động đóng van ngay khi phát hiện sự cố rò rỉ, giúp hạn chế thiệt hại do nước gây ra và nâng cao mức độ an toàn cho ngôi nhà.\n\nThiết bị được thiết kế nhỏ gọn, dễ dàng lắp đặt trên nhiều loại van nước phổ biến mà không cần thay đổi hệ thống đường ống hiện có. Nguồn điện sử dụng pin giúp việc lắp đặt linh hoạt hơn, không phụ thuộc vào vị trí ổ cắm điện và vẫn đảm bảo hoạt động ổn định trong thời gian dài.\n\nTHÔNG SỐ KỸ THUẬT\n\nSản phẩm: Bộ điều khiển van thông minh Aqara Valve Controller T1\nChức năng: Điều khiển đóng/mở van nước từ xa\nKết nối không dây: Zigbee\nĐiều khiển: Thông qua ứng dụng Aqara Home\nChuẩn bảo vệ: IP20\nNguồn điện: Pin\nKích thước: 93 × 72 × 84 mm\nMôi trường sử dụng: Trong nhà\nTương thích: Aqara Home và hệ sinh thái nhà thông minh Aqara\n\nTÍNH NĂNG NỔI BẬT\n\nĐiều khiển van nước từ xa bằng điện thoại\nKết nối Zigbee ổn định, tiết kiệm năng lượng\nTự động đóng van khi kết hợp với cảm biến rò rỉ nước\nLắp đặt dễ dàng trên nhiều loại van nước phổ biến\nHoạt động bằng pin, không cần đi dây nguồn\nQuản lý và theo dõi trạng thái thiết bị trên ứng dụng Aqara Home\nNâng cao an toàn và hạn chế rủi ro do rò rỉ nước",
     "featured": true,
@@ -2555,8 +2558,10 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-02T01:49:20.379Z",
-    "discountPrice": 2500000,
-    "updatedAt": "2026-06-02T04:27:00.855Z"
+    "sold": 154,
+    "originalPrice": 2500000,
+    "discountPrice": 0,
+    "updatedAt": "2026-06-05T07:18:13.058Z"
   },
   {
     "id": "aE5QhIENBrw0Gn7a2smO",
@@ -4046,7 +4051,6 @@
     "price": 880000,
     "discountPrice": 0,
     "minStockAlert": 5,
-    "rating": 4.9,
     "shortDescription": "Cảm biến khói Aqara là thiết bị báo cháy thông minh giúp phát hiện khói ngay từ giai đoạn đầu và kích hoạt cảnh báo bằng âm thanh lớn kết hợp thông báo từ xa đến điện thoại. Thiết bị sử dụng chuẩn Zigbee 3.0, tích hợp còi báo động công suất cao và thời lượng pin lên đến 10 năm, mang lại giải pháp an toàn cho nhà ở, căn hộ, văn phòng và các không gian sinh hoạt.",
     "description": "Cảm biến khói Aqara được thiết kế để nâng cao khả năng bảo vệ an toàn cho gia đình, căn hộ và văn phòng bằng cách giám sát khói liên tục 24/7. Khi phát hiện dấu hiệu khói bất thường, thiết bị sẽ ngay lập tức kích hoạt còi báo động âm lượng lớn cùng đèn LED cảnh báo, giúp người dùng nhanh chóng nhận biết và xử lý tình huống.\n\nNhờ kết nối Zigbee 3.0 thông qua Aqara Hub, cảm biến có thể gửi thông báo đến điện thoại theo thời gian thực dù người dùng không có mặt tại nhà. Ngoài ra, thiết bị còn hỗ trợ liên kết với các cảm biến khói hoặc hub Aqara khác để phát cảnh báo đồng bộ trên toàn bộ hệ thống.\n\nVới thiết kế nhỏ gọn cùng thời lượng pin lên đến 10 năm, Aqara Smoke Detector giúp giảm đáng kể chi phí bảo trì và thay pin trong quá trình sử dụng. Đây là giải pháp phù hợp cho nhà ở, căn hộ, văn phòng, khách sạn hoặc các khu vực cần tăng cường an toàn phòng cháy chữa cháy.\n\nThông số kỹ thuật\nTrạng thái: Phát hiện khói / Không phát hiện khói\nKết nối: Zigbee 3.0\nCòi báo động: Âm lượng cao 90dB\nThời lượng pin: Lên đến 10 năm\nPin: DC 3V (CR17450)\nKích thước: ⌀104.6 × 42 mm\nCảnh báo: Còi báo động + đèn LED\nHỗ trợ thông báo từ xa qua ứng dụng\nLắp đặt: Gắn trần hoặc tường\nTương thích: Aqara Home, Apple HomeKit, Google Home, Amazon Alexa, SmartThings, Matter over Bridge\nƯu điểm nổi bật\n\n✔ Phát hiện khói nhanh chóng với độ chính xác cao.\n✔ Còi báo động 90dB giúp cảnh báo rõ ràng khi có sự cố.\n✔ Thời lượng pin lên đến 10 năm.\n✔ Hỗ trợ Zigbee 3.0 cho kết nối ổn định và tiết kiệm năng lượng.\n✔ Gửi cảnh báo tức thì đến điện thoại.\n✔ Hỗ trợ liên kết với hệ sinh thái nhà thông minh Aqara.\n✔ Phù hợp cho nhà ở, căn hộ, văn phòng và khu vực cần giám sát an toàn cháy nổ.",
     "newProduct": false,
@@ -4065,11 +4069,13 @@
     "tags": [],
     "specifications": [],
     "createdAt": "2026-06-01T02:27:35.263Z",
-    "sold": 760000,
     "featured": true,
-    "bestSeller": true,
     "stock": 980,
-    "updatedAt": "2026-06-02T01:45:42.759Z"
+    "sold": 64,
+    "originalPrice": 0,
+    "rating": 4.8,
+    "bestSeller": false,
+    "updatedAt": "2026-06-05T07:21:43.634Z"
   },
   {
     "id": "suVIO8KDZ8sBSLCowkV7",

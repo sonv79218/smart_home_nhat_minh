@@ -108,12 +108,12 @@ const Navbar = () => {
             >
               Giới thiệu
             </Link>
-            <Link
+            {/* <Link
               to="/solutions-by-house"
               className={`menu-item ${isActive("/solutions-by-house") ? "active" : ""}`}
             >
               Giải pháp
-            </Link>
+            </Link> */}
           </div>
 
           {/* Search Bar */}
