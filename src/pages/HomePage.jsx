@@ -19,12 +19,13 @@ import {
   EcosystemSection,
   AboutSection,
   ContactSection,
-  FloatingContactButtons,
+  // FloatingContactButtons,
   SolutionSection,
   CategorySidebar,
   MegaCategoryMenu,
+  // DesktopHeroMenu,
 } from "./home/components";
-
+import DesktopHeroMenu from "./home/components/DesktopHeroMenu";
 // ============================================
 // CONSTANTS
 // ============================================
@@ -114,6 +115,7 @@ const HomePage = () => {
       {/* <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 lg:px-4 xl:px-6 pt-4"> */}
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
         {/* Desktop Hero Grid */}
+        <DesktopHeroMenu />
         <div
           // className="relative hidden lg:grid grid-cols-[300px_1fr] h-[420px] xl:h-[460px] overflow-hidden rounded-2xl"
             className="
@@ -124,6 +126,7 @@ const HomePage = () => {
   "
           onMouseLeave={() => setHoveredCategory(null)}
         >
+          
           {/* Category Sidebar */}
           <CategorySidebar
             categories={categories}

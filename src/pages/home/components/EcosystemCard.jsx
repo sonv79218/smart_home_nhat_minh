@@ -36,7 +36,7 @@ const EcosystemCard = ({ ecosystem }) => {
     `}
   />
 
-  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+  {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" /> */}
 </div>
 {/* </Link> */}
       {/* Hover Glow Effect */}

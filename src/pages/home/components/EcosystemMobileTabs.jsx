@@ -44,7 +44,7 @@ const EcosystemMobileTabs = ({ ecosystems }) => {
       {/* Active Content Card */}
       {activeEcosystem && (
         <div
-          className="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden transition-all duration-300"
+          // className="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden transition-all duration-300"
           key={activeEcosystem.id}
         >
           {/* <Link to={activeEcosystem.link}> */}

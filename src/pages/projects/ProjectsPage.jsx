@@ -22,6 +22,7 @@ import {
   Hotel,
   Coffee,
 } from "lucide-react";
+import HouseFloorPlanSection from "./HouseFloorPlanSection";
 
 const filters = [
   { id: "nha-o", label: "Nhà ở", icon: Home },
@@ -468,55 +469,12 @@ const SolutionsByHousePage = () => {
 
   return (
     <main className="bg-white text-slate-900">
-      {/* <section className="relative overflow-hidden bg-slate-950">
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950" />
-        <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-blue-500/25 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[360px] h-[360px] rounded-full bg-cyan-400/20 blur-3xl" />
-
-        <div className="relative z-10 w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 py-24 md:py-32 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 font-bold mb-6">
-            <Sparkles size={16} />
-            Giải pháp Smart Home theo công trình
-          </div>
-
-          <h1 className="text-4xl md:text-7xl font-black text-white leading-tight max-w-5xl mx-auto">
-            Biến ngôi nhà của bạn thành Smart Home hiện đại
-          </h1>
-
-          <p className="mt-6 max-w-3xl mx-auto text-slate-300 text-base md:text-xl leading-relaxed">
-            So sánh trước và sau khi lắp đặt nhà thông minh cho từng loại công
-            trình: nhà ống, nhà cấp 4, biệt thự, chung cư, văn phòng, showroom
-            và cửa hàng.
-          </p>
-
-          <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition"
-            >
-              Nhận tư vấn miễn phí
-              <ArrowRight size={18} />
-            </Link>
-
-            <a
-              href="tel:0876906668"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white/10 border border-white/15 text-white font-extrabold hover:bg-white/15 transition"
-            >
-              <Phone size={18} />
-              Gọi hotline
-            </a>
-          </div>
-        </div>
-      </section> */}
 
 
 
       <section className="py-16 md:py-24 bg-slate-50">
         <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="max-w-3xl mx-auto text-center mb-8">
-            {/* <p className="text-blue-600 font-extrabold mb-3">
-              Chọn nhanh loại công trình
-            </p> */}
 
             <h2 className="text-3xl md:text-5xl font-black leading-tight">
               Tìm giải pháp giống ngôi nhà của bạn
@@ -661,6 +619,11 @@ const SolutionsByHousePage = () => {
         </div>
       </section>
 
+      {/* ─────────────────────────────────────────── */}
+      {/* HOUSE FLOOR PLAN SECTION */}
+      {/* ─────────────────────────────────────────── */}
+      <HouseFloorPlanSection />
+
       <section className="py-16 md:py-20 bg-white">
         <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
           <div className="grid lg:grid-cols-4 gap-5">
@@ -684,80 +647,8 @@ const SolutionsByHousePage = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-slate-950 text-white">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="max-w-3xl mb-12">
-            <p className="text-blue-300 font-extrabold mb-3">
-              Quy trình thi công Smart Home
-            </p>
 
-            <h2 className="text-3xl text-slate-300 md:text-5xl font-black leading-tight">
-              Từ khảo sát đến bàn giao, rõ ràng từng bước
-            </h2>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {processSteps.map((step, index) => {
-              const Icon = step.icon;
-
-              return (
-                <div
-                  key={step.title}
-                  className="relative rounded-3xl bg-white/5 border border-white/10 p-6"
-                >
-                  <div className="text-6xl font-black text-white/5 absolute right-5 top-3">
-                    {index + 1}
-                  </div>
-
-                  <div className="w-14 h-14 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-300 mb-5">
-                    <Icon size={28} />
-                  </div>
-
-                  <h3 className="text-xl text-slate-300 font-black">{step.title}</h3>
-
-                  <p className="mt-3 text-slate-300 leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* <section className="relative py-20 md:py-28 bg-gradient-to-r from-blue-600 to-indigo-700 overflow-hidden">
-        <div className="absolute -right-20 -top-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute left-0 bottom-0 w-72 h-72 bg-cyan-300/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 max-w-[900px] mx-auto px-5 text-center text-white">
-          <h2 className="text-3xl md:text-6xl font-black leading-tight">
-            Bạn muốn biết nhà mình nên lắp Smart Home thế nào?
-          </h2>
-
-          <p className="mt-5 text-blue-100 text-base md:text-lg leading-relaxed">
-            Nhất Minh Smart Home sẽ khảo sát, tư vấn thiết bị phù hợp với nhu
-            cầu, loại công trình và ngân sách của bạn.
-          </p>
-
-          <div className="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white text-blue-700 font-extrabold hover:bg-blue-50 transition"
-            >
-              Nhận tư vấn miễn phí
-              <ArrowRight size={18} />
-            </Link>
-
-            <a
-              href="tel:0876906668"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white/10 border border-white/20 text-white font-extrabold hover:bg-white/15 transition"
-            >
-              <Phone size={18} />
-              Gọi hotline
-            </a>
-          </div>
-        </div>
-      </section> */}
 
       {selectedSolution && (
         <DetailModal
