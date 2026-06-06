@@ -61,7 +61,7 @@ const CategoryBanner = ({ banner }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="
-        relative aspect-[18/3]
+        relative aspect-[18.2/3]
         rounded-xl md:rounded-2xl 
         overflow-hidden mb-5
         cursor-pointer

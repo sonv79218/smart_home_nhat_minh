@@ -691,7 +691,7 @@ const SolutionsByHousePage = () => {
               Quy trình thi công Smart Home
             </p>
 
-            <h2 className="text-3xl md:text-5xl font-black leading-tight">
+            <h2 className="text-3xl text-slate-300 md:text-5xl font-black leading-tight">
               Từ khảo sát đến bàn giao, rõ ràng từng bước
             </h2>
           </div>
@@ -713,7 +713,7 @@ const SolutionsByHousePage = () => {
                     <Icon size={28} />
                   </div>
 
-                  <h3 className="text-xl font-black">{step.title}</h3>
+                  <h3 className="text-xl text-slate-300 font-black">{step.title}</h3>
 
                   <p className="mt-3 text-slate-300 leading-relaxed">
                     {step.desc}

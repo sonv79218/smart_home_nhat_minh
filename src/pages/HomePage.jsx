@@ -241,7 +241,7 @@ const HomePage = () => {
       {/* FEATURES BAR */}
       {/* ============================================ */}
       <SectionDivider />
-      <FeaturesBar />
+      {/* <FeaturesBar /> */}
 
       {/* ============================================ */}
       {/* CONTACT SECTION */}

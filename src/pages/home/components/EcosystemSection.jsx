@@ -13,7 +13,7 @@ const ecosystems = [
     name: "Aqara",
     description: "Hệ sinh thái smart home cao cấp hỗ trợ Apple HomeKit và Zigbee.",
     features: ["HomeKit", "Automation", "Zigbee", "AI Smart"],
-    image: "https://cdn.phototourl.com/free/2026-06-05-84f12f33-a64b-48ff-9bae-358c2e1a5113.png",
+    image: "https://cdn.phototourl.com/free/2026-06-06-c34f7eb9-e3e4-4677-9852-f137144df790.png",
     color: "#4e5055",
     link: "/ecosystem/aqara",
     comparison: {
@@ -28,7 +28,7 @@ const ecosystems = [
     name: "Lumi",
     description: "Giải pháp nhà thông minh toàn diện dành cho gia đình Việt.",
     features: ["Made in Vietnam", "Tiếng Việt", "Dễ sử dụng", "Ổn định"],
-    image: "https://cdn.phototourl.com/free/2026-06-05-1300d0c1-f3b2-4c6a-9f16-47f6039e04ff.png",
+    image: "https://cdn.phototourl.com/free/2026-06-06-11390faf-7717-44d7-91dc-4d7561654582.png",
     color: "#24743f",
     link: "/ecosystem/lumi",
     comparison: {
@@ -43,7 +43,7 @@ const ecosystems = [
     name: "Hunonic",
     description: "Thiết bị thông minh giá tốt, dễ lắp đặt và điều khiển từ xa.",
     features: ["Giá tốt", "WiFi", "Điều khiển app", "Smart Life"],
-    image: "https://cdn.phototourl.com/free/2026-06-05-6da130da-8248-49d9-9b11-c3fda9d571a3.png",
+    image: "https://cdn.phototourl.com/free/2026-06-06-21bc2a32-6cfc-4a73-a7d5-bd95016e9b3a.png",
     color: "#04c53a",
     link: "/ecosystem/hunonic",
     comparison: {

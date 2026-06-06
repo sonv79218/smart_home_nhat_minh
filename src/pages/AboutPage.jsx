@@ -34,12 +34,6 @@ const IMAGES = {
   project3: "https://cdn.phototourl.com/free/2026-06-05-3a7cf6bd-8982-470f-a245-187c47c5b501.png",
   project4: "https://cdn.phototourl.com/free/2026-06-05-3a7cf6bd-8982-470f-a245-187c47c5b501.png",
 
-  process1: "../../assets/images/process/khao_sat.png",
-  process2: "../../assets/images/process/tu_van.png",
-  process3: "../../assets/images/process/thiet_ke.png",
-  process4: "../../assets/images/process/thi_cong.png",
-  process5: "../../assets/images/process/ban_giao.png",
-  process6: "../../assets/images/process/bao_hanh.png",
   gallery1: "https://cdn.phototourl.com/free/2026-06-05-e01d53ba-2a00-49e7-a78a-f19d4183b5a4.png",
   gallery2: "https://cdn.phototourl.com/free/2026-06-05-a7176776-1153-4556-86fb-fe52f63d4cd7.jpg",
   gallery3: "https://cdn.phototourl.com/free/2026-06-05-230e8e27-db9e-4a12-aca9-57882348c0db.png",
@@ -126,12 +120,12 @@ const projects = [
 ];
 
 const process = [
-  { image: IMAGES.process1, title: "Khảo sát", desc: "Kiểm tra hiện trạng công trình và nhu cầu sử dụng." },
-  { image: IMAGES.process2, title: "Tư vấn", desc: "Đề xuất hệ thiết bị phù hợp với ngân sách." },
-  { image: IMAGES.process3, title: "Thiết kế", desc: "Lên phương án thiết bị, vị trí lắp đặt và kịch bản sử dụng." },
-  { image: IMAGES.process4, title: "Thi công", desc: "Lắp đặt, đấu nối và cấu hình thiết bị." },
-  { image: IMAGES.process5, title: "Bàn giao", desc: "Hướng dẫn sử dụng app, ngữ cảnh và điều khiển từ xa." },
-  { image: IMAGES.process6, title: "Bảo hành", desc: "Hỗ trợ kỹ thuật sau lắp đặt, xử lý nhanh khi cần." },
+  { title: "Khảo sát", desc: "Kiểm tra hiện trạng công trình và nhu cầu sử dụng." },
+  { title: "Tư vấn", desc: "Đề xuất hệ thiết bị phù hợp với ngân sách." },
+  { title: "Thiết kế", desc: "Lên phương án thiết bị, vị trí lắp đặt và kịch bản sử dụng." },
+  { title: "Thi công", desc: "Lắp đặt, đấu nối và cấu hình thiết bị." },
+  { title: "Bàn giao", desc: "Hướng dẫn sử dụng app, ngữ cảnh và điều khiển từ xa." },
+  { title: "Bảo hành", desc: "Hỗ trợ kỹ thuật sau lắp đặt, xử lý nhanh khi cần." },
 ];
 
 const commitments = [
@@ -161,7 +155,7 @@ const AboutPage = () => {
               Nhật Minh Smart Home
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+            <h1 className="text-4xl text-slate-300 md:text-6xl font-extrabold color-white mb-5">
               Tư vấn, thiết kế và thi công nhà thông minh
             </h1>
 
@@ -296,88 +290,77 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* PROCESS */}
-      <section className="py-16 md:py-24">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <p className="text-sky-500 font-bold mb-3">Quy trình làm việc</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold">
-              Rõ ràng từ khảo sát đến bàn giao
-            </h2>
-          </div>
-<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {process.map((step, index) => (
-    <div
-      key={step.title}
-      className="
-        relative
-        bg-white
-        rounded-[32px]
-        border border-slate-200
-        p-8
-        shadow-sm
-        hover:shadow-xl
-        hover:-translate-y-1
-        transition-all
-        overflow-hidden
-      "
-    >
-      {/* Number */}
-      <div
-        className="
-          absolute
-          top-4
-          right-5
-          text-[72px]
-          font-black
-          text-slate-100
-          leading-none
-        "
-      >
-        {String(index + 1).padStart(2, "0")}
-      </div>
-
-      {/* Icon */}
-      <div
-        className="
-          w-24
-          h-24
-          rounded-3xl
-          bg-gradient-to-br
-          from-sky-50
-          to-blue-100
-          flex
-          items-center
-          justify-center
-          mb-6
-        "
-      >
-        <img
-          src={step.image}
-          alt={step.title}
-          className="w-14 h-14 object-contain"
-        />
-      </div>
-
-      {/* Title */}
-      <h3 className="text-2xl font-black mb-3">
-        {step.title}
-      </h3>
-
-      {/* Desc */}
-      <p className="text-slate-600 leading-relaxed">
-        {step.desc}
+{/* PROCESS */}
+<section className="py-16 md:py-24 bg-slate-50">
+  <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
+    <div className="text-center max-w-3xl mx-auto mb-12">
+      <p className="text-sky-500 font-bold mb-3 uppercase tracking-wide">
+        Quy trình làm việc
       </p>
-
-      {/* Line */}
-      <div className="mt-6 w-16 h-1 rounded-full bg-sky-500" />
+      <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900">
+        Rõ ràng từ khảo sát đến bàn giao
+      </h2>
     </div>
-  ))}
-</div>
- 
-        </div>
-      </section>
 
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {process.map((step, index) => (
+        <div
+          key={step.title}
+          className="
+            group relative
+            bg-white
+            rounded-[28px]
+            border border-slate-200
+            p-7 md:p-8
+            shadow-sm
+            hover:shadow-xl
+            hover:-translate-y-1
+            transition-all duration-300
+            overflow-hidden
+          "
+        >
+          <div className="absolute -top-8 -right-6 text-[120px] font-black text-slate-50 leading-none select-none">
+            {String(index + 1).padStart(2, "0")}
+          </div>
+
+          <div className="relative z-10">
+            <div
+              className="
+                w-16 h-16
+                rounded-2xl
+                bg-gradient-to-br from-sky-500 to-blue-600
+                text-white
+                flex items-center justify-center
+                text-2xl font-black
+                shadow-lg shadow-sky-500/25
+                mb-6
+                group-hover:scale-105
+                transition-transform
+              "
+            >
+              {index + 1}
+            </div>
+
+            <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-3">
+              {step.title}
+            </h3>
+
+            <p className="text-slate-600 leading-relaxed">
+              {step.desc}
+            </p>
+
+            <div className="mt-6 flex items-center gap-3">
+              <div className="w-12 h-1 rounded-full bg-sky-500" />
+              <span className="text-xs font-bold uppercase tracking-wider text-sky-600">
+                Bước {index + 1}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
 
       {/* GALLERY */}
@@ -497,7 +480,7 @@ const AboutPage = () => {
         <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <p className="text-sky-300 font-bold mb-3">Liên hệ</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-5">
+            <h2 className="text-3xl text-slate-300 md:text-5xl font-extrabold mb-5">
               Bạn cần tư vấn giải pháp Smart Home?
             </h2>
             <p className="text-slate-300 leading-relaxed mb-8">
