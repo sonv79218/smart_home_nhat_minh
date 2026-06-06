@@ -17,9 +17,9 @@ import {
 } from "lucide-react";
 
 const aboutImages = {
-  main: "",
-  project1: "",
-  project2: "",
+  main: "https://cdn.phototourl.com/free/2026-06-05-38389b9c-7a29-484b-b66c-2c87a1e9f322.png",
+  project1: "https://cdn.phototourl.com/free/2026-06-05-a974a7eb-b90c-4167-8842-13a01d72e2c4.jpg",
+  project2: "https://cdn.phototourl.com/free/2026-06-05-230e8e27-db9e-4a12-aca9-57882348c0db.png",
 };
 
 const ImageBox = ({ src, label, className = "" }) => (

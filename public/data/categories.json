@@ -28,12 +28,12 @@
   {
     "id": "smart-switch",
     "name": "Công tắc thông minh",
-    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-cf542ba7-bb63-4d38-b51b-efba0712ef28.png",
     "description": "Công tắc cảm ứng, công tắc ngữ cảnh, điều khiển đèn và thiết bị",
     "banner": {
       "title": "Công Tắc Thông Minh",
       "subtitle": "Điều khiển đèn và thiết bị bằng app, giọng nói hoặc tự động hóa",
-      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-cf542ba7-bb63-4d38-b51b-efba0712ef28.png",
       "buttonText": "Xem công tắc",
       "link": "/products?category=smart-switch"
     }
@@ -41,12 +41,12 @@
   {
     "id": "smart-light",
     "name": "Đèn thông minh",
-    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-2b617fd4-f099-4dbb-8950-0bb7dae31986.png",
     "description": "Đèn âm trần, đèn ốp trần, LED RGB, điều chỉnh độ sáng",
     "banner": {
       "title": "Đèn Thông Minh",
       "subtitle": "Tạo không gian sống hiện đại với ánh sáng thông minh",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-2b617fd4-f099-4dbb-8950-0bb7dae31986.png",
       "buttonText": "Xem đèn",
       "link": "/products?category=smart-light"
     }
@@ -54,12 +54,12 @@
   {
     "id": "smart-plug",
     "name": "Ổ cắm thông minh",
-    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-660950d2-f414-4126-a9e8-54e571bf276d.png",
     "description": "Ổ cắm điều khiển từ xa, hẹn giờ, theo dõi thiết bị điện",
     "banner": {
       "title": "Ổ Cắm Thông Minh",
       "subtitle": "Biến thiết bị điện thường thành thiết bị thông minh",
-      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-660950d2-f414-4126-a9e8-54e571bf276d.png",
       "buttonText": "Xem ổ cắm",
       "link": "/products?category=smart-plug"
     }
@@ -67,12 +67,12 @@
   {
     "id": "curtain",
     "name": "Rèm tự động",
-    "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-1b108f26-ad18-4988-b6c9-f33674d06a36.png",
     "description": "Động cơ rèm, điều khiển rèm từ xa và theo ngữ cảnh",
     "banner": {
       "title": "Rèm Tự Động",
       "subtitle": "Tự động đóng mở rèm theo thời gian, ánh sáng hoặc ngữ cảnh",
-      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-1b108f26-ad18-4988-b6c9-f33674d06a36.png",
       "buttonText": "Xem rèm",
       "link": "/products?category=curtain"
     }
@@ -80,12 +80,12 @@
   {
     "id": "doorbell",
     "name": "Chuông cửa có hình",
-    "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-edae94fd-545d-4c41-9559-0c8f47ce084b.png",
     "description": "Chuông cửa camera, đàm thoại từ xa, cảnh báo thông minh",
     "banner": {
       "title": "Chuông Cửa Có Hình",
       "subtitle": "Quan sát và trò chuyện với khách ngay trên điện thoại",
-      "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-edae94fd-545d-4c41-9559-0c8f47ce084b.png",
       "buttonText": "Xem chuông cửa",
       "link": "/products?category=doorbell"
     }
@@ -93,12 +93,12 @@
   {
     "id": "camera",
     "name": "Camera thông minh",
-    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-dc7a7f4a-065b-4d37-9558-ffe839b79008.png",
     "description": "Camera AI, giám sát an ninh, theo dõi chuyển động",
     "banner": {
       "title": "Camera Thông Minh",
       "subtitle": "Giám sát ngôi nhà 24/7 với hình ảnh sắc nét và cảnh báo thông minh",
-      "image": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-dc7a7f4a-065b-4d37-9558-ffe839b79008.png",
       "buttonText": "Xem camera",
       "link": "/products?category=camera"
     }
@@ -106,12 +106,12 @@
   {
     "id": "smart-lock",
     "name": "Khóa cửa thông minh",
-    "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-7f3e98ff-6707-498a-93fb-95d72aeafea2.png",
     "description": "Khóa vân tay, mật khẩu, thẻ từ, mở khóa qua app",
     "banner": {
       "title": "Khóa Cửa Thông Minh",
       "subtitle": "An toàn, tiện lợi và hiện đại cho cửa nhà bạn",
-      "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-7f3e98ff-6707-498a-93fb-95d72aeafea2.png",
       "buttonText": "Xem khóa",
       "link": "/products?category=smart-lock"
     }
@@ -119,12 +119,12 @@
   {
     "id": "other",
     "name": "Thiết bị khác",
-    "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400&h=400&fit=crop",
+    "image": "https://cdn.phototourl.com/free/2026-06-06-8d405a24-b2f2-4458-abcf-f24fb52361a2.png",
     "description": "Màn hình điều khiển, thiết bị mở rộng và phụ kiện Smart Home",
     "banner": {
       "title": "Thiết Bị Smart Home Khác",
       "subtitle": "Hoàn thiện hệ sinh thái nhà thông minh của bạn",
-      "image": "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=1400&h=400&fit=crop",
+      "image": "https://cdn.phototourl.com/free/2026-06-06-8d405a24-b2f2-4458-abcf-f24fb52361a2.png",
       "buttonText": "Khám phá",
       "link": "/products?category=other"
     }

@@ -61,7 +61,7 @@ const CategoryBanner = ({ banner }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="
-        relative h-52 md:h-64 lg:h-72 
+        relative aspect-[18/3]
         rounded-xl md:rounded-2xl 
         overflow-hidden mb-5
         cursor-pointer
@@ -72,25 +72,25 @@ const CategoryBanner = ({ banner }) => {
         src={banner.image}
         alt={banner.title || "Category Banner"}
         className={`
-          w-full h-full object-cover
+          w-full h-full object-contain object-center
           transition-transform duration-500
           ${isHovered ? "scale-105" : "scale-100"}
         `}
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/50 to-transparent" />
+      {/* <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/50 to-transparent" /> */}
       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center p-5 md:p-8">
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2 max-w-md">
+        {/* <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2 max-w-md">
           {banner.title}
         </h3>
         <p className="text-sm md:text-base text-white/80 max-w-md line-clamp-2 mb-3 md:mb-4">
           {banner.subtitle || banner.description}
-        </p>
-        <Link
+        </p> */}
+        {/* <Link
           to={banner.link || "#"}
           className="
             inline-flex items-center gap-2 
@@ -105,7 +105,7 @@ const CategoryBanner = ({ banner }) => {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
