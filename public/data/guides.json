@@ -1,0 +1,78 @@
+[
+  {
+    "id": "cac-buoc-lap-dat-khoa-thong-minh",
+    "title": "5 bước lắp đặt khóa thông minh cho cửa nhà phố",
+    "slug": "cac-buoc-lap-dat-khoa-thong-minh",
+    "category": "Kiến thức nhà thông minh",
+    "type": "guide",
+    "excerpt": "Hướng dẫn chi tiết từng bước để lắp đặt khóa thông minh cho cửa nhà phố, từ chuẩn bị dụng cụ đến cài đặt ứng dụng.",
+    "thumbnail": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-20",
+    "tags": ["Khóa thông minh", "Hướng dẫn lắp đặt", "Cửa nhà phố"],
+    "status": "active",
+    "relatedProducts": ["aqara-u200", "aqara-n100"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Giới Thiệu" },
+      { "type": "paragraph", "text": "Khóa thông minh là một trong những thiết bị nhà thông minh được lắp đặt phổ biến nhất hiện nay. Bài viết này hướng dẫn chi tiết 5 bước để lắp đặt khóa thông minh cho cửa nhà phố một cách an toàn và chính xác." },
+      { "type": "heading", "level": 2, "text": "Bước 1: Kiểm Tra Độ Dày Cửa" },
+      { "type": "paragraph", "text": "Trước khi mua khóa thông minh, bạn cần đo độ dày cửa và khoảng cách từ mép cửa đến tâm lỗ khóa. Đa số khóa thông minh Aqara phù hợp với cửa dày từ 35mm đến 60mm." },
+      { "type": "heading", "level": 2, "text": "Bước 2: Tháo Khóa Cơ Cũ" },
+      { "type": "paragraph", "text": "Tháo hai vis bắt khóa cơ ở mặt trong và mặt ngoài cửa. Cẩn thận không làm xước bề mặt cửa. Giữ lại bu-lông neo nếu có thể sử dụng lại." },
+      { "type": "heading", "level": 2, "text": "Bước 3: Lắp Bộ Phận Cố Định" },
+      { "type": "paragraph", "text": "Đặt bộ phận cố định (plate) vào đúng vị trí lỗ khóa cũ. Đảm bảo các chốt alignment khớp với lỗ trên cửa. Siết chặt vis từ mặt trong cửa." },
+      { "type": "heading", "level": 2, "text": "Bước 4: Lắp Bảng Điều Khiển" },
+      { "type": "paragraph", "text": "Gắn bảng điều khiển mặt ngoài vào trục cố định. Cắm cáp kết nối vào bo mạch bên trong. Đậy nắp hộp pin và gắn bảng điều khiển mặt trong." },
+      { "type": "heading", "level": 2, "text": "Bước 5: Cài Đặt App và Thêm Vân Tay" },
+      { "type": "list", "items": ["Tải ứng dụng Aqara Home từ App Store", "Thêm khóa vào ứng dụng bằng mã QR trên khóa", "Đăng ký vân tay, mã PIN và thẻ NFC", "Kiểm tra hoạt động: khóa/mở bằng vân tay, app, và chìa khóa cơ dự phòng"] }
+    ]
+  },
+  {
+    "id": "cai-dat-aqara-homekit-cho-nguoi-moi",
+    "title": "Hướng dẫn cài đặt Aqara với Apple HomeKit từ A đến Z",
+    "slug": "cai-dat-aqara-homekit-cho-nguoi-moi",
+    "category": "Kiến thức nhà thông minh",
+    "type": "guide",
+    "excerpt": "Hướng dẫn đầy đủ cách thiết lập hệ sinh thái Aqara kết nối Apple HomeKit: từ Hub, thêm thiết bị, tạo phòng và kịch bản tự động.",
+    "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-05",
+    "tags": ["Aqara", "Apple HomeKit", "Hướng dẫn", "Cài đặt"],
+    "status": "active",
+    "relatedProducts": ["aqara-hub-m3"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Chuẩn Bị Trước Khi Bắt Đầu" },
+      { "type": "list", "items": ["iPhone hoặc iPad chạy iOS 14 trở lên", "Tài khoản Apple ID đã đăng nhập", "Mạng Wi-Fi 2.4GHz (Aqara không hỗ trợ 5GHz trực tiếp)", "Bộ thiết bị Aqara muốn kết nối"] },
+      { "type": "heading", "level": 2, "text": "Bước 1: Cài Đặt App Aqara Home" },
+      { "type": "paragraph", "text": "Tải và cài đặt ứng dụng Aqara Home từ App Store. Đăng ký tài khoản Aqara hoặc đăng nhập bằng Apple ID. Kết nối Hub Aqara M3 hoặc M2 vào nguồn điện và đợi đèn LED nhấp nháy." },
+      { "type": "heading", "level": 2, "text": "Bước 2: Thêm Hub vào Aqara Home" },
+      { "type": "paragraph", "text": "Mở app Aqara Home, nhấn dấu '+' để thêm thiết bị. Chọn Hub phù hợp (M3 hoặc M2). Làm theo hướng dẫn trên màn hình để kết nối Hub vào mạng Wi-Fi. Sau khi Hub được thêm thành công, bạn có thể bắt đầu thêm các thiết bị khác." },
+      { "type": "heading", "level": 2, "text": "Bước 3: Thêm Thiết Bị Vào Home App" },
+      { "type": "paragraph", "text": "Mở app Home trên iPhone. Nhấn dấu '+' → 'Thêm Phụ Kiện'. Quét mã QR trên thiết bị Aqara hoặc Hub. Làm theo hướng dẫn để đặt tên và gán phòng cho thiết bị. Sau khi thêm, bạn có thể điều khiển thiết bị từ Home App hoặc Siri." }
+    ]
+  },
+    {
+    "id": "cai-dat-aqara-homekit-cho-nguoi-moi",
+    "title": "Hướng dẫn cài đặt Aqara với Apple HomeKit từ A đến Z",
+    "slug": "cai-dat-aqara-homekit-cho-nguoi-moi",
+    "category": "Kiến thức nhà thông minh",
+    "type": "guide",
+    "excerpt": "Hướng dẫn đầy đủ cách thiết lập hệ sinh thái Aqara kết nối Apple HomeKit: từ Hub, thêm thiết bị, tạo phòng và kịch bản tự động.",
+    "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-05",
+    "tags": ["Aqara", "Apple HomeKit", "Hướng dẫn", "Cài đặt"],
+    "status": "active",
+    "relatedProducts": ["aqara-hub-m3"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Chuẩn Bị Trước Khi Bắt Đầu" },
+      { "type": "list", "items": ["iPhone hoặc iPad chạy iOS 14 trở lên", "Tài khoản Apple ID đã đăng nhập", "Mạng Wi-Fi 2.4GHz (Aqara không hỗ trợ 5GHz trực tiếp)", "Bộ thiết bị Aqara muốn kết nối"] },
+      { "type": "heading", "level": 2, "text": "Bước 1: Cài Đặt App Aqara Home" },
+      { "type": "paragraph", "text": "Tải và cài đặt ứng dụng Aqara Home từ App Store. Đăng ký tài khoản Aqara hoặc đăng nhập bằng Apple ID. Kết nối Hub Aqara M3 hoặc M2 vào nguồn điện và đợi đèn LED nhấp nháy." },
+      { "type": "heading", "level": 2, "text": "Bước 2: Thêm Hub vào Aqara Home" },
+      { "type": "paragraph", "text": "Mở app Aqara Home, nhấn dấu '+' để thêm thiết bị. Chọn Hub phù hợp (M3 hoặc M2). Làm theo hướng dẫn trên màn hình để kết nối Hub vào mạng Wi-Fi. Sau khi Hub được thêm thành công, bạn có thể bắt đầu thêm các thiết bị khác." },
+      { "type": "heading", "level": 2, "text": "Bước 3: Thêm Thiết Bị Vào Home App" },
+      { "type": "paragraph", "text": "Mở app Home trên iPhone. Nhấn dấu '+' → 'Thêm Phụ Kiện'. Quét mã QR trên thiết bị Aqara hoặc Hub. Làm theo hướng dẫn để đặt tên và gán phòng cho thiết bị. Sau khi thêm, bạn có thể điều khiển thiết bị từ Home App hoặc Siri." }
+    ]
+  }
+]

@@ -8,7 +8,7 @@ const brandItems = [
 
 const supportItems = [
   { label: "Hướng dẫn", href: "/guides" },
-  { label: "Tư vấn", href: "/contact" },
+  { label: "Tư vấn", href: "/blogs" },
 ];
 
 const DesktopHeroMenu = () => {

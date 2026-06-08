@@ -18,6 +18,10 @@ import AboutPage from "../pages/AboutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import SolutionDetailPage from "../pages/SolutionDetailPage";
 
+// Blog Pages
+import BlogListPage from "../pages/blog/BlogListPage";
+import BlogDetailPage from "../pages/blog/BlogDetailPage";
+
 // Ecosystem Pages
 import LumiPage from "../pages/ecosystem/LumiPage";
 import Hunonic from "../pages/ecosystem/HunonicPage";
@@ -33,7 +37,8 @@ import AddProductPage from "../pages/admin/AddProductPage";
 import EditProductPage from "../pages/admin/EditProductPage";
 import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
 import AdminBannersPage from "../pages/admin/AdminBannersPage";
-import AdminSolutionsPage from "../pages/admin/AdminSolutionsPage";
+import AdminBlogListPage from "../pages/admin/AdminBlogListPage";
+import AdminBlogFormPage from "../pages/admin/AdminBlogFormPage";
 import AdminLogin from "../pages/admin/AdminLogin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 
@@ -134,16 +139,76 @@ const AppRoutes = () => {
           }
         />
 
-        {/* SOLUTION DETAIL ROUTE */}
+        <Route
+          path="/solutions"
+          element={
+            <MainLayout>
+              <BlogListPage type="solution" />
+            </MainLayout>
+          }
+        />
         <Route
           path="/solutions/:slug"
           element={
             <MainLayout>
-              <SolutionDetailPage />
+              <BlogDetailPage />
             </MainLayout>
           }
         />
 
+        {/* GUIDES ROUTES */}
+        <Route
+          path="/guides"
+          element={
+            <MainLayout>
+              <BlogListPage type="guide" />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/guides/:slug"
+          element={
+            <MainLayout>
+              <BlogDetailPage />
+            </MainLayout>
+          }
+        />
+
+        {/* PROJECTS ROUTES */}
+        <Route
+          path="/projects"
+          element={
+            <MainLayout>
+              <BlogListPage type="project" />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/projects/:slug"
+          element={
+            <MainLayout>
+              <BlogDetailPage />
+            </MainLayout>
+          }
+        />
+
+        {/* BLOG ROUTES */}
+        <Route
+          path="/blogs"
+          element={
+            <MainLayout>
+              <BlogListPage type="blog" />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/blogs/:slug"
+          element={
+            <MainLayout>
+              <BlogDetailPage />
+            </MainLayout>
+          }
+        />
 
         {/* ADMIN ROUTES */}
         
@@ -200,8 +265,18 @@ const AppRoutes = () => {
   />
 
   <Route
-    path="solutions"
-    element={<AdminSolutionsPage />}
+    path="blogs"
+    element={<AdminBlogListPage />}
+  />
+
+  <Route
+    path="blogs/add"
+    element={<AdminBlogFormPage />}
+  />
+
+  <Route
+    path="blogs/edit/:id"
+    element={<AdminBlogFormPage />}
   />
 </Route>
 

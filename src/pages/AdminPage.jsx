@@ -51,7 +51,7 @@ const AdminPage = () => {
     { to: "/admin/products", icon: ProductsIcon, label: "Quản lý sản phẩm" },
     { to: "/admin/orders", icon: OrdersIcon, label: "Quản lý đơn hàng" },
     { to: "/admin/banners", icon: BannersIcon, label: "Quản lý Banner" },
-    { to: "/admin/solutions", icon: SolutionsIcon, label: "Giải pháp" },
+    { to: "/admin/blogs", icon: BlogIcon, label: "Quan ly Blog" },
   ];
 
   return (
@@ -267,6 +267,12 @@ const LogoutIcon = ({ className }) => (
 const PhoneIcon = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+  </svg>
+);
+
+const BlogIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
   </svg>
 );
 

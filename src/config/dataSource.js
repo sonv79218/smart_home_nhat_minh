@@ -8,5 +8,6 @@ export const DATA_SOURCE = {
   // - "json": Read data from public/data/*.json files
   // - "firebase": Read data from Firestore collections
   products: "json",
-  solutions: "firebase",
+  solutions: "firebase", // Use "firebase" to read from blogs collection, "json" to read from solutions.json
+
 };

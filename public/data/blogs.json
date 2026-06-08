@@ -1,0 +1,48 @@
+[
+  {
+    "id": "nha-thong-minh-cho-chung-cu",
+    "title": "Giải pháp nhà thông minh toàn diện cho căn hộ chung cư hiện đại",
+    "slug": "nha-thong-minh-cho-chung-cu",
+    "category": "Công trình thực tế",
+    "type": "project",
+    "excerpt": "Chia sẻ kinh nghiệm thiết kế và lắp đặt hệ thống nhà thông minh cho căn hộ chung cư 75m² tại Hà Nội, từ thiết kế đến bàn giao.",
+    "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-10",
+    "tags": ["Công trình thực tế", "Chung cư", "Hà Nội", "Nhà ở"],
+    "status": "active",
+    "relatedProducts": ["aqara-starter-pack"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Thông Tin Công Trình" },
+      { "type": "paragraph", "text": "Căn hộ chung cư 75m² tại quận Cầu Giấy, Hà Nội. Yêu cầu: hệ thống nhà thông minh tích hợp HomeKit, kiểm soát chiếu sáng, điều hòa, an ninh và giám sát từ xa." },
+      { "type": "heading", "level": 2, "text": "Thiết Bị Được Lắp Đặt" },
+      { "type": "list", "items": ["8 công tắc thông minh Aqara H1 cho toàn bộ căn hộ", "Hub Aqara M3 làm trung tâm điều khiển", "2 camera Aqara G4 (cửa chính và ban công)", "Cảm biến cửa P1 cho cửa chính và cửa phòng ngủ", "1 cảm biến hiện diện FP2 cho phòng khách", "Khóa thông minh Aqara D200i cho cửa chính", "Điều khiển điều hòa qua Hub M3"] },
+      { "type": "heading", "level": 2, "text": "Kết Quả Sau Thi Công" },
+      { "type": "paragraph", "text": "Chủ nhà hoàn toàn hài lòng với hệ thống. Tổng chi phí thiết bị và lắp đặt: 28 triệu VNĐ. Thời gian thi công: 2 ngày. Hệ thống hoạt động ổn định sau 3 tháng sử dụng, tiết kiệm được khoảng 15% chi phí điện hàng tháng." }
+    ]
+  },
+  {
+    "id": "aqara-vs-philips-hue-so-sanh",
+    "title": "So sánh Aqara vs Philips Hue: Nên chọn hệ sinh thái nào cho ngôi nhà thông minh?",
+    "slug": "aqara-vs-philips-hue-so-sanh",
+    "category": "So sánh thiết bị",
+    "type": "blog",
+    "excerpt": "So sánh chi tiết giữa Aqara và Philips Hue về khả năng tương thích HomeKit, giá cả, tính năng và hệ sinh thái mở rộng.",
+    "thumbnail": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-15",
+    "tags": ["So sánh", "Aqara", "Philips Hue", "Apple HomeKit"],
+    "status": "active",
+    "relatedProducts": ["aqara-hub-m3", "philips-hue-starter"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Tổng Quan So Sánh" },
+      { "type": "paragraph", "text": "Khi xây dựng ngôi nhà thông minh tích hợp Apple HomeKit, hai lựa chọn phổ biến nhất là Aqara và Philips Hue. Mỗi hệ sinh thái có điểm mạnh riêng, phù hợp với nhu cầu và ngân sách khác nhau." },
+      { "type": "heading", "level": 2, "text": "Về Giá Cả" },
+      { "type": "paragraph", "text": "Aqara có lợi thế rõ rệt về giá — các sản phẩm Aqara thường có giá thấp hơn 30-50% so với Philips Hue tương đương. Đặc biệt với công tắc thông minh, Aqara lắp thay thế công tắc cũ không cần thay bóng đèn, trong khi Philips Hue yêu cầu thay toàn bộ bóng." },
+      { "type": "heading", "level": 2, "text": "Về Hệ Sinh Thái" },
+      { "type": "paragraph", "text": "Philips Hue chuyên về chiếu sáng với đa dạng loại bóng, đèn strip, và đèn ngoài trời. Aqara có hệ sinh thái rộng hơn nhiều: cảm biến, khóa cửa, camera, công tắc, rèm tự động — phù hợp cho ngôi nhà thông minh toàn diện." },
+      { "type": "heading", "level": 2, "text": "Kết Luận" },
+      { "type": "paragraph", "text": "Nếu bạn muốn hệ thống chiếu sáng chuyên nghiệp với nhiều loại đèn, Philips Hue là lựa chọn tốt. Nếu bạn muốn ngôi nhà thông minh toàn diện từ an ninh đến chiếu sáng với ngân sách tiết kiệm, Aqara là lựa chọn thông minh hơn. Hai hệ sinh thái này cũng có thể kết hợp sử dụng cùng nhau thông qua HomeKit." }
+    ]
+  }
+]
