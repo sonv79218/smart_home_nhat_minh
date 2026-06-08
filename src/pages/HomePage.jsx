@@ -54,48 +54,63 @@ const HomePage = () => {
   // ============================================
   // DATA FETCHING
   // ============================================
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
+useEffect(() => {
+  let mounted = true;
 
-        // Fetch categories from JSON
-        const categoriesData = await getCategories();
-        setCategories(categoriesData);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
 
-        // Fetch banners
-        const bannersData = await getActiveBanners();
-        setBanners(bannersData);
+      // Load dữ liệu quan trọng song song
+      const [categoriesData, bannersData, solutionsData, featured] =
+        await Promise.all([
+          getCategories(),
+          getActiveBanners(),
+          getActiveSolutions(),
+          getFeaturedProducts(PRODUCTS_LIMIT.featured),
+        ]);
 
-        // Fetch featured products
-        const featured = await getFeaturedProducts(PRODUCTS_LIMIT.featured);
-        setFeaturedProducts(featured);
+      if (!mounted) return;
 
-        // Fetch solutions
-        const solutionsData = await getActiveSolutions();
-        setSolutions(solutionsData);
+      setCategories(categoriesData);
+      setBanners(bannersData);
+      setSolutions(solutionsData);
+      setFeaturedProducts(featured);
+      setLoading(false);
 
-        // Fetch products by category
-        const categoryProducts = {};
-        for (const category of categoriesData.slice(0, PRODUCTS_LIMIT.topCategory)) {
-          const products = await getProductsByCategory(
-            category.id,
-            PRODUCTS_LIMIT.category
-          );
-          if (products.length > 0) {
-            categoryProducts[category.id] = products;
-          }
-        }
-        setProductsByCategory(categoryProducts);
-      } catch (error) {
-        console.error("Error fetching homepage data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      // Load sản phẩm theo danh mục sau, không chặn banner/solution
+      const categoryProductsEntries = await Promise.all(
+        categoriesData
+          .slice(0, PRODUCTS_LIMIT.topCategory)
+          .map(async (category) => {
+            const products = await getProductsByCategory(
+              category.id,
+              PRODUCTS_LIMIT.category
+            );
 
-    fetchData();
-  }, []);
+            return [category.id, products];
+          })
+      );
+
+      if (!mounted) return;
+
+      const categoryProducts = Object.fromEntries(
+        categoryProductsEntries.filter(([, products]) => products.length > 0)
+      );
+
+      setProductsByCategory(categoryProducts);
+    } catch (error) {
+      console.error("Error fetching homepage data:", error);
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+
+  return () => {
+    mounted = false;
+  };
+}, []);
 
   const topCategories = categories.slice(0, PRODUCTS_LIMIT.topCategory);
 
@@ -114,44 +129,48 @@ const HomePage = () => {
       {/* ============================================ */}
       {/* <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 lg:px-4 xl:px-6 pt-4"> */}
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
+    
+    {categories.length > 0 && (
+  <>
+    <DesktopHeroMenu />
+
+    <div
+      className="
+        relative hidden lg:grid
+        grid-cols-[300px_1fr]
+        h-[clamp(475px,28vw,600px)]
+        overflow-hidden rounded-b-2xl
+      "
+      onMouseLeave={() => setHoveredCategory(null)}
+    >
+      <CategorySidebar
+        categories={categories}
+        hoveredCategory={hoveredCategory}
+        setHoveredCategory={setHoveredCategory}
+      />
+
+      <div className="h-full overflow-hidden rounded-br-2xl">
+        <BannerSection
+          className="h-full"
+          banners={banners}
+          current={current}
+          setCurrent={setCurrent}
+        />
+      </div>
+
+      {hoveredCategory && (
+        <MegaCategoryMenu
+          category={hoveredCategory}
+          products={productsByCategory[hoveredCategory.id] || []}
+        />
+      )}
+    </div>
+  </>
+)}
         {/* Desktop Hero Grid */}
-        <DesktopHeroMenu />
-        <div
-          // className="relative hidden lg:grid grid-cols-[300px_1fr] h-[420px] xl:h-[460px] overflow-hidden rounded-2xl"
-            className="
-    relative hidden lg:grid
-    grid-cols-[300px_1fr]
-    h-[clamp(475px,28vw,600px)]
-    overflow-hidden rounded-2xl
-  "
-          onMouseLeave={() => setHoveredCategory(null)}
-        >
-          
-          {/* Category Sidebar */}
-          <CategorySidebar
-            categories={categories}
-            hoveredCategory={hoveredCategory}
-            setHoveredCategory={setHoveredCategory}
-          />
 
-          {/* Hero Banner */}
-          <div className="h-full overflow-hidden rounded-r-2xl">
-            <BannerSection
-              className="h-full"
-              banners={banners}
-              current={current}
-              setCurrent={setCurrent}
-            />
-          </div>
+        {/* <DesktopHeroMenu /> */}
 
-          {/* Mega Category Menu - overlays entire hero area */}
-          {hoveredCategory && (
-            <MegaCategoryMenu
-              category={hoveredCategory}
-              products={productsByCategory[hoveredCategory.id] || []}
-            />
-          )}
-        </div>
 
         {/* Mobile Banner (shown when lg grid is hidden) */}
         <div className="lg:hidden h-[260px] sm:h-[320px] md:h-[400px]">

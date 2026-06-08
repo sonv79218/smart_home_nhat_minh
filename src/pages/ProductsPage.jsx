@@ -227,21 +227,14 @@ const ProductsPage = () => {
 
         {/* Category Banner */}
         {currentCategory && currentCategory.banner && (
-          <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden mb-6">
+          <div className="relative w-full     aspect-[6/1]
+    md:aspect-[6/1] rounded-2xl overflow-hidden mb-6">
             <img
               src={currentCategory.banner.image}
               alt={currentCategory.name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/40 to-transparent" />
-            <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
-                {currentCategory.banner.title}
-              </h2>
-              <p className="text-sm md:text-base text-white/80">
-                {currentCategory.banner.subtitle}
-              </p>
-            </div>
+ 
           </div>
         )}
 
