@@ -238,7 +238,7 @@ const AdminBlogListPage = () => {
                   />
                   <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-bold text-slate-800 line-clamp-2 leading-snug">{blog.title}</h3>
-                    <p className="text-xs text-slate-400 mt-1 line-clamp-1">{blog.category}</p>
+                    <p className="text-xs text-slate-400 mt-1 line-clamp-1">{typeCfg.label}</p>
                   </div>
                 </div>
 

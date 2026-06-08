@@ -46,22 +46,44 @@ const blogsRef = collection(db, BLOGS_COLLECTION);
 
 const normalizeBlogSolution = (docSnap) => {
   const data = docSnap.data();
+
   return {
     id: docSnap.id,
+
     title: data.title || "",
+    slug: data.slug || "",
+    type: data.type || "solution",
+
+    excerpt: data.excerpt || "",
     subtitle: data.excerpt || data.subtitle || "",
-    description: data.excerpt || data.subtitle || "",
-    excerpt: data.excerpt || data.subtitle || "",
+    description: data.excerpt || "",
+
     image: data.thumbnail || data.image || "",
     thumbnail: data.thumbnail || data.image || "",
-    slug: data.slug || "",
-    category: data.category || "",
-    status: data.status === "published" ? "active" : data.status === "draft" ? "inactive" : data.status,
+
+    author: data.author || "Nhật Minh Smart Home",
+
+    tags: data.tags || [],
+    content: data.content || [],
+    relatedProducts: data.relatedProducts || [],
+
+    seoTitle: data.seoTitle || "",
+    seoDescription: data.seoDescription || "",
+
     featured: data.featured || false,
     views: data.views || 0,
     order: data.order || 1,
-    type: data.type,
-    createdAt: data.createdAt,
+
+    status:
+      data.status === "published"
+        ? "active"
+        : data.status === "draft"
+        ? "inactive"
+        : data.status,
+
+    createdAt: data.createdAt || null,
+    updatedAt: data.updatedAt || null,
+    publishedAt: data.publishedAt || null,
   };
 };
 

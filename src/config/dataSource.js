@@ -1,13 +1,13 @@
 // ============================================
 // DATA SOURCE CONFIGURATION
-// Control where data is read from
+// Control where data is read from for each entity
+// Options: "json" | "firebase"
 // ============================================
 
 export const DATA_SOURCE = {
-  // Options: "json" | "firebase"
-  // - "json": Read data from public/data/*.json files
-  // - "firebase": Read data from Firestore collections
-  products: "json",
-  solutions: "firebase", // Use "firebase" to read from blogs collection, "json" to read from solutions.json
-
+  products: "json",   // products.json or Firestore "products" collection
+  solutions: "firebase",  // /data/solutions.json or Firestore blogs (type="solution")
+  blogs: "firebase",      // /data/blogs.json or Firestore blogs (type="blog")
+  guides: "firebase",     // /data/guides.json or Firestore blogs (type="guide")
+  projects : "firebase",    // /data/projects.json or Firestore blogs (type="project")
 };

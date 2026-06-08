@@ -13,11 +13,32 @@ import BlogContentRenderer from "../../components/blog/BlogContentRenderer";
 import BlogCard from "../../components/blog/BlogCard";
 import { getBlogBySlug, getRelatedBlogs, extractHeadings, formatDate } from "../../services/blogService";
 
+const TYPE_COLORS = {
+  solution: "bg-emerald-100 text-emerald-700 border-emerald-200",
+  project: "bg-violet-100 text-violet-700 border-violet-200",
+  guide: "bg-orange-100 text-orange-700 border-orange-200",
+  blog: "bg-blue-100 text-blue-700 border-blue-200",
+};
+
+const TYPE_LABELS = {
+  solution: "Giai phap",
+  project: "Cong trinh",
+  guide: "Huong dan",
+  blog: "Bai viet",
+};
+
 const CATEGORY_COLORS = {
-  "Tư vấn giải pháp": "bg-blue-100 text-blue-700 border-blue-200",
-  "Kiến thức nhà thông minh": "bg-emerald-100 text-emerald-700 border-emerald-200",
-  "So sánh thiết bị": "bg-amber-100 text-amber-700 border-amber-200",
-  "Công trình thực tế": "bg-violet-100 text-violet-700 border-violet-200",
+  "Tư vấn giải pháp":
+    "bg-blue-100 text-blue-700 border-blue-200",
+
+  "Kiến thức nhà thông minh":
+    "bg-emerald-100 text-emerald-700 border-emerald-200",
+
+  "So sánh thiết bị":
+    "bg-amber-100 text-amber-700 border-amber-200",
+
+  "Công trình thực tế":
+    "bg-violet-100 text-violet-700 border-violet-200",
 };
 
 const BlogDetailPage = () => {
@@ -141,29 +162,16 @@ const BlogDetailPage = () => {
 
           {/* ─── Left: Main Content ─── */}
           <article>
-            {/* Category + Type badges */}
+            {/* Type badge */}
             <div className="flex flex-wrap items-center gap-2 mb-4">
               <span
-                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border ${catColor}`}
+                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border ${
+                  TYPE_COLORS[blog.type] || TYPE_COLORS.blog
+                }`}
               >
                 <Tag size={11} strokeWidth={2.5} />
-                {blog.category}
+                {TYPE_LABELS[blog.type] || "Bai viet"}
               </span>
-              {blog.type === "guide" && (
-                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border bg-orange-100 text-orange-700 border-orange-200">
-                  Huong dan
-                </span>
-              )}
-              {blog.type === "solution" && (
-                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border bg-emerald-100 text-emerald-700 border-emerald-200">
-                  Giai phap
-                </span>
-              )}
-              {blog.type === "project" && (
-                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border bg-violet-100 text-violet-700 border-violet-200">
-                  Cong trinh
-                </span>
-              )}
             </div>
 
             {/* Title */}

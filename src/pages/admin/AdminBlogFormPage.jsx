@@ -8,7 +8,6 @@ import {
 } from "../../services/adminBlogService";
 import { uploadImageToCloudinary } from "../../services/cloudinaryService";
 import { useToast } from "../../contexts/ToastContext";
-import { BLOG_CATEGORIES } from "../../constants/blogCategories";
 import {
   ArrowLeft,
   Save,
@@ -50,7 +49,6 @@ const DEFAULT_FORM = {
   title: "",
   slug: "",
   type: "blog",
-  category: "",
   excerpt: "",
   thumbnail: "",
   author: "Nhat Minh Smart Home",
@@ -96,7 +94,6 @@ const AdminBlogFormPage = () => {
         title: blog.title || "",
         slug: blog.slug || "",
         type: blog.type || "blog",
-        category: blog.category || "",
         excerpt: blog.excerpt || "",
         thumbnail: blog.thumbnail || "",
         author: blog.author || "Nhat Minh Smart Home",
@@ -249,7 +246,6 @@ const AdminBlogFormPage = () => {
       title: form.title.trim(),
       slug: form.slug.trim(),
       type: form.type,
-      category: form.category,
       excerpt: form.excerpt.trim(),
       thumbnail: form.thumbnail,
       author: form.author.trim(),
@@ -372,38 +368,23 @@ const AdminBlogFormPage = () => {
                   {slugError && (
                     <p className="text-xs text-red-500 mt-1">{slugError}</p>
                   )}
-                  <p className="text-xs text-slate-400 mt-1">
+                  {/* <p className="text-xs text-slate-400 mt-1">
                     URL: /blogs/{form.slug || "duong-dan"}
-                  </p>
+                  </p> */}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Loai</label>
-                    <select
-                      value={form.type}
-                      onChange={(e) => handleField("type", e.target.value)}
-                      className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 bg-white transition-all"
-                    >
-                      <option value="solution">Tu van giai phap</option>
-                      <option value="guide">Huong dan</option>
-                      <option value="project">Cong trinh thuc te</option>
-                      <option value="blog">Bai viet</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Chuyen muc</label>
-                    <select
-                      value={form.category}
-                      onChange={(e) => handleField("category", e.target.value)}
-                      className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 bg-white transition-all"
-                    >
-                      <option value="">Chon chuyen muc</option>
-                      {BLOG_CATEGORIES.filter((c) => c !== "Tat ca").map((cat) => (
-                        <option key={cat} value={cat}>{cat}</option>
-                      ))}
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Loai</label>
+                  <select
+                    value={form.type}
+                    onChange={(e) => handleField("type", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 bg-white transition-all"
+                  >
+                    <option value="solution">Tu van giai phap</option>
+                    <option value="guide">Huong dan</option>
+                    <option value="project">Cong trinh thuc te</option>
+                    <option value="blog">Bai viet</option>
+                  </select>
                 </div>
 
                 <div>

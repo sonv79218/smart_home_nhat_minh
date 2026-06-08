@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Tag } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { formatDate } from "../../services/blogService";
-
-const CATEGORY_COLORS = {
-  "Tư vấn giải pháp": "bg-blue-100 text-blue-700 border-blue-200",
-  "Kiến thức nhà thông minh": "bg-emerald-100 text-emerald-700 border-emerald-200",
-  "So sánh thiết bị": "bg-amber-100 text-amber-700 border-amber-200",
-  "Công trình thực tế": "bg-violet-100 text-violet-700 border-violet-200",
-};
 
 const TYPE_BADGES = {
   solution: "bg-emerald-100 text-emerald-700 border-emerald-200",
@@ -16,11 +9,18 @@ const TYPE_BADGES = {
   blog: "bg-slate-100 text-slate-600 border-slate-200",
 };
 
+const TYPE_LABELS = {
+  solution: "Giai phap",
+  project: "Cong trinh",
+  guide: "Huong dan",
+  blog: "Bai viet",
+};
+
 const BlogCard = ({ blog, variant = "default" }) => {
   if (!blog) return null;
 
-  const catColor = CATEGORY_COLORS[blog.category] || "bg-slate-100 text-slate-600 border-slate-200";
   const typeBadge = TYPE_BADGES[blog.type] || TYPE_BADGES.blog;
+  const typeLabel = TYPE_LABELS[blog.type] || "Bai viet";
   const getBlogPath = (type, slug) => {
     if (type === "guide") return `/guides/${slug}`;
     if (type === "solution") return `/solutions/${slug}`;
@@ -28,7 +28,6 @@ const BlogCard = ({ blog, variant = "default" }) => {
     return `/blogs/${slug}`;
   };
   const blogPath = getBlogPath(blog.type, blog.slug);
-  const typeLabel = { solution: "Giai phap", guide: "Huong dan", project: "Cong trinh", blog: "Bai viet" }[blog.type] || "Bai viet";
 
   if (variant === "compact") {
     return (
@@ -81,14 +80,6 @@ const BlogCard = ({ blog, variant = "default" }) => {
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-5 md:p-6">
-        {/* Category */}
-        <span
-          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border w-fit mb-3 ${catColor}`}
-        >
-          <Tag size={10} strokeWidth={2.5} />
-          {blog.category}
-        </span>
-
         {/* Title */}
         <h3 className="text-base md:text-lg font-black text-slate-900 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors flex-none">
           {blog.title}

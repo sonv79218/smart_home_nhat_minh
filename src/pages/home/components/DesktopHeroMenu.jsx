@@ -15,7 +15,7 @@ const cameraItems = [
 
 const supportItems = [
   { label: "Hướng dẫn", href: "/guides" },
-  { label: "Tư vấn", href: "/blogs" },
+  { label: "Bài viết", href: "/blogs" },
   { label: "Công trình", href: "/projects" },
 ];
 

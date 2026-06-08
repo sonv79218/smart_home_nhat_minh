@@ -1,26 +1,5 @@
 [
-  {
-    "id": "nha-thong-minh-cho-chung-cu",
-    "title": "Giải pháp nhà thông minh toàn diện cho căn hộ chung cư hiện đại",
-    "slug": "nha-thong-minh-cho-chung-cu",
-    "category": "Công trình thực tế",
-    "type": "project",
-    "excerpt": "Chia sẻ kinh nghiệm thiết kế và lắp đặt hệ thống nhà thông minh cho căn hộ chung cư 75m² tại Hà Nội, từ thiết kế đến bàn giao.",
-    "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    "author": "Nhật Minh Smart Home",
-    "createdAt": "2026-05-10",
-    "tags": ["Công trình thực tế", "Chung cư", "Hà Nội", "Nhà ở"],
-    "status": "active",
-    "relatedProducts": ["aqara-starter-pack"],
-    "content": [
-      { "type": "heading", "level": 2, "text": "Thông Tin Công Trình" },
-      { "type": "paragraph", "text": "Căn hộ chung cư 75m² tại quận Cầu Giấy, Hà Nội. Yêu cầu: hệ thống nhà thông minh tích hợp HomeKit, kiểm soát chiếu sáng, điều hòa, an ninh và giám sát từ xa." },
-      { "type": "heading", "level": 2, "text": "Thiết Bị Được Lắp Đặt" },
-      { "type": "list", "items": ["8 công tắc thông minh Aqara H1 cho toàn bộ căn hộ", "Hub Aqara M3 làm trung tâm điều khiển", "2 camera Aqara G4 (cửa chính và ban công)", "Cảm biến cửa P1 cho cửa chính và cửa phòng ngủ", "1 cảm biến hiện diện FP2 cho phòng khách", "Khóa thông minh Aqara D200i cho cửa chính", "Điều khiển điều hòa qua Hub M3"] },
-      { "type": "heading", "level": 2, "text": "Kết Quả Sau Thi Công" },
-      { "type": "paragraph", "text": "Chủ nhà hoàn toàn hài lòng với hệ thống. Tổng chi phí thiết bị và lắp đặt: 28 triệu VNĐ. Thời gian thi công: 2 ngày. Hệ thống hoạt động ổn định sau 3 tháng sử dụng, tiết kiệm được khoảng 15% chi phí điện hàng tháng." }
-    ]
-  },
+
   {
     "id": "aqara-vs-philips-hue-so-sanh",
     "title": "So sánh Aqara vs Philips Hue: Nên chọn hệ sinh thái nào cho ngôi nhà thông minh?",
