@@ -2,7 +2,7 @@
 // MODERN NAVBAR COMPONENT
 // ============================================
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import { getCategories } from "../../services/categoryService";
 import {
@@ -22,6 +22,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
@@ -61,6 +62,26 @@ const Navbar = () => {
     }
   };
 
+  // Handle go home logic
+  const closeMobileMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsCategoryOpen(false);
+  };
+
+  const handleGoHome = () => {
+    closeMobileMenus();
+
+    if (location.pathname === "/") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    navigate("/");
+  };
+
   // Top categories for dropdown (first 6)
   const topCategories = categories.slice(0, 6);
 
@@ -72,28 +93,30 @@ const Navbar = () => {
       >
         <nav className="navbar-container">
           {/* Logo */}
-          <Link
-  to="/"
-  className="flex items-center gap-3 group"
->
-  <div className="flex flex-col leading-none">
-            <span className="logo-text">
-              <span className="logo-highlight">NHAT </span>MINH
-            </span>
-    <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-slate-500">
-      NHÀ THÔNG MINH
-    </span>
-  </div>
-</Link>
+          <button
+            type="button"
+            onClick={handleGoHome}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
+            <div className="flex flex-col leading-none">
+              <span className="logo-text">
+                <span className="logo-highlight">NHAT </span>MINH
+              </span>
+              <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-slate-500">
+                NHÀ THÔNG MINH
+              </span>
+            </div>
+          </button>
 
           {/* Desktop Menu */}
           <div className="navbar-menu desktop-only">
-            <Link
-              to="/"
+            <button
+              type="button"
+              onClick={handleGoHome}
               className={`menu-item ${isActive("/") ? "active" : ""}`}
             >
               Trang chủ
-            </Link>
+            </button>
 
             <Link
               to="/products"
