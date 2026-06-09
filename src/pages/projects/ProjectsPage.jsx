@@ -483,7 +483,7 @@ const SolutionsByHousePage = () => {
           </div>
 
           <div className="sticky top-0 z-20 -mx-5 md:mx-0 px-5 md:px-0 py-4 bg-slate-50/95 backdrop-blur">
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2 md:gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-2 md:gap-3">
               {filters.map((filter) => {
                 const Icon = filter.icon;
                 const isActive = activeFilter === filter.id;
@@ -545,84 +545,14 @@ const SolutionsByHousePage = () => {
             </div>
           </div>
 
-          <div className="mt-5 grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredHouseTypes.map((item) => {
-              const Icon = item.icon;
 
-              return (
-                <article
-                  key={item.title}
-                  className="group bg-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
-                >
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
-
-                    <div className="absolute left-5 right-5 bottom-5">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs font-bold mb-3">
-                        <Icon size={15} />
-                        {item.budget}
-                      </div>
-
-                      <h3 className="text-2xl font-black text-white">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div className="p-5">
-                    <h4 className="text-sm font-black text-slate-500 uppercase tracking-wide mb-3">
-                      Sau khi lắp đặt
-                    </h4>
-
-                    <div className="space-y-3">
-                      {item.after.slice(0, 3).map((feature) => (
-                        <div key={feature} className="flex gap-3">
-                          <CheckCircle
-                            size={18}
-                            className="text-emerald-600 shrink-0 mt-0.5"
-                          />
-                          <span className="text-sm font-semibold text-slate-700">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedSolution(item)}
-                        className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-slate-100 text-slate-800 font-extrabold hover:bg-slate-200 transition"
-                      >
-                        Xem chi tiết
-                      </button>
-
-                      <Link
-                        to="/contact"
-                        className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition"
-                      >
-                        Tư vấn
-                        <ArrowRight size={16} />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────── */}
       {/* HOUSE FLOOR PLAN SECTION */}
       {/* ─────────────────────────────────────────── */}
-      <HouseFloorPlanSection />
+      <HouseFloorPlanSection activeType={activeFilter} />
 
       <section className="py-16 md:py-20 bg-white">
         <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">

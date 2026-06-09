@@ -74,5 +74,85 @@
       { "type": "heading", "level": 2, "text": "Bước 3: Thêm Thiết Bị Vào Home App" },
       { "type": "paragraph", "text": "Mở app Home trên iPhone. Nhấn dấu '+' → 'Thêm Phụ Kiện'. Quét mã QR trên thiết bị Aqara hoặc Hub. Làm theo hướng dẫn để đặt tên và gán phòng cho thiết bị. Sau khi thêm, bạn có thể điều khiển thiết bị từ Home App hoặc Siri." }
     ]
+  },
+    {
+    "id": "cac-buoc-lap-dat-khoa-thong-minh",
+    "title": "5 bước lắp đặt khóa thông minh cho cửa nhà phố",
+    "slug": "cac-buoc-lap-dat-khoa-thong-minh",
+    "category": "Kiến thức nhà thông minh",
+    "type": "guide",
+    "excerpt": "Hướng dẫn chi tiết từng bước để lắp đặt khóa thông minh cho cửa nhà phố, từ kiểm tra cửa, tháo khóa cũ đến cài đặt ứng dụng.",
+    "thumbnail": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-20",
+    "tags": ["Khóa thông minh", "Hướng dẫn lắp đặt", "Cửa nhà phố"],
+    "status": "active",
+    "relatedProducts": ["aqara-u200", "aqara-n100"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Giới Thiệu" },
+      { "type": "paragraph", "text": "Khóa thông minh giúp tăng an toàn, tiện lợi và hiện đại cho cửa nhà phố. Người dùng có thể mở cửa bằng vân tay, mã PIN, thẻ NFC, điện thoại hoặc chìa cơ dự phòng." },
+      { "type": "heading", "level": 2, "text": "Bước 1: Kiểm Tra Cửa" },
+      { "type": "paragraph", "text": "Trước khi lắp đặt, cần kiểm tra độ dày cửa, hướng mở cửa, loại cửa và vị trí lỗ khóa cũ. Một số mẫu khóa cần cửa có độ dày từ 35mm đến 60mm để lắp đặt ổn định." },
+      { "type": "heading", "level": 2, "text": "Bước 2: Tháo Khóa Cũ" },
+      { "type": "paragraph", "text": "Tháo khóa cơ cũ cẩn thận để tránh làm xước bề mặt cửa. Nên giữ lại phụ kiện cũ để đối chiếu kích thước trong quá trình lắp khóa mới." },
+      { "type": "heading", "level": 2, "text": "Bước 3: Lắp Thân Khóa" },
+      { "type": "paragraph", "text": "Đặt thân khóa vào đúng vị trí, căn chỉnh chốt khóa khớp với khung cửa. Nếu cửa chưa có lỗ phù hợp, cần khoan hoặc chỉnh sửa nhẹ theo bản vẽ kỹ thuật của khóa." },
+      { "type": "heading", "level": 2, "text": "Bước 4: Lắp Mặt Khóa" },
+      { "type": "paragraph", "text": "Gắn mặt ngoài và mặt trong của khóa, kết nối cáp tín hiệu, siết ốc cố định vừa đủ chắc. Không nên siết quá mạnh vì có thể làm lệch cảm biến hoặc kẹt tay nắm." },
+      { "type": "heading", "level": 2, "text": "Bước 5: Cài Đặt Ứng Dụng" },
+      { "type": "list", "items": ["Tải ứng dụng tương ứng với thương hiệu khóa", "Thêm khóa vào app bằng Bluetooth hoặc mã QR", "Tạo mã PIN quản trị", "Thêm vân tay cho từng thành viên", "Kiểm tra mở khóa bằng app, vân tay và chìa cơ"] }
+    ]
+  },
+  {
+    "id": "cai-dat-aqara-homekit-cho-nguoi-moi",
+    "title": "Hướng dẫn cài đặt Aqara với Apple HomeKit từ A đến Z",
+    "slug": "cai-dat-aqara-homekit-cho-nguoi-moi",
+    "category": "Kiến thức nhà thông minh",
+    "type": "guide",
+    "excerpt": "Hướng dẫn thiết lập hệ sinh thái Aqara kết nối Apple HomeKit: từ Hub, thêm thiết bị, tạo phòng đến tự động hóa.",
+    "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-05",
+    "tags": ["Aqara", "Apple HomeKit", "Hướng dẫn", "Cài đặt"],
+    "status": "active",
+    "relatedProducts": ["aqara-hub-m3", "aqara-hub-m2"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Chuẩn Bị Trước Khi Cài Đặt" },
+      { "type": "list", "items": ["iPhone hoặc iPad", "Tài khoản Apple ID", "Mạng Wi-Fi ổn định", "Hub Aqara M2, M3 hoặc hub tương thích", "Thiết bị Aqara cần thêm vào hệ thống"] },
+      { "type": "heading", "level": 2, "text": "Bước 1: Cài App Aqara Home" },
+      { "type": "paragraph", "text": "Tải ứng dụng Aqara Home từ App Store. Sau đó đăng nhập tài khoản Aqara hoặc tạo tài khoản mới. Nên chọn đúng khu vực sử dụng để tránh lỗi không tìm thấy thiết bị." },
+      { "type": "heading", "level": 2, "text": "Bước 2: Thêm Hub Aqara" },
+      { "type": "paragraph", "text": "Cắm nguồn cho Hub, chờ đèn báo chuyển sang trạng thái sẵn sàng. Trong app Aqara Home, nhấn dấu cộng để thêm Hub và làm theo hướng dẫn kết nối Wi-Fi." },
+      { "type": "heading", "level": 2, "text": "Bước 3: Kết Nối Apple HomeKit" },
+      { "type": "paragraph", "text": "Mở ứng dụng Home trên iPhone, chọn thêm phụ kiện và quét mã HomeKit trên Hub. Sau khi kết nối, các thiết bị Aqara có thể được đồng bộ sang Apple Home." },
+      { "type": "heading", "level": 2, "text": "Bước 4: Tạo Phòng và Ngữ Cảnh" },
+      { "type": "list", "items": ["Tạo phòng khách, phòng ngủ, bếp", "Gán thiết bị vào đúng phòng", "Tạo ngữ cảnh đi ngủ, ra ngoài, về nhà", "Kiểm tra điều khiển bằng Siri"] }
+    ]
+  },
+  {
+    "id": "cach-chon-cong-tac-thong-minh-phu-hop",
+    "title": "Cách chọn công tắc thông minh phù hợp cho từng loại nhà",
+    "slug": "cach-chon-cong-tac-thong-minh-phu-hop",
+    "category": "Tư vấn thiết bị",
+    "type": "guide",
+    "excerpt": "So sánh công tắc có dây nguội, không dây nguội, Zigbee và Wi-Fi để chọn đúng loại công tắc thông minh cho nhà bạn.",
+    "thumbnail": "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-04-28",
+    "tags": ["Công tắc thông minh", "Zigbee", "Wi-Fi", "Tư vấn"],
+    "status": "active",
+    "relatedProducts": ["aqara-h1", "aqara-d1", "lumi-switch"],
+    "content": [
+      { "type": "heading", "level": 2, "text": "Vì Sao Cần Chọn Đúng Công Tắc?" },
+      { "type": "paragraph", "text": "Công tắc thông minh là thiết bị nền tảng trong hệ thống nhà thông minh. Nếu chọn sai loại, việc lắp đặt có thể gặp lỗi nhấp nháy đèn, mất kết nối hoặc không tương thích với hệ thống hiện tại." },
+      { "type": "heading", "level": 2, "text": "Công Tắc Có Dây Nguội" },
+      { "type": "paragraph", "text": "Loại này hoạt động ổn định nhất vì có đủ dây cấp nguồn. Phù hợp với nhà xây mới hoặc nhà đang cải tạo hệ thống điện." },
+      { "type": "heading", "level": 2, "text": "Công Tắc Không Dây Nguội" },
+      { "type": "paragraph", "text": "Phù hợp với nhà đã hoàn thiện, không muốn đi lại dây điện. Tuy nhiên cần kiểm tra công suất bóng đèn và có thể cần thêm tụ chống nháy." },
+      { "type": "heading", "level": 2, "text": "Zigbee Hay Wi-Fi?" },
+      { "type": "list", "items": ["Zigbee ổn định hơn khi có nhiều thiết bị", "Wi-Fi dễ dùng nhưng phụ thuộc router", "Zigbee cần Hub trung tâm", "Nhà nhiều tầng nên ưu tiên Zigbee"] },
+      { "type": "heading", "level": 2, "text": "Gợi Ý Lựa Chọn" },
+      { "type": "paragraph", "text": "Nếu nhà mới xây, nên đi dây nguội và dùng công tắc Zigbee. Nếu nhà đã hoàn thiện, có thể chọn công tắc không dây nguội hoặc công tắc không dây dán tường." }
+    ]
   }
 ]
