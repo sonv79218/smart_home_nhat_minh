@@ -6,7 +6,7 @@
 
 export const DATA_SOURCE = {
   products: "json",   // products.json or Firestore "products" collection
-  solutions: "firebase",  // /data/solutions.json or Firestore blogs (type="solution")
+  solutions: "json",  // /data/solutions.json or Firestore blogs (type="solution")
   blogs: "firebase",      // /data/blogs.json or Firestore blogs (type="blog")
   guides: "firebase",     // /data/guides.json or Firestore blogs (type="guide")
   projects : "firebase",    // /data/projects.json or Firestore blogs (type="project")

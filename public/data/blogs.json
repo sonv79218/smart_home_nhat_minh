@@ -1,5 +1,4 @@
 [
-
   {
     "id": "aqara-vs-philips-hue-so-sanh",
     "title": "So sánh Aqara vs Philips Hue: Nên chọn hệ sinh thái nào cho ngôi nhà thông minh?",
@@ -7,21 +6,251 @@
     "category": "So sánh thiết bị",
     "type": "blog",
     "excerpt": "So sánh chi tiết giữa Aqara và Philips Hue về khả năng tương thích HomeKit, giá cả, tính năng và hệ sinh thái mở rộng.",
-    "thumbnail": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=800&q=80",
+    "thumbnail": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=1200&q=80",
     "author": "Nhật Minh Smart Home",
     "createdAt": "2026-05-15",
     "tags": ["So sánh", "Aqara", "Philips Hue", "Apple HomeKit"],
     "status": "active",
-    "relatedProducts": ["aqara-hub-m3", "philips-hue-starter"],
+    "relatedProducts": ["aqara-hub-m3"],
     "content": [
-      { "type": "heading", "level": 2, "text": "Tổng Quan So Sánh" },
-      { "type": "paragraph", "text": "Khi xây dựng ngôi nhà thông minh tích hợp Apple HomeKit, hai lựa chọn phổ biến nhất là Aqara và Philips Hue. Mỗi hệ sinh thái có điểm mạnh riêng, phù hợp với nhu cầu và ngân sách khác nhau." },
-      { "type": "heading", "level": 2, "text": "Về Giá Cả" },
-      { "type": "paragraph", "text": "Aqara có lợi thế rõ rệt về giá — các sản phẩm Aqara thường có giá thấp hơn 30-50% so với Philips Hue tương đương. Đặc biệt với công tắc thông minh, Aqara lắp thay thế công tắc cũ không cần thay bóng đèn, trong khi Philips Hue yêu cầu thay toàn bộ bóng." },
-      { "type": "heading", "level": 2, "text": "Về Hệ Sinh Thái" },
-      { "type": "paragraph", "text": "Philips Hue chuyên về chiếu sáng với đa dạng loại bóng, đèn strip, và đèn ngoài trời. Aqara có hệ sinh thái rộng hơn nhiều: cảm biến, khóa cửa, camera, công tắc, rèm tự động — phù hợp cho ngôi nhà thông minh toàn diện." },
-      { "type": "heading", "level": 2, "text": "Kết Luận" },
-      { "type": "paragraph", "text": "Nếu bạn muốn hệ thống chiếu sáng chuyên nghiệp với nhiều loại đèn, Philips Hue là lựa chọn tốt. Nếu bạn muốn ngôi nhà thông minh toàn diện từ an ninh đến chiếu sáng với ngân sách tiết kiệm, Aqara là lựa chọn thông minh hơn. Hai hệ sinh thái này cũng có thể kết hợp sử dụng cùng nhau thông qua HomeKit." }
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Tổng Quan"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aqara và Philips Hue đều là những thương hiệu nổi tiếng trong lĩnh vực nhà thông minh. Tuy nhiên, định hướng phát triển sản phẩm và đối tượng khách hàng của hai hệ sinh thái này khá khác nhau."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Điểm Mạnh Của Aqara"
+      },
+      {
+        "type": "paragraph",
+        "text": "Aqara có lợi thế về giá thành, đa dạng thiết bị như công tắc, cảm biến, khóa cửa, camera, rèm tự động và hỗ trợ Matter, Apple HomeKit rất tốt."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Điểm Mạnh Của Philips Hue"
+      },
+      {
+        "type": "paragraph",
+        "text": "Philips Hue nổi tiếng với hệ thống chiếu sáng cao cấp, màu sắc đẹp, độ ổn định cao và rất nhiều phụ kiện đèn chuyên dụng."
+      }
+    ]
+  },
+
+  {
+    "id": "co-nen-lap-nha-thong-minh-2026",
+    "title": "Có nên lắp nhà thông minh năm 2026 không?",
+    "slug": "co-nen-lap-nha-thong-minh-2026",
+    "category": "Xu hướng",
+    "type": "blog",
+    "excerpt": "Phân tích chi phí, lợi ích và xu hướng phát triển nhà thông minh trong năm 2026.",
+    "thumbnail": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-20",
+    "tags": ["Nhà thông minh", "Xu hướng"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Nhà thông minh đang dần trở thành tiêu chuẩn mới trong các công trình hiện đại. Chi phí đã giảm đáng kể so với 5 năm trước trong khi tính năng ngày càng hoàn thiện."
+      },
+      {
+        "type": "paragraph",
+        "text": "Các hệ sinh thái như Aqara, Lumi, Hunonic hay Matter giúp người dùng dễ dàng bắt đầu với ngân sách từ vài triệu đồng."
+      }
+    ]
+  },
+
+  {
+    "id": "5-loi-khi-lap-camera-gia-dinh",
+    "title": "5 lỗi thường gặp khi lắp camera gia đình",
+    "slug": "5-loi-khi-lap-camera-gia-dinh",
+    "category": "Camera an ninh",
+    "type": "blog",
+    "excerpt": "Những sai lầm khiến camera không phát huy hiệu quả và cách khắc phục.",
+    "thumbnail": "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-25",
+    "tags": ["Camera", "An ninh"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "list",
+        "items": [
+          "Lắp camera ngược sáng",
+          "Đặt quá cao hoặc quá thấp",
+          "Không có UPS dự phòng",
+          "Mạng WiFi yếu",
+          "Không kiểm tra góc chết"
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "matter-la-gi",
+    "title": "Matter là gì và vì sao đang thay đổi ngành nhà thông minh?",
+    "slug": "matter-la-gi",
+    "category": "Công nghệ",
+    "type": "blog",
+    "excerpt": "Tìm hiểu chuẩn kết nối Matter và lợi ích đối với người dùng smart home.",
+    "thumbnail": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-28",
+    "tags": ["Matter", "Smart Home"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Matter giúp thiết bị từ nhiều thương hiệu khác nhau hoạt động chung trong một hệ sinh thái duy nhất."
+      },
+      {
+        "type": "paragraph",
+        "text": "Người dùng không còn bị phụ thuộc vào một hãng duy nhất như trước đây."
+      }
+    ]
+  },
+
+  {
+    "id": "apple-homekit-co-gi-hay",
+    "title": "Apple HomeKit có gì hấp dẫn với người dùng iPhone?",
+    "slug": "apple-homekit-co-gi-hay",
+    "category": "Apple HomeKit",
+    "type": "blog",
+    "excerpt": "Khám phá các tính năng nổi bật của Apple HomeKit.",
+    "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-05-30",
+    "tags": ["HomeKit", "Apple"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "HomeKit nổi bật với khả năng bảo mật cao, điều khiển bằng Siri và khả năng tự động hóa mạnh mẽ."
+      }
+    ]
+  },
+
+  {
+    "id": "smart-home-tiet-kiem-dien",
+    "title": "Nhà thông minh có thực sự giúp tiết kiệm điện?",
+    "slug": "smart-home-tiet-kiem-dien",
+    "category": "Tiết kiệm năng lượng",
+    "type": "blog",
+    "excerpt": "Đánh giá khả năng tiết kiệm điện của hệ thống smart home.",
+    "thumbnail": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-06-01",
+    "tags": ["Tiết kiệm điện"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Các cảm biến hiện diện, công tắc thông minh và lịch tự động có thể giúp giảm đáng kể lượng điện tiêu thụ không cần thiết."
+      }
+    ]
+  },
+
+  {
+    "id": "top-thiet-bi-nen-lap-dau-tien",
+    "title": "Top 7 thiết bị smart home nên lắp đầu tiên",
+    "slug": "top-thiet-bi-nen-lap-dau-tien",
+    "category": "Tư vấn",
+    "type": "blog",
+    "excerpt": "Danh sách thiết bị đáng đầu tư nhất khi mới bắt đầu làm nhà thông minh.",
+    "thumbnail": "https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-06-02",
+    "tags": ["Tư vấn", "Smart Home"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "list",
+        "items": [
+          "Khóa thông minh",
+          "Camera",
+          "Công tắc thông minh",
+          "Cảm biến cửa",
+          "Rèm tự động",
+          "Hub trung tâm",
+          "Ổ cắm thông minh"
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": "zigbee-vs-wifi",
+    "title": "Zigbee và WiFi: Công nghệ nào phù hợp cho smart home?",
+    "slug": "zigbee-vs-wifi",
+    "category": "Công nghệ",
+    "type": "blog",
+    "excerpt": "So sánh Zigbee và WiFi trong hệ thống nhà thông minh.",
+    "thumbnail": "https://images.unsplash.com/photo-1563770660941-10a63607639e?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-06-03",
+    "tags": ["Zigbee", "WiFi"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Zigbee tiết kiệm năng lượng hơn, tạo mạng mesh ổn định hơn, trong khi WiFi dễ triển khai và không cần hub riêng."
+      }
+    ]
+  },
+
+  {
+    "id": "khoa-thong-minh-co-an-toan-khong",
+    "title": "Khóa thông minh có thực sự an toàn không?",
+    "slug": "khoa-thong-minh-co-an-toan-khong",
+    "category": "Khóa thông minh",
+    "type": "blog",
+    "excerpt": "Giải đáp những lo ngại thường gặp về khóa cửa thông minh.",
+    "thumbnail": "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-06-05",
+    "tags": ["Khóa thông minh", "An ninh"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Các mẫu khóa hiện đại đều có mã hóa dữ liệu, chống dò mật khẩu và vẫn có chìa cơ dự phòng khi cần."
+      }
+    ]
+  },
+
+  {
+    "id": "xu-huong-smart-home-viet-nam",
+    "title": "Xu hướng nhà thông minh tại Việt Nam giai đoạn 2026-2030",
+    "slug": "xu-huong-smart-home-viet-nam",
+    "category": "Xu hướng",
+    "type": "blog",
+    "excerpt": "Những thay đổi đáng chú ý của thị trường smart home trong những năm tới.",
+    "thumbnail": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&q=80",
+    "author": "Nhật Minh Smart Home",
+    "createdAt": "2026-06-06",
+    "tags": ["Xu hướng", "Smart Home Việt Nam"],
+    "status": "active",
+    "relatedProducts": [],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Matter, AI và các giải pháp tiết kiệm năng lượng sẽ là ba xu hướng lớn nhất trong thị trường smart home những năm tới."
+      }
     ]
   }
 ]
