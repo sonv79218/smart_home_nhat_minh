@@ -199,11 +199,11 @@ const BlogDetailPage = () => {
             </div>
 
             {/* Thumbnail */}
-            <div className="rounded-2xl overflow-hidden mb-8 shadow-sm">
+            <div className="rounded-2xl overflow-hidden mb-8 shadow-sm justify-center flex">
               <img
                 src={blog.thumbnail}
                 alt={blog.title}
-                className="w-full object-cover max-h-96"
+                className="w-full lg:w-[80%] aspect-[2] object-cover "
                 onError={(e) => {
                   e.currentTarget.src =
                     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80";

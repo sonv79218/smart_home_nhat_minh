@@ -263,12 +263,51 @@ const ProductInfo = ({
 };
 
 // ============================================
+// QUANTITY SELECTOR
+// ============================================
+const QuantitySelector = ({ quantity, setQuantity, maxStock, isOutOfStock }) => {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-sm font-semibold text-slate-700">Số lượng:</span>
+      <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-0.5">
+        <button
+          type="button"
+          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+          disabled={quantity <= 1 || isOutOfStock}
+          className="w-9 h-9 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-md disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </button>
+        <span className="w-12 text-center text-base font-bold text-slate-800 bg-white rounded-md py-1.5">
+          {quantity}
+        </span>
+        <button
+          type="button"
+          onClick={() => setQuantity(Math.min(maxStock, quantity + 1))}
+          disabled={quantity >= maxStock || isOutOfStock}
+          className="w-9 h-9 flex items-center justify-center text-slate-600 hover:bg-slate-200 rounded-md disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// ============================================
 // ACTION BUTTONS
 // ============================================
 const ProductActions = ({ 
   product, 
   selectedVariant,
   hasVariants,
+  quantity,
+  setQuantity,
   addToCart, 
   navigate 
 }) => {
@@ -308,16 +347,18 @@ const ProductActions = ({
 
   const handleBuyNow = () => {
     if (isOutOfStock) return;
-    
-    const cartItem = {
+
+    // Tạo item cho Buy Now - lưu vào sessionStorage thay vì cart
+    const buyNowItem = {
       id: product.id,
       name: product.name,
-      thumbnail: hasVariants && selectedVariant?.thumbnail 
-        ? selectedVariant.thumbnail 
+      thumbnail: hasVariants && selectedVariant?.thumbnail
+        ? selectedVariant.thumbnail
         : product.thumbnail,
-      // Pricing - dùng price là giá bán, originalPrice là giá gốc
+      // Pricing
       price: selectedVariant?.price || product.price || 0,
       originalPrice: selectedVariant?.originalPrice || selectedVariant?.discountPrice || product.originalPrice || product.discountPrice || product.price || 0,
+      quantity: quantity,
       // Variant info
       ...(selectedVariant && {
         variantId: selectedVariant.id,
@@ -325,13 +366,24 @@ const ProductActions = ({
         optionValues: selectedVariant.optionValues || [],
       }),
     };
-    
-    addToCart(cartItem);
-    navigate("/checkout");
+
+    // Lưu vào sessionStorage và navigate với mode=buy-now
+    sessionStorage.setItem("buyNowItem", JSON.stringify(buyNowItem));
+    navigate("/checkout?mode=buy-now");
   };
 
   return (
     <div className="bg-white rounded-2xl p-5 shadow-sm">
+      {/* Quantity Selector */}
+      <div className="mb-4 pb-4 border-b border-slate-100">
+        <QuantitySelector
+          quantity={quantity}
+          setQuantity={setQuantity}
+          maxStock={displayStock}
+          isOutOfStock={isOutOfStock}
+        />
+      </div>
+
       {/* Desktop Layout */}
       <div className="hidden sm:flex gap-3">
         {/* Thêm vào giỏ */}
@@ -498,6 +550,7 @@ const ProductDetailPage = () => {
   
   // Variant state
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
   // Check if product has variants
   const hasVariants = product?.options?.length > 0 && product?.variants?.length > 0;
@@ -676,6 +729,8 @@ const ProductDetailPage = () => {
               product={product}
               selectedVariant={selectedVariant}
               hasVariants={hasVariants}
+              quantity={quantity}
+              setQuantity={setQuantity}
               addToCart={addToCart}
               navigate={navigate}
             />

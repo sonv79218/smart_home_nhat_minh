@@ -57,12 +57,12 @@ const BlogContentRenderer = ({ content }) => {
             return (
               <figure
                 key={idx}
-                className="rounded-2xl overflow-hidden shadow-sm my-4"
+                className="rounded-2xl overflow-hidden shadow-sm my-4 flex justify-center"
               >
                 <img
                   src={block.src}
                   alt={block.alt || ""}
-                  className="w-full object-cover max-h-96"
+                  className="w-full lg:w-[80%] aspect-[2] object-cover"
                   onError={(e) => {
                     e.currentTarget.src =
                       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80";

@@ -141,14 +141,29 @@ const CartItem = ({
           sku={item.sku}
         />
 
-        {/* Price on Mobile */}
-        <div className="mt-1 flex items-center gap-2 sm:hidden">
-          <span className="text-base font-bold text-red-600">
-            {itemPrice.toLocaleString()}đ
-          </span>
+        {/* Price Detail Block */}
+        <div className="mt-2 flex items-center gap-4 flex-wrap">
+          <div className="flex items-baseline gap-1">
+            <span className="text-xs text-slate-400">Đơn giá:</span>
+            <span className="text-sm font-semibold text-slate-700">
+              {itemPrice.toLocaleString()}đ
+            </span>
+          </div>
+          <div className="flex items-baseline gap-1">
+            <span className="text-xs text-slate-400">SL:</span>
+            <span className="text-sm font-semibold text-slate-700">
+              {itemQty}
+            </span>
+          </div>
+          <div className="flex items-baseline gap-1">
+            <span className="text-xs text-slate-400">Thành tiền:</span>
+            <span className="text-sm font-bold text-red-600">
+              {itemTotal.toLocaleString()}đ
+            </span>
+          </div>
           {hasDiscount && (
             <span className="text-xs text-slate-400 line-through">
-              {originalPrice.toLocaleString()}đ
+              {originalTotal.toLocaleString()}đ
             </span>
           )}
         </div>
@@ -158,18 +173,6 @@ const CartItem = ({
 
         {/* Bottom Row */}
         <div className="flex items-center justify-between mt-2">
-          {/* Price on Desktop */}
-          <div className="hidden sm:flex flex-col items-start">
-            <span className="text-base font-bold text-red-600">
-              {itemTotal.toLocaleString()}đ
-            </span>
-            {hasDiscount && (
-              <span className="text-xs text-slate-400 line-through">
-                {originalTotal.toLocaleString()}đ
-              </span>
-            )}
-          </div>
-
           {/* Quantity Controls */}
           <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-0.5">
             <button
@@ -295,7 +298,13 @@ const OrderSummary = ({
 }) => {
   const getItemKey = (item) => item.variantId ? `${item.id}-${item.variantId}` : item.id;
   
-  const selectedCount = allItems
+  // Đếm số dòng sản phẩm (unique items)
+  const selectedItemCount = allItems
+    .filter(item => selectedItems.includes(getItemKey(item)))
+    .length;
+  
+  // Đếm tổng số lượng món
+  const selectedQuantityCount = allItems
     .filter(item => selectedItems.includes(getItemKey(item)))
     .reduce((sum, item) => sum + toInteger(item.quantity || 1), 0);
   
@@ -318,9 +327,30 @@ const OrderSummary = ({
         Tóm tắt đơn hàng
       </h3>
 
+      {/* Item count summary */}
+      <div className="flex items-center gap-3 mb-4 p-3 bg-slate-50 rounded-xl">
+        <div className="flex items-center gap-1.5 text-sm text-slate-600">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+          </svg>
+          <span>{selectedItemCount} sản phẩm</span>
+        </div>
+        <div className="w-px h-4 bg-slate-300" />
+        <div className="flex items-center gap-1.5 text-sm text-slate-600">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          <span>{selectedQuantityCount} món</span>
+        </div>
+      </div>
+
       <div className="space-y-3 mb-4">
         <div className="flex justify-between text-sm text-slate-600">
-          <span>Tạm tính ({selectedCount} sản phẩm)</span>
+          <span>Tạm tính</span>
           <span>{toInteger(subtotal).toLocaleString()}đ</span>
         </div>
         
@@ -356,11 +386,11 @@ const OrderSummary = ({
 
       <button 
         onClick={onCheckout}
-        disabled={selectedCount === 0}
+        disabled={selectedQuantityCount === 0}
         className={`
           w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm
           transition-all duration-200 active:scale-[0.98]
-          ${selectedCount === 0 
+          ${selectedQuantityCount === 0 
             ? "bg-slate-200 text-slate-400 cursor-not-allowed" 
             : "bg-red-500 text-white shadow-lg shadow-red-500/30 hover:bg-red-600"
           }
@@ -370,7 +400,7 @@ const OrderSummary = ({
           <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
           <line x1="1" y1="10" x2="23" y2="10" />
         </svg>
-        Thanh toán ({selectedCount})
+        Thanh toán ({selectedQuantityCount} món)
       </button>
 
       <div className="flex items-center justify-center gap-2 mt-3 text-xs text-slate-400">
@@ -663,7 +693,7 @@ const CartPage = () => {
             </div>
             <div>
               <p className="text-lg font-bold text-red-600">{toInteger(selectedTotal).toLocaleString()}đ</p>
-              <p className="text-[10px] text-slate-500">{selectedCount} sản phẩm</p>
+              <p className="text-[10px] text-slate-500">{selectedCount} món</p>
             </div>
           </div>
 
@@ -674,13 +704,13 @@ const CartPage = () => {
             className={`
               px-6 py-2.5 rounded-xl font-bold text-sm
               transition-all duration-200 active:scale-95
-              ${selectedCount === 0 
-                ? "bg-slate-200 text-slate-400 cursor-not-allowed" 
+              ${selectedCount === 0
+                ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                 : "bg-red-500 text-white shadow-lg shadow-red-500/30"
               }
             `}
           >
-            Mua hàng
+            Mua hàng ({selectedCount} món)
           </button>
         </div>
       </div>

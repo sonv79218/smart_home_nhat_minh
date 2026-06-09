@@ -1,7 +1,7 @@
 // ============================================
 // CHECKOUT PAGE - TAILWIND CSS
 // ============================================
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { useToast } from "../contexts/ToastContext";
@@ -15,13 +15,38 @@ const CheckoutPage = () => {
   const toast = useToast();
   const { cartItems, removeMultipleFromCart, getCartItemKey } = useCart();
 
+  // Parse URL params for buy-now mode
+  const searchParams = new URLSearchParams(location.search);
+  const isBuyNow = searchParams.get("mode") === "buy-now";
+
+  // Buy Now item from sessionStorage
+  const [buyNowItem, setBuyNowItem] = useState(null);
+
+  useEffect(() => {
+    if (isBuyNow) {
+      const savedItem = sessionStorage.getItem("buyNowItem");
+      if (savedItem) {
+        try {
+          setBuyNowItem(JSON.parse(savedItem));
+        } catch (e) {
+          console.error("Error parsing buyNowItem:", e);
+        }
+      }
+    }
+  }, [isBuyNow]);
+
+  // Get selected items from navigation state (for cart checkout)
   const selectedItemKeys = location.state?.selectedItems || [];
 
+  // Determine checkout items: buyNowItem takes priority
   const checkoutItems = useMemo(() => {
+    if (buyNowItem) {
+      return [buyNowItem];
+    }
     return cartItems.filter(item =>
       selectedItemKeys.includes(getCartItemKey(item))
     );
-  }, [cartItems, selectedItemKeys, getCartItemKey]);
+  }, [buyNowItem, cartItems, selectedItemKeys, getCartItemKey]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -160,7 +185,15 @@ const CheckoutPage = () => {
 
       await createOrder(order);
 
-      removeMultipleFromCart(selectedItemKeys);
+      // Only remove from cart if not buy-now mode
+      if (!isBuyNow) {
+        removeMultipleFromCart(selectedItemKeys);
+      }
+
+      // Clear buyNowItem if exists
+      if (isBuyNow) {
+        sessionStorage.removeItem("buyNowItem");
+      }
 
       toast.success("Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ sớm để xác nhận.", {
         title: "Đặt hàng thành công",
@@ -184,13 +217,23 @@ const CheckoutPage = () => {
         {/* Header */}
         <div className="mb-8">
           <button
-            onClick={() => navigate("/cart")}
+            onClick={() => {
+              if (isBuyNow) {
+                // Clear buyNowItem and go back
+                sessionStorage.removeItem("buyNowItem");
+                navigate(-1);
+              } else {
+                navigate("/cart");
+              }
+            }}
             className="flex items-center gap-2 text-slate-500 hover:text-blue-600 text-sm font-medium mb-4 transition-colors"
           >
             <ArrowLeft size={20} />
-            Quay lại giỏ hàng
+            {isBuyNow ? "Quay lại sản phẩm" : "Quay lại giỏ hàng"}
           </button>
-          <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900">Thanh toán</h1>
+          <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900">
+            {isBuyNow ? "Mua ngay" : "Thanh toán"}
+          </h1>
         </div>
 
         {/* Main Content */}
@@ -349,7 +392,7 @@ const CheckoutPage = () => {
               {/* Summary Rows */}
               <div className="space-y-3 pb-4 border-b border-slate-100 mb-4">
                 <div className="flex justify-between text-sm text-slate-600">
-                  <span>Tạm tính ({checkoutItems.length} sản phẩm)</span>
+                  <span>Tạm tính ({checkoutItems.length} sản phẩm / {checkoutItems.reduce((sum, item) => sum + (item.quantity || 1), 0)} món)</span>
                   <span className="font-semibold text-slate-900">{toInteger(subtotal).toLocaleString()}đ</span>
                 </div>
                 <div className="flex justify-between text-sm text-slate-600">
