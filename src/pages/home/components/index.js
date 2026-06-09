@@ -2,6 +2,7 @@
 // HOME PAGE COMPONENTS - EXPORTS
 // ============================================
 export { default as BannerSection } from "./BannerSection";
+export { default as BannerSkeleton, DesktopBannerSkeleton } from "./BannerSkeleton";
 export { default as FeaturesBar } from "./FeaturesBar";
 export { default as CategoryGridSection } from "./CategoryGridSection";
 export { default as CategoryCard } from "./CategoryCard";
@@ -16,4 +17,12 @@ export { default as ProjectsSection } from "./ProjectsSection";
 export { default as SolutionSection } from "./SolutionSection";
 export { default as SolutionCard } from "./SolutionCard";
 export { default as CategorySidebar } from "./CategorySidebar";
+export { default as SidebarSkeleton } from "./SidebarSkeleton";
 export { default as MegaCategoryMenu } from "./MegaCategoryMenu";
+export {
+  SolutionGridSkeleton,
+  CategoryGridSkeleton,
+  SectionHeaderSkeleton,
+  SolutionSectionSkeleton,
+  CategoryGridSectionSkeleton,
+} from "./SectionSkeletons";

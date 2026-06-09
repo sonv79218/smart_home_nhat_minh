@@ -6,8 +6,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CategoryCard from "./CategoryCard";
+import { CategoryGridSkeleton } from "./SectionSkeletons";
 
-const CategoryGridSection = ({ categories }) => {
+const CategoryGridSection = ({ categories, isLoading }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
@@ -22,30 +23,19 @@ const CategoryGridSection = ({ categories }) => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  if (!categories || categories.length === 0) return null;
+  const hasCategories = categories && categories.length > 0;
+  const showLoading = isLoading !== undefined ? isLoading : !hasCategories;
 
   const limitCount = isMobile ? 8 : 10;
-  const displayedCategories = showAll
-    ? categories
-    : categories.slice(0, limitCount);
-
-  const hasMore = categories.length > limitCount;
+  const displayedCategories = hasCategories
+    ? (showAll ? categories : categories.slice(0, limitCount))
+    : [];
+  const hasMore = hasCategories && categories.length > limitCount;
 
   return (
     <section className="w-full py-4 md:py-6">
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-3 sm:px-4 md:px-6">
-        {/* Header */}
-        {/* <div className="flex items-end justify-between gap-3 mb-4 md:mb-5">
-          <div>
-            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 tracking-tight">
-              Danh mục sản phẩm
-            </h2>
-
-            <p className="text-xs md:text-sm text-slate-500 mt-1">
-              Giải pháp Smart Home toàn diện
-            </p>
-          </div>
-        </div> */}
+        {/* Header - Always render to prevent layout shift */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />
           <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-wide text-center whitespace-nowrap">
@@ -53,50 +43,56 @@ const CategoryGridSection = ({ categories }) => {
           </h2>
           <div className="flex-1 h-px bg-gradient-to-l from-transparent to-primary-200" />
         </div>
-        {/* Animated Grid */}
-        <motion.div
-          layout
-          className="
-            grid
-            grid-cols-4
-            sm:grid-cols-10
-            gap-2.5 sm:gap-3 md:gap-4
-          "
-        >
-          <AnimatePresence initial={false}>
-            {displayedCategories.map((category, index) => (
-              <motion.div
-                key={category.id}
-                layout
-                initial={{
-                  opacity: 0,
-                  y: 12,
-                  scale: 0.96,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: -8,
-                  scale: 0.96,
-                }}
-                transition={{
-                  duration: 0.22,
-                  ease: "easeOut",
-                  delay: showAll ? index * 0.015 : 0,
-                }}
-              >
-                <CategoryCard category={category} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+
+        {/* Loading Skeleton */}
+        {showLoading && <CategoryGridSkeleton />}
+
+        {/* Animated Grid - Only show when not loading and has data */}
+        {!showLoading && hasCategories && (
+          <motion.div
+            layout
+            className="
+              grid
+              grid-cols-4
+              sm:grid-cols-10
+              gap-2.5 sm:gap-3 md:gap-4
+            "
+          >
+            <AnimatePresence initial={false}>
+              {displayedCategories.map((category, index) => (
+                <motion.div
+                  key={category.id}
+                  layout
+                  initial={{
+                    opacity: 0,
+                    y: 12,
+                    scale: 0.96,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: -8,
+                    scale: 0.96,
+                  }}
+                  transition={{
+                    duration: 0.22,
+                    ease: "easeOut",
+                    delay: showAll ? index * 0.015 : 0,
+                  }}
+                >
+                  <CategoryCard category={category} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
         {/* More Button */}
-        {hasMore && (
+        {!showLoading && hasMore && (
           <motion.div
             layout
             className="mt-3 flex justify-center"

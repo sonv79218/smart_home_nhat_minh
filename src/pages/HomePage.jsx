@@ -11,21 +11,25 @@ import { companyInfo, companySocial } from "../data/company";
 import { useApp } from "../contexts/AppContext";
 import OfflineNotice from "../components/common/OfflineNotice";
 
+import DesktopHeroMenu from "./home/components/DesktopHeroMenu";
+
 import {
   BannerSection,
+  BannerSkeleton,
+  DesktopBannerSkeleton,
   FeaturesBar,
   CategoryGridSection,
   CategoryProductSection,
   EcosystemSection,
   AboutSection,
   ContactSection,
-  // FloatingContactButtons,
   SolutionSection,
   CategorySidebar,
+  SidebarSkeleton,
   MegaCategoryMenu,
-  // DesktopHeroMenu,
+  SolutionSectionSkeleton,
+  CategoryGridSectionSkeleton,
 } from "./home/components";
-import DesktopHeroMenu from "./home/components/DesktopHeroMenu";
 // ============================================
 // CONSTANTS
 // ============================================
@@ -127,101 +131,106 @@ useEffect(() => {
       {/* ============================================ */}
       {/* HERO: Sidebar + Banner + Mega Menu */}
       {/* ============================================ */}
-      {/* <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 lg:px-4 xl:px-6 pt-4"> */}
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
-    
-    {categories.length > 0 && (
-  <>
-    <DesktopHeroMenu />
+        {/* Desktop Hero Menu - Always render */}
+        <DesktopHeroMenu />
 
-    <div
-      className="
-        relative hidden lg:grid
-        grid-cols-[300px_1fr]
-        h-[clamp(475px,28vw,600px)]
-        overflow-hidden rounded-b-2xl
-      "
-      onMouseLeave={() => setHoveredCategory(null)}
-    >
-      <CategorySidebar
-        categories={categories}
-        hoveredCategory={hoveredCategory}
-        setHoveredCategory={setHoveredCategory}
-      />
+        {/* Desktop Hero Grid - Always render with fixed height */}
+        <div
+          className="
+            relative hidden lg:grid
+            grid-cols-[300px_1fr]
+            h-[clamp(475px,28vw,600px)]
+            overflow-hidden rounded-b-2xl
+          "
+          onMouseLeave={() => setHoveredCategory(null)}
+        >
+          {/* Sidebar - Show skeleton or real sidebar */}
+          {categories.length > 0 ? (
+            <CategorySidebar
+              categories={categories}
+              hoveredCategory={hoveredCategory}
+              setHoveredCategory={setHoveredCategory}
+            />
+          ) : (
+            <SidebarSkeleton />
+          )}
 
-      <div className="h-full overflow-hidden rounded-br-2xl">
-        <BannerSection
-          className="h-full"
-          banners={banners}
-          current={current}
-          setCurrent={setCurrent}
-        />
-      </div>
+          {/* Banner - Show skeleton or real banner */}
+          <div className="h-full overflow-hidden rounded-br-2xl">
+            {banners.length > 0 ? (
+              <BannerSection
+                className="h-full"
+                banners={banners}
+                current={current}
+                setCurrent={setCurrent}
+              />
+            ) : (
+              <DesktopBannerSkeleton />
+            )}
+          </div>
 
-      {hoveredCategory && (
-        <MegaCategoryMenu
-          category={hoveredCategory}
-          products={productsByCategory[hoveredCategory.id] || []}
-        />
-      )}
-    </div>
-  </>
-)}
-        {/* Desktop Hero Grid */}
+          {/* Mega Menu - Only show when category is hovered and data is loaded */}
+          {hoveredCategory && productsByCategory[hoveredCategory.id] && (
+            <MegaCategoryMenu
+              category={hoveredCategory}
+              products={productsByCategory[hoveredCategory.id]}
+            />
+          )}
+        </div>
 
-        {/* <DesktopHeroMenu /> */}
-
-
-        {/* Mobile Banner (shown when lg grid is hidden) */}
+        {/* Mobile Banner (shown when lg grid is hidden) - Always render with fixed height */}
         <div className="lg:hidden h-[260px] sm:h-[320px] md:h-[400px]">
-          <BannerSection
-            banners={banners}
-            current={current}
-            setCurrent={setCurrent}
-            className="h-full"
-          />
+          {banners.length > 0 ? (
+            <BannerSection
+              banners={banners}
+              current={current}
+              setCurrent={setCurrent}
+              className="h-full"
+            />
+          ) : (
+            <BannerSkeleton className="h-full rounded-b-2xl" />
+          )}
         </div>
       </div>
+
       {/* Divider */}
       <SectionDivider />
-{/* MOBILE: Category trước Solution */}
-<div className="lg:hidden">
-  <SectionDivider />
 
-  <div className="w-full bg-gradient-to-b from-slate-50 to-white">
-    {topCategories.length > 0 && (
-      <CategoryGridSection categories={topCategories} />
-    )}
-  </div>
+      {/* ============================================ */}
+      {/* MOBILE: Category trước Solution */}
+      {/* ============================================ */}
+      <div className="lg:hidden">
+        <SectionDivider />
 
-  <SectionDivider />
+        <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+          <CategoryGridSection categories={topCategories} isLoading={loading} />
+        </div>
 
-  {solutions.length > 0 && (
-    <SolutionSection solutions={solutions} />
-  )}
-</div>
+        <SectionDivider />
 
-{/* DESKTOP: Solution trước Category */}
-<div className="hidden lg:block">
-  <SectionDivider />
+        <SolutionSection solutions={solutions} isLoading={loading} />
+      </div>
 
-  {solutions.length > 0 && (
-    <SolutionSection solutions={solutions} />
-  )}
+      {/* ============================================ */}
+      {/* DESKTOP: Solution trước Category */}
+      {/* ============================================ */}
+      <div className="hidden lg:block">
+        <SectionDivider />
 
-  <SectionDivider />
+        <SolutionSection solutions={solutions} isLoading={loading} />
 
-  <div className="w-full bg-gradient-to-b from-slate-50 to-white">
-    {topCategories.length > 0 && (
-      <CategoryGridSection categories={topCategories} />
-    )}
-  </div>
-</div>
+        <SectionDivider />
+
+        <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+          <CategoryGridSection categories={topCategories} isLoading={loading} />
+        </div>
+      </div>
+
       {/* ============================================ */}
       {/* ECOSYSTEM SECTION */}
       {/* ============================================ */}
       <EcosystemSection />
-
 
       {/* Divider */}
       <SectionDivider />

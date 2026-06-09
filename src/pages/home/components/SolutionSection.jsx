@@ -5,16 +5,20 @@
 import { useState, useEffect } from "react";
 import SolutionCard from "./SolutionCard";
 import { getActiveSolutions } from "../../../services/solutionService";
+import { SolutionGridSkeleton } from "./SectionSkeletons";
 
-const SolutionSection = ({ solutions: propSolutions }) => {
+const SolutionSection = ({ solutions: propSolutions, isLoading: externalLoading }) => {
   const [solutions, setSolutions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [internalLoading, setInternalLoading] = useState(true);
+
+  // Use external loading if provided, otherwise use internal state
+  const showLoading = externalLoading !== undefined ? externalLoading : internalLoading;
 
   useEffect(() => {
     const fetchSolutions = async () => {
-      if (propSolutions) {
+      if (propSolutions !== undefined) {
         setSolutions(propSolutions);
-        setLoading(false);
+        setInternalLoading(false);
         return;
       }
 
@@ -24,22 +28,17 @@ const SolutionSection = ({ solutions: propSolutions }) => {
       } catch (error) {
         console.error("[SolutionSection] Error fetching solutions:", error);
       } finally {
-        setLoading(false);
+        setInternalLoading(false);
       }
     };
 
     fetchSolutions();
   }, [propSolutions]);
 
-  // Don't render if no data
-  if (!loading && solutions.length === 0) {
-    return null;
-  }
-
   return (
     <div className="w-full py-12 md:py-16 bg-slate-50">
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
-        {/* Section Header */}
+        {/* Section Header - Always render to prevent layout shift */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />
           <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-wide text-center whitespace-nowrap">
@@ -50,19 +49,10 @@ const SolutionSection = ({ solutions: propSolutions }) => {
         
 
         {/* Loading Skeleton */}
-        {loading && (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <div
-                key={index}
-                className="aspect-[4/5] rounded-2xl bg-slate-200 animate-pulse"
-              />
-            ))}
-          </div>
-        )}
+        {showLoading && <SolutionGridSkeleton />}
 
-        {/* Solutions Grid */}
-        {!loading && solutions.length > 0 && (
+        {/* Solutions Grid - Only show when not loading and has data */}
+        {!showLoading && solutions.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
             {solutions.map((solution) => (
               <SolutionCard key={solution.id} solution={solution} />
