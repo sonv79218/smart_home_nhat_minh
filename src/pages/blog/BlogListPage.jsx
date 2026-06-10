@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Search, LayoutGrid } from "lucide-react";
 import BlogCard from "../../components/blog/BlogCard";
 import { getBlogsByType } from "../../services/blogService";
-import DesktopHeroMenu  from "../home/components/DesktopHeroMenu";
+import DesktopHeroMenu from "@/features/home/components/hero/DesktopHeroMenu";
 
 const BlogListPage = ({ type = "blog" }) => {
   const [blogs, setBlogs] = useState([]);

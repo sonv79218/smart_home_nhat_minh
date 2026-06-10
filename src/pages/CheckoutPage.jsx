@@ -3,7 +3,7 @@
 // ============================================
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import useCart from "../hooks/useCart";
+import  useCart  from "@/features/cart/hooks/useCart";
 import { useToast } from "../contexts/ToastContext";
 import { createOrder } from "../services/orderService";
 import { toInteger } from "../utils/priceUtils";

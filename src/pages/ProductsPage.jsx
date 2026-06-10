@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { getProducts } from "../services/productService";
 import { getCategories } from "../services/categoryService";
 import { getBrands } from "../services/brandService";
-import ProductCard from "./home/components/ProductCard";
+import ProductCard from "@/features/home/components/category/ProductCard";
 import Pagination from "../components/common/Pagination";
 import { Search, X, SlidersHorizontal } from "lucide-react";
 

@@ -3,7 +3,8 @@
 // ============================================
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useCart from "../../hooks/useCart";
+
+import useCart from '@/features/cart/hooks/useCart';
 import { getCategories } from "../../services/categoryService";
 import {
   COLORS,
