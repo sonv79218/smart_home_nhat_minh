@@ -13,7 +13,7 @@ import {
   serverTimestamp,
   increment,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 
 const COLLECTION = "blogs";
 const blogsRef = collection(db, COLLECTION);

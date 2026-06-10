@@ -15,7 +15,7 @@ import {
   limit,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 import { DATA_SOURCE } from "../config/dataSource";
 import { getActiveSolutions } from "./solutionService";
 

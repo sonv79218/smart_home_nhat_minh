@@ -1,5 +1,5 @@
 import { doc, getDoc, updateDoc, increment, setDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 
 const statsRef = doc(db, "stats", "dashboard");
 

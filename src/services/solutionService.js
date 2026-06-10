@@ -18,7 +18,7 @@ import {
   getDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 
 // Collections
 const SOLUTIONS_COLLECTION = "solutions"; // Legacy
