@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar } from "lucide-react";
-import { formatDate } from "../../services/blogService";
+import { formatDate } from "@/features/blog/services/blogService";
 
 const TYPE_BADGES = {
   solution: "bg-emerald-100 text-emerald-700 border-emerald-200",

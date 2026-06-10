@@ -8,10 +8,10 @@ import {
   Tag,
   Lightbulb,
 } from "lucide-react";
-import TableOfContents from "../../components/blog/TableOfContents";
-import BlogContentRenderer from "../../components/blog/BlogContentRenderer";
-import BlogCard from "../../components/blog/BlogCard";
-import { getBlogBySlug, getRelatedBlogs, extractHeadings, formatDate } from "../../services/blogService";
+import TableOfContents from "@/features/blog/components/TableOfContents";
+import BlogContentRenderer from "@/features/blog/components/BlogContentRenderer";
+import BlogCard from "@/features/blog/components/BlogCard";
+import { getBlogBySlug, getRelatedBlogs, extractHeadings, formatDate } from "@/features/blog/services/blogService";
 
 const TYPE_COLORS = {
   solution: "bg-emerald-100 text-emerald-700 border-emerald-200",

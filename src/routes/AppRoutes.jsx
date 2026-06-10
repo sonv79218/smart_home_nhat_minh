@@ -19,8 +19,8 @@ import AboutPage from "../pages/AboutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
 // Blog Pages
-import BlogListPage from "../pages/blog/BlogListPage";
-import BlogDetailPage from "../pages/blog/BlogDetailPage";
+import BlogListPage from "../features/blog/pages/BlogListPage";
+import BlogDetailPage from "../features/blog/pages/BlogDetailPage";
 
 // Ecosystem Pages
 import LumiPage from "../pages/ecosystem/LumiPage";

@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Search, LayoutGrid } from "lucide-react";
-import BlogCard from "../../components/blog/BlogCard";
-import { getBlogsByType } from "../../services/blogService";
+import BlogCard from "@/features/blog/components/BlogCard";
+import { getBlogsByType } from "@/features/blog/services/blogService";
 import DesktopHeroMenu from "@/features/home/components/hero/DesktopHeroMenu";
 
 const BlogListPage = ({ type = "blog" }) => {
