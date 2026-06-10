@@ -3,6 +3,7 @@
 // Footer.jsx
 // ============================================
 
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -14,12 +15,12 @@ import {
 
 const Footer = () => {
   const supportLinks = [
+    { label: "Chính sách & Điều khoản", href: "/chinh-sach" },
     "Chính sách thanh toán",
     "Chính sách bảo hành",
     "Chính sách đổi trả - hoàn tiền",
     "Chính sách vận chuyển",
     "Chính sách kiểm hàng",
-    "Chính sách bảo mật",
     "Dịch vụ lắp đặt tại nhà",
   ];
 
@@ -63,11 +64,19 @@ const Footer = () => {
 
             <ul className="space-y-3">
               {supportLinks.map((item, index) => (
-                <li
-                  key={index}
-                  className="hover:text-cyan-400 transition-all duration-300 cursor-pointer text-sm"
-                >
-                  {item}
+                <li key={index}>
+                  {typeof item === "object" && item.href ? (
+                    <Link
+                      to={item.href}
+                      className="hover:text-cyan-400 transition-all duration-300 cursor-pointer text-sm block"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span className="hover:text-cyan-400 transition-all duration-300 cursor-pointer text-sm">
+                      {item}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

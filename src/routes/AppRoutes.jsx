@@ -16,6 +16,7 @@ import ProductDetailPage from "../features/products/pages/ProductDetailPage";
 import CartPage from "../features/cart/pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import AboutPage from "../pages/AboutPage";
+import PolicyPage from "../pages/PolicyPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
 // Blog Pages
@@ -100,6 +101,15 @@ const AppRoutes = () => {
           element={
             <MainLayout>
               <AboutPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/chinh-sach"
+          element={
+            <MainLayout>
+              <PolicyPage />
             </MainLayout>
           }
         />
