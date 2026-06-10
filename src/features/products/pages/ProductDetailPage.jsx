@@ -4,13 +4,13 @@
 // ============================================
 import { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProductById, getProducts } from "../services/productService";
-import { getCategoryName } from "../services/categoryService";
-import { getBrandById } from "../services/brandService";
-import useCart from "@/features/cart/hooks/useCart";
+import { getProductById, getProducts } from "@/services/productService";
+import { getCategoryName } from "@/services/categoryService";
+import { getBrandById } from "@/services/brandService";
+import  useCart from "@/features/cart/hooks/useCart";
 import ProductCard from "@/features/home/components/category/ProductCard";
-import VariantSelector, { SelectedVariantInfo } from "../components/product/VariantSelector";
-import { toInteger } from "../utils/priceUtils";
+import VariantSelector, { SelectedVariantInfo } from "@/features/products/components/VariantSelector";
+import { toInteger } from "@/utils/priceUtils";
 
 // ============================================
 // HELPERS

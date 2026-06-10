@@ -3,7 +3,7 @@
 // Hiển thị lựa chọn biến thể sản phẩm
 // ============================================
 import { useMemo } from "react";
-import { toInteger } from "../../utils/priceUtils";
+import { toInteger } from "@/utils/priceUtils";
 
 /**
  * Tìm variant phù hợp với các option đã chọn

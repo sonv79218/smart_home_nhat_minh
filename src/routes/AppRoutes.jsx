@@ -11,8 +11,8 @@ import AdminLayout from "../admin/layouts/AdminLayout";
 
 // Public Pages
 import HomePage from "../features/home/pages/HomePage";
-import ProductsPage from "../pages/ProductsPage";
-import ProductDetailPage from "../pages/ProductDetailPage";
+import ProductsPage from "../features/products/pages/ProductsPage";
+import ProductDetailPage from "../features/products/pages/ProductDetailPage";
 import CartPage from "../features/cart/pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import AboutPage from "../pages/AboutPage";
