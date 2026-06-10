@@ -3,7 +3,7 @@
 // Seamless sections with consistent styling
 // ============================================
 import { useNavigate } from "react-router-dom";
-import SectionHeader from "../../../components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 import {
   Home,
   Camera,

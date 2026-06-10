@@ -13,7 +13,7 @@ import {
   SHADOW,
   TRANSITION,
 } from "../../styles/designSystem";
-import { getCategoryIcon } from "../../pages/home/components/categoryIcons";
+import { getCategoryIcon } from "../../features/home/components/category/categoryIcons";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

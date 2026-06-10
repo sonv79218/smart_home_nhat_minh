@@ -2,7 +2,7 @@
 // ECOSYSTEM SECTION - UNIFIED DESIGN SYSTEM
 // Seamless sections with consistent styling
 // ============================================
-import SectionHeader from "../../../components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 import EcosystemCard from "./EcosystemCard";
 import EcosystemMobileTabs from "./EcosystemMobileTabs";
 

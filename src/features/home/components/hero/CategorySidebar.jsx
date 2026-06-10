@@ -3,7 +3,7 @@
 // No mega menu, no sticky, no scroll inside sidebar
 // ============================================
 import { useNavigate, useLocation } from "react-router-dom";
-import { getCategoryIcon } from "./categoryIcons";
+import { getCategoryIcon } from "@/features/home/components/category/categoryIcons";
 
 const CategorySidebar = ({ categories = [], hoveredCategory, setHoveredCategory }) => {
   const navigate = useNavigate();

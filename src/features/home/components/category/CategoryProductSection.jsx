@@ -4,7 +4,7 @@
 // ============================================
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import SectionHeader from "../../../components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 import ProductCard from "./ProductCard";
 
 const PRODUCTS_PER_PAGE = 8;

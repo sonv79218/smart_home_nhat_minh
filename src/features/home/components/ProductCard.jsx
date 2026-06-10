@@ -5,9 +5,9 @@
 // ============================================
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useCart from "../../../hooks/useCart";
-import { useToast } from "../../../contexts/ToastContext";
-import { toInteger } from "../../../utils/priceUtils";
+import useCart from "@/hooks/useCart";
+import { useToast } from "@/contexts/ToastContext";
+import { toInteger } from "@/utils/priceUtils";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();

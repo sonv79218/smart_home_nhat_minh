@@ -3,21 +3,20 @@
 // Seamless sections with consistent styling and dividers
 // ============================================
 import { useState, useEffect } from "react";
-import { getFeaturedProducts, getProductsByCategory } from "../services/productService";
-import { getCategories } from "../services/categoryService";
-import { getActiveBanners } from "../services/bannerService";
-import { getActiveSolutions } from "../services/solutionService";
-import { companyInfo, companySocial } from "../data/company";
-import { useApp } from "../contexts/AppContext";
-import OfflineNotice from "../components/common/OfflineNotice";
+import { getFeaturedProducts, getProductsByCategory } from "@/services/productService";
+import { getCategories } from "@/services/categoryService";
+import { getActiveBanners } from "@/services/bannerService";
+import { getActiveSolutions } from "@/services/solutionService";
+import { companyInfo, companySocial } from "@/data/company";
+import { useApp } from "@/contexts/AppContext";
+import OfflineNotice from "@/components/common/OfflineNotice";
 
-import DesktopHeroMenu from "./home/components/DesktopHeroMenu";
+import DesktopHeroMenu from "@/features/home/components/hero/DesktopHeroMenu";
 
 import {
   BannerSection,
   BannerSkeleton,
   DesktopBannerSkeleton,
-  FeaturesBar,
   CategoryGridSection,
   CategoryProductSection,
   EcosystemSection,
@@ -27,9 +26,9 @@ import {
   CategorySidebar,
   SidebarSkeleton,
   MegaCategoryMenu,
-  SolutionSectionSkeleton,
-  CategoryGridSectionSkeleton,
-} from "./home/components";
+  SectionDivider,
+} from "@/features/home/components";
+
 // ============================================
 // CONSTANTS
 // ============================================
@@ -38,11 +37,6 @@ const PRODUCTS_LIMIT = {
   featured: 8,
   topCategory: 10,
 };
-
-// Section divider component
-const SectionDivider = () => (
-  <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-);
 
 const HomePage = () => {
   const { offlineMode } = useApp();
@@ -58,63 +52,63 @@ const HomePage = () => {
   // ============================================
   // DATA FETCHING
   // ============================================
-useEffect(() => {
-  let mounted = true;
+  useEffect(() => {
+    let mounted = true;
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
 
-      // Load dữ liệu quan trọng song song
-      const [categoriesData, bannersData, solutionsData, featured] =
-        await Promise.all([
-          getCategories(),
-          getActiveBanners(),
-          getActiveSolutions(),
-          getFeaturedProducts(PRODUCTS_LIMIT.featured),
-        ]);
+        // Load dữ liệu quan trọng song song
+        const [categoriesData, bannersData, solutionsData, featured] =
+          await Promise.all([
+            getCategories(),
+            getActiveBanners(),
+            getActiveSolutions(),
+            getFeaturedProducts(PRODUCTS_LIMIT.featured),
+          ]);
 
-      if (!mounted) return;
+        if (!mounted) return;
 
-      setCategories(categoriesData);
-      setBanners(bannersData);
-      setSolutions(solutionsData);
-      setFeaturedProducts(featured);
-      setLoading(false);
+        setCategories(categoriesData);
+        setBanners(bannersData);
+        setSolutions(solutionsData);
+        setFeaturedProducts(featured);
+        setLoading(false);
 
-      // Load sản phẩm theo danh mục sau, không chặn banner/solution
-      const categoryProductsEntries = await Promise.all(
-        categoriesData
-          .slice(0, PRODUCTS_LIMIT.topCategory)
-          .map(async (category) => {
-            const products = await getProductsByCategory(
-              category.id,
-              PRODUCTS_LIMIT.category
-            );
+        // Load sản phẩm theo danh mục sau, không chặn banner/solution
+        const categoryProductsEntries = await Promise.all(
+          categoriesData
+            .slice(0, PRODUCTS_LIMIT.topCategory)
+            .map(async (category) => {
+              const products = await getProductsByCategory(
+                category.id,
+                PRODUCTS_LIMIT.category
+              );
 
-            return [category.id, products];
-          })
-      );
+              return [category.id, products];
+            })
+        );
 
-      if (!mounted) return;
+        if (!mounted) return;
 
-      const categoryProducts = Object.fromEntries(
-        categoryProductsEntries.filter(([, products]) => products.length > 0)
-      );
+        const categoryProducts = Object.fromEntries(
+          categoryProductsEntries.filter(([, products]) => products.length > 0)
+        );
 
-      setProductsByCategory(categoryProducts);
-    } catch (error) {
-      console.error("Error fetching homepage data:", error);
-      setLoading(false);
-    }
-  };
+        setProductsByCategory(categoryProducts);
+      } catch (error) {
+        console.error("Error fetching homepage data:", error);
+        setLoading(false);
+      }
+    };
 
-  fetchData();
+    fetchData();
 
-  return () => {
-    mounted = false;
-  };
-}, []);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const topCategories = categories.slice(0, PRODUCTS_LIMIT.topCategory);
 

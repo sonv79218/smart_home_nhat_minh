@@ -10,7 +10,7 @@ import AdminLoginRoute from "./AdminLoginRoute";
 import AdminLayout from "../admin/layouts/AdminLayout";
 
 // Public Pages
-import HomePage from "../pages/HomePage";
+import HomePage from "../features/home/pages/HomePage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import CartPage from "../pages/CartPage";

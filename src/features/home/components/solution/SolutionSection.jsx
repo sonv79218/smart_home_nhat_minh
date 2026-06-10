@@ -4,8 +4,8 @@
 // ============================================
 import { useState, useEffect } from "react";
 import SolutionCard from "./SolutionCard";
-import { getActiveSolutions } from "../../../services/solutionService";
-import { SolutionGridSkeleton } from "./SectionSkeletons";
+import { getActiveSolutions } from "@/services/solutionService";
+import { SolutionGridSkeleton } from "@/features/home/components/category/SectionSkeletons";
 
 const SolutionSection = ({ solutions: propSolutions, isLoading: externalLoading }) => {
   const [solutions, setSolutions] = useState([]);
