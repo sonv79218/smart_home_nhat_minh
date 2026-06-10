@@ -107,9 +107,6 @@ const NotFoundPage = () => {
             <Link to="/products?brand=hunonic" className="text-slate-500 hover:text-primary-600 transition-colors">
               Hunonic
             </Link>
-            <Link to="/ecosystem/lumi" className="text-slate-500 hover:text-primary-600 transition-colors">
-              Hệ sinh thái
-            </Link>
             <Link to="/cart" className="text-slate-500 hover:text-primary-600 transition-colors">
               Giỏ hàng
             </Link>

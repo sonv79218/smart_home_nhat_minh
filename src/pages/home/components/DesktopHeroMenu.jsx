@@ -72,9 +72,12 @@ const DesktopHeroMenu = () => {
 
       <div className="grid grid-cols-4">
         {brandItems.map((item) => (
-          <Link key={item.label} to={item.href} className={menuLinkClass}>
+          <span key={item.label} className={menuLinkClass}>
             {item.label}
-          </Link>
+          </span>
+          // <Link key={item.label} to={item.href} className={menuLinkClass}>
+          //   {item.label}
+          // </Link>
         ))}
 
         <div className="relative group h-full">
