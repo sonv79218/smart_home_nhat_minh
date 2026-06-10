@@ -31,15 +31,15 @@ import SolutionsByHousePage from "../pages/projects/ProjectsPage";
 
 
 // Admin Pages
-import AdminProductsPage from "../pages/admin/AdminProductsPage";
-import AddProductPage from "../pages/admin/AddProductPage";
-import EditProductPage from "../pages/admin/EditProductPage";
-import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
-import AdminBannersPage from "../pages/admin/AdminBannersPage";
-import AdminBlogListPage from "../pages/admin/AdminBlogListPage";
-import AdminBlogFormPage from "../pages/admin/AdminBlogFormPage";
-import AdminLogin from "../pages/admin/AdminLogin";
-import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminProductsPage from "../admin/pages/AdminProductsPage";
+import AddProductPage from "../admin/pages/AddProductPage";
+import EditProductPage from "../admin/pages/EditProductPage";
+import AdminOrdersPage from "../admin/pages/AdminOrdersPage";
+import AdminBannersPage from "../admin/pages/AdminBannersPage";
+import AdminBlogListPage from "../admin/pages/AdminBlogListPage";
+import AdminBlogFormPage from "../admin/pages/AdminBlogFormPage";
+import AdminLogin from "../admin/pages/AdminLogin";
+import AdminDashboard from "../admin/pages/AdminDashboard";
 
 // Protected Route
 import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
