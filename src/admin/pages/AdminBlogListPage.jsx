@@ -132,7 +132,7 @@ const AdminBlogListPage = () => {
           </p>
         </div>
         <Link
-          to="/admin/blogs/add"
+          to="/qtvnmsmart/blogs/add"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white font-semibold rounded-xl shadow-lg hover:bg-primary-700 hover:-translate-y-0.5 transition-all duration-200"
         >
           <Plus className="w-5 h-5" />
@@ -193,7 +193,7 @@ const AdminBlogListPage = () => {
           <h3 className="text-lg font-bold text-slate-700">Chua co bai viet nao</h3>
           <p className="text-sm text-slate-500 mt-1">Bat dau bang cach them bai viet dau tien.</p>
           <Link
-            to="/admin/blogs/add"
+            to="/qtvnmsmart/blogs/add"
             className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
           >
             <Plus className="w-5 h-5" />
@@ -294,7 +294,7 @@ const AdminBlogListPage = () => {
                     </a>
                   )}
                   <button
-                    onClick={() => navigate(`/admin/blogs/edit/${blog.id}`)}
+                    onClick={() => navigate(`/qtvnmsmart/blogs/edit/${blog.id}`)}
                     className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:border-amber-300 hover:text-amber-500 hover:bg-amber-50 transition-all"
                     title="Sua bai viet"
                   >
@@ -325,7 +325,7 @@ const AdminBlogListPage = () => {
                         <Eye size={14} />
                       </a>
                     )}
-                    <button onClick={() => navigate(`/admin/blogs/edit/${blog.id}`)} className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400">
+                    <button onClick={() => navigate(`/qtvnmsmart/blogs/edit/${blog.id}`)} className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400">
                       <Edit2 size={14} />
                     </button>
                     <button onClick={() => handleDelete(blog)} className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400">

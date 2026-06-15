@@ -20,7 +20,7 @@ const AdminLogin = () => {
 
   // Nếu đã login là admin, redirect
   if (adminUser && !loading) {
-    const from = location.state?.from?.pathname || "/admin/dashboard";
+    const from = location.state?.from?.pathname || "/qtvnmsmart";
     return <Navigate to={from} replace />;
   }
 
@@ -36,7 +36,7 @@ const AdminLogin = () => {
         toast.success("Chào mừng bạn quay lại trang quản trị Smart Home Nhật Minh.", {
           title: "Đăng nhập thành công",
         });
-        const from = location.state?.from?.pathname || "/admin/dashboard";
+        const from = location.state?.from?.pathname || "/qtvnmsmart";
         navigate(from, { replace: true });
       } else {
         setError(result.error);

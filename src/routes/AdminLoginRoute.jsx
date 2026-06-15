@@ -10,7 +10,7 @@ const AdminLoginRoute = ({ children }) => {
   }
 
   if (adminUser) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/qtvnmsmart" replace />;
   }
 
   return children;

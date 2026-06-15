@@ -412,7 +412,7 @@ const AddProductPage = () => {
       toast.success("Sản phẩm mới đã được thêm vào hệ thống.", {
         title: "Thêm sản phẩm thành công",
       });
-      navigate("/admin/products");
+      navigate("/qtvnmsmart/products");
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Không thể thêm sản phẩm lúc này. Vui lòng thử lại.", {
@@ -1038,7 +1038,7 @@ const AddProductPage = () => {
           </button>
           <button
             type="button"
-            onClick={() => navigate("/admin/products")}
+            onClick={() => navigate("/qtvnmsmart/products")}
             className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
           >
             Hủy

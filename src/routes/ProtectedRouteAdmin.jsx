@@ -17,7 +17,7 @@ const ProtectedRouteAdmin = ({ children }) => {
 
   // Chưa login hoặc không phải admin - redirect về login
   if (!adminUser) {
-    return <Navigate to="/admin/login" state={{ from: location }} replace />;
+    return <Navigate to="/qtvnmsmart/login" state={{ from: location }} replace />;
   }
 
   // Là admin - cho phép truy cập

@@ -87,7 +87,7 @@ const AdminBlogFormPage = () => {
       const blog = await getBlogById(id);
       if (!blog) {
         toast.error("Khong tim thay bai viet.");
-        navigate("/admin/blogs");
+        navigate("/qtvnmsmart/blogs");
         return;
       }
       setForm({
@@ -269,7 +269,7 @@ const AdminBlogFormPage = () => {
         await createBlog(payload);
         toast.success("Tao bai viet moi thanh cong.", { title: "Tao thanh cong" });
       }
-      navigate("/admin/blogs");
+      navigate("/qtvnmsmart/blogs");
     } catch (err) {
       console.error("Save error:", err);
       toast.error("Khong the luu bai viet luc nay.");
@@ -292,7 +292,7 @@ const AdminBlogFormPage = () => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <Link
-            to="/admin/blogs"
+            to="/qtvnmsmart/blogs"
             className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:border-slate-300 transition-all"
           >
             <ArrowLeft size={18} />

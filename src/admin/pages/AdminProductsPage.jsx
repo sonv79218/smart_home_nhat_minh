@@ -230,7 +230,7 @@ const PLACEHOLDER_IMAGE =
         </div>
 
         <Link
-          to="/admin/products/add"
+          to="/qtvnmsmart/products/add"
           className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 hover:bg-primary-700 hover:-translate-y-0.5 transition-all duration-200"
         >
           <PlusIcon className="w-5 h-5" />
@@ -483,7 +483,7 @@ const PLACEHOLDER_IMAGE =
 
                         {/* EDIT */}
                         <Link
-                          to={`/admin/products/edit/${product.id}`}
+                          to={`/qtvnmsmart/products/edit/${product.id}`}
                           className="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors"
                         >
                           <EditIcon className="w-4 h-4" />
@@ -575,7 +575,7 @@ const PLACEHOLDER_IMAGE =
                   </Link>
 
                   <Link
-                    to={`/admin/products/edit/${product.id}`}
+                    to={`/qtvnmsmart/products/edit/${product.id}`}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-amber-50 text-amber-600 rounded-lg"
                   >
                     <EditIcon className="w-4 h-4" />

@@ -81,11 +81,11 @@ const CloseIcon = ({ className }) => (
 
 // ========== NAV ITEMS ==========
 export const adminNavItems = [
-  { to: "/admin/dashboard", icon: DashboardIcon, label: "Dashboard" },
-  { to: "/admin/products", icon: ProductsIcon, label: "Quản lý sản phẩm" },
-  { to: "/admin/orders", icon: OrdersIcon, label: "Quản lý đơn hàng" },
-  { to: "/admin/banners", icon: BannersIcon, label: "Quản lý Banner" },
-  { to: "/admin/blogs", icon: BlogIcon, label: "Quản lý Blog" },
+  { to: "/qtvnmsmart/dashboard", icon: DashboardIcon, label: "Dashboard" },
+  { to: "/qtvnmsmart/products", icon: ProductsIcon, label: "Quản lý sản phẩm" },
+  { to: "/qtvnmsmart/orders", icon: OrdersIcon, label: "Quản lý đơn hàng" },
+  { to: "/qtvnmsmart/banners", icon: BannersIcon, label: "Quản lý Banner" },
+  { to: "/qtvnmsmart/blogs", icon: BlogIcon, label: "Quản lý Blog" },
 ];
 
 // ========== ADMIN LAYOUT COMPONENT ==========
@@ -126,7 +126,7 @@ const AdminLayout = () => {
       });
     }
 
-    navigate("/admin/login");
+    navigate("/qtvnmsmart/login");
   };
 
   // Get current page title
@@ -134,7 +134,7 @@ const AdminLayout = () => {
     const currentItem = adminNavItems.find(
       (item) =>
         location.pathname === item.to ||
-        (item.to !== "/admin/dashboard" && location.pathname.startsWith(item.to))
+        (item.to !== "/qtvnmsmart/dashboard" && location.pathname.startsWith(item.to))
     );
     return currentItem?.label || "Admin Panel";
   };
@@ -143,7 +143,7 @@ const AdminLayout = () => {
   const isNavActive = (item) => {
     return (
       location.pathname === item.to ||
-      (item.to !== "/admin/dashboard" && location.pathname.startsWith(item.to))
+      (item.to !== "/qtvnmsmart/dashboard" && location.pathname.startsWith(item.to))
     );
   };
 
@@ -171,7 +171,7 @@ const AdminLayout = () => {
       >
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-slate-700">
-          <Link to="/admin/dashboard" className="flex items-center gap-3">
+          <Link to="/qtvnmsmart/dashboard" className="flex items-center gap-3">
             <span className="w-9 h-9 bg-gradient-to-br from-primary-500 to-accent rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-lg">🏠</span>
             </span>

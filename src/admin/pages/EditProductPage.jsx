@@ -468,7 +468,7 @@ const EditProductPage = () => {
       toast.success("Thông tin sản phẩm đã được cập nhật.", {
         title: "Cập nhật sản phẩm thành công",
       });
-      navigate("/admin/products");
+      navigate("/qtvnmsmart/products");
     } catch (err) {
       console.error("Error updating product:", err);
       toast.error("Không thể cập nhật sản phẩm lúc này. Vui lòng thử lại.", {
@@ -498,7 +498,7 @@ const EditProductPage = () => {
         </div>
         <h2 className="text-xl font-bold text-slate-800 mb-2">{error}</h2>
         <button
-          onClick={() => navigate("/admin/products")}
+          onClick={() => navigate("/qtvnmsmart/products")}
           className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700"
         >
           Quay lại
@@ -914,7 +914,7 @@ const EditProductPage = () => {
               <>Lưu thay đổi</>
             )}
           </button>
-          <button type="button" onClick={() => navigate("/admin/products")}
+          <button type="button" onClick={() => navigate("/qtvnmsmart/products")}
             className="flex-1 sm:flex-none px-6 py-3 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50">
             Hủy
           </button>

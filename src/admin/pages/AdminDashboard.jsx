@@ -17,9 +17,9 @@ const AdminDashboard = () => {
   ];
 
   const quickActions = [
-    { label: "Thêm sản phẩm", sublabel: "Tạo sản phẩm mới", color: "blue", icon: PlusIcon, path: "/admin/products/add" },
-    { label: "Xem đơn hàng", sublabel: "0 đơn hàng chưa xử lý", color: "green", icon: ListIcon, path: "/admin/orders" },
-    { label: "Quản lý Banner", sublabel: "Cập nhật banners", color: "purple", icon: ImageIcon, path: "/admin/banners" },
+    { label: "Thêm sản phẩm", sublabel: "Tạo sản phẩm mới", color: "blue", icon: PlusIcon, path: "/qtvnmsmart/products/add" },
+    { label: "Xem đơn hàng", sublabel: "0 đơn hàng chưa xử lý", color: "green", icon: ListIcon, path: "/qtvnmsmart/orders" },
+    { label: "Quản lý Banner", sublabel: "Cập nhật banners", color: "purple", icon: ImageIcon, path: "/qtvnmsmart/banners" },
   ];
 
   const colorMap = {

@@ -221,9 +221,15 @@ const AppRoutes = () => {
 
         {/* ADMIN ROUTES */}
 
+        {/* Redirect /admin/* to NotFoundPage */}
+        <Route
+          path="/admin/*"
+          element={<NotFoundPage />}
+        />
+
         {/* Admin Login - Public */}
         <Route
-          path="/admin/login"
+          path="/qtvnmsmart/login"
           element={
             <AdminLoginRoute>
               <AdminLogin />
@@ -231,31 +237,30 @@ const AppRoutes = () => {
           }
         />
 
-    
-{/* Admin Layout - Protected */}
-<Route
-  path="/admin"
-  element={
-    <ProtectedRouteAdmin>
-      <AdminLayout />
-    </ProtectedRouteAdmin>
-  }
->
-  <Route index element={<AdminDashboard />} />
+        {/* Admin Layout - Protected */}
+        <Route
+          path="/qtvnmsmart"
+          element={
+            <ProtectedRouteAdmin>
+              <AdminLayout />
+            </ProtectedRouteAdmin>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
 
-  <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
 
-  <Route path="products" element={<AdminProductsPage />} />
-  <Route path="products/add" element={<AddProductPage />} />
-  <Route path="products/edit/:id" element={<EditProductPage />} />
+          <Route path="products" element={<AdminProductsPage />} />
+          <Route path="products/add" element={<AddProductPage />} />
+          <Route path="products/edit/:id" element={<EditProductPage />} />
 
-  <Route path="orders" element={<AdminOrdersPage />} />
-  <Route path="banners" element={<AdminBannersPage />} />
+          <Route path="orders" element={<AdminOrdersPage />} />
+          <Route path="banners" element={<AdminBannersPage />} />
 
-  <Route path="blogs" element={<AdminBlogListPage />} />
-  <Route path="blogs/add" element={<AdminBlogFormPage />} />
-  <Route path="blogs/edit/:id" element={<AdminBlogFormPage />} />
-</Route>
+          <Route path="blogs" element={<AdminBlogListPage />} />
+          <Route path="blogs/add" element={<AdminBlogFormPage />} />
+          <Route path="blogs/edit/:id" element={<AdminBlogFormPage />} />
+        </Route>
 
         {/* 404 - Not Found */}
         <Route
