@@ -138,6 +138,12 @@ const Navbar = () => {
             >
               Giải pháp
             </Link>
+                        <Link
+              to="/contact"
+              className={`menu-item ${isActive("/contact") ? "active" : ""}`}
+            >
+              Liên hệ
+            </Link>
           </div>
 
           {/* Search Bar */}

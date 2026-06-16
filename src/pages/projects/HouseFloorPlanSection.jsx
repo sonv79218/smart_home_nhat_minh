@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   DoorOpen,
@@ -26,7 +26,419 @@ import {
   Footprints,
   Droplets,
   Sun,
+  Camera,
+  Lock,
+  Plug,
+  Wind,
+  Eye,
+  Bell,
+  ShieldAlert,
+  Waves,
+  TreesIcon as TreeIcon,
+  LampDesk,
+  Speaker,
+  Timer,
+  AlertTriangle,
+  Fingerprint,
+  Signal,
+  Thermometer,
+  Compass,
+  Radio,
 } from "lucide-react";
+
+// ============================================
+// ROOM VISUALIZATION DATA
+// Mỗi khu vực có sơ đồ, vị trí thiết bị, marker
+// ============================================
+const ROOM_DIAGRAMS = {
+  // === NHÀ Ở ===
+  "cong-san-truoc": {
+    name: "Cổng / Sân trước",
+    diagram: "gate",
+    devices: [
+      { id: "cam1", name: "Camera AI", position: { x: 20, y: 30 }, icon: Camera, color: "red" },
+      { id: "bell1", name: "Chuông cửa", position: { x: 50, y: 50 }, icon: Bell, color: "blue" },
+      { id: "lock1", name: "Khóa tự động", position: { x: 75, y: 40 }, icon: Lock, color: "green" },
+      { id: "pir1", name: "Cảm biến chuyển động", position: { x: 50, y: 80 }, icon: Eye, color: "amber" },
+    ],
+    suggestedProducts: [
+      { name: "Camera G3 4K AI", brand: "Aqara", price: "2.990.000đ" },
+      { name: "Chuông video G4", brand: "Aqara", price: "1.890.000đ" },
+      { name: "Khóa N100", brand: "Aqara", price: "4.990.000đ" },
+    ],
+  },
+  "phong-khach": {
+    name: "Phòng khách",
+    diagram: "living",
+    devices: [
+      { id: "sw1", name: "Công tắc", position: { x: 10, y: 50 }, icon: Plug, color: "blue" },
+      { id: "light1", name: "Đèn thông minh", position: { x: 30, y: 20 }, icon: Lightbulb, color: "amber" },
+      { id: "blinds1", name: "Rèm thông minh", position: { x: 50, y: 10 }, icon: LayoutGrid, color: "violet" },
+      { id: "pir2", name: "Cảm biến hiện diện", position: { x: 70, y: 60 }, icon: Eye, color: "green" },
+      { id: "ac1", name: "Điều hòa", position: { x: 85, y: 25 }, icon: Wind, color: "cyan" },
+    ],
+    suggestedProducts: [
+      { name: "Công tắc H1M", brand: "Aqara", price: "690.000đ" },
+      { name: "Đèn T1M", brand: "Aqara", price: "890.000đ" },
+      { name: "MTR-H1", brand: "Aqara", price: "1.290.000đ" },
+    ],
+  },
+  "bep": {
+    name: "Bếp",
+    diagram: "kitchen",
+    devices: [
+      { id: "smoke1", name: "Cảm biến khói", position: { x: 20, y: 15 }, icon: AlertTriangle, color: "red" },
+      { id: "gas1", name: "Cảm biến gas", position: { x: 40, y: 15 }, icon: AlertTriangle, color: "orange" },
+      { id: "plug1", name: "Ổ cắm thông minh", position: { x: 60, y: 60 }, icon: Plug, color: "blue" },
+      { id: "cam2", name: "Camera", position: { x: 80, y: 30 }, icon: Camera, color: "red" },
+      { id: "pir3", name: "Cảm biến", position: { x: 30, y: 70 }, icon: Eye, color: "green" },
+    ],
+    suggestedProducts: [
+      { name: "Cảm biến khói T1", brand: "Aqara", price: "590.000đ" },
+      { name: "Cảm biến gas", brand: "Aqara", price: "890.000đ" },
+      { name: "Camera G3", brand: "Aqara", price: "1.490.000đ" },
+    ],
+  },
+  "phong-ngu": {
+    name: "Phòng ngủ",
+    diagram: "bedroom",
+    devices: [
+      { id: "sw2", name: "Công tắc", position: { x: 10, y: 50 }, icon: Plug, color: "blue" },
+      { id: "light2", name: "Đèn ngủ", position: { x: 35, y: 20 }, icon: Lightbulb, color: "amber" },
+      { id: "blinds2", name: "Rèm", position: { x: 55, y: 10 }, icon: LayoutGrid, color: "violet" },
+      { id: "ac2", name: "Điều hòa", position: { x: 80, y: 25 }, icon: Thermometer, color: "cyan" },
+      { id: "pir4", name: "Cảm biến hiện diện", position: { x: 65, y: 70 }, icon: Eye, color: "green" },
+    ],
+    suggestedProducts: [
+      { name: "Công tắc H1M", brand: "Aqara", price: "690.000đ" },
+      { name: "Đèn T1M", brand: "Aqara", price: "890.000đ" },
+      { name: "Điều khiển RC2", brand: "Aqara", price: "490.000đ" },
+    ],
+  },
+  "nha-ve-sinh": {
+    name: "Nhà vệ sinh",
+    diagram: "bathroom",
+    devices: [
+      { id: "pir5", name: "Cảm biến hiện diện", position: { x: 25, y: 25 }, icon: Eye, color: "green" },
+      { id: "water1", name: "Cảm biến rò rỉ", position: { x: 50, y: 75 }, icon: Droplets, color: "blue" },
+      { id: "fan1", name: "Quạt thông gió", position: { x: 75, y: 20 }, icon: Wind, color: "cyan" },
+      { id: "plug2", name: "Ổ cắm IP66", position: { x: 50, y: 45 }, icon: Plug, color: "blue" },
+    ],
+    suggestedProducts: [
+      { name: "Cảm biến hiện diện FP2", brand: "Aqara", price: "890.000đ" },
+      { name: "Cảm biến rò rỉ", brand: "Aqara", price: "390.000đ" },
+      { name: "Quạt thông minh", brand: "Hunonic", price: "650.000đ" },
+    ],
+  },
+  "ban-cong-san-thuong": {
+    name: "Ban công / Sân thượng",
+    diagram: "balcony",
+    devices: [
+      { id: "water2", name: "Tưới tự động", position: { x: 20, y: 60 }, icon: Waves, color: "blue" },
+      { id: "cam3", name: "Camera ngoài trời", position: { x: 50, y: 20 }, icon: Camera, color: "red" },
+      { id: "light3", name: "Đèn sân", position: { x: 75, y: 50 }, icon: Lightbulb, color: "amber" },
+      { id: "pir6", name: "Cảm biến ánh sáng", position: { x: 35, y: 80 }, icon: Sun, color: "yellow" },
+    ],
+    suggestedProducts: [
+      { name: "Camera G3 HomeKit", brand: "Aqara", price: "1.990.000đ" },
+      { name: "Đèn LED RGB", brand: "Hunonic", price: "450.000đ" },
+      { name: "Van tưới thông minh", brand: "Hunonic", price: "1.200.000đ" },
+    ],
+  },
+
+  // === BIỆT THỰ ===
+  "cong": {
+    name: "Cổng chính",
+    diagram: "gate",
+    devices: [
+      { id: "cam4", name: "Camera AI", position: { x: 15, y: 30 }, icon: Camera, color: "red" },
+      { id: "face1", name: "Nhận diện khuôn mặt", position: { x: 35, y: 30 }, icon: Eye, color: "red" },
+      { id: "bell2", name: "Chuông video", position: { x: 55, y: 50 }, icon: Bell, color: "blue" },
+      { id: "lock2", name: "Khóa cổng", position: { x: 75, y: 50 }, icon: Lock, color: "green" },
+      { id: "pir7", name: "Cảm biến", position: { x: 50, y: 80 }, icon: Eye, color: "amber" },
+    ],
+    suggestedProducts: [
+      { name: "Camera G3 4K AI", brand: "Aqara", price: "2.990.000đ" },
+      { name: "Chuông Video Doorbell", brand: "Aqara", price: "2.490.000đ" },
+      { name: "Khóa thông minh U200", brand: "Aqara", price: "6.990.000đ" },
+    ],
+  },
+  "san-vuon": {
+    name: "Sân vườn",
+    diagram: "garden",
+    devices: [
+      { id: "water3", name: "Tưới tự động", position: { x: 20, y: 50 }, icon: Waves, color: "blue" },
+      { id: "light4", name: "Đèn sân vườn", position: { x: 45, y: 25 }, icon: Lightbulb, color: "amber" },
+      { id: "cam5", name: "Camera ngoài trời", position: { x: 70, y: 30 }, icon: Camera, color: "red" },
+      { id: "soil1", name: "Cảm biến độ ẩm đất", position: { x: 35, y: 75 }, icon: Droplets, color: "green" },
+    ],
+    suggestedProducts: [
+      { name: "Hệ thống tưới thông minh", brand: "Hunonic", price: "3.500.000đ" },
+      { name: "Camera G3 IP67", brand: "Aqara", price: "2.490.000đ" },
+      { name: "Đèn ngoài trời RGB", brand: "Hunonic", price: "890.000đ" },
+    ],
+  },
+  "gara": {
+    name: "Gara ô tô",
+    diagram: "garage",
+    devices: [
+      { id: "cam6", name: "Camera giám sát", position: { x: 20, y: 25 }, icon: Camera, color: "red" },
+      { id: "pir8", name: "Cảm biến chuyển động", position: { x: 45, y: 25 }, icon: Eye, color: "amber" },
+      { id: "light5", name: "Đèn tự động", position: { x: 70, y: 25 }, icon: Lightbulb, color: "amber" },
+      { id: "door1", name: "Cửa garage", position: { x: 50, y: 70 }, icon: DoorOpen, color: "slate" },
+    ],
+    suggestedProducts: [
+      { name: "Camera G3 4K", brand: "Aqara", price: "2.990.000đ" },
+      { name: "Cảm biến P1", brand: "Aqara", price: "490.000đ" },
+      { name: "Bộ điều khiển cửa", brand: "Hunonic", price: "2.100.000đ" },
+    ],
+  },
+  "phong-ngu-chinh": {
+    name: "Phòng ngủ chính",
+    diagram: "bedroom",
+    devices: [
+      { id: "sw3", name: "Công tắc cảm ứng", position: { x: 10, y: 50 }, icon: Plug, color: "blue" },
+      { id: "light6", name: "Đèn ngủ dim", position: { x: 30, y: 20 }, icon: Lightbulb, color: "amber" },
+      { id: "blinds3", name: "Rèm tự động", position: { x: 50, y: 10 }, icon: LayoutGrid, color: "violet" },
+      { id: "ac3", name: "Điều hòa thông minh", position: { x: 80, y: 25 }, icon: Thermometer, color: "cyan" },
+      { id: "speaker1", name: "Loa thông minh", position: { x: 65, y: 70 }, icon: Speaker, color: "indigo" },
+    ],
+    suggestedProducts: [
+      { name: "Công tắc H1 Pro", brand: "Aqara", price: "890.000đ" },
+      { name: "Đèn LED T1M", brand: "Aqara", price: "990.000đ" },
+      { name: "Điều khiển S1 Plus", brand: "Aqara", price: "1.690.000đ" },
+    ],
+  },
+  "san-thuong": {
+    name: "Sân thượng",
+    diagram: "rooftop",
+    devices: [
+      { id: "cam7", name: "Camera 360", position: { x: 25, y: 25 }, icon: Camera, color: "red" },
+      { id: "light7", name: "Đèn thông minh", position: { x: 50, y: 20 }, icon: Lightbulb, color: "amber" },
+      { id: "rain1", name: "Cảm biến mưa", position: { x: 75, y: 30 }, icon: AlertTriangle, color: "blue" },
+      { id: "water4", name: "Tưới tự động", position: { x: 35, y: 65 }, icon: Waves, color: "green" },
+      { id: "pir9", name: "Cảm biến chuyển động", position: { x: 65, y: 65 }, icon: Eye, color: "amber" },
+    ],
+    suggestedProducts: [
+      { name: "Camera G3 360", brand: "Aqara", price: "2.990.000đ" },
+      { name: "Cảm biến thời tiết", brand: "Aqara", price: "790.000đ" },
+      { name: "Van tưới thông minh", brand: "Hunonic", price: "1.200.000đ" },
+    ],
+  },
+
+  // === CĂN HỘ ===
+  "cua-chinh": {
+    name: "Cửa chính",
+    diagram: "door",
+    devices: [
+      { id: "lock3", name: "Khóa vân tay", position: { x: 50, y: 50 }, icon: Fingerprint, color: "green" },
+      { id: "sensor1", name: "Cảm biến cửa", position: { x: 30, y: 30 }, icon: Eye, color: "blue" },
+      { id: "cam8", name: "Camera trong nhà", position: { x: 70, y: 30 }, icon: Camera, color: "red" },
+      { id: "bell3", name: "Chuông cửa", position: { x: 50, y: 80 }, icon: Bell, color: "blue" },
+    ],
+    suggestedProducts: [
+      { name: "Khóa N100", brand: "Aqara", price: "4.990.000đ" },
+      { name: "Cảm biến cửa P2", brand: "Aqara", price: "390.000đ" },
+      { name: "Camera G3", brand: "Aqara", price: "1.490.000đ" },
+    ],
+  },
+
+  // Default for other areas
+  default: {
+    name: "Khu vực",
+    diagram: "default",
+    devices: [
+      { id: "dev1", name: "Thiết bị 1", position: { x: 30, y: 40 }, icon: Plug, color: "blue" },
+      { id: "dev2", name: "Thiết bị 2", position: { x: 60, y: 40 }, icon: Lightbulb, color: "amber" },
+    ],
+    suggestedProducts: [],
+  },
+};
+
+// Device color mapping
+const DEVICE_COLORS = {
+  red: { bg: "bg-red-100", border: "border-red-300", icon: "text-red-600", dot: "bg-red-500" },
+  blue: { bg: "bg-blue-100", border: "border-blue-300", icon: "text-blue-600", dot: "bg-blue-500" },
+  green: { bg: "bg-green-100", border: "border-green-300", icon: "text-green-600", dot: "bg-green-500" },
+  amber: { bg: "bg-amber-100", border: "border-amber-300", icon: "text-amber-600", dot: "bg-amber-500" },
+  violet: { bg: "bg-violet-100", border: "border-violet-300", icon: "text-violet-600", dot: "bg-violet-500" },
+  cyan: { bg: "bg-cyan-100", border: "border-cyan-300", icon: "text-cyan-600", dot: "bg-cyan-500" },
+  indigo: { bg: "bg-indigo-100", border: "border-indigo-300", icon: "text-indigo-600", dot: "bg-indigo-500" },
+  slate: { bg: "bg-slate-100", border: "border-slate-300", icon: "text-slate-600", dot: "bg-slate-500" },
+};
+
+// ============================================
+// ROOM DIAGRAM SVG COMPONENT
+// Sơ đồ minh họa khu vực với markers thiết bị
+// ============================================
+const RoomDiagram = ({ areaId, devices, isAnimating }) => {
+  const diagramData = ROOM_DIAGRAMS[areaId] || ROOM_DIAGRAMS.default;
+
+  return (
+    <div className={`
+      relative w-full aspect-[4/3] rounded-2xl overflow-hidden
+      bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200
+      transition-all duration-300
+      ${isAnimating ? "opacity-0 scale-95" : "opacity-100 scale-100"}
+    `}>
+      {/* Room Background SVG */}
+      <svg
+        viewBox="0 0 200 150"
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {/* Room outline */}
+        <rect x="10" y="10" width="180" height="130" rx="8" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="2" />
+        
+        {/* Floor pattern */}
+        <pattern id="floor" patternUnits="userSpaceOnUse" width="20" height="20">
+          <rect width="20" height="20" fill="#f8fafc" />
+          <rect width="1" height="1" x="0" y="0" fill="#f1f5f9" />
+        </pattern>
+        <rect x="10" y="10" width="180" height="130" rx="8" fill="url(#floor)" />
+        
+        {/* Room-specific decorations */}
+        {diagramData.diagram === "gate" && (
+          <>
+            <rect x="70" y="50" width="60" height="50" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <line x1="100" y1="50" x2="100" y2="100" stroke="#cbd5e1" strokeWidth="1" />
+            <circle cx="120" cy="75" r="3" fill="#94a3b8" />
+          </>
+        )}
+        {diagramData.diagram === "living" && (
+          <>
+            <rect x="60" y="80" width="80" height="35" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <rect x="80" y="85" width="40" height="15" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <rect x="30" y="50" width="25" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <rect x="145" y="50" width="25" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+          </>
+        )}
+        {diagramData.diagram === "bedroom" && (
+          <>
+            <rect x="50" y="60" width="100" height="50" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <rect x="70" y="70" width="60" height="30" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <rect x="30" y="30" width="40" height="25" rx="2" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+          </>
+        )}
+        {diagramData.diagram === "kitchen" && (
+          <>
+            <rect x="40" y="60" width="120" height="50" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <rect x="50" y="70" width="40" height="30" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <rect x="110" y="70" width="40" height="30" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <circle cx="70" cy="55" r="10" fill="none" stroke="#fca5a5" strokeWidth="1.5" strokeDasharray="2,2" />
+          </>
+        )}
+        {diagramData.diagram === "bathroom" && (
+          <>
+            <rect x="60" y="50" width="80" height="60" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <ellipse cx="100" cy="90" rx="20" ry="12" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <rect x="125" y="60" width="15" height="25" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+          </>
+        )}
+        {diagramData.diagram === "balcony" && (
+          <>
+            <rect x="10" y="10" width="180" height="130" rx="8" fill="none" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="4,4" />
+            <circle cx="100" cy="75" r="30" fill="#f0fdf4" stroke="#86efac" strokeWidth="1" />
+            <path d="M100 60 L100 90 M85 75 L100 60 L115 75" fill="none" stroke="#86efac" strokeWidth="2" />
+          </>
+        )}
+        {diagramData.diagram === "garage" && (
+          <>
+            <rect x="30" y="40" width="140" height="80" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <rect x="50" y="60" width="50" height="40" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <path d="M50 60 L80 90 M100 60 L100 90" fill="none" stroke="#cbd5e1" strokeWidth="1" />
+          </>
+        )}
+        {diagramData.diagram === "garden" && (
+          <>
+            <circle cx="60" cy="90" r="20" fill="#f0fdf4" stroke="#86efac" strokeWidth="1" />
+            <circle cx="60" cy="90" r="8" fill="#86efac" />
+            <circle cx="140" cy="80" r="25" fill="#f0fdf4" stroke="#86efac" strokeWidth="1" />
+            <circle cx="140" cy="80" r="10" fill="#86efac" />
+            <path d="M30 130 Q60 100 90 130 Q120 100 170 130" fill="none" stroke="#86efac" strokeWidth="1" />
+          </>
+        )}
+        {diagramData.diagram === "rooftop" && (
+          <>
+            <rect x="10" y="10" width="180" height="130" rx="8" fill="none" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="4,4" />
+            <rect x="60" y="60" width="80" height="50" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+            <path d="M50 50 L100 30 L150 50" fill="none" stroke="#e2e8f0" strokeWidth="2" />
+          </>
+        )}
+        {diagramData.diagram === "door" && (
+          <>
+            <rect x="50" y="20" width="100" height="110" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
+            <rect x="60" y="30" width="80" height="90" rx="2" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1" />
+            <circle cx="130" cy="75" r="5" fill="#94a3b8" />
+            <rect x="95" y="60" width="10" height="30" rx="2" fill="#cbd5e1" stroke="#94a3b8" strokeWidth="1" />
+          </>
+        )}
+        {diagramData.diagram === "default" && (
+          <>
+            <rect x="40" y="40" width="120" height="70" rx="4" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5" />
+          </>
+        )}
+      </svg>
+
+      {/* Device Markers */}
+      {diagramData.devices.map((device, idx) => {
+        const colors = DEVICE_COLORS[device.color] || DEVICE_COLORS.blue;
+        const Icon = device.icon;
+        return (
+          <div
+            key={device.id}
+            className={`
+              absolute flex flex-col items-center
+              transform -translate-x-1/2 -translate-y-1/2
+              transition-all duration-300
+              ${isAnimating ? "opacity-0 scale-50" : "opacity-100 scale-100"}
+            `}
+            style={{
+              left: `${device.position.x}%`,
+              top: `${device.position.y}%`,
+              transitionDelay: `${idx * 50}ms`,
+            }}
+          >
+            {/* Marker dot with pulse effect */}
+            <div className="relative">
+              <div className={`absolute inset-0 w-8 h-8 ${colors.bg} rounded-full animate-ping opacity-50`} />
+              <div className={`relative w-8 h-8 ${colors.bg} border-2 ${colors.border} rounded-full flex items-center justify-center shadow-sm`}>
+                <Icon size={14} className={colors.icon} />
+              </div>
+            </div>
+            {/* Label */}
+            <div className={`
+              mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold whitespace-nowrap
+              ${colors.bg} ${colors.icon}
+              shadow-sm
+            `}>
+              {device.name}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ============================================
+// DEVICE CARD COMPONENT
+// Card hiển thị thiết bị đề xuất
+// ============================================
+const DeviceCard = ({ name, brand, price }) => (
+  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-all duration-200 cursor-pointer group">
+    <div className="flex items-center gap-3">
+      <div className="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center">
+        <Plug size={14} className="text-primary-600" />
+      </div>
+      <div>
+        <p className="text-xs font-semibold text-slate-800 group-hover:text-primary-700">{name}</p>
+        <p className="text-[10px] text-slate-400">{brand}</p>
+      </div>
+    </div>
+    <span className="text-xs font-bold text-primary-600">{price}</span>
+  </div>
+);
 
 // ============================================
 // DATA THEO TỪNG LOẠI CÔNG TRÌNH
@@ -1340,15 +1752,26 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
   const areas = currentData.areas;
 
   // Initialize selected with first area's id
-  const [selected, setSelected] = useState(() => areas[0]?.id || null);
+  const [selectedAreaId, setSelectedAreaId] = useState(() => areas[0]?.id || null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [displayType, setDisplayType] = useState(activeType);
+  const [isAreaSwitching, setIsAreaSwitching] = useState(false);
 
   // Get active area data from displayType
   const displayData = FLOOR_PLAN_DATA[displayType] || FLOOR_PLAN_DATA["nha-o"];
   const displayAreas = displayData.areas;
-  const activeArea = displayAreas.find((a) => a.id === selected);
+  const activeArea = displayAreas.find((a) => a.id === selectedAreaId);
   const colors = COLOR_MAP[activeArea?.color] || COLOR_MAP.emerald;
+
+  // Handle area selection with animation
+  const handleAreaSelect = (areaId) => {
+    if (areaId === selectedAreaId) return;
+    setIsAreaSwitching(true);
+    setTimeout(() => {
+      setSelectedAreaId(areaId);
+      setIsAreaSwitching(false);
+    }, 200);
+  };
 
   // Reset when type changes
   useEffect(() => {
@@ -1356,7 +1779,7 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
       setIsAnimating(true);
       const timer = setTimeout(() => {
         setDisplayType(activeType);
-        setSelected(areas[0]?.id || null);
+        setSelectedAreaId(areas[0]?.id || null);
         setIsAnimating(false);
       }, 150);
       return () => clearTimeout(timer);
@@ -1460,7 +1883,7 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
                     ];
 
                     const pos = positions[idx] || { top: "30%", left: "30%", width: "20%", height: "20%" };
-                    const isActive = selected === area.id;
+                    const isActive = selectedAreaId === area.id;
                     const col = COLOR_MAP[area.color] || COLOR_MAP.emerald;
                     const Icon = area.icon;
 
@@ -1468,13 +1891,13 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
                       <button
                         key={area.id}
                         type="button"
-                        onClick={() => setSelected(area.id)}
+                        onClick={() => handleAreaSelect(area.id)}
                         className={`
                           absolute pointer-events-auto
                           flex flex-col items-center justify-center gap-1
                           rounded-xl border-2 transition-all duration-200 cursor-pointer
                           ${isActive
-                            ? `${col.activeBg} border-current ${col.activeText} shadow-md`
+                            ? `${col.activeBg} border-current ${col.activeText} shadow-md scale-110 z-10`
                             : "bg-white/70 border-slate-300 text-slate-500 hover:border-slate-400 hover:bg-white"
                           }
                         `}
@@ -1518,6 +1941,8 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
                 px-6 md:px-8 py-5 md:py-6
                 bg-gradient-to-r ${colors.active} to-white
                 flex items-center gap-4
+                transition-all duration-300
+                ${isAreaSwitching ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}
               `}>
                 <div className={`
                   w-12 h-12 md:w-14 md:h-14 rounded-2xl
@@ -1538,22 +1963,67 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
               </div>
 
               {/* Panel Body */}
-              <div className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
+              <div className="flex-1 p-5 md:p-6 space-y-5 overflow-y-auto">
+
+                {/* Room Diagram Visualization */}
+                <div className={`
+                  transition-all duration-300
+                  ${isAreaSwitching ? "opacity-0 scale-95" : "opacity-100 scale-100"}
+                `}>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                    Sơ đồ vị trí thiết bị
+                  </h4>
+                  <RoomDiagram 
+                    areaId={activeArea.id} 
+                    devices={activeArea.devices}
+                    isAnimating={isAreaSwitching}
+                  />
+                </div>
+
+                {/* Suggested Products */}
+                {(() => {
+                  const roomData = ROOM_DIAGRAMS[activeArea.id] || ROOM_DIAGRAMS.default;
+                  if (!roomData.suggestedProducts || roomData.suggestedProducts.length === 0) return null;
+                  return (
+                    <div className={`
+                      transition-all duration-300
+                      ${isAreaSwitching ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}
+                    `}>
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                        Thiết bị đề xuất
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                        {roomData.suggestedProducts.map((product, idx) => (
+                          <DeviceCard
+                            key={idx}
+                            name={product.name}
+                            brand={product.brand}
+                            price={product.price}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
 
                 {/* Vấn đề thường gặp */}
-                <div className="rounded-2xl bg-red-50 border border-red-100 p-5">
-                  <h4 className="flex items-center gap-2 font-black text-red-600 text-sm mb-4">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0">
+                <div className={`
+                  rounded-2xl bg-red-50 border border-red-100 p-4
+                  transition-all duration-300
+                  ${isAreaSwitching ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}
+                `}>
+                  <h4 className="flex items-center gap-2 font-black text-red-600 text-sm mb-3">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0">
                       <circle cx="12" cy="12" r="10" />
                       <line x1="12" y1="8" x2="12" y2="12" />
                       <line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
                     Vấn đề thường gặp
                   </h4>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-2">
                     {activeArea.problems.map((p, idx) => (
-                      <li key={idx} className="flex gap-3 text-sm text-slate-700">
-                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                      <li key={idx} className="flex gap-2 text-xs text-slate-700">
+                        <span className="mt-1 w-1 h-1 rounded-full bg-red-400 shrink-0" />
                         {p}
                       </li>
                     ))}
@@ -1561,15 +2031,19 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
                 </div>
 
                 {/* Thiết bị đề xuất */}
-                <div className="rounded-2xl bg-blue-50 border border-blue-100 p-5">
-                  <h4 className="flex items-center gap-2 font-black text-blue-700 text-sm mb-4">
-                    <Smartphone size={15} className="shrink-0" />
-                    Thiết bị đề xuất
+                <div className={`
+                  rounded-2xl bg-blue-50 border border-blue-100 p-4
+                  transition-all duration-300
+                  ${isAreaSwitching ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}
+                `}>
+                  <h4 className="flex items-center gap-2 font-black text-blue-700 text-sm mb-3">
+                    <Smartphone size={13} className="shrink-0" />
+                    Thiết bị phù hợp
                   </h4>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-2">
                     {activeArea.devices.map((d, idx) => (
-                      <li key={idx} className="flex gap-3 text-sm text-slate-700">
-                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
+                      <li key={idx} className="flex gap-2 text-xs text-slate-700">
+                        <span className="mt-1 w-1 h-1 rounded-full bg-blue-400 shrink-0" />
                         {d}
                       </li>
                     ))}
@@ -1577,15 +2051,19 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
                 </div>
 
                 {/* Lợi ích */}
-                <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-5">
-                  <h4 className="flex items-center gap-2 font-black text-emerald-700 text-sm mb-4">
-                    <Zap size={15} className="shrink-0" />
+                <div className={`
+                  rounded-2xl bg-emerald-50 border border-emerald-100 p-4
+                  transition-all duration-300
+                  ${isAreaSwitching ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}
+                `}>
+                  <h4 className="flex items-center gap-2 font-black text-emerald-700 text-sm mb-3">
+                    <Zap size={13} className="shrink-0" />
                     Lợi ích sau khi lắp
                   </h4>
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-2">
                     {activeArea.benefits.map((b, idx) => (
-                      <li key={idx} className="flex gap-3 text-sm text-slate-700">
-                        <CheckCircle2 size={16} className={`${colors.activeIcon} shrink-0 mt-0.5`} />
+                      <li key={idx} className="flex gap-2 text-xs text-slate-700">
+                        <CheckCircle2 size={14} className={`${colors.activeIcon} shrink-0 mt-0.5`} />
                         {b}
                       </li>
                     ))}
@@ -1595,22 +2073,22 @@ const HouseFloorPlanSection = ({ activeType = "nha-o" }) => {
               </div>
 
               {/* Panel Footer: CTA */}
-              <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2">
+              <div className="px-5 md:px-6 pb-5 md:pb-6 pt-2">
                 <Link
                   to="/contact"
                   className={`
                     w-full flex items-center justify-center gap-2
-                    px-6 py-3.5 md:py-4 rounded-2xl
-                    font-bold text-base
+                    px-5 py-3.5 md:py-4 rounded-2xl
+                    font-bold text-sm md:text-base
                     bg-gradient-to-r ${colors.active} text-white
                     shadow-lg hover:shadow-xl
                     hover:brightness-105 active:brightness-95
                     transition-all duration-200
                   `}
                 >
-                  <Lightbulb size={18} strokeWidth={2.2} />
+                  <Lightbulb size={16} strokeWidth={2.2} />
                   Tư vấn khu vực này
-                  <ArrowRight size={17} strokeWidth={2.5} />
+                  <ArrowRight size={15} strokeWidth={2.5} />
                 </Link>
               </div>
 

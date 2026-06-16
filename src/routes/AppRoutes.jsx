@@ -17,6 +17,7 @@ import CartPage from "../features/cart/pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import AboutPage from "../pages/AboutPage";
 import PolicyPage from "../pages/PolicyPage";
+import ContactPage from "../pages/ContactPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
 // Blog Pages
@@ -44,6 +45,7 @@ import AdminDashboard from "../admin/pages/AdminDashboard";
 
 // Protected Route
 import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
+
 
 const AppRoutes = () => {
   return (
@@ -100,7 +102,7 @@ const AppRoutes = () => {
           path="/about"
           element={
             <MainLayout>
-              <AboutPage />
+              <AboutPage/>
             </MainLayout>
           }
         />
@@ -110,6 +112,15 @@ const AppRoutes = () => {
           element={
             <MainLayout>
               <PolicyPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
+            <MainLayout>
+              <ContactPage />
             </MainLayout>
           }
         />

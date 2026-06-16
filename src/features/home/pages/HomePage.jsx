@@ -7,7 +7,6 @@ import { getFeaturedProducts, getProductsByCategory } from "@/services/productSe
 import { getCategories } from "@/services/categoryService";
 import { getActiveBanners } from "@/services/bannerService";
 import { getActiveSolutions } from "@/services/solutionService";
-import { companyInfo, companySocial } from "@/data/company";
 import { useApp } from "@/contexts/AppContext";
 import OfflineNotice from "@/components/common/OfflineNotice";
 
@@ -20,8 +19,6 @@ import {
   CategoryGridSection,
   CategoryProductSection,
   EcosystemSection,
-  AboutSection,
-  ContactSection,
   SolutionSection,
   CategorySidebar,
   SidebarSkeleton,
@@ -256,26 +253,10 @@ const HomePage = () => {
         })}
       </div>
 
-      {/* ============================================ */}
-      {/* ABOUT SECTION */}
-      {/* ============================================ */}
-      <SectionDivider />
-      <AboutSection companyInfo={companyInfo} />
-
-      {/* ============================================ */}
       {/* FEATURES BAR */}
       {/* ============================================ */}
       <SectionDivider />
       {/* <FeaturesBar /> */}
-
-      {/* ============================================ */}
-      {/* CONTACT SECTION */}
-      {/* ============================================ */}
-      <SectionDivider />
-      <ContactSection
-        companyInfo={companyInfo}
-        companySocial={companySocial}
-      />
     </div>
   );
 };

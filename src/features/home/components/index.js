@@ -29,7 +29,6 @@ export { default as EcosystemMobileTabs } from "./ecosystem/EcosystemMobileTabs"
 export { default as EcosystemComparisonTable } from "./ecosystem/EcosystemComparisonTable";
 
 // About & Contact components
-export { default as AboutSection } from "./about/AboutSection";
 export { default as ContactSection } from "./contact/ContactSection";
 
 // Common components
