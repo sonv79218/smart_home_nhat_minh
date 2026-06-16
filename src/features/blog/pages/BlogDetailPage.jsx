@@ -7,11 +7,13 @@ import {
   ArrowLeft,
   Tag,
   Lightbulb,
+  Clock,
 } from "lucide-react";
 import TableOfContents from "@/features/blog/components/TableOfContents";
 import BlogContentRenderer from "@/features/blog/components/BlogContentRenderer";
 import BlogCard from "@/features/blog/components/BlogCard";
-import { getBlogBySlug, getRelatedBlogs, extractHeadings, formatDate } from "@/features/blog/services/blogService";
+import SidebarBlog from "@/features/blog/components/SidebarBlog";
+import { getBlogBySlug, getRelatedBlogs, extractHeadings, formatDate, calculateReadingTime } from "@/features/blog/services/blogService";
 
 const TYPE_COLORS = {
   solution: "bg-emerald-100 text-emerald-700 border-emerald-200",
@@ -21,10 +23,10 @@ const TYPE_COLORS = {
 };
 
 const TYPE_LABELS = {
-  solution: "Giai phap",
-  project: "Cong trinh",
-  guide: "Huong dan",
-  blog: "Bai viet",
+  solution: "Giải pháp",
+  project: "Công trình",
+  guide: "Hướng dẫn",
+  blog: "Bài viết",
 };
 
 const CATEGORY_COLORS = {
@@ -46,6 +48,7 @@ const BlogDetailPage = () => {
   const navigate = useNavigate();
   const [blog, setBlog] = useState(null);
   const [related, setRelated] = useState([]);
+  const [recentPosts, setRecentPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -63,6 +66,7 @@ const BlogDetailPage = () => {
 
         const relatedData = await getRelatedBlogs(data, 3);
         setRelated(relatedData);
+        setRecentPosts(relatedData);
       } catch (err) {
         console.error("Error fetching blog:", err);
         setNotFound(true);
@@ -76,18 +80,18 @@ const BlogDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin" />
           <p className="text-slate-500 text-sm">Đang tải bài viết...</p>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (notFound || !blog) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center px-5">
+      <main className="min-h-screen flex flex-col items-center justify-center text-center px-5 bg-white">
         <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-6">
           <svg
             width="40"
@@ -112,12 +116,13 @@ const BlogDetailPage = () => {
           <ArrowLeft size={16} />
           Quay lại danh sách
         </Link>
-      </div>
+      </main>
     );
   }
 
   const catColor = CATEGORY_COLORS[blog.category] || "bg-slate-100 text-slate-600 border-slate-200";
   const headings = extractHeadings(blog.content || blog.contentBlocks || []);
+  const readingTime = calculateReadingTime(blog.content || blog.contentBlocks || []);
   const getBlogPath = (type) => {
     if (type === "guide") return "/guides";
     if (type === "solution") return "/solutions";
@@ -125,10 +130,10 @@ const BlogDetailPage = () => {
     return "/blogs";
   };
   const getTypeLabel = (type) => {
-    if (type === "guide") return "Huong dan";
-    if (type === "solution") return "Giai phap";
-    if (type === "project") return "Cong trinh";
-    return "Tu van";
+    if (type === "guide") return "Hướng dẫn";
+    if (type === "solution") return "Giải pháp";
+    if (type === "project") return "Công trình";
+    return "Bài viết";
   };
   const blogListPath = getBlogPath(blog.type);
 
@@ -136,7 +141,7 @@ const BlogDetailPage = () => {
     <main className="bg-white min-h-screen">
       {/* ─── Breadcrumb ─── */}
       <div className="border-b border-slate-100 bg-white">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <nav className="flex items-center gap-1.5 py-3 text-sm text-slate-500">
             <Link to="/" className="hover:text-primary-600 transition-colors">
               Trang chủ
@@ -157,53 +162,68 @@ const BlogDetailPage = () => {
       </div>
 
       {/* ─── Article Layout ─── */}
-      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 py-8 md:py-12">
-        <div className="grid lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_320px] gap-8 xl:gap-12 items-start">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-8 xl:gap-10 items-start">
 
           {/* ─── Left: Main Content ─── */}
           <article>
-            {/* Type badge */}
+            {/* Category + Type badge */}
             <div className="flex flex-wrap items-center gap-2 mb-4">
+              {blog.category && (
+                <span
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border ${catColor}`}
+                >
+                  {blog.category}
+                </span>
+              )}
               <span
                 className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border ${
                   TYPE_COLORS[blog.type] || TYPE_COLORS.blog
                 }`}
               >
                 <Tag size={11} strokeWidth={2.5} />
-                {TYPE_LABELS[blog.type] || "Bai viet"}
+                {TYPE_LABELS[blog.type] || "Bài viết"}
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-4">
+            <h1 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-4">
               {blog.title}
             </h1>
 
             {/* Excerpt */}
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-6">
-              {blog.excerpt}
-            </p>
+            {blog.excerpt && (
+              <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                {blog.excerpt}
+              </p>
+            )}
 
-            {/* Author + Date */}
-            <div className="flex items-center gap-4 pb-6 mb-6 border-b border-slate-100">
+            {/* Author + Date + Reading Time */}
+            <div className="flex flex-wrap items-center gap-4 pb-6 mb-6 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center">
                   <User size={16} className="text-blue-600" />
                 </div>
-                <span className="text-sm font-semibold text-slate-700">{blog.author}</span>
+                <span className="text-sm font-semibold text-slate-700">{blog.author || "Nhật Minh Smart Home"}</span>
               </div>
               <div className="flex items-center gap-1.5 text-sm text-slate-400">
                 <Calendar size={14} strokeWidth={2} />
                 <span>{formatDate(blog.createdAt)}</span>
               </div>
+              {readingTime > 0 && (
+                <div className="flex items-center gap-1.5 text-sm text-slate-400">
+                  <Clock size={14} strokeWidth={2} />
+                  <span>{readingTime} phút đọc</span>
+                </div>
+              )}
             </div>
 
-            {/* Thumbnail */}
-            <div className="rounded-2xl overflow-hidden mb-8 shadow-sm justify-center flex">
+            {/* Thumbnail full width */}
+            <div className="rounded-2xl overflow-hidden mb-8 shadow-sm">
               <img
                 src={blog.thumbnail}
                 alt={blog.title}
-                className="w-full lg:w-[80%] aspect-[2] object-cover "
+                className="w-full aspect-[2] object-cover"
                 onError={(e) => {
                   e.currentTarget.src =
                     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80";
@@ -211,9 +231,9 @@ const BlogDetailPage = () => {
               />
             </div>
 
-            {/* ─── Mobile TOC ─── */}
+            {/* Table of Contents */}
             {headings.length > 2 && (
-              <div className="lg:hidden mb-8">
+              <div className="mb-8">
                 <TableOfContents headings={headings} />
               </div>
             )}
@@ -246,39 +266,13 @@ const BlogDetailPage = () => {
                 className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-primary-600 transition-colors"
               >
                 <ArrowLeft size={15} strokeWidth={2} />
-                Quay lai danh sach {blog.type === "guide" ? "huong dan" : blog.type === "solution" ? "tu van" : blog.type === "project" ? "cong trinh" : "bai viet"}
+                Quay lại danh sách {getTypeLabel(blog.type).toLowerCase()}
               </Link>
             </div>
           </article>
 
           {/* ─── Right: Sidebar ─── */}
-          <aside className="hidden lg:flex flex-col gap-6 sticky top-24">
-
-            {/* Table of Contents */}
-            {headings.length > 2 && (
-              <TableOfContents headings={headings} />
-            )}
-
-            {/* CTA Box */}
-            <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600 to-blue-500 p-6 shadow-lg shadow-blue-200/50 text-white">
-              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                <Lightbulb size={22} strokeWidth={2} className="text-white" />
-              </div>
-              <h3 className="text-lg font-black leading-snug mb-2">
-                Cần tư vấn giải pháp Smart Home?
-              </h3>
-              <p className="text-sm text-blue-100 leading-relaxed mb-5">
-                Liên hệ Nhật Minh Smart Home để được tư vấn miễn phí thiết bị phù hợp với ngôi nhà của bạn.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 bg-white text-blue-700 font-bold text-sm rounded-xl hover:bg-blue-50 transition-colors"
-              >
-                Liên hệ tư vấn ngay
-              </Link>
-            </div>
-
-          </aside>
+          <SidebarBlog recentPosts={recentPosts} />
         </div>
 
         {/* ─── Related Articles ─── */}

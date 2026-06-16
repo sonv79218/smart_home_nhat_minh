@@ -425,3 +425,17 @@ export const formatDate = (dateStr) => {
     year: "numeric",
   });
 };
+
+export const calculateReadingTime = (content) => {
+  if (!content || !Array.isArray(content)) return 0;
+
+  const plainText = content
+    .filter((block) => block.type === "paragraph" || block.type === "heading")
+    .map((block) => block.text || "")
+    .join(" ");
+
+  const words = plainText.trim().split(/\s+/).filter(Boolean).length;
+  const wordsPerMinute = 200;
+  const minutes = Math.max(1, Math.ceil(words / wordsPerMinute));
+  return minutes;
+};

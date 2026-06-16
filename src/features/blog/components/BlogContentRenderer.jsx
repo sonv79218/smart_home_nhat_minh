@@ -1,8 +1,3 @@
-/**
- * Renders rich blog content blocks
- * Supports: heading, paragraph, image, list
- */
-
 const BlogContentRenderer = ({ content }) => {
   if (!content || !Array.isArray(content)) return null;
 
@@ -13,9 +8,9 @@ const BlogContentRenderer = ({ content }) => {
           case "heading": {
             const Tag = `h${block.level || 2}`;
             const headingStyles = {
-              2: "text-2xl md:text-3xl font-black text-slate-900 leading-tight",
-              3: "text-xl md:text-2xl font-bold text-slate-900 leading-snug",
-              4: "text-lg font-bold text-slate-800 leading-snug",
+              2: "text-2xl font-black text-slate-900 leading-tight scroll-mt-24",
+              3: "text-xl font-bold text-slate-900 leading-snug scroll-mt-24",
+              4: "text-lg font-bold text-slate-800 leading-snug scroll-mt-24",
             };
 
             const id = block.text
@@ -47,7 +42,7 @@ const BlogContentRenderer = ({ content }) => {
             return (
               <p
                 key={idx}
-                className="text-base md:text-lg text-slate-700 leading-relaxed md:leading-loose"
+                className="text-base leading-8 text-slate-700"
               >
                 {block.text}
               </p>
@@ -57,19 +52,19 @@ const BlogContentRenderer = ({ content }) => {
             return (
               <figure
                 key={idx}
-                className="rounded-2xl overflow-hidden shadow-sm my-4 flex justify-center"
+                className="rounded-2xl overflow-hidden my-6"
               >
                 <img
                   src={block.src}
                   alt={block.alt || ""}
-                  className="w-full lg:w-[80%] aspect-[2] object-cover"
+                  className="w-full aspect-video object-cover"
                   onError={(e) => {
                     e.currentTarget.src =
                       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80";
                   }}
                 />
                 {block.caption && (
-                  <figcaption className="mt-2 text-sm text-slate-500 text-center italic px-4">
+                  <figcaption className="mt-3 text-sm text-slate-500 text-center italic px-4">
                     {block.caption}
                   </figcaption>
                 )}
@@ -81,15 +76,14 @@ const BlogContentRenderer = ({ content }) => {
             return (
               <ul
                 key={idx}
-                className="space-y-2.5 pl-2"
+                className="space-y-3 pl-5"
               >
                 {block.items.map((item, itemIdx) => (
                   <li
                     key={itemIdx}
-                    className="flex gap-3 text-base text-slate-700 leading-relaxed"
+                    className="relative pl-5 text-base text-slate-700 leading-8 before:content-[''] before:absolute before:left-0 before:top-[14px] before:w-2 before:h-2 before:rounded-full before:bg-blue-400"
                   >
-                    <span className="mt-2.5 w-2 h-2 rounded-full bg-blue-400 shrink-0" />
-                    <span>{item}</span>
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -99,9 +93,9 @@ const BlogContentRenderer = ({ content }) => {
             return (
               <blockquote
                 key={idx}
-                className="border-l-4 border-blue-400 pl-6 py-2 my-2 italic text-slate-600 bg-blue-50 rounded-r-xl"
+                className="border-l-4 border-blue-500 pl-6 py-3 my-6 text-slate-700 bg-slate-50 rounded-r-xl"
               >
-                <p className="text-base">{block.text}</p>
+                <p className="text-base leading-8 italic">{block.text}</p>
                 {block.author && (
                   <footer className="mt-2 text-sm font-semibold text-slate-500 not-italic">
                     — {block.author}
@@ -114,7 +108,7 @@ const BlogContentRenderer = ({ content }) => {
             return (
               <hr
                 key={idx}
-                className="border-slate-200 my-6"
+                className="border-slate-200 my-8"
               />
             );
 
