@@ -145,7 +145,7 @@ const Footer = () => {
       </footer>
 
       {/* MOBILE FOOTER */}
-      <footer className="lg:hidden bg-white text-slate-900 border-t border-slate-200 pb-20">
+      <footer className="lg:hidden bg-white text-slate-900 border-t border-slate-200">
         <div className="divide-y divide-slate-200">
           {footerSections.map((section) => {
             const isOpen = openSection === section.title;

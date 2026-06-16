@@ -350,6 +350,7 @@ const navbarCSS = `
 
   .navbar-container {
     max-width: 1400px;
+    height: 70px;
     margin: 0 auto;
     padding: ${SPACING.navbarPaddingY} ${SPACING.navbarPaddingX};
     display: flex;
