@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   MapPin,
   Phone,
@@ -5,11 +6,59 @@ import {
   MessageCircle,
   Clock,
   Send,
-  ShieldCheck
+  ShieldCheck,
 } from "lucide-react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/config/firebase";
 import ContactSection from "./ContactSection";
 
 const ContactPage = () => {
+  const [form, setForm] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (error) setError("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!form.fullName.trim() || !form.phone.trim()) {
+      setError("Vui lòng nhập đầy đủ họ tên và số điện thoại.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await addDoc(collection(db, "contact_requests"), {
+        fullName: form.fullName.trim(),
+        phone: form.phone.trim(),
+        email: form.email.trim(),
+        message: form.message.trim(),
+        status: "new",
+        createdAt: serverTimestamp(),
+      });
+
+      setForm({ fullName: "", phone: "", email: "", message: "" });
+      alert("Gửi yêu cầu thành công!");
+    } catch (err) {
+      console.error(err);
+      setError("Có lỗi xảy ra, vui lòng thử lại.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="bg-white min-h-screen">
       <section className="py-12 md:py-16">
@@ -63,7 +112,10 @@ const ContactPage = () => {
           </div>
 
           {/* Form */}
-          <div className="border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
+          <form
+            onSubmit={handleSubmit}
+            className="border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm"
+          >
             <h2 className="text-2xl md:text-3xl font-extrabold mb-2">
               Gửi yêu cầu tư vấn
             </h2>
@@ -72,34 +124,56 @@ const ContactPage = () => {
               Để lại thông tin, Nhật Minh Smart Home sẽ liên hệ tư vấn sớm nhất.
             </p>
 
+            {error && (
+              <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                {error}
+              </p>
+            )}
+
             <div className="grid md:grid-cols-2 gap-4">
               <input
+                name="fullName"
+                value={form.fullName}
+                onChange={handleChange}
                 className="border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500"
                 placeholder="Họ và tên"
               />
 
               <input
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
                 className="border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500"
                 placeholder="Số điện thoại"
               />
             </div>
 
             <input
+              name="email"
+              value={form.email}
+              onChange={handleChange}
               className="border border-slate-200 rounded-xl px-4 py-3 w-full mt-4 outline-none focus:border-blue-500"
               placeholder="Email"
             />
 
             <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
               rows={5}
               className="border border-slate-200 rounded-xl px-4 py-3 w-full mt-4 outline-none focus:border-blue-500 resize-none"
               placeholder="Nội dung cần tư vấn..."
             />
 
-            <button className="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition">
-              Gửi yêu cầu
-              <Send size={18} />
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-semibold transition"
+            >
+              {loading ? "Đang gửi..." : "Gửi yêu cầu"}
+              {!loading && <Send size={18} />}
             </button>
-          </div>
+          </form>
         </div>
       </section>
 

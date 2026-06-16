@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import useCart from '@/features/cart/hooks/useCart';
 import { getCategories } from "../../services/categoryService";
+import MobileNewsAccordion from "./MobileNewsAccordion";
 import {
   COLORS,
   TYPOGRAPHY,
@@ -132,18 +133,19 @@ const Navbar = () => {
             >
               Giới thiệu
             </Link>
-            <Link
+            {/* <Link
               to="/solutions-by-house"
               className={`menu-item ${isActive("/solutions-by-house") ? "active" : ""}`}
             >
               Giải pháp
-            </Link>
+            </Link> */}
                         <Link
               to="/contact"
               className={`menu-item ${isActive("/contact") ? "active" : ""}`}
             >
               Liên hệ
             </Link>
+
           </div>
 
           {/* Search Bar */}
@@ -247,7 +249,22 @@ const Navbar = () => {
             </svg>
             Giới thiệu
           </Link>
-                    <Link to="/solutions-by-house" className="mobile-menu-item">
+<Link to="/contact" className="mobile-menu-item">
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.89.33 1.76.63 2.59a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.49-1.15a2 2 0 0 1 2.11-.45c.83.3 1.7.51 2.59.63A2 2 0 0 1 22 16.92z"/>
+  </svg>
+  Liên hệ
+</Link>
+          <MobileNewsAccordion onNavigate={closeMobileMenus} />
+          
+                    {/* <Link to="/solutions-by-house" className="mobile-menu-item">
 
             <svg
   width="20"
@@ -262,7 +279,7 @@ const Navbar = () => {
   <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-1.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z" />
 </svg>
             Giải pháp
-          </Link>
+          </Link> */}
 
           {/* Mobile Categories */}
           <div className="mobile-categories">
@@ -572,8 +589,51 @@ const navbarCSS = `
     transition: ${TRANSITION.fast};
   }
 
-  .mobile-menu-item:hover {
+
+
+
+
+  .mobile-news-chevron {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    color: ${COLORS.textSecondary};
+    transition: ${TRANSITION.smooth};
+  }
+
+  .mobile-news-chevron-open {
+    transform: rotate(180deg);
+  }
+
+  .mobile-news-submenu-wrapper {
+    overflow: hidden;
+  }
+
+  .mobile-news-submenu {
+    padding: 4px 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mobile-news-item {
+    display: block;
+    padding: 16px;
+    margin-left: 28px;
+    color: ${COLORS.textMuted};
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: ${BORDER_RADIUS.button};
+    transition: ${TRANSITION.fast};
+  }
+
+  .mobile-news-item:hover {
     background: ${COLORS.hoverBgAccent};
+    color: ${COLORS.accent};
+  }
+
+  .mobile-news-item-active {
     color: ${COLORS.accent};
   }
 

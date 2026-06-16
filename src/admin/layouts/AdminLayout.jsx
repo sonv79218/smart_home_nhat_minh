@@ -49,6 +49,12 @@ const GlobeIcon = ({ className }) => (
   </svg>
 );
 
+const MessageCircleIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+  </svg>
+);
+
 const ExternalIcon = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -86,6 +92,7 @@ export const adminNavItems = [
   { to: "/qtvnmsmart/orders", icon: OrdersIcon, label: "Quản lý đơn hàng" },
   { to: "/qtvnmsmart/banners", icon: BannersIcon, label: "Quản lý Banner" },
   { to: "/qtvnmsmart/blogs", icon: BlogIcon, label: "Quản lý Blog" },
+  { to: "/qtvnmsmart/contacts", icon: MessageCircleIcon, label: "Yêu cầu liên hệ" },
 ];
 
 // ========== ADMIN LAYOUT COMPONENT ==========
