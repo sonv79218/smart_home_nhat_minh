@@ -4,7 +4,6 @@
 // ============================================
 
 // Hero components
-export { default as DesktopHeroMenu } from "./hero/DesktopHeroMenu";
 export { default as CategorySidebar } from "./hero/CategorySidebar";
 export { default as MegaCategoryMenu } from "./hero/MegaCategoryMenu";
 export { default as SidebarSkeleton } from "./hero/SidebarSkeleton";

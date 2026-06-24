@@ -2,7 +2,6 @@ import { useEffect, useState, useMemo } from "react";
 import { Search, LayoutGrid } from "lucide-react";
 import BlogCard from "@/features/blog/components/BlogCard";
 import { getBlogsByType } from "@/features/blog/services/blogService";
-import DesktopHeroMenu from "@/features/home/components/hero/DesktopHeroMenu";
 
 const BlogListPage = ({ type = "blog" }) => {
   const [blogs, setBlogs] = useState([]);
@@ -99,8 +98,7 @@ const BlogListPage = ({ type = "blog" }) => {
       <section className="py-0 md:py-0 bg-white border-b border-slate-200">
         
         <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="pt-4"><DesktopHeroMenu /></div>
-          
+          <div className="pt-4"></div>
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold mb-5">
               <LayoutGrid size={13} strokeWidth={2.5} />

@@ -10,8 +10,6 @@ import { getActiveSolutions } from "@/services/solutionService";
 import { useApp } from "@/contexts/AppContext";
 import OfflineNotice from "@/components/common/OfflineNotice";
 
-import DesktopHeroMenu from "@/features/home/components/hero/DesktopHeroMenu";
-
 import {
   BannerSection,
   BannerSkeleton,
@@ -20,9 +18,6 @@ import {
   CategoryProductSection,
   EcosystemSection,
   SolutionSection,
-  CategorySidebar,
-  SidebarSkeleton,
-  MegaCategoryMenu,
   SectionDivider,
 } from "@/features/home/components";
 
@@ -120,57 +115,24 @@ const HomePage = () => {
       {offlineMode && <OfflineNotice />}
 
       {/* ============================================ */}
-      {/* HERO: Sidebar + Banner + Mega Menu */}
+      {/* HERO: Banner only */}
       {/* ============================================ */}
       <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
-        {/* Desktop Hero Menu - Always render */}
-        <DesktopHeroMenu />
-
-        {/* Desktop Hero Grid - Always render with fixed height */}
-        <div
-          className="
-            relative hidden lg:grid
-            grid-cols-[300px_1fr]
-            h-[clamp(475px,28vw,600px)]
-            overflow-hidden rounded-b-2xl
-          "
-          onMouseLeave={() => setHoveredCategory(null)}
-        >
-          {/* Sidebar - Show skeleton or real sidebar */}
-          {categories.length > 0 ? (
-            <CategorySidebar
-              categories={categories}
-              hoveredCategory={hoveredCategory}
-              setHoveredCategory={setHoveredCategory}
+        {/* Desktop Banner */}
+        <div className="hidden lg:block h-[clamp(475px,28vw,600px)] overflow-hidden rounded-b-2xl">
+          {banners.length > 0 ? (
+            <BannerSection
+              className="h-full"
+              banners={banners}
+              current={current}
+              setCurrent={setCurrent}
             />
           ) : (
-            <SidebarSkeleton />
-          )}
-
-          {/* Banner - Show skeleton or real banner */}
-          <div className="h-full overflow-hidden rounded-br-2xl">
-            {banners.length > 0 ? (
-              <BannerSection
-                className="h-full"
-                banners={banners}
-                current={current}
-                setCurrent={setCurrent}
-              />
-            ) : (
-              <DesktopBannerSkeleton />
-            )}
-          </div>
-
-          {/* Mega Menu - Only show when category is hovered and data is loaded */}
-          {hoveredCategory && productsByCategory[hoveredCategory.id] && (
-            <MegaCategoryMenu
-              category={hoveredCategory}
-              products={productsByCategory[hoveredCategory.id]}
-            />
+            <DesktopBannerSkeleton />
           )}
         </div>
 
-        {/* Mobile Banner (shown when lg grid is hidden) - Always render with fixed height */}
+        {/* Mobile Banner */}
         <div className="lg:hidden h-[260px] sm:h-[320px] md:h-[400px]">
           {banners.length > 0 ? (
             <BannerSection
