@@ -1,374 +1,731 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Home,
-  Lightbulb,
-  ShieldCheck,
-  Smartphone,
-  Cpu,
-  Waves,
-  CheckCircle,
-  ArrowRight,
-  ImageIcon,
-  MapPin,
-  Phone,
-} from "lucide-react";
 
-const lumiGreen = "#009B5A";
+// ==================== DATA ====================
+const requiredInfos = [
+  {
+    icon: "💡",
+    title: "Nhu cầu của chủ nhà",
+    content:
+      "Xác định rõ các giải pháp mong muốn như chiếu sáng, rèm tự động, điều hòa, an ninh để đưa ra số lượng thiết bị phù hợp.",
+  },
+  {
+    icon: "📐",
+    title: "Bản vẽ xây dựng",
+    content:
+      "Diện tích, số phòng, số tầng và cách bố trí công năng ảnh hưởng trực tiếp đến số lượng công tắc và bộ điều khiển.",
+  },
+  {
+    icon: "⚡",
+    title: "Hạ tầng hiện đại",
+    content:
+      "Kiểm tra hiện trạng điện, mạng, vị trí lắp đặt để đề xuất phương án phù hợp và tối ưu chi phí thi công.",
+  },
+];
 
-const lumiImages = {
-  hero: "",
-  intro: "",
-  solution1: "",
-  solution2: "",
-  solution3: "",
-  solution4: "",
-  project1: "",
-  project2: "",
-  project3: "",
-  project4: "",
-  cta: "",
+const pricingTabs = ["Chung cư", "Nhà phố", "Biệt thự"];
+
+const pricingPackages = {
+  0: [
+    {
+      name: "Basic",
+      price: "19.000.000 đ",
+      popular: false,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: false },
+        { text: "Rèm tự động", available: false },
+        { text: "Âm thanh đa vùng", available: false },
+        { text: "Tưới tự động", available: false },
+        { text: "Đèn Dimmer", available: false },
+        { text: "An ninh thông minh", available: false },
+      ],
+    },
+    {
+      name: "Standard",
+      price: "49.000.000 đ",
+      popular: true,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: false },
+        { text: "Tưới tự động", available: false },
+        { text: "Đèn Dimmer", available: false },
+        { text: "An ninh thông minh", available: false },
+      ],
+    },
+    {
+      name: "Premium",
+      price: "79.000.000 đ",
+      popular: false,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: true },
+        { text: "Tưới tự động", available: true },
+        { text: "Đèn Dimmer", available: true },
+        { text: "An ninh thông minh", available: true },
+      ],
+    },
+  ],
+
+  1: [
+    {
+      name: "Basic",
+      price: "35.000.000 đ",
+      popular: false,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: false },
+        { text: "Âm thanh đa vùng", available: false },
+        { text: "Tưới tự động", available: false },
+        { text: "Đèn Dimmer", available: false },
+        { text: "An ninh thông minh", available: false },
+      ],
+    },
+    {
+      name: "Standard",
+      price: "75.000.000 đ",
+      popular: true,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: false },
+        { text: "Tưới tự động", available: false },
+        { text: "Đèn Dimmer", available: true },
+        { text: "An ninh thông minh", available: true },
+      ],
+    },
+    {
+      name: "Premium",
+      price: "120.000.000 đ",
+      popular: false,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: true },
+        { text: "Tưới tự động", available: true },
+        { text: "Đèn Dimmer", available: true },
+        { text: "An ninh thông minh", available: true },
+      ],
+    },
+  ],
+
+  2: [
+    {
+      name: "Basic",
+      price: "65.000.000 đ",
+      popular: false,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: false },
+        { text: "Tưới tự động", available: false },
+        { text: "Đèn Dimmer", available: true },
+        { text: "An ninh thông minh", available: true },
+      ],
+    },
+    {
+      name: "Standard",
+      price: "150.000.000 đ",
+      popular: true,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: true },
+        { text: "Tưới tự động", available: true },
+        { text: "Đèn Dimmer", available: true },
+        { text: "An ninh thông minh", available: true },
+      ],
+    },
+    {
+      name: "Premium",
+      price: "250.000.000 đ",
+      popular: false,
+      features: [
+        { text: "Chiếu sáng thông minh", available: true },
+        { text: "Điều hòa thông minh", available: true },
+        { text: "Bình nóng lạnh thông minh", available: true },
+        { text: "Cảm biến thông minh", available: true },
+        { text: "Rèm tự động", available: true },
+        { text: "Âm thanh đa vùng", available: true },
+        { text: "Tưới tự động", available: true },
+        { text: "Đèn Dimmer", available: true },
+        { text: "An ninh thông minh", available: true },
+      ],
+    },
+  ],
 };
 
-const ImageBox = ({ src, label, className = "" }) => (
-  <div className={`relative overflow-hidden bg-emerald-50 border border-emerald-100 ${className}`}>
-    {src ? (
-      <img src={src} alt={label} className="w-full h-full object-cover" />
-    ) : (
-      <div className="w-full h-full min-h-[180px] flex items-center justify-center text-center p-5">
-        <div>
-          <ImageIcon className="w-9 h-9 mx-auto mb-3 text-emerald-400" />
-          <p className="text-sm font-bold text-emerald-700">{label}</p>
-          <p className="text-xs text-emerald-500 mt-1">Thêm ảnh trong lumiImages</p>
-        </div>
-      </div>
-    )}
+const whyChooseLumi = {
+  title: "Tại sao lại lựa chọn nhà thông minh Lumi",
+  description:
+    "Lumi là thương hiệu nhà thông minh Việt Nam với hơn 10 năm kinh nghiệm, hệ sinh thái thiết bị đa dạng và đội ngũ kỹ thuật chuyên nghiệp. Giải pháp của Lumi tập trung vào sự tiện nghi, an toàn, tiết kiệm điện năng và khả năng điều khiển tập trung trên ứng dụng di động. Với hơn 5000+ công trình đã hoàn thành trên toàn quốc, Lumi tự tin mang đến trải nghiệm smarthome tốt nhất cho ngôi nhà của bạn.",
+  features: [
+    "Thiết bị đồng bộ từ đầu đến cuối",
+    "Dễ dàng nâng cấp mở rộng",
+    "Tối ưu chi phí đầu tư",
+    "Hỗ trợ kỹ thuật 24/7",
+    "Bảo hành 2 năm chính hãng",
+    "Lắp đặt nhanh chóng chuyên nghiệp",
+  ],
+};
+
+const featuredProject = {
+  title: "Nhà của sao",
+  type: "Dự án nổi bật",
+  img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+};
+
+const projects = [
+  {
+    title: "Biệt thự phong cách hiện đại",
+    type: "Biệt thự",
+    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
+  },
+  {
+    title: "Căn hộ cao cấp view thành phố",
+    type: "Chung cư",
+    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
+  },
+  {
+    title: "Nhà phố tối giản",
+    type: "Nhà phố",
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+  },
+];
+
+const smartSolutions = [
+  {
+    title: "Chiếu sáng thông minh",
+    desc: "Điều khiển đèn theo ngữ cảnh, lịch trình hoặc cảm biến hiện diện. Tiết kiệm đến 40% chi phí điện.",
+    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+  },
+  {
+    title: "Rèm cửa tự động",
+    desc: "Quản lý ánh sáng tự nhiên, đóng mở rèm bằng app, giọng nói hoặc lịch hẹn thông minh.",
+    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+  },
+  {
+    title: "Điều hòa không khí",
+    desc: "Bật tắt điều hòa từ xa, thiết lập nhiệt độ theo thói quen và tối ưu điện năng tiêu thụ.",
+    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80",
+  },
+  {
+    title: "An ninh chống trộm",
+    desc: "Kết hợp cảm biến cửa, cảm biến chuyển động, camera và cảnh báo tức thời qua điện thoại.",
+    img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&q=80",
+  },
+];
+
+const faqs = [
+  {
+    question: "Chi phí nhà thông minh bao nhiêu?",
+    answer:
+      "Chi phí nhà thông minh dao động từ 19 triệu đến 79 triệu tùy theo gói giải pháp và quy mô công trình. Gói Basic phù hợp căn hộ nhỏ, gói Standard cho gia đình muốn tự động hóa nhiều khu vực, và gói Premium trọn bộ tiện nghi cao cấp.",
+  },
+  {
+    question: "Chung cư có lắp được không?",
+    answer:
+      "Hoàn toàn có thể lắp đặt nhà thông minh cho chung cư. Lumi có các giải pháp riêng cho căn hộ chung cư với việc không cần đục đẽo hay thay đổi hệ thống điện hiện tại.",
+  },
+  {
+    question: "Có cần đi lại dây điện không?",
+    answer:
+      "Với giải pháp của Lumi, bạn không cần đi lại dây điện. Hệ thống hoạt động trên nền tảng dây điện hiện có thông qua các module thông minh lắp đặt tại công tắc và ổ cắm.",
+  },
+  {
+    question: "Bảo hành bao lâu?",
+    answer:
+      "Tất cả thiết bị Lumi được bảo hành chính hãng 24 tháng. Đội ngũ kỹ thuật hỗ trợ 24/7 và có các trung tâm bảo hành tại nhiều tỉnh thành trên cả nước.",
+  },
+];
+
+// ==================== COMPONENTS ====================
+const CheckIcon = ({ active }) => (
+  <span
+    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+      active ? "bg-emerald-100 text-emerald-600" : "bg-red-100 text-red-400"
+    }`}
+  >
+    {active ? "✓" : "×"}
+  </span>
+);
+
+const FAQItem = ({ faq, isOpen, onToggle }) => (
+  <div className="border-b border-gray-200">
+    <button
+      type="button"
+      onClick={onToggle}
+      className="flex w-full items-center justify-between py-5 text-left"
+    >
+      <span className="text-base font-semibold text-gray-900 md:text-lg">
+        {faq.question}
+      </span>
+      <span
+        className={`ml-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-transform duration-200 ${
+          isOpen ? "rotate-180" : ""
+        }`}
+      >
+        ▼
+      </span>
+    </button>
+    <div
+      className={`overflow-hidden transition-all duration-300 ${
+        isOpen ? "max-h-96 pb-5" : "max-h-0"
+      }`}
+    >
+      <p className="text-sm leading-relaxed text-gray-600 md:text-base">
+        {faq.answer}
+      </p>
+    </div>
   </div>
 );
 
-const strengths = [
-  "Thương hiệu Smart Home Việt Nam",
-  "App tiếng Việt, dễ sử dụng",
-  "Phù hợp gia đình Việt",
-  "Dễ bảo hành và hỗ trợ kỹ thuật",
-  "Hệ sinh thái thiết bị đa dạng",
-];
-
-const solutions = [
-  {
-    icon: Lightbulb,
-    image: lumiImages.solution1,
-    title: "Chiếu sáng thông minh",
-    desc: "Điều khiển đèn theo khu vực, lịch trình, cảm biến hoặc ngữ cảnh sinh hoạt.",
-  },
-  {
-    icon: Smartphone,
-    image: lumiImages.solution2,
-    title: "Điều khiển qua app",
-    desc: "Quản lý thiết bị từ xa, tạo ngữ cảnh và kiểm soát ngôi nhà dễ dàng.",
-  },
-  {
-    icon: ShieldCheck,
-    image: lumiImages.solution3,
-    title: "An ninh thông minh",
-    desc: "Kết hợp cảm biến, khóa cửa, camera và cảnh báo khi có bất thường.",
-  },
-  {
-    icon: Waves,
-    image: lumiImages.solution4,
-    title: "Rèm & thiết bị tự động",
-    desc: "Tự động hóa rèm, công tắc, cảm biến và các thiết bị trong nhà.",
-  },
-];
-
-const projects = [
-  { image: lumiImages.project1, title: "Nhà phố Lumi", desc: "Giải pháp gọn gàng, dễ dùng cho gia đình." },
-  { image: lumiImages.project2, title: "Căn hộ thông minh", desc: "Điều khiển đèn, rèm, cảm biến và thiết bị qua app." },
-  { image: lumiImages.project3, title: "Biệt thự Smart Home", desc: "Hệ thống Lumi đồng bộ cho nhiều khu vực trong nhà." },
-  { image: lumiImages.project4, title: "Showroom / Văn phòng", desc: "Tối ưu vận hành, ánh sáng và an ninh." },
-];
-
+// ==================== MAIN COMPONENT ====================
 const LumiPage = () => {
+  const [activeTab, setActiveTab] = useState(0);
+  const activePackages = pricingPackages[activeTab];
+
+
+
   return (
-    <main className="bg-white text-slate-900">
-      {/* HERO */}
-      <section className="relative min-h-[620px] bg-slate-950 overflow-hidden">
-        <ImageBox
-          src={lumiImages.hero}
-          label="Ảnh hero Lumi"
-          className="absolute inset-0 rounded-none border-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-emerald-900/20" />
-        <div className="absolute -right-20 top-20 w-96 h-96 rounded-full bg-emerald-500/30 blur-3xl" />
+    <div className="bg-white min-h-screen">
+      {/* ==================== SECTION 1: HERO ==================== */}
+      <section
+        className="relative flex min-h-[650px] items-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800"
+        style={{ backgroundColor: "#0B5ED7" }}
+      >
+        {/* Background blur effects */}
+        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-cyan-400 opacity-20 blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-emerald-400 opacity-20 blur-3xl" />
 
-        <div className="relative z-10 w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
-          <div className="max-w-3xl pt-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 text-sm font-bold mb-6">
-              <Home size={16} />
-              Hệ sinh thái Lumi
-            </div>
-
-            <h1 className="text-4xl md:text-7xl font-extrabold text-white leading-tight">
-              Giải pháp Smart Home Lumi cho gia đình Việt
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-16 lg:flex-row lg:items-center lg:px-6">
+          {/* Left column */}
+          <div className="flex-1 text-white">
+            <span className="mb-4 inline-block rounded-full bg-white/20 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm">
+              Báo giá nhà thông minh 2025
+            </span>
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+              Giải pháp nhà thông minh Lumi
             </h1>
-
-            <p className="mt-6 text-white/75 text-base md:text-xl leading-relaxed max-w-2xl">
-              Nhật Minh Smart Home tư vấn, cung cấp và triển khai hệ sinh thái Lumi
-              cho nhà phố, căn hộ, biệt thự, showroom và văn phòng.
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-blue-100 md:text-lg">
+              Giải pháp smarthome toàn diện cho ngôi nhà của bạn. Tiện nghi, an
+              toàn, tiết kiệm điện và điều khiển dễ dàng từ smartphone.
             </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-white font-bold transition"
-                style={{ backgroundColor: lumiGreen }}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button
+                type="button"
+                className="rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 shadow-lg transition hover:bg-gray-50 hover:shadow-xl"
+                style={{ color: "#0B5ED7" }}
               >
-                Nhận tư vấn Lumi
-                <ArrowRight size={18} />
-              </Link>
-
-              <Link
-                to="/products?brand=lumi"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/15 text-white font-bold hover:bg-white/15 transition"
+                Nhận báo giá
+              </button>
+              <button
+                type="button"
+                className="rounded-xl border-2 border-white/50 bg-transparent px-6 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white/10"
               >
-                Xem sản phẩm Lumi
-              </Link>
+                Xem sản phẩm
+              </button>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* INTRO */}
-      <section className="py-16 md:py-24">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
-          <ImageBox
-            src={lumiImages.intro}
-            label="Ảnh giới thiệu Lumi"
-            className="h-[320px] md:h-[480px] rounded-3xl"
-          />
-
-          <div>
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Lumi là gì?
-            </p>
-
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-              Thương hiệu nhà thông minh Việt Nam, dễ dùng và dễ triển khai
-            </h2>
-
-            <p className="text-slate-600 leading-relaxed mb-6">
-              Lumi là hệ sinh thái thiết bị Smart Home hướng đến trải nghiệm sử dụng
-              đơn giản, phù hợp thói quen của người Việt. Nhật Minh Smart Home lựa chọn
-              Lumi cho các công trình cần sự ổn định, dễ bảo hành và dễ mở rộng.
-            </p>
-
-            <div className="space-y-3">
-              {strengths.map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle size={20} className="text-emerald-500 shrink-0" />
-                  <span className="font-semibold text-slate-700">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHY */}
-      <section className="py-16 md:py-24 bg-emerald-50/60">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Vì sao Nhật Minh tư vấn Lumi?
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Phù hợp với nhiều công trình thực tế
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              ["Dễ sử dụng", "App tiếng Việt, thao tác gần gũi với người dùng."],
-              ["Dễ hỗ trợ", "Thuận tiện khi cần bảo hành, cấu hình hoặc mở rộng."],
-              ["Dễ triển khai", "Phù hợp nhà phố, chung cư, biệt thự và showroom."],
-            ].map(([title, desc]) => (
-              <div key={title} className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-sm">
-                <Cpu className="mb-4" size={30} style={{ color: lumiGreen }} />
-                <h3 className="text-xl font-extrabold mb-2">{title}</h3>
-                <p className="text-slate-600 leading-relaxed">{desc}</p>
+          {/* Right column - Image with floating cards */}
+          <div className="relative flex-1">
+            {/* Main image placeholder */}
+            <div className="relative mx-auto max-w-lg">
+              <div className="overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                  alt="Smart Home"
+                  className="h-80 w-full object-cover opacity-90"
+                />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* SOLUTIONS */}
-      <section className="py-16 md:py-24">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="max-w-3xl mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Giải pháp Lumi
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Một hệ thống, nhiều thiết bị hoạt động cùng nhau
-            </h2>
-          </div>
+              {/* Floating cards */}
+              <div
+                className="absolute -left-4 top-10 rounded-2xl bg-white p-4 shadow-xl"
+                style={{ color: "#0F172A" }}
+              >
+                <p className="text-xs font-medium text-gray-500">Gói từ</p>
+                <p
+                  className="text-2xl font-extrabold"
+                  style={{ color: "#0B5ED7" }}
+                >
+                  19 triệu
+                </p>
+              </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {solutions.map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <div key={item.title} className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-                  <ImageBox src={item.image} label={`Ảnh ${item.title}`} className="h-[210px] rounded-none border-0" />
-
-                  <div className="p-5">
-                    <Icon size={28} className="mb-3" style={{ color: lumiGreen }} />
-                    <h3 className="text-lg font-extrabold mb-2">{item.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* FIT */}
-      <section className="py-16 bg-slate-950 text-white">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <p className="text-emerald-300 font-extrabold mb-3">
-                Lumi phù hợp với ai?
-              </p>
-
-              <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-                Phù hợp từ căn hộ nhỏ đến nhà phố và biệt thự
-              </h2>
-
-              <p className="text-slate-300 leading-relaxed">
-                Với khả năng mở rộng linh hoạt, Lumi phù hợp cho khách hàng muốn
-                bắt đầu từ vài thiết bị cơ bản rồi nâng cấp dần thành hệ thống hoàn chỉnh.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {["Nhà phố", "Chung cư", "Biệt thự", "Showroom"].map((item) => (
-                <div key={item} className="rounded-3xl bg-white/5 border border-white/10 p-6">
-                  <Home className="text-emerald-300 mb-4" size={30} />
-                  <h3 className="text-xl font-extrabold">{item}</h3>
-                </div>
-              ))}
+              <div
+                className="absolute -right-4 bottom-10 rounded-2xl bg-white p-4 shadow-xl"
+                style={{ color: "#0F172A" }}
+              >
+                <p className="text-xs font-medium text-gray-500">Công trình</p>
+                <p
+                  className="text-2xl font-extrabold"
+                  style={{ color: "#10B981" }}
+                >
+                  5000+
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section className="py-16 md:py-24 bg-slate-50">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Công trình Lumi
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Thêm ảnh thực tế để khách hàng thấy năng lực triển khai
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {projects.map((item) => (
-              <div key={item.title} className="rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-sm">
-                <ImageBox src={item.image} label={`Ảnh ${item.title}`} className="h-[230px] rounded-none border-0" />
-
-                <div className="p-5">
-                  <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
-                    <MapPin size={15} />
-                    Công trình thực tế
-                  </div>
-
-                  <h3 className="text-lg font-extrabold mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* ==================== SECTION 2: GIỚI THIỆU ==================== */}
+      <section className="mx-auto max-w-[1000px] px-4 py-16">
+        <h2 className="text-center text-2xl font-extrabold text-gray-900 md:text-3xl">
+          Báo giá nhà thông minh (Update 2025)
+        </h2>
+        <p className="mt-6 text-center text-base leading-8 text-gray-600 md:text-lg">
+          Báo giá giải pháp nhà thông minh là một trong những bước quan trọng
+          khi tiến hành thiết kế nội thất smarthome. Việc nắm rõ chi phí sẽ giúp
+          gia chủ chủ động trong việc lên kế hoạch tài chính, lựa chọn giải pháp
+          phù hợp với nhu cầu và không gian sống của mình. Lumi cung cấp báo giá
+          chi tiết, minh bạch cho từng hạng mục thiết bị và công lắp đặt, giúp
+          khách hàng yên tâm từ đầu đến cuối.
+        </p>
       </section>
 
-      {/* COMPARISON */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-[900px] mx-auto px-5">
-          <div className="text-center mb-10">
-            <p className="font-extrabold mb-3" style={{ color: lumiGreen }}>
-              Tổng quan nhanh
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold">
-              Lumi trong mắt Nhật Minh
-            </h2>
-          </div>
-
-          <div className="rounded-3xl border border-emerald-100 overflow-hidden bg-white shadow-sm">
-            {[
-              ["Nguồn gốc", "Việt Nam"],
-              ["Ngôn ngữ app", "Tiếng Việt, dễ dùng"],
-              ["Chi phí", "Trung bình - cao"],
-              ["Phù hợp", "Gia đình Việt, nhà phố, biệt thự"],
-              ["Khả năng mở rộng", "Tốt"],
-            ].map(([label, value]) => (
-              <div key={label} className="grid grid-cols-3 border-b last:border-b-0 border-emerald-100">
-                <div className="col-span-1 bg-emerald-50 p-4 font-bold text-emerald-700">
-                  {label}
-                </div>
-                <div className="col-span-2 p-4 font-semibold text-slate-700">
-                  {value}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-20 md:py-28 bg-emerald-700 overflow-hidden">
-        <ImageBox
-          src={lumiImages.cta}
-          label="Ảnh CTA Lumi"
-          className="absolute inset-0 rounded-none border-0 opacity-30"
-        />
-
-        <div className="absolute inset-0 bg-emerald-900/75" />
-
-        <div className="relative z-10 max-w-[900px] mx-auto px-5 text-center text-white">
-          <h2 className="text-3xl md:text-6xl font-extrabold leading-tight">
-            Bạn muốn lắp hệ thống Smart Home Lumi?
+      {/* ==================== SECTION 3: 3 THÔNG TIN CẦN CÓ ==================== */}
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-12 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            3 thông tin chính cần có để lên một báo giá nhà thông minh chuẩn xác
           </h2>
 
-          <p className="mt-5 text-white/80 text-base md:text-lg leading-relaxed">
-            Nhật Minh Smart Home sẽ khảo sát, tư vấn và triển khai phương án Lumi
-            phù hợp với công trình và ngân sách của bạn.
-          </p>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-emerald-700 font-extrabold hover:bg-emerald-50 transition"
-            >
-              Liên hệ tư vấn
-              <ArrowRight size={18} />
-            </Link>
-
-            <a
-              href="tel:0876906668"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/20 text-white font-extrabold hover:bg-white/15 transition"
-            >
-              <Phone size={18} />
-              Gọi hotline
-            </a>
+          <div className="grid gap-8 md:grid-cols-3">
+            {requiredInfos.map((info, index) => (
+              <div
+                key={index}
+                className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              >
+                <div
+                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl"
+                  style={{ backgroundColor: "#0B5ED7" + "15" }}
+                >
+                  {info.icon}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">{info.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                  {info.content}
+                </p>
+                <Link
+                  to="/contact"
+                  className="mt-5 inline-block text-sm font-bold transition hover:underline"
+                  style={{ color: "#0B5ED7" }}
+                >
+                  Liên hệ ngay →
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-    </main>
+
+      {/* ==================== SECTION 4: BẢNG GIÁ ==================== */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-8 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Dự toán báo giá nhà thông minh Lumi
+          </h2>
+
+          {/* Tabs */}
+          <div className="mb-10 flex justify-center">
+            <div className="inline-flex rounded-xl bg-gray-100 p-1">
+              {pricingTabs.map((tab, index) => (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveTab(index)}
+                  className={`rounded-lg px-6 py-2 text-sm font-semibold transition-all duration-200 ${
+                    activeTab === index
+                      ? "bg-white text-white shadow-md"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                  style={activeTab === index ? { backgroundColor: "#0B5ED7" } : {}}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Packages */}
+          <div className="grid gap-8 lg:grid-cols-3 lg:items-stretch">
+           {activePackages.map((pkg) => (
+              <div
+                key={pkg.name}
+                className={`relative flex flex-col rounded-3xl border-2 bg-white p-8 shadow-lg transition-all duration-300 ${
+                  pkg.popular
+                    ? "scale-105 border-blue-500 shadow-xl"
+                    : "border-gray-200"
+                }`}
+                style={pkg.popular ? { borderColor: "#0B5ED7" } : {}}
+              >
+                {pkg.popular && (
+                  <span
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold text-white"
+                    style={{ backgroundColor: "#0B5ED7" }}
+                  >
+                    Phổ biến
+                  </span>
+                )}
+
+                <h3 className="text-xl font-bold text-gray-900">{pkg.name}</h3>
+                <div
+                  className="mt-3 text-3xl font-extrabold"
+                  style={{ color: "#0B5ED7" }}
+                >
+                  {pkg.price}
+                </div>
+
+                <div className="mt-6 flex-1 space-y-3">
+                  {pkg.features.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 text-sm text-gray-700"
+                    >
+                      <CheckIcon active={feature.available} />
+                      <span>{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className="mt-8 w-full rounded-xl py-3 text-sm font-bold transition-all"
+                  style={
+                    pkg.popular
+                      ? { backgroundColor: "#0B5ED7", color: "white" }
+                      : { backgroundColor: "#0B5ED7", color: "white" }
+                  }
+                >
+                  Hẹn lịch tư vấn
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 5: TẠI SAO CHỌN LUMI ==================== */}
+      <section
+        className="py-16"
+        style={{ backgroundColor: "#0F172A" }}
+      >
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-8">
+          {/* Left */}
+          <div className="text-white">
+            <h2 className="text-2xl font-extrabold md:text-3xl">
+              {whyChooseLumi.title}
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-gray-300">
+              {whyChooseLumi.description}
+            </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {whyChooseLumi.features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <span style={{ color: "#10B981" }}>✓</span>
+                  <span className="text-sm text-gray-300">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="mt-8 rounded-xl px-6 py-3 text-sm font-bold transition hover:opacity-90"
+              style={{ backgroundColor: "#10B981", color: "white" }}
+            >
+              Xem thêm
+            </button>
+          </div>
+
+          {/* Right - Image */}
+          <div className="relative overflow-hidden rounded-3xl">
+            <img
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+              alt="Lumi Smart Devices"
+              className="h-80 w-full object-cover lg:h-96"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 6: CTA ==================== */}
+      <section
+        className="py-16"
+        style={{ background: "linear-gradient(135deg, #10B981 0%, #059669 100%)" }}
+      >
+        <div className="mx-auto max-w-4xl px-4 text-center text-white">
+          <h2 className="text-2xl font-extrabold md:text-3xl">
+            Hẹn lịch tư vấn cùng đội ngũ chuyên gia của Lumi Smarthome
+          </h2>
+          <p className="mt-4 text-base text-emerald-100">
+            Đội ngũ kỹ thuật viên giàu kinh nghiệm sẵn sàng hỗ trợ bạn 24/7
+          </p>
+          <button
+            type="button"
+            className="mt-8 rounded-xl bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
+            style={{ color: "#10B981" }}
+          >
+            Hẹn lịch ngay
+          </button>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 7: DỰ ÁN TIÊU BIỂU ==================== */}
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Dự án tiêu biểu
+          </h2>
+
+          {/* Featured project */}
+          <Link
+            to="/projects"
+            className="group relative mb-8 block overflow-hidden rounded-3xl"
+          >
+            <img
+              src={featuredProject.img}
+              alt={featuredProject.title}
+              className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8 text-white">
+              <span
+                className="inline-block rounded-full px-3 py-1 text-xs font-bold"
+                style={{ backgroundColor: "#10B981" }}
+              >
+                {featuredProject.type}
+              </span>
+              <h3 className="mt-3 text-2xl font-extrabold">
+                {featuredProject.title}
+              </h3>
+            </div>
+          </Link>
+
+          {/* 3 project cards */}
+          <div className="grid gap-6 md:grid-cols-3">
+            {projects.map((project, idx) => (
+              <Link
+                key={idx}
+                to="/projects"
+                className="group overflow-hidden rounded-2xl bg-white shadow-lg"
+              >
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-5">
+                  <span
+                    className="text-xs font-semibold"
+                    style={{ color: "#64748B" }}
+                  >
+                    {project.type}
+                  </span>
+                  <h3 className="mt-1 text-base font-bold text-gray-900">
+                    {project.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 8: GIẢI PHÁP THÔNG MINH ==================== */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Hệ thống thông minh cho ngôi nhà của bạn
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {smartSolutions.map((solution, idx) => (
+              <div
+                key={idx}
+                className="group relative h-72 overflow-hidden rounded-2xl shadow-lg"
+              >
+                <img
+                  src={solution.img}
+                  alt={solution.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <h3 className="text-base font-bold">{solution.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-300">
+                    {solution.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* ==================== SECTION 11: CTA CUỐI ==================== */}
+      <section
+        className="py-20"
+        style={{ background: "linear-gradient(135deg, #0B5ED7 0%, #0F172A 100%)" }}
+      >
+        <div className="mx-auto max-w-4xl px-4 text-center text-white">
+          <h2 className="text-2xl font-extrabold md:text-3xl">
+            Sẵn sàng nâng cấp ngôi nhà của bạn?
+          </h2>
+          <p className="mt-4 text-base text-blue-100">
+            Liên hệ ngay để được tư vấn miễn phí và nhận báo giá chi tiết
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <button
+              type="button"
+              className="rounded-xl bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
+              style={{ color: "#0B5ED7" }}
+            >
+              Nhận báo giá
+            </button>
+            <button
+              type="button"
+              className="rounded-xl border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
+            >
+              Liên hệ ngay
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

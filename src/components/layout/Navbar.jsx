@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  House,
+  Package,
+  Building2,
+  Phone,
+  Newspaper,
+} from "lucide-react";
 
 import useCart from "@/features/cart/hooks/useCart";
 import { getCategories } from "../../services/categoryService";
@@ -41,7 +48,7 @@ const CategoryMegaMenu = ({
 
   return (
     <div
-  className={`absolute left-0 top-full z-[1200] mt-0 flex h-[570px] overflow-hidden rounded-b-2xl border border-slate-100 bg-white shadow-xl shadow-slate-200/70 ${
+  className={`absolute left-0 top-full z-[1200] mt-0 flex h-[550px] overflow-hidden rounded-b-2xl border border-slate-100 bg-white shadow-xl shadow-slate-200/70 ${
     hoveredCategory ? "w-[1200px]" : "w-[300px]"
   }`}
       onMouseEnter={onMouseEnter}
@@ -63,13 +70,20 @@ const CategoryMegaMenu = ({
                   onNavigate(`/products?category=${category.id}`);
                   onClose();
                 }}
-                className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-200 ${
+                // className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-200 ${
+                className={`flex w-full items-center gap-2 px-3 py-2 text-left transition-colors duration-200 ${
                   isActive
                     ? "bg-blue-50 text-blue-600"
                     : "text-slate-700 hover:bg-blue-50 hover:text-blue-600"
                 }`}
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                <span
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-200 ${
+                    isActive
+                      ? "bg-blue-50 text-blue-600"
+                      : "bg-slate-100 text-slate-500"
+                  }`}
+                >
                   <IconComponent size={18} strokeWidth={2} />
                 </span>
                 <span className="flex-1 text-sm font-medium">{category.name}</span>
@@ -308,7 +322,8 @@ const handleCategoryMouseEnter = () => {
   return (
     <>
       <header
-        className="fixed left-0 right-0 top-0 z-[1000] border-b border-slate-100 bg-white transition"
+       className="fixed left-0 right-0 top-0 z-[1000] border-b border-slate-100 bg-white transition lg:relative"
+        // className="fixed left-0 right-0 top-0 z-[1000] border-b border-slate-100 bg-white transition"
         style={{
           boxShadow: isScrolled ? "0 4px 20px rgba(0,0,0,.08)" : "none",
         }}
@@ -341,9 +356,9 @@ const handleCategoryMouseEnter = () => {
               Trang chủ
             </button>
 
-            <Link to="/products" className={menuItemClass("/products")}>
+            {/* <Link to="/products" className={menuItemClass("/products")}>
               Sản phẩm
-            </Link>
+            </Link> */}
 
             <Link to="/about" className={menuItemClass("/about")}>
               Giới thiệu
@@ -428,8 +443,8 @@ const handleCategoryMouseEnter = () => {
             </button>
           </div>
         </nav>
-
-        <div className="hidden border-t border-slate-100 border-b border-slate-100 bg-white lg:block">
+<div className="hidden bg-white lg:block">
+        {/* <div className="hidden border-t border-slate-100 border-b border-slate-100 bg-white lg:block"> */}
           <div className="mx-auto grid h-14 max-w-[1200px] grid-cols-[300px_1fr_320px] overflow-visible">
             {/* Category dropdown wrapper */}
             <div
@@ -513,6 +528,7 @@ const handleCategoryMouseEnter = () => {
                 </Link>
               ))}
             </div>
+          
           </div>
         </div>
       </header>
@@ -536,24 +552,38 @@ const handleCategoryMouseEnter = () => {
 
           <div className="flex flex-col gap-1">
             <button
-              type="button"
-              onClick={handleGoHome}
-              className="rounded-xl px-4 py-4 text-left text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600"
-            >
-              Trang chủ
-            </button>
+            type="button"
+            onClick={handleGoHome}
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600"
+          >
+            <House size={18} />
+            <span>Trang chủ</span>
+          </button>
 
-            <Link to="/products" className="rounded-xl px-4 py-4 text-[15px] font-medium text-slate-700 no-underline hover:bg-blue-50 hover:text-blue-600">
-              Sản phẩm
-            </Link>
+          <Link
+            to="/products"
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium text-slate-700 no-underline hover:bg-blue-50 hover:text-blue-600"
+          >
+            <Package size={18} />
+            <span>Sản phẩm</span>
+          </Link>
 
-            <Link to="/about" className="rounded-xl px-4 py-4 text-[15px] font-medium text-slate-700 no-underline hover:bg-blue-50 hover:text-blue-600">
-              Giới thiệu
-            </Link>
+          <Link
+            to="/about"
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium text-slate-700 no-underline hover:bg-blue-50 hover:text-blue-600"
+          >
+            <Building2 size={18} />
+            <span>Giới thiệu</span>
+          </Link>
 
-            <Link to="/contact" className="rounded-xl px-4 py-4 text-[15px] font-medium text-slate-700 no-underline hover:bg-blue-50 hover:text-blue-600">
-              Liên hệ
-            </Link>
+          <Link
+            to="/contact"
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium text-slate-700 no-underline hover:bg-blue-50 hover:text-blue-600"
+          >
+            <Phone size={18} />
+            <span>Liên hệ</span>
+          </Link>
+           
 
             <MobileNewsAccordion onNavigate={closeMobileMenus} />
 
