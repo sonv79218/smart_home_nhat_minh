@@ -64,7 +64,7 @@ const ContactPage = () => {
       <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-5 grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
           {/* Info */}
-          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8">
+          <div className="bg-slate-50 border border-slate-200 rounded-none p-6 md:p-8">
             <p className="text-blue-600 font-bold mb-2">
               LIÊN HỆ
             </p>
@@ -114,7 +114,7 @@ const ContactPage = () => {
           {/* Form */}
           <form
             onSubmit={handleSubmit}
-            className="border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm"
+            className="border border-slate-200 rounded-none p-6 md:p-8 shadow-sm"
           >
             <h2 className="text-2xl md:text-3xl font-extrabold mb-2">
               Gửi yêu cầu tư vấn
@@ -125,7 +125,8 @@ const ContactPage = () => {
             </p>
 
             {error && (
-              <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+              <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-none
+ px-4 py-3">
                 {error}
               </p>
             )}

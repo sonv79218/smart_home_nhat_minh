@@ -196,7 +196,7 @@ const HomePage = () => {
       {/* ============================================ */}
       {/* CATEGORY PRODUCTS */}
       {/* ============================================ */}
-      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] ">
         {topCategories.map((category, index) => {
           const categoryProducts = productsByCategory[category.id] || [];
           if (categoryProducts.length === 0) return null;

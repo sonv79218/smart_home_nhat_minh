@@ -72,7 +72,7 @@ const AboutPage = () => {
           </div>
 
           {/* SHOWROOM */}
-          <div className="overflow-hidden rounded-2xl md:rounded-[28px] border-2 md:border-[3px] border-sky-500 shadow-sm mb-10 md:mb-14 bg-slate-100">
+          <div className="overflow-hidden rounded-none md:rounded-none border-2 md:border-[2px] border-sky-500 shadow-sm mb-10 md:mb-14 bg-slate-100">
             <img
               src={IMAGES.showroom}
               alt="Showroom Nhật Minh Smart Home"
@@ -106,7 +106,7 @@ const AboutPage = () => {
                 an toàn, tiện nghi và hiện đại hơn.
               </p>
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 md:p-6 mb-7">
+              <div className="rounded-none border border-slate-200 bg-slate-50 p-5 md:p-6 mb-7">
                 <p className="font-bold text-slate-900 mb-4">
                   Thông tin liên hệ
                 </p>

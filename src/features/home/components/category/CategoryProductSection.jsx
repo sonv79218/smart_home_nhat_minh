@@ -84,28 +84,6 @@ const CategoryBanner = ({ banner }) => {
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center p-5 md:p-8">
-        {/* <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2 max-w-md">
-          {banner.title}
-        </h3>
-        <p className="text-sm md:text-base text-white/80 max-w-md line-clamp-2 mb-3 md:mb-4">
-          {banner.subtitle || banner.description}
-        </p> */}
-        {/* <Link
-          to={banner.link || "#"}
-          className="
-            inline-flex items-center gap-2 
-            px-4 py-2 md:px-5 md:py-2.5
-            bg-white text-slate-900 font-semibold rounded-full
-            w-fit text-xs md:text-sm
-            hover:bg-primary-50 hover:text-primary-600
-            transition-colors
-          "
-        >
-          Khám phá ngay
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link> */}
       </div>
     </div>
   );

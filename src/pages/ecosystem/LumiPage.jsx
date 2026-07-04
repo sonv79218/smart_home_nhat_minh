@@ -1,22 +1,28 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Lightbulb,
+  Ruler,
+  Zap,
+} from "lucide-react";
 
 // ==================== DATA ====================
+const bannerImage = "https://sudospaces.com/lumi/2022/02/z3115361986276-ac2b854e53ddd032d71f1dcef3076389-2048x759.jpeg";
 const requiredInfos = [
   {
-    icon: "💡",
+    icon: <Lightbulb className="h-6 w-6" />,
     title: "Nhu cầu của chủ nhà",
     content:
       "Xác định rõ các giải pháp mong muốn như chiếu sáng, rèm tự động, điều hòa, an ninh để đưa ra số lượng thiết bị phù hợp.",
   },
   {
-    icon: "📐",
+    icon: <Ruler className="h-6 w-6" />,
     title: "Bản vẽ xây dựng",
     content:
       "Diện tích, số phòng, số tầng và cách bố trí công năng ảnh hưởng trực tiếp đến số lượng công tắc và bộ điều khiển.",
   },
   {
-    icon: "⚡",
+    icon: <Zap className="h-6 w-6" />,
     title: "Hạ tầng hiện đại",
     content:
       "Kiểm tra hiện trạng điện, mạng, vị trí lắp đặt để đề xuất phương án phù hợp và tối ưu chi phí thi công.",
@@ -267,7 +273,7 @@ const faqs = [
 // ==================== COMPONENTS ====================
 const CheckIcon = ({ active }) => (
   <span
-    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-none text-xs font-bold ${
       active ? "bg-emerald-100 text-emerald-600" : "bg-red-100 text-red-400"
     }`}
   >
@@ -286,7 +292,7 @@ const FAQItem = ({ faq, isOpen, onToggle }) => (
         {faq.question}
       </span>
       <span
-        className={`ml-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-transform duration-200 ${
+        className={`ml-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-none bg-gray-100 text-gray-600 transition-transform duration-200 ${
           isOpen ? "rotate-180" : ""
         }`}
       >
@@ -315,86 +321,14 @@ const LumiPage = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* ==================== SECTION 1: HERO ==================== */}
-      <section
-        className="relative flex min-h-[650px] items-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800"
-        style={{ backgroundColor: "#0B5ED7" }}
-      >
-        {/* Background blur effects */}
-        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-cyan-400 opacity-20 blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-emerald-400 opacity-20 blur-3xl" />
-
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-16 lg:flex-row lg:items-center lg:px-6">
-          {/* Left column */}
-          <div className="flex-1 text-white">
-            <span className="mb-4 inline-block rounded-full bg-white/20 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm">
-              Báo giá nhà thông minh 2025
-            </span>
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight md:text-4xl lg:text-5xl">
-              Giải pháp nhà thông minh Lumi
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-blue-100 md:text-lg">
-              Giải pháp smarthome toàn diện cho ngôi nhà của bạn. Tiện nghi, an
-              toàn, tiết kiệm điện và điều khiển dễ dàng từ smartphone.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <button
-                type="button"
-                className="rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 shadow-lg transition hover:bg-gray-50 hover:shadow-xl"
-                style={{ color: "#0B5ED7" }}
-              >
-                Nhận báo giá
-              </button>
-              <button
-                type="button"
-                className="rounded-xl border-2 border-white/50 bg-transparent px-6 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white/10"
-              >
-                Xem sản phẩm
-              </button>
-            </div>
-          </div>
-
-          {/* Right column - Image with floating cards */}
-          <div className="relative flex-1">
-            {/* Main image placeholder */}
-            <div className="relative mx-auto max-w-lg">
-              <div className="overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
-                  alt="Smart Home"
-                  className="h-80 w-full object-cover opacity-90"
-                />
-              </div>
-
-              {/* Floating cards */}
-              <div
-                className="absolute -left-4 top-10 rounded-2xl bg-white p-4 shadow-xl"
-                style={{ color: "#0F172A" }}
-              >
-                <p className="text-xs font-medium text-gray-500">Gói từ</p>
-                <p
-                  className="text-2xl font-extrabold"
-                  style={{ color: "#0B5ED7" }}
-                >
-                  19 triệu
-                </p>
-              </div>
-
-              <div
-                className="absolute -right-4 bottom-10 rounded-2xl bg-white p-4 shadow-xl"
-                style={{ color: "#0F172A" }}
-              >
-                <p className="text-xs font-medium text-gray-500">Công trình</p>
-                <p
-                  className="text-2xl font-extrabold"
-                  style={{ color: "#10B981" }}
-                >
-                  5000+
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<section className="relative min-h-[650px] overflow-hidden">
+  {/* Ảnh nền */}
+  <img
+    src={bannerImage}
+    alt="Lumi Smart Home"
+    className="absolute inset-0 h-full w-full object-cover"
+  />
+</section>
 
       {/* ==================== SECTION 2: GIỚI THIỆU ==================== */}
       <section className="mx-auto max-w-[1000px] px-4 py-16">
@@ -422,10 +356,10 @@ const LumiPage = () => {
             {requiredInfos.map((info, index) => (
               <div
                 key={index}
-                className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                className="group rounded-none border border-gray-200 bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
                 <div
-                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl"
+                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-none text-2xl"
                   style={{ backgroundColor: "#0B5ED7" + "15" }}
                 >
                   {info.icon}
@@ -456,7 +390,7 @@ const LumiPage = () => {
 
           {/* Tabs */}
           <div className="mb-10 flex justify-center">
-            <div className="inline-flex rounded-xl bg-gray-100 p-1">
+            <div className="inline-flex rounded-none bg-gray-100 p-1">
               {pricingTabs.map((tab, index) => (
                 <button
                   key={tab}
@@ -480,7 +414,7 @@ const LumiPage = () => {
            {activePackages.map((pkg) => (
               <div
                 key={pkg.name}
-                className={`relative flex flex-col rounded-3xl border-2 bg-white p-8 shadow-lg transition-all duration-300 ${
+                className={`relative flex flex-col rounded-none border-2 bg-white p-8 shadow-lg transition-all duration-300 ${
                   pkg.popular
                     ? "scale-105 border-blue-500 shadow-xl"
                     : "border-gray-200"
@@ -489,7 +423,7 @@ const LumiPage = () => {
               >
                 {pkg.popular && (
                   <span
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold text-white"
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-none px-4 py-1 text-xs font-bold text-white"
                     style={{ backgroundColor: "#0B5ED7" }}
                   >
                     Phổ biến
@@ -518,7 +452,7 @@ const LumiPage = () => {
 
                 <button
                   type="button"
-                  className="mt-8 w-full rounded-xl py-3 text-sm font-bold transition-all"
+                  className="mt-8 w-full rounded-none py-3 text-sm font-bold transition-all"
                   style={
                     pkg.popular
                       ? { backgroundColor: "#0B5ED7", color: "white" }
@@ -559,7 +493,7 @@ const LumiPage = () => {
 
             <button
               type="button"
-              className="mt-8 rounded-xl px-6 py-3 text-sm font-bold transition hover:opacity-90"
+              className="mt-8 rounded-none px-6 py-3 text-sm font-bold transition hover:opacity-90"
               style={{ backgroundColor: "#10B981", color: "white" }}
             >
               Xem thêm
@@ -567,7 +501,7 @@ const LumiPage = () => {
           </div>
 
           {/* Right - Image */}
-          <div className="relative overflow-hidden rounded-3xl">
+          <div className="relative overflow-hidden rounded-none">
             <img
               src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
               alt="Lumi Smart Devices"
@@ -592,7 +526,7 @@ const LumiPage = () => {
           </p>
           <button
             type="button"
-            className="mt-8 rounded-xl bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
+            className="mt-8 rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
             style={{ color: "#10B981" }}
           >
             Hẹn lịch ngay
@@ -610,7 +544,7 @@ const LumiPage = () => {
           {/* Featured project */}
           <Link
             to="/projects"
-            className="group relative mb-8 block overflow-hidden rounded-3xl"
+            className="group relative mb-8 block overflow-hidden rounded-none"
           >
             <img
               src={featuredProject.img}
@@ -620,7 +554,7 @@ const LumiPage = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 p-8 text-white">
               <span
-                className="inline-block rounded-full px-3 py-1 text-xs font-bold"
+                className="inline-block rounded-none px-3 py-1 text-xs font-bold"
                 style={{ backgroundColor: "#10B981" }}
               >
                 {featuredProject.type}
@@ -637,7 +571,7 @@ const LumiPage = () => {
               <Link
                 key={idx}
                 to="/projects"
-                className="group overflow-hidden rounded-2xl bg-white shadow-lg"
+                className="group overflow-hidden rounded-none bg-white shadow-lg"
               >
                 <div className="h-48 overflow-hidden">
                   <img
@@ -674,7 +608,7 @@ const LumiPage = () => {
             {smartSolutions.map((solution, idx) => (
               <div
                 key={idx}
-                className="group relative h-72 overflow-hidden rounded-2xl shadow-lg"
+                className="group relative h-72 overflow-hidden rounded-none shadow-lg"
               >
                 <img
                   src={solution.img}
@@ -711,14 +645,14 @@ const LumiPage = () => {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <button
               type="button"
-              className="rounded-xl bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
+              className="rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
               style={{ color: "#0B5ED7" }}
             >
               Nhận báo giá
             </button>
             <button
               type="button"
-              className="rounded-xl border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
+              className="rounded-none border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
             >
               Liên hệ ngay
             </button>

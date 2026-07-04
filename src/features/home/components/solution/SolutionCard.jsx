@@ -37,7 +37,7 @@ const hasImage = imageSrc && imageSrc.trim() !== "";
   return (
     <div
       onClick={handleClick}
-      className="group relative aspect-[8/5] rounded-xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
+      className="group relative aspect-[8/5] rounded-none overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
     >
       {/* Background Image or Placeholder */}
 {hasImage ? (

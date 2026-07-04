@@ -1,377 +1,670 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Home,
   Lightbulb,
-  ShieldCheck,
-  Smartphone,
-  Cpu,
-  Waves,
-  CheckCircle,
-  ArrowRight,
-  ImageIcon,
-  MapPin,
-  Phone,
-  ToggleLeft,
+  Home,
+  Wallet,
 } from "lucide-react";
 
-const hunonicGreen = "#0bff03";
+// ==================== DATA ====================
+const bannerImage = "https://thaihungsmarthome.com/wp-content/uploads/2026/05/1779360945602_1070054269534547164_1070054269534547164_075272239e677ba506fafa5d503026e5-1536x716.jpg";
+const requiredInfos = [
+  {
+    icon: <Lightbulb className="h-6 w-6" />,
+    title: "Nhu cầu sử dụng",
+    content:
+      "Xác định các thiết bị cần điều khiển như đèn, điều hòa, bình nóng lạnh, cửa cuốn, cổng, rèm, camera...",
+  },
+  {
+    icon: <Home className="h-6 w-6" />,
+    title: "Hiện trạng công trình",
+    content:
+      "Nhà đang xây, đã hoàn thiện hay đang sử dụng sẽ quyết định phương án thi công phù hợp.",
+  },
+  {
+    icon: <Wallet className="h-6 w-6" />,
+    title: "Ngân sách",
+    content:
+      "Dựa vào ngân sách để lựa chọn gói giải pháp phù hợp và tối ưu chi phí đầu tư.",
+  },
+];
 
-const hunonicImages = {
-  hero: "",
-  intro: "",
-  solution1: "",
-  solution2: "",
-  solution3: "",
-  solution4: "",
-  project1: "",
-  project2: "",
-  project3: "",
-  project4: "",
-  cta: "",
+const pricingTabs = ["Chung cư", "Nhà phố", "Biệt thự"];
+
+const pricingPackages = {
+  0: [
+    {
+      name: "Starter",
+      price: "9.900.000 đ",
+      popular: false,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+    {
+      name: "Smart",
+      price: "19.900.000 đ",
+      popular: true,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+    {
+      name: "Pro",
+      price: "39.900.000 đ",
+      popular: false,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+  ],
+
+  1: [
+    {
+      name: "Starter",
+      price: "14.900.000 đ",
+      popular: false,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+    {
+      name: "Smart",
+      price: "29.900.000 đ",
+      popular: true,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+    {
+      name: "Pro",
+      price: "49.900.000 đ",
+      popular: false,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+  ],
+
+  2: [
+    {
+      name: "Starter",
+      price: "19.900.000 đ",
+      popular: false,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+    {
+      name: "Smart",
+      price: "39.900.000 đ",
+      popular: true,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+    {
+      name: "Pro",
+      price: "79.900.000 đ",
+      popular: false,
+      features: [
+        { text: "Công tắc thông minh", available: true },
+        { text: "Ổ cắm thông minh", available: true },
+        { text: "Bình nóng lạnh", available: true },
+        { text: "Điều hòa", available: true },
+        { text: "Cửa cuốn", available: true },
+        { text: "Cổng tự động", available: true },
+        { text: "Cảm biến", available: true },
+        { text: "Camera", available: true },
+        { text: "Báo động", available: true },
+      ],
+    },
+  ],
 };
 
-const ImageBox = ({ src, label, className = "" }) => (
-  <div className={`relative overflow-hidden bg-lime-50 border border-lime-100 ${className}`}>
-    {src ? (
-      <img src={src} alt={label} className="w-full h-full object-cover" />
-    ) : (
-      <div className="w-full h-full min-h-[180px] flex items-center justify-center text-center p-5">
-        <div>
-          <ImageIcon className="w-9 h-9 mx-auto mb-3 text-lime-500" />
-          <p className="text-sm font-bold text-lime-700">{label}</p>
-          <p className="text-xs text-lime-600 mt-1">Thêm ảnh trong hunonicImages</p>
-        </div>
-      </div>
-    )}
+const whyChooseHunonic = {
+  title: "Tại sao nên lựa chọn Hunonic?",
+  description:
+    "Hunonic là thương hiệu nhà thông minh Việt Nam tập trung vào giải pháp không dây, dễ lắp đặt, giá thành hợp lý và khả năng mở rộng linh hoạt.",
+  features: [
+    "Không cần đi lại dây điện",
+    "Lắp đặt trong ngày",
+    "Điều khiển từ xa",
+    "Hỗ trợ Google Assistant",
+    "Hỗ trợ Alexa",
+    "Máy chủ tại Việt Nam",
+    "Bảo hành chính hãng",
+    "Dễ nâng cấp",
+  ],
+};
+
+const featuredProject = {
+  title: "Công trình tiêu biểu",
+  type: "Dự án tiêu biểu",
+  img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+};
+
+const projects = [
+  {
+    title: "Nhà phố thông minh",
+    type: "Nhà phố",
+    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+  },
+  {
+    title: "Villa tự động hóa",
+    type: "Villa",
+    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
+  },
+  {
+    title: "Quán Cafe thông minh",
+    type: "Quán Cafe",
+    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
+  },
+];
+
+const smartSolutions = [
+  {
+    title: "Công tắc thông minh",
+    desc: "Điều khiển đèn theo ngữ cảnh, lịch trình hoặc cảm biến hiện diện. Tiết kiệm đến 40% chi phí điện.",
+    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+  },
+  {
+    title: "Ổ cắm thông minh",
+    desc: "Quản lý nguồn điện từ xa, lập lịch tự động và theo dõi mức tiêu thụ năng lượng theo thời gian thực.",
+    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+  },
+  {
+    title: "Bình nóng lạnh",
+    desc: "Bật tắt, hẹn giờ và điều chỉnh nhiệt độ bình nóng lạnh từ xa thông qua ứng dụng Hunonic.",
+    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80",
+  },
+  {
+    title: "Điều hòa",
+    desc: "Điều khiển điều hòa từ xa, đặt nhiệt độ theo thói quen và tối ưu hóa mức tiêu thụ điện.",
+    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80",
+  },
+];
+
+const faqs = [
+  {
+    question: "Hunonic có cần Internet không?",
+    answer:
+      "Hệ thống Hunonic hoạt động ổn định trên mạng Wi-Fi gia đình để điều khiển từ xa qua app. Một số chức năng cơ bản có thể hoạt động ngoại tuyến khi mạng mất.",
+  },
+  {
+    question: "Có phải đi lại dây điện không?",
+    answer:
+      "Không. Hunonic sử dụng giải pháp không dây, lắp đặt trực tiếp lên công tắc và thiết bị hiện có mà không cần đục đẽo hay đi lại dây điện.",
+  },
+  {
+    question: "Nhà đang ở có lắp được không?",
+    answer:
+      "Có. Hunonic phù hợp với cả nhà mới và nhà đang sử dụng. Thiết kế không dây giúp lắp đặt nhanh, không gây ồn ào và không cần sửa chữa lớn.",
+  },
+  {
+    question: "Có điều khiển bằng giọng nói không?",
+    answer:
+      "Có. Hunonic hỗ trợ điều khiển bằng giọng nói qua Google Assistant và Alexa, giúp bạn quản lý nhà thông minh dễ dàng hơn.",
+  },
+  {
+    question: "Có dùng Google Assistant không?",
+    answer:
+      "Có. Bạn có thể tích hợp Hunonic với Google Assistant để điều khiển thiết bị bằng giọng nói hoặc đặt lịch tự động hóa.",
+  },
+  {
+    question: "Có bảo hành bao lâu?",
+    answer:
+      "Tất cả thiết bị Hunonic được bảo hành chính hãng 24 tháng. Đội ngũ kỹ thuật hỗ trợ tư vấn và xử lý sự cố nhanh chóng.",
+  },
+];
+
+// ==================== COMPONENTS ====================
+const CheckIcon = ({ active }) => (
+  <span
+    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-none text-xs font-bold ${
+      active ? "bg-emerald-100 text-emerald-600" : "bg-red-100 text-red-400"
+    }`}
+  >
+    {active ? "✓" : "×"}
+  </span>
+);
+
+const FAQItem = ({ faq, isOpen, onToggle }) => (
+  <div className="border-b border-gray-200">
+    <button
+      type="button"
+      onClick={onToggle}
+      className="flex w-full items-center justify-between py-5 text-left"
+    >
+      <span className="text-base font-semibold text-gray-900 md:text-lg">
+        {faq.question}
+      </span>
+      <span
+        className={`ml-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-none bg-gray-100 text-gray-600 transition-transform duration-200 ${
+          isOpen ? "rotate-180" : ""
+        }`}
+      >
+        ▼
+      </span>
+    </button>
+    <div
+      className={`overflow-hidden transition-all duration-300 ${
+        isOpen ? "max-h-96 pb-5" : "max-h-0"
+      }`}
+    >
+      <p className="text-sm leading-relaxed text-gray-600 md:text-base">
+        {faq.answer}
+      </p>
+    </div>
   </div>
 );
 
-const strengths = [
-  "Thương hiệu Smart Home Việt Nam",
-  "Chi phí dễ tiếp cận hơn Lumi",
-  "App tiếng Việt, dễ sử dụng",
-  "Phù hợp người mới bắt đầu Smart Home",
-  "Dễ bảo hành và hỗ trợ kỹ thuật",
-];
-
-const solutions = [
-  {
-    icon: ToggleLeft,
-    image: hunonicImages.solution1,
-    title: "Công tắc thông minh",
-    desc: "Điều khiển đèn, bình nóng lạnh, thiết bị điện qua app hoặc theo ngữ cảnh.",
-  },
-  {
-    icon: Lightbulb,
-    image: hunonicImages.solution2,
-    title: "Chiếu sáng thông minh",
-    desc: "Bật tắt đèn theo lịch trình, khu vực, cảm biến hoặc thói quen sinh hoạt.",
-  },
-  {
-    icon: Waves,
-    image: hunonicImages.solution3,
-    title: "Rèm cửa tự động",
-    desc: "Điều khiển rèm từ xa, hẹn giờ mở đóng và kết hợp với ngữ cảnh trong nhà.",
-  },
-  {
-    icon: ShieldCheck,
-    image: hunonicImages.solution4,
-    title: "Cảm biến & an ninh",
-    desc: "Kết hợp cảm biến cửa, cảm biến chuyển động và cảnh báo để tăng an toàn.",
-  },
-];
-
-const projects = [
-  { image: hunonicImages.project1, title: "Nhà phố Hunonic", desc: "Giải pháp tiết kiệm, dễ dùng cho gia đình." },
-  { image: hunonicImages.project2, title: "Căn hộ thông minh", desc: "Điều khiển công tắc, đèn, rèm và cảm biến qua app." },
-  { image: hunonicImages.project3, title: "Gia đình mới bắt đầu", desc: "Lắp từ vài thiết bị cơ bản rồi nâng cấp dần." },
-  { image: hunonicImages.project4, title: "Công trình dân dụng", desc: "Phù hợp nhu cầu thực tế, dễ bảo hành và hỗ trợ." },
-];
-
+// ==================== MAIN COMPONENT ====================
 const HunonicPage = () => {
+  const [activeTab, setActiveTab] = useState(0);
+  const activePackages = pricingPackages[activeTab];
+
   return (
-    <main className="bg-white text-slate-900">
-      {/* HERO */}
-      <section className="relative min-h-[620px] bg-slate-950 overflow-hidden">
-        <ImageBox
-          src={hunonicImages.hero}
-          label="Ảnh hero Hunonic"
-          className="absolute inset-0 rounded-none border-0"
+    <div className="bg-white min-h-screen">
+      {/* ==================== SECTION 1: HERO ==================== */}
+      <section className="relative min-h-[650px] overflow-hidden">
+        {/* Ảnh nền */}
+        <img
+          src={bannerImage}
+          alt="Hunonic Smart Home"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/75 to-lime-900/20" />
-        <div className="absolute -right-20 top-20 w-96 h-96 rounded-full bg-lime-500/30 blur-3xl" />
-        <div className="absolute left-10 bottom-10 w-72 h-72 rounded-full bg-green-500/20 blur-3xl" />
-
-        <div className="relative z-10 w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 min-h-[620px] flex items-center">
-          <div className="max-w-3xl pt-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/10 border border-lime-400/20 text-lime-300 text-sm font-bold mb-6">
-              <Home size={16} />
-              Hệ sinh thái Hunonic
-            </div>
-
-            <h1 className="text-4xl md:text-7xl font-extrabold text-white leading-tight">
-              Giải pháp Smart Home Hunonic dễ dùng cho gia đình Việt
-            </h1>
-
-            <p className="mt-6 text-white/75 text-base md:text-xl leading-relaxed max-w-2xl">
-              Nhật Minh Smart Home tư vấn, cung cấp và triển khai hệ sinh thái Hunonic
-              cho nhà phố, chung cư, gia đình mới bắt đầu và các công trình dân dụng.
-            </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-slate-950 font-extrabold hover:brightness-110 transition"
-                style={{ backgroundColor: hunonicGreen }}
-              >
-                Nhận tư vấn Hunonic
-                <ArrowRight size={18} />
-              </Link>
-
-              <Link
-                to="/products?brand=hunonic"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/15 text-white font-bold hover:bg-white/15 transition"
-              >
-                Xem sản phẩm Hunonic
-              </Link>
-            </div>
-          </div>
-        </div>
       </section>
 
-      {/* INTRO */}
-      <section className="py-16 md:py-24">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-10 items-center">
-          <ImageBox
-            src={hunonicImages.intro}
-            label="Ảnh giới thiệu Hunonic"
-            className="h-[320px] md:h-[480px] rounded-3xl"
-          />
-
-          <div>
-            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
-              Hunonic là gì?
-            </p>
-
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-              Nhà thông minh Việt Nam, dễ dùng và chi phí dễ tiếp cận
-            </h2>
-
-            <p className="text-slate-600 leading-relaxed mb-6">
-              Hunonic là hệ sinh thái Smart Home Việt Nam tập trung vào sự đơn giản,
-              dễ sử dụng và phù hợp với nhu cầu thực tế của gia đình Việt. Đây là lựa
-              chọn tốt cho khách hàng muốn bắt đầu nhà thông minh với chi phí hợp lý.
-            </p>
-
-            <div className="space-y-3">
-              {strengths.map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle size={20} className="text-lime-500 shrink-0" />
-                  <span className="font-semibold text-slate-700">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* ==================== SECTION 2: GIỚI THIỆU ==================== */}
+      <section className="mx-auto max-w-[1000px] px-4 py-16">
+        <h2 className="text-center text-2xl font-extrabold text-gray-900 md:text-3xl">
+          Báo giá nhà thông minh Hunonic
+        </h2>
+        <p className="mt-6 text-center text-base leading-8 text-gray-600 md:text-lg">
+          Giải pháp nhà thông minh không dây Hunonic giúp điều khiển chiếu sáng, điều hòa, bình nóng lạnh, cửa cuốn, cổng và nhiều thiết bị khác ngay trên điện thoại. Phù hợp cả nhà mới và nhà đang sử dụng.
+        </p>
       </section>
 
-      {/* WHY */}
-      <section className="py-16 md:py-24 bg-lime-50/70">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
-              Vì sao Nhật Minh tư vấn Hunonic?
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Dễ bắt đầu, dễ dùng, dễ nâng cấp
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              ["Chi phí dễ tiếp cận", "Phù hợp khách hàng muốn làm smart home với ngân sách hợp lý."],
-              ["Dễ sử dụng", "App tiếng Việt, thao tác đơn giản, phù hợp nhiều độ tuổi."],
-              ["Dễ triển khai", "Có thể lắp từ công tắc, đèn, rèm đến cảm biến theo từng giai đoạn."],
-            ].map(([title, desc]) => (
-              <div key={title} className="bg-white rounded-3xl border border-lime-100 p-6 shadow-sm">
-                <Cpu className="mb-4" size={30} style={{ color: hunonicGreen }} />
-                <h3 className="text-xl font-extrabold mb-2">{title}</h3>
-                <p className="text-slate-600 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SOLUTIONS */}
-      <section className="py-16 md:py-24">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="max-w-3xl mb-10">
-            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
-              Giải pháp Hunonic
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Từ thiết bị cơ bản đến hệ thống Smart Home hoàn chỉnh
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {solutions.map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <div key={item.title} className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-lg transition">
-                  <ImageBox src={item.image} label={`Ảnh ${item.title}`} className="h-[210px] rounded-none border-0" />
-
-                  <div className="p-5">
-                    <Icon size={28} className="mb-3" style={{ color: hunonicGreen }} />
-                    <h3 className="text-lg font-extrabold mb-2">{item.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* FIT */}
-      <section className="py-16 bg-slate-950 text-white">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <p className="text-lime-300 font-extrabold mb-3">
-                Hunonic phù hợp với ai?
-              </p>
-
-              <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-5">
-                Phù hợp cho người mới bắt đầu nhà thông minh
-              </h2>
-
-              <p className="text-slate-300 leading-relaxed">
-                Hunonic phù hợp với khách hàng muốn trải nghiệm Smart Home theo cách
-                đơn giản, dễ dùng và có thể nâng cấp dần theo nhu cầu sử dụng thực tế.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {["Nhà phố", "Chung cư", "Người mới bắt đầu", "Công trình dân dụng"].map((item) => (
-                <div key={item} className="rounded-3xl bg-white/5 border border-white/10 p-6">
-                  <Home className="text-lime-300 mb-4" size={30} />
-                  <h3 className="text-xl font-extrabold">{item}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS */}
-      <section className="py-16 md:py-24 bg-slate-50">
-        <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-5 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
-              Công trình Hunonic
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Thêm ảnh thực tế để khách hàng dễ hình dung
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {projects.map((item) => (
-              <div key={item.title} className="rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-sm">
-                <ImageBox src={item.image} label={`Ảnh ${item.title}`} className="h-[230px] rounded-none border-0" />
-
-                <div className="p-5">
-                  <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
-                    <MapPin size={15} />
-                    Công trình thực tế
-                  </div>
-
-                  <h3 className="text-lg font-extrabold mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* OVERVIEW */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-[900px] mx-auto px-5">
-          <div className="text-center mb-10">
-            <p className="font-extrabold mb-3" style={{ color: hunonicGreen }}>
-              Tổng quan nhanh
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold">
-              Hunonic trong mắt Nhật Minh
-            </h2>
-          </div>
-
-          <div className="rounded-3xl border border-lime-100 overflow-hidden bg-white shadow-sm">
-            {[
-              ["Nguồn gốc", "Việt Nam"],
-              ["Ngôn ngữ app", "Tiếng Việt, dễ dùng"],
-              ["Chi phí", "Dễ tiếp cận hơn Lumi"],
-              ["Phù hợp", "Gia đình Việt, nhà phố, chung cư"],
-              ["Khả năng mở rộng", "Tốt cho nhu cầu dân dụng"],
-            ].map(([label, value]) => (
-              <div key={label} className="grid grid-cols-3 border-b last:border-b-0 border-lime-100">
-                <div className="col-span-1 bg-lime-50 p-4 font-bold text-lime-700">
-                  {label}
-                </div>
-                <div className="col-span-2 p-4 font-semibold text-slate-700">
-                  {value}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-20 md:py-28 bg-lime-600 overflow-hidden">
-        <ImageBox
-          src={hunonicImages.cta}
-          label="Ảnh CTA Hunonic"
-          className="absolute inset-0 rounded-none border-0 opacity-30"
-        />
-
-        <div className="absolute inset-0 bg-green-950/70" />
-
-        <div className="relative z-10 max-w-[900px] mx-auto px-5 text-center text-white">
-          <h2 className="text-3xl md:text-6xl font-extrabold leading-tight">
-            Bạn muốn lắp hệ thống Smart Home Hunonic?
+      {/* ==================== SECTION 3: 3 THÔNG TIN CẦN CÓ ==================== */}
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-12 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            3 thông tin chính cần có để lên một báo giá nhà thông minh chuẩn xác
           </h2>
 
-          <p className="mt-5 text-white/80 text-base md:text-lg leading-relaxed">
-            Nhật Minh Smart Home sẽ khảo sát, tư vấn và triển khai phương án Hunonic
-            phù hợp với công trình, nhu cầu sử dụng và ngân sách của bạn.
-          </p>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-lime-700 font-extrabold hover:bg-lime-50 transition"
-            >
-              Liên hệ tư vấn
-              <ArrowRight size={18} />
-            </Link>
-
-            <a
-              href="tel:0876906668"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 border border-white/20 text-white font-extrabold hover:bg-white/15 transition"
-            >
-              <Phone size={18} />
-              Gọi hotline
-            </a>
+          <div className="grid gap-8 md:grid-cols-3">
+            {requiredInfos.map((info, index) => (
+              <div
+                key={index}
+                className="group rounded-none border border-gray-200 bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              >
+                <div
+                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-none text-2xl"
+                  style={{ backgroundColor: "#16A34A" + "15" }}
+                >
+                  {info.icon}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">{info.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                  {info.content}
+                </p>
+                <Link
+                  to="/contact"
+                  className="mt-5 inline-block text-sm font-bold transition hover:underline"
+                  style={{ color: "#16A34A" }}
+                >
+                  Liên hệ ngay →
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-    </main>
+
+      {/* ==================== SECTION 4: BẢNG GIÁ ==================== */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-8 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Dự toán báo giá nhà thông minh Hunonic
+          </h2>
+
+          {/* Tabs */}
+          <div className="mb-10 flex justify-center">
+            <div className="inline-flex rounded-none bg-gray-100 p-1">
+              {pricingTabs.map((tab, index) => (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveTab(index)}
+                  className={`rounded-lg px-6 py-2 text-sm font-semibold transition-all duration-200 ${
+                    activeTab === index
+                      ? "bg-white text-white shadow-md"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                  style={activeTab === index ? { backgroundColor: "#16A34A" } : {}}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Packages */}
+          <div className="grid gap-8 lg:grid-cols-3 lg:items-stretch">
+           {activePackages.map((pkg) => (
+              <div
+                key={pkg.name}
+                className={`relative flex flex-col rounded-none border-2 bg-white p-8 shadow-lg transition-all duration-300 ${
+                  pkg.popular
+                    ? "scale-105 border-green-500 shadow-xl"
+                    : "border-gray-200"
+                }`}
+                style={pkg.popular ? { borderColor: "#16A34A" } : {}}
+              >
+                {pkg.popular && (
+                  <span
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-none px-4 py-1 text-xs font-bold text-white"
+                    style={{ backgroundColor: "#16A34A" }}
+                  >
+                    Phổ biến
+                  </span>
+                )}
+
+                <h3 className="text-xl font-bold text-gray-900">{pkg.name}</h3>
+                <div
+                  className="mt-3 text-3xl font-extrabold"
+                  style={{ color: "#16A34A" }}
+                >
+                  {pkg.price}
+                </div>
+
+                <div className="mt-6 flex-1 space-y-3">
+                  {pkg.features.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 text-sm text-gray-700"
+                    >
+                      <CheckIcon active={feature.available} />
+                      <span>{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className="mt-8 w-full rounded-none py-3 text-sm font-bold transition-all"
+                  style={
+                    pkg.popular
+                      ? { backgroundColor: "#16A34A", color: "white" }
+                      : { backgroundColor: "#16A34A", color: "white" }
+                  }
+                >
+                  Hẹn lịch tư vấn
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 5: TẠI SAO CHỌN HUNONIC ==================== */}
+      <section
+        className="py-16"
+        style={{ backgroundColor: "#14532D" }}
+      >
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-8">
+          {/* Left */}
+          <div className="text-white">
+            <h2 className="text-2xl font-extrabold md:text-3xl">
+              {whyChooseHunonic.title}
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-gray-300">
+              {whyChooseHunonic.description}
+            </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {whyChooseHunonic.features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <span style={{ color: "#22C55E" }}>✓</span>
+                  <span className="text-sm text-gray-300">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="mt-8 rounded-none px-6 py-3 text-sm font-bold transition hover:opacity-90"
+              style={{ backgroundColor: "#22C55E", color: "white" }}
+            >
+              Xem thêm
+            </button>
+          </div>
+
+          {/* Right - Image */}
+          <div className="relative overflow-hidden rounded-none">
+            <img
+              src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&q=80"
+              alt="Hunonic Smart Devices"
+              className="h-80 w-full object-cover lg:h-96"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 6: CTA ==================== */}
+      <section
+        className="py-16"
+        style={{ background: "linear-gradient(135deg, #16A34A 0%, #14532D 100%)" }}
+      >
+        <div className="mx-auto max-w-4xl px-4 text-center text-white">
+          <h2 className="text-2xl font-extrabold md:text-3xl">
+            Trải nghiệm giải pháp nhà thông minh không dây từ Hunonic
+          </h2>
+          <p className="mt-4 text-base text-green-100">
+            Đội ngũ chuyên gia Hunonic sẵn sàng tư vấn và triển khai giải pháp phù hợp với ngôi nhà của bạn
+          </p>
+          <button
+            type="button"
+            className="mt-8 rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
+            style={{ color: "#16A34A" }}
+          >
+            Nhận báo giá
+          </button>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 7: DỰ ÁN TIÊU BIỂU ==================== */}
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Công trình tiêu biểu
+          </h2>
+
+          {/* Featured project */}
+          <Link
+            to="/projects"
+            className="group relative mb-8 block overflow-hidden rounded-none"
+          >
+            <img
+              src={featuredProject.img}
+              alt={featuredProject.title}
+              className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8 text-white">
+              <span
+                className="inline-block rounded-none px-3 py-1 text-xs font-bold"
+                style={{ backgroundColor: "#22C55E" }}
+              >
+                {featuredProject.type}
+              </span>
+              <h3 className="mt-3 text-2xl font-extrabold">
+                {featuredProject.title}
+              </h3>
+            </div>
+          </Link>
+
+          {/* 3 project cards */}
+          <div className="grid gap-6 md:grid-cols-3">
+            {projects.map((project, idx) => (
+              <Link
+                key={idx}
+                to="/projects"
+                className="group overflow-hidden rounded-none bg-white shadow-lg"
+              >
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-5">
+                  <span
+                    className="text-xs font-semibold"
+                    style={{ color: "#64748B" }}
+                  >
+                    {project.type}
+                  </span>
+                  <h3 className="mt-1 text-base font-bold text-gray-900">
+                    {project.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== SECTION 8: GIẢI PHÁP THÔNG MINH ==================== */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Giải pháp nhà thông minh Hunonic
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {smartSolutions.map((solution, idx) => (
+              <div
+                key={idx}
+                className="group relative h-72 overflow-hidden rounded-none shadow-lg"
+              >
+                <img
+                  src={solution.img}
+                  alt={solution.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <h3 className="text-base font-bold">{solution.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-300">
+                    {solution.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* ==================== SECTION 11: CTA CUỐI ==================== */}
+      <section
+        className="py-20"
+        style={{ background: "linear-gradient(135deg, #16A34A 0%, #14532D 100%)" }}
+      >
+        <div className="mx-auto max-w-4xl px-4 text-center text-white">
+          <h2 className="text-2xl font-extrabold md:text-3xl">
+            Sẵn sàng nâng cấp ngôi nhà cùng Hunonic?
+          </h2>
+          <p className="mt-4 text-base text-green-100">
+            Liên hệ ngay để được tư vấn miễn phí và nhận báo giá chi tiết
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <button
+              type="button"
+              className="rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
+              style={{ color: "#16A34A" }}
+            >
+              Nhận báo giá
+            </button>
+            <button
+              type="button"
+              className="rounded-none border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
+            >
+              Liên hệ tư vấn
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
