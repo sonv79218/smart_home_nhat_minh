@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Lightbulb,
   Ruler,
   Zap,
 } from "lucide-react";
+import PackageCard from "./aqara/PackageCard";
+import EstimateSummary from "./aqara/EstimateSummary";
+import {
+  pricingPackages,
+  housingTabs,
+  packageKeys,
+  defaultSelection,
+} from "./lumi/lumiPricingData";
+
+// ==================== THEME ====================
+const theme = {
+  primary: "#0B5ED7",
+  borderClass: "border-blue-600",
+  accentClass: "accent-blue-600",
+  textClass: "text-blue-600",
+};
 
 // ==================== DATA ====================
 const bannerImage = "https://sudospaces.com/lumi/2022/02/z3115361986276-ac2b854e53ddd032d71f1dcef3076389-2048x759.jpeg";
@@ -28,163 +44,6 @@ const requiredInfos = [
       "Kiểm tra hiện trạng điện, mạng, vị trí lắp đặt để đề xuất phương án phù hợp và tối ưu chi phí thi công.",
   },
 ];
-
-const pricingTabs = ["Chung cư", "Nhà phố", "Biệt thự"];
-
-const pricingPackages = {
-  0: [
-    {
-      name: "Basic",
-      price: "19.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: false },
-        { text: "Rèm tự động", available: false },
-        { text: "Âm thanh đa vùng", available: false },
-        { text: "Tưới tự động", available: false },
-        { text: "Đèn Dimmer", available: false },
-        { text: "An ninh thông minh", available: false },
-      ],
-    },
-    {
-      name: "Standard",
-      price: "49.000.000 đ",
-      popular: true,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: false },
-        { text: "Tưới tự động", available: false },
-        { text: "Đèn Dimmer", available: false },
-        { text: "An ninh thông minh", available: false },
-      ],
-    },
-    {
-      name: "Premium",
-      price: "79.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: true },
-        { text: "Tưới tự động", available: true },
-        { text: "Đèn Dimmer", available: true },
-        { text: "An ninh thông minh", available: true },
-      ],
-    },
-  ],
-
-  1: [
-    {
-      name: "Basic",
-      price: "35.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: false },
-        { text: "Âm thanh đa vùng", available: false },
-        { text: "Tưới tự động", available: false },
-        { text: "Đèn Dimmer", available: false },
-        { text: "An ninh thông minh", available: false },
-      ],
-    },
-    {
-      name: "Standard",
-      price: "75.000.000 đ",
-      popular: true,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: false },
-        { text: "Tưới tự động", available: false },
-        { text: "Đèn Dimmer", available: true },
-        { text: "An ninh thông minh", available: true },
-      ],
-    },
-    {
-      name: "Premium",
-      price: "120.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: true },
-        { text: "Tưới tự động", available: true },
-        { text: "Đèn Dimmer", available: true },
-        { text: "An ninh thông minh", available: true },
-      ],
-    },
-  ],
-
-  2: [
-    {
-      name: "Basic",
-      price: "65.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: false },
-        { text: "Tưới tự động", available: false },
-        { text: "Đèn Dimmer", available: true },
-        { text: "An ninh thông minh", available: true },
-      ],
-    },
-    {
-      name: "Standard",
-      price: "150.000.000 đ",
-      popular: true,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: true },
-        { text: "Tưới tự động", available: true },
-        { text: "Đèn Dimmer", available: true },
-        { text: "An ninh thông minh", available: true },
-      ],
-    },
-    {
-      name: "Premium",
-      price: "250.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Chiếu sáng thông minh", available: true },
-        { text: "Điều hòa thông minh", available: true },
-        { text: "Bình nóng lạnh thông minh", available: true },
-        { text: "Cảm biến thông minh", available: true },
-        { text: "Rèm tự động", available: true },
-        { text: "Âm thanh đa vùng", available: true },
-        { text: "Tưới tự động", available: true },
-        { text: "Đèn Dimmer", available: true },
-        { text: "An ninh thông minh", available: true },
-      ],
-    },
-  ],
-};
 
 const whyChooseLumi = {
   title: "Tại sao lại lựa chọn nhà thông minh Lumi",
@@ -271,16 +130,6 @@ const faqs = [
 ];
 
 // ==================== COMPONENTS ====================
-const CheckIcon = ({ active }) => (
-  <span
-    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-none text-xs font-bold ${
-      active ? "bg-emerald-100 text-emerald-600" : "bg-red-100 text-red-400"
-    }`}
-  >
-    {active ? "✓" : "×"}
-  </span>
-);
-
 const FAQItem = ({ faq, isOpen, onToggle }) => (
   <div className="border-b border-gray-200">
     <button
@@ -313,22 +162,77 @@ const FAQItem = ({ faq, isOpen, onToggle }) => (
 
 // ==================== MAIN COMPONENT ====================
 const LumiPage = () => {
-  const [activeTab, setActiveTab] = useState(0);
-  const activePackages = pricingPackages[activeTab];
+  const [activeTab, setActiveTab] = useState(housingTabs[0].key);
+  const [openFaq, setOpenFaq] = useState(null);
 
+  // Selection state is keyed by `${housingType}:${packageKey}` so each
+  // (loại nhà, gói) combo keeps its own checkbox choices.
+  const [selectedItems, setSelectedItems] = useState(() => {
+    const initial = {};
+    for (const tab of housingTabs) {
+      for (const pkgKey of packageKeys) {
+        initial[`${tab.key}:${pkgKey}`] = new Set(defaultSelection[pkgKey]);
+      }
+    }
+    return initial;
+  });
+  const [selectedPackage, setSelectedPackage] = useState(() => {
+    const initial = {};
+    for (const tab of housingTabs) {
+      initial[tab.key] = packageKeys[1]; // default to "Standard"
+    }
+    return initial;
+  });
 
+  const handleFaqToggle = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const toggleDevice = (pkgKey, deviceId) => {
+    const key = `${activeTab}:${pkgKey}`;
+    setSelectedItems((prev) => {
+      const nextSet = new Set(prev[key]);
+      if (nextSet.has(deviceId)) nextSet.delete(deviceId);
+      else nextSet.add(deviceId);
+      return { ...prev, [key]: nextSet };
+    });
+  };
+
+  const handleSelectPackage = (pkgKey) => {
+    setSelectedPackage((prev) => ({ ...prev, [activeTab]: pkgKey }));
+  };
+
+  const activeTabPackages = pricingPackages[activeTab];
+  const activePkgKey = selectedPackage[activeTab] ?? packageKeys[0];
+
+  // Pre-compute totals per package so cards and the summary share one source of truth.
+  const packageTotals = useMemo(() => {
+    const totals = {};
+    for (const pkgKey of packageKeys) {
+      const ids = selectedItems[`${activeTab}:${pkgKey}`];
+      totals[pkgKey] = activeTabPackages[pkgKey].devices
+        .filter((d) => ids.has(d.id))
+        .reduce((sum, d) => sum + d.price, 0);
+    }
+    return totals;
+  }, [activeTab, activeTabPackages, selectedItems]);
+
+  const selectedPkg = activeTabPackages[activePkgKey];
+  const selectedDeviceIds = selectedItems[`${activeTab}:${activePkgKey}`] ?? new Set();
+  const selectedDevices = selectedPkg
+    ? selectedPkg.devices.filter((d) => selectedDeviceIds.has(d.id))
+    : [];
 
   return (
     <div className="bg-white min-h-screen">
       {/* ==================== SECTION 1: HERO ==================== */}
-<section className="relative min-h-[650px] overflow-hidden">
-  {/* Ảnh nền */}
-  <img
-    src={bannerImage}
-    alt="Lumi Smart Home"
-    className="absolute inset-0 h-full w-full object-cover"
-  />
-</section>
+      <section className="relative min-h-[650px] overflow-hidden">
+        <img
+          src={bannerImage}
+          alt="Lumi Smart Home"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </section>
 
       {/* ==================== SECTION 2: GIỚI THIỆU ==================== */}
       <section className="mx-auto max-w-[1000px] px-4 py-16">
@@ -391,19 +295,19 @@ const LumiPage = () => {
           {/* Tabs */}
           <div className="mb-10 flex justify-center">
             <div className="inline-flex rounded-none bg-gray-100 p-1">
-              {pricingTabs.map((tab, index) => (
+              {housingTabs.map((tab) => (
                 <button
-                  key={tab}
+                  key={tab.key}
                   type="button"
-                  onClick={() => setActiveTab(index)}
+                  onClick={() => setActiveTab(tab.key)}
                   className={`rounded-lg px-6 py-2 text-sm font-semibold transition-all duration-200 ${
-                    activeTab === index
+                    activeTab === tab.key
                       ? "bg-white text-white shadow-md"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
-                  style={activeTab === index ? { backgroundColor: "#0B5ED7" } : {}}
+                  style={activeTab === tab.key ? { backgroundColor: theme.primary } : {}}
                 >
-                  {tab}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -411,59 +315,27 @@ const LumiPage = () => {
 
           {/* Packages */}
           <div className="grid gap-8 lg:grid-cols-3 lg:items-stretch">
-           {activePackages.map((pkg) => (
-              <div
-                key={pkg.name}
-                className={`relative flex flex-col rounded-none border-2 bg-white p-8 shadow-lg transition-all duration-300 ${
-                  pkg.popular
-                    ? "scale-105 border-blue-500 shadow-xl"
-                    : "border-gray-200"
-                }`}
-                style={pkg.popular ? { borderColor: "#0B5ED7" } : {}}
-              >
-                {pkg.popular && (
-                  <span
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-none px-4 py-1 text-xs font-bold text-white"
-                    style={{ backgroundColor: "#0B5ED7" }}
-                  >
-                    Phổ biến
-                  </span>
-                )}
-
-                <h3 className="text-xl font-bold text-gray-900">{pkg.name}</h3>
-                <div
-                  className="mt-3 text-3xl font-extrabold"
-                  style={{ color: "#0B5ED7" }}
-                >
-                  {pkg.price}
-                </div>
-
-                <div className="mt-6 flex-1 space-y-3">
-                  {pkg.features.map((feature, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 text-sm text-gray-700"
-                    >
-                      <CheckIcon active={feature.available} />
-                      <span>{feature.text}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  type="button"
-                  className="mt-8 w-full rounded-none py-3 text-sm font-bold transition-all"
-                  style={
-                    pkg.popular
-                      ? { backgroundColor: "#0B5ED7", color: "white" }
-                      : { backgroundColor: "#0B5ED7", color: "white" }
-                  }
-                >
-                  Hẹn lịch tư vấn
-                </button>
-              </div>
+            {packageKeys.map((pkgKey) => (
+              <PackageCard
+                key={pkgKey}
+                pkg={activeTabPackages[pkgKey]}
+                selectedIds={selectedItems[`${activeTab}:${pkgKey}`]}
+                total={packageTotals[pkgKey]}
+                isActive={activePkgKey === pkgKey}
+                onSelect={() => handleSelectPackage(pkgKey)}
+                onToggleDevice={(id) => toggleDevice(pkgKey, id)}
+                theme={theme}
+              />
             ))}
           </div>
+
+          {/* Estimate Summary */}
+          <EstimateSummary
+            pkg={selectedPkg}
+            selectedDevices={selectedDevices}
+            total={packageTotals[activePkgKey]}
+            theme={theme}
+          />
         </div>
       </section>
 
@@ -473,7 +345,6 @@ const LumiPage = () => {
         style={{ backgroundColor: "#0F172A" }}
       >
         <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-8">
-          {/* Left */}
           <div className="text-white">
             <h2 className="text-2xl font-extrabold md:text-3xl">
               {whyChooseLumi.title}
@@ -500,7 +371,6 @@ const LumiPage = () => {
             </button>
           </div>
 
-          {/* Right - Image */}
           <div className="relative overflow-hidden rounded-none">
             <img
               src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
@@ -541,7 +411,6 @@ const LumiPage = () => {
             Dự án tiêu biểu
           </h2>
 
-          {/* Featured project */}
           <Link
             to="/projects"
             className="group relative mb-8 block overflow-hidden rounded-none"
@@ -565,7 +434,6 @@ const LumiPage = () => {
             </div>
           </Link>
 
-          {/* 3 project cards */}
           <div className="grid gap-6 md:grid-cols-3">
             {projects.map((project, idx) => (
               <Link
@@ -628,9 +496,26 @@ const LumiPage = () => {
         </div>
       </section>
 
+      {/* ==================== SECTION 9: FAQ ==================== */}
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-3xl px-4">
+          <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
+            Câu hỏi thường gặp
+          </h2>
+          <div className="rounded-none bg-white p-6 shadow-lg md:p-8">
+            {faqs.map((faq, idx) => (
+              <FAQItem
+                key={idx}
+                faq={faq}
+                isOpen={openFaq === idx}
+                onToggle={() => handleFaqToggle(idx)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
-
-      {/* ==================== SECTION 11: CTA CUỐI ==================== */}
+      {/* ==================== SECTION 10: CTA CUỐI ==================== */}
       <section
         className="py-20"
         style={{ background: "linear-gradient(135deg, #0B5ED7 0%, #0F172A 100%)" }}

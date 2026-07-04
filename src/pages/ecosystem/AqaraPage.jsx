@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   House,
   DraftingCompass,
   Wallet,
 } from "lucide-react";
+import PackageCard from "./aqara/PackageCard";
+import EstimateSummary from "./aqara/EstimateSummary";
+import {
+  pricingPackages,
+  housingTabs,
+  packageKeys,
+  defaultSelection,
+} from "./aqara/aqaraPricingData";
 
 // ==================== DATA ====================
 const bannerImage = "https://aqaravn.com/opengraph-image";
@@ -28,199 +36,6 @@ const requiredInfos = [
       "Ngân sách sẽ giúp lựa chọn hệ sinh thái Aqara phù hợp từ cơ bản đến cao cấp.",
   },
 ];
-
-const pricingTabs = ["Chung cư", "Nhà phố", "Biệt thự"];
-
-const pricingPackages = {
-  0: [
-    {
-      name: "Starter",
-      price: "15.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-    {
-      name: "Smart",
-      price: "35.000.000 đ",
-      popular: true,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-    {
-      name: "Luxury",
-      price: "80.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-  ],
-
-  1: [
-    {
-      name: "Starter",
-      price: "25.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-    {
-      name: "Smart",
-      price: "55.000.000 đ",
-      popular: true,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-    {
-      name: "Luxury",
-      price: "120.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-  ],
-
-  2: [
-    {
-      name: "Starter",
-      price: "35.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-    {
-      name: "Smart",
-      price: "75.000.000 đ",
-      popular: true,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-    {
-      name: "Luxury",
-      price: "180.000.000 đ",
-      popular: false,
-      features: [
-        { text: "Zigbee Hub", available: true },
-        { text: "Công tắc thông minh", available: true },
-        { text: "Cảm biến cửa", available: true },
-        { text: "Cảm biến chuyển động", available: true },
-        { text: "Cảm biến nhiệt độ", available: true },
-        { text: "Rèm thông minh", available: true },
-        { text: "Điều hòa", available: true },
-        { text: "Camera", available: true },
-        { text: "Khóa cửa", available: true },
-        { text: "Chuông cửa", available: true },
-        { text: "Apple Home", available: true },
-        { text: "Google Home", available: true },
-        { text: "Matter", available: true },
-      ],
-    },
-  ],
-};
 
 const whyChooseAqara = {
   title: "Tại sao nên lựa chọn Aqara?",
@@ -289,16 +104,6 @@ const smartSolutions = [
 
 
 // ==================== COMPONENTS ====================
-const CheckIcon = ({ active }) => (
-  <span
-    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-none text-xs font-bold ${
-      active ? "bg-blue-100 text-blue-600" : "bg-red-100 text-red-400"
-    }`}
-  >
-    {active ? "✓" : "×"}
-  </span>
-);
-
 const FAQItem = ({ faq, isOpen, onToggle }) => (
   <div className="border-b border-gray-200">
     <button
@@ -331,13 +136,67 @@ const FAQItem = ({ faq, isOpen, onToggle }) => (
 
 // ==================== MAIN COMPONENT ====================
 const AqaraPage = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(housingTabs[0].key);
   const [openFaq, setOpenFaq] = useState(null);
-  const activePackages = pricingPackages[activeTab];
+
+  // Selection state is keyed by `${housingType}:${packageKey}` so each
+  // (loại nhà, gói) combo keeps its own checkbox choices.
+  const [selectedItems, setSelectedItems] = useState(() => {
+    const initial = {};
+    for (const tab of housingTabs) {
+      for (const pkgKey of packageKeys) {
+        initial[`${tab.key}:${pkgKey}`] = new Set(defaultSelection[pkgKey]);
+      }
+    }
+    return initial;
+  });
+  const [selectedPackage, setSelectedPackage] = useState(() => {
+    // Initialize every tab so selectedPackage[tabKey] is always defined.
+    const initial = {};
+    for (const tab of housingTabs) {
+      initial[tab.key] = packageKeys[1]; // default to "Smart"
+    }
+    return initial;
+  });
 
   const handleFaqToggle = (index) => {
     setOpenFaq(openFaq === index ? null : index);
   };
+
+  const toggleDevice = (pkgKey, deviceId) => {
+    const key = `${activeTab}:${pkgKey}`;
+    setSelectedItems((prev) => {
+      const nextSet = new Set(prev[key]);
+      if (nextSet.has(deviceId)) nextSet.delete(deviceId);
+      else nextSet.add(deviceId);
+      return { ...prev, [key]: nextSet };
+    });
+  };
+
+  const handleSelectPackage = (pkgKey) => {
+    setSelectedPackage((prev) => ({ ...prev, [activeTab]: pkgKey }));
+  };
+
+  const activeTabPackages = pricingPackages[activeTab];
+  const activePkgKey = selectedPackage[activeTab] ?? packageKeys[0];
+
+  // Pre-compute totals per package so cards and the summary share one source of truth.
+  const packageTotals = useMemo(() => {
+    const totals = {};
+    for (const pkgKey of packageKeys) {
+      const ids = selectedItems[`${activeTab}:${pkgKey}`];
+      totals[pkgKey] = activeTabPackages[pkgKey].devices
+        .filter((d) => ids.has(d.id))
+        .reduce((sum, d) => sum + d.price, 0);
+    }
+    return totals;
+  }, [activeTab, activeTabPackages, selectedItems]);
+
+  const selectedPkg = activeTabPackages[activePkgKey];
+  const selectedDeviceIds = selectedItems[`${activeTab}:${activePkgKey}`] ?? new Set();
+  const selectedDevices = selectedPkg
+    ? selectedPkg.devices.filter((d) => selectedDeviceIds.has(d.id))
+    : [];
 
   return (
     <div className="bg-white min-h-screen">
@@ -407,19 +266,19 @@ const AqaraPage = () => {
           {/* Tabs */}
           <div className="mb-10 flex justify-center">
             <div className="inline-flex rounded-none bg-gray-100 p-1">
-              {pricingTabs.map((tab, index) => (
+              {housingTabs.map((tab) => (
                 <button
-                  key={tab}
+                  key={tab.key}
                   type="button"
-                  onClick={() => setActiveTab(index)}
+                  onClick={() => setActiveTab(tab.key)}
                   className={`rounded-lg px-6 py-2 text-sm font-semibold transition-all duration-200 ${
-                    activeTab === index
+                    activeTab === tab.key
                       ? "bg-white text-white shadow-md"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
-                  style={activeTab === index ? { backgroundColor: "#2563EB" } : {}}
+                  style={activeTab === tab.key ? { backgroundColor: "#2563EB" } : {}}
                 >
-                  {tab}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -427,59 +286,25 @@ const AqaraPage = () => {
 
           {/* Packages */}
           <div className="grid gap-8 lg:grid-cols-3 lg:items-stretch">
-           {activePackages.map((pkg) => (
-              <div
-                key={pkg.name}
-                className={`relative flex flex-col rounded-none border-2 bg-white p-8 shadow-lg transition-all duration-300 ${
-                  pkg.popular
-                    ? "scale-105 border-blue-500 shadow-xl"
-                    : "border-gray-200"
-                }`}
-                style={pkg.popular ? { borderColor: "#2563EB" } : {}}
-              >
-                {pkg.popular && (
-                  <span
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-none px-4 py-1 text-xs font-bold text-white"
-                    style={{ backgroundColor: "#2563EB" }}
-                  >
-                    Phổ biến
-                  </span>
-                )}
-
-                <h3 className="text-xl font-bold text-gray-900">{pkg.name}</h3>
-                <div
-                  className="mt-3 text-3xl font-extrabold"
-                  style={{ color: "#2563EB" }}
-                >
-                  {pkg.price}
-                </div>
-
-                <div className="mt-6 flex-1 space-y-3">
-                  {pkg.features.map((feature, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 text-sm text-gray-700"
-                    >
-                      <CheckIcon active={feature.available} />
-                      <span>{feature.text}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  type="button"
-                  className="mt-8 w-full rounded-none py-3 text-sm font-bold transition-all"
-                  style={
-                    pkg.popular
-                      ? { backgroundColor: "#2563EB", color: "white" }
-                      : { backgroundColor: "#2563EB", color: "white" }
-                  }
-                >
-                  Hẹn lịch tư vấn
-                </button>
-              </div>
+            {packageKeys.map((pkgKey) => (
+              <PackageCard
+                key={pkgKey}
+                pkg={activeTabPackages[pkgKey]}
+                selectedIds={selectedItems[`${activeTab}:${pkgKey}`]}
+                total={packageTotals[pkgKey]}
+                isActive={activePkgKey === pkgKey}
+                onSelect={() => handleSelectPackage(pkgKey)}
+                onToggleDevice={(id) => toggleDevice(pkgKey, id)}
+              />
             ))}
           </div>
+
+          {/* Estimate Summary */}
+          <EstimateSummary
+            pkg={selectedPkg}
+            selectedDevices={selectedDevices}
+            total={packageTotals[activePkgKey]}
+          />
         </div>
       </section>
 
