@@ -29,6 +29,7 @@ import LumiPage from "../pages/ecosystem/LumiPage";
 import Hunonic from "../pages/ecosystem/HunonicPage";
 import AqaraPage from "../pages/ecosystem/AqaraPage";
 import SolutionsByHousePage from "../pages/projects/ProjectsPage";
+import SolarPage from "../pages/SolarPage";
 
 
 
@@ -158,6 +159,12 @@ const AppRoutes = () => {
               <SolutionsByHousePage />
             </MainLayout>
           }
+        />
+
+        {/* SOLAR ROUTE — Nhật Minh Solar microsite (own header/footer) */}
+        <Route
+          path="/solar"
+          element={<SolarPage />}
         />
 
         <Route
