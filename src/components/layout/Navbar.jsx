@@ -16,9 +16,10 @@ import { TYPOGRAPHY } from "../../styles/designSystem";
 import { getCategoryIcon } from "../../features/home/components/category/categoryIcons";
 
 const brandItems = [
+   { label: "Lumi", href: "/ecosystem/lumi" },
   { label: "Aqara", href: "/ecosystem/aqara" },
   { label: "Hunonic", href: "/ecosystem/hunonic" },
-  { label: "Lumi", href: "/ecosystem/lumi" },
+ 
 ];
 
 const cameraItems = [
