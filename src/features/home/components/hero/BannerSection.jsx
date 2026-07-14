@@ -227,7 +227,7 @@ const BannerSection = ({ banners, current, setCurrent, className = "" }) => {
         />
 
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-slate-900/80 via-slate-900/30 to-transparent" />
+        {/* <div className="absolute inset-0 z-20 bg-gradient-to-r from-slate-900/80 via-slate-900/30 to-transparent" /> */}
 
         {/* Mobile gradient fade */}
         <div className="absolute inset-x-0 bottom-0 h-12 md:hidden bg-gradient-to-b from-transparent via-slate-50/60 to-slate-50 z-30 pointer-events-none" />

@@ -177,7 +177,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <ContactSection />
+      {/* <ContactSection /> */}
     </main>
   );
 };

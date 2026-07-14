@@ -21,6 +21,9 @@ import {
   SectionDivider,
 } from "@/features/home/components";
 
+import AboutPage from "@/pages/AboutPage";
+import ContactPage from "@/pages/ContactPage";
+
 // ============================================
 // CONSTANTS
 // ============================================
@@ -175,9 +178,9 @@ const HomePage = () => {
 
         <SectionDivider />
 
-        <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+        {/* <div className="w-full bg-gradient-to-b from-slate-50 to-white">
           <CategoryGridSection categories={topCategories} isLoading={loading} />
-        </div>
+        </div> */}
       </div>
 
       {/* ============================================ */}
@@ -196,7 +199,7 @@ const HomePage = () => {
       {/* ============================================ */}
       {/* CATEGORY PRODUCTS */}
       {/* ============================================ */}
-      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] ">
+      {/* <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] ">
         {topCategories.map((category, index) => {
           const categoryProducts = productsByCategory[category.id] || [];
           if (categoryProducts.length === 0) return null;
@@ -208,13 +211,14 @@ const HomePage = () => {
                 viewAllLink={`/products?category=${category.id}`}
                 maxProducts={PRODUCTS_LIMIT.category}
               />
-              {/* Divider between category sections */}
+            
               {index < topCategories.length - 1 && <SectionDivider />}
             </div>
           );
         })}
-      </div>
-
+      </div> */}
+<AboutPage />
+<ContactPage />
       {/* FEATURES BAR */}
       {/* ============================================ */}
       <SectionDivider />

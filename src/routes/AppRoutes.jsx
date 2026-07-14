@@ -19,15 +19,18 @@ import AboutPage from "../pages/AboutPage";
 import PolicyPage from "../pages/PolicyPage";
 import ContactPage from "../pages/ContactPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import SmartHomePage from "../pages/SmartHomePage";
 
 // Blog Pages
 import BlogListPage from "../features/blog/pages/BlogListPage";
 import BlogDetailPage from "../features/blog/pages/BlogDetailPage";
 
 // Ecosystem Pages
-import LumiPage from "../pages/ecosystem/LumiPage";
-import Hunonic from "../pages/ecosystem/HunonicPage";
-import AqaraPage from "../pages/ecosystem/AqaraPage";
+import LumiPage from "../pages/LumiPage";
+import AqaraPage from "../pages/AqaraPage";
+import HunonicEcosystemPage from "../pages/ecosystem/HunonicPage";
+import AqaraEcosystemPage from "../pages/ecosystem/AqaraPage";
+import LumiEcosystemPage from "../pages/ecosystem/LumiPage";
 import SolutionsByHousePage from "../pages/projects/ProjectsPage";
 import SolarPage from "../pages/SolarPage";
 
@@ -132,20 +135,29 @@ const AppRoutes = () => {
           path="/ecosystem/lumi"
           element={
             <MainLayout>
+              <LumiEcosystemPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/ecosystem/aqara"
+          element={
+            <MainLayout>
+              <AqaraEcosystemPage />
+            </MainLayout>
+          }
+        />
+                <Route
+          path="/products/lumi"
+          element={
+            <MainLayout>
               <LumiPage />
             </MainLayout>
           }
         />
-        <Route
-          path="/ecosystem/hunonic"
-          element={
-            <MainLayout>
-              <Hunonic />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/ecosystem/aqara"
+                <Route
+          path="/products/aqara"
           element={
             <MainLayout>
               <AqaraPage />
@@ -157,6 +169,16 @@ const AppRoutes = () => {
           element={
             <MainLayout>
               <SolutionsByHousePage />
+            </MainLayout>
+          }
+        />
+
+        {/* SMART HOME OVERVIEW ROUTE */}
+        <Route
+          path="/smart-home"
+          element={
+            <MainLayout>
+              <SmartHomePage />
             </MainLayout>
           }
         />
