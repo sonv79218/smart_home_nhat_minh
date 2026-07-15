@@ -1,6 +1,5 @@
 // ============================================
 // HOMEPAGE - UNIFIED DESIGN SYSTEM
-// Seamless sections with consistent styling and dividers
 // ============================================
 import { useState, useEffect } from "react";
 import { getFeaturedProducts, getProductsByCategory } from "@/services/productService";
@@ -15,7 +14,6 @@ import {
   BannerSkeleton,
   DesktopBannerSkeleton,
   CategoryGridSection,
-  CategoryProductSection,
   EcosystemSection,
   SolutionSection,
   SectionDivider,
@@ -54,7 +52,6 @@ const HomePage = () => {
       try {
         setLoading(true);
 
-        // Load dữ liệu quan trọng song song
         const [categoriesData, bannersData, solutionsData, featured] =
           await Promise.all([
             getCategories(),
@@ -71,7 +68,6 @@ const HomePage = () => {
         setFeaturedProducts(featured);
         setLoading(false);
 
-        // Load sản phẩm theo danh mục sau, không chặn banner/solution
         const categoryProductsEntries = await Promise.all(
           categoriesData
             .slice(0, PRODUCTS_LIMIT.topCategory)
@@ -80,7 +76,6 @@ const HomePage = () => {
                 category.id,
                 PRODUCTS_LIMIT.category
               );
-
               return [category.id, products];
             })
         );
@@ -111,16 +106,14 @@ const HomePage = () => {
   // RENDER
   // ============================================
   return (
-    <div className="w-full min-h-screen bg-white">
-      {/* ============================================ */}
+    <div className="w-full min-h-screen bg-white font-sans text-slate-900">
       {/* OFFLINE NOTICE */}
-      {/* ============================================ */}
       {offlineMode && <OfflineNotice />}
 
       {/* ============================================ */}
-      {/* HERO: Banner only */}
+      {/* HERO: Banner */}
       {/* ============================================ */}
-      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-0 py-0 lg:px-4 lg:py-4 xl:px-6">
+      <div className="w-full max-w-[1200px] mx-auto px-0 py-0 lg:px-4 lg:py-4">
         {/* Desktop Banner */}
         <div className="hidden lg:block h-[clamp(475px,28vw,600px)] overflow-hidden rounded-b-2xl">
           {banners.length > 0 ? (
@@ -150,79 +143,36 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Divider */}
+      {/* ============================================ */}
+      {/* SOLUTION SECTION — bg-white */}
+      {/* ============================================ */}
       <SectionDivider />
+      {/* <SolutionSection solutions={solutions} isLoading={loading} /> */}
 
       {/* ============================================ */}
-      {/* MOBILE: Category trước Solution */}
+      {/* MOBILE: Category Grid — bg-slate-50 */}
       {/* ============================================ */}
       <div className="lg:hidden">
         <SectionDivider />
-
-        <div className="w-full bg-gradient-to-b from-slate-50 to-white">
+        <div className="w-full bg-slate-50">
           <CategoryGridSection categories={topCategories} isLoading={loading} />
         </div>
-
         <SectionDivider />
-
-        <SolutionSection solutions={solutions} isLoading={loading} />
       </div>
 
       {/* ============================================ */}
-      {/* DESKTOP: Solution trước Category */}
-      {/* ============================================ */}
-      <div className="hidden lg:block">
-        <SectionDivider />
-
-        <SolutionSection solutions={solutions} isLoading={loading} />
-
-        <SectionDivider />
-
-        {/* <div className="w-full bg-gradient-to-b from-slate-50 to-white">
-          <CategoryGridSection categories={topCategories} isLoading={loading} />
-        </div> */}
-      </div>
-
-      {/* ============================================ */}
-      {/* ECOSYSTEM SECTION */}
-      {/* ============================================ */}
-      <EcosystemSection />
-
-      {/* Divider */}
-      <SectionDivider />
-
-      {/* ============================================ */}
-      {/* FLOATING CONTACT BUTTONS */}
-      {/* ============================================ */}
-      {/* <FloatingContactButtons /> */}
-
-      {/* ============================================ */}
-      {/* CATEGORY PRODUCTS */}
-      {/* ============================================ */}
-      {/* <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] ">
-        {topCategories.map((category, index) => {
-          const categoryProducts = productsByCategory[category.id] || [];
-          if (categoryProducts.length === 0) return null;
-          return (
-            <div key={category.id}>
-              <CategoryProductSection
-                category={category}
-                products={categoryProducts}
-                viewAllLink={`/products?category=${category.id}`}
-                maxProducts={PRODUCTS_LIMIT.category}
-              />
-            
-              {index < topCategories.length - 1 && <SectionDivider />}
-            </div>
-          );
-        })}
-      </div> */}
-<AboutPage />
-<ContactPage />
-      {/* FEATURES BAR */}
+      {/* ECOSYSTEM SECTION — bg-slate-50 */}
       {/* ============================================ */}
       <SectionDivider />
-      {/* <FeaturesBar /> */}
+
+
+      {/* ============================================ */}
+      {/* ABOUT & CONTACT */}
+      {/* ============================================ */}
+      <AboutPage />
+            <EcosystemSection />
+      <SectionDivider />
+      <ContactPage />
     </div>
   );
 };

@@ -1,11 +1,8 @@
 // ============================================
 // ECOSYSTEM SECTION - UNIFIED DESIGN SYSTEM
-// Seamless sections with consistent styling
 // ============================================
-import SectionHeader from "@/components/common/SectionHeader";
 import EcosystemCard from "./EcosystemCard";
 import EcosystemMobileTabs from "./EcosystemMobileTabs";
-
 
 const ecosystems = [
   {
@@ -57,22 +54,12 @@ const ecosystems = [
 
 const EcosystemSection = () => {
   return (
-    <section className="py-10 md:py-16 bg-white">
-      <div className="w-full max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 md:px-6">
-        {/* Section Header - Centered */}
-        {/* <SectionHeader
-          title="Hệ Sinh Thái Smart Home"
-          subtitle="Kết nối toàn bộ thiết bị thông minh trong ngôi nhà của bạn"
-          // align="center"
-          size="md"
-        /> */}
-                <div className="flex items-center justify-center gap-4 mb-10">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary-200" />
-          <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase tracking-wide text-center whitespace-nowrap">
-            Hệ Sinh Thái Smart Home
-          </h2>
-          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-primary-200" />
-        </div>
+    <section className="py-12 md:py-16 bg-slate-50">
+      <div className="w-full max-w-[1200px] mx-auto px-4 md:px-6">
+        {/* Section Heading */}
+        <h2 className="text-2xl md:text-3xl font-bold leading-tight text-slate-900 text-center mb-10">
+          Hệ Sinh Thái Smart Home
+        </h2>
 
         {/* Mobile: Tabs Layout */}
         <div className="md:hidden">

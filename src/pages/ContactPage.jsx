@@ -1,3 +1,8 @@
+// ============================================
+// CONTACT PAGE - NHẬT MINH SMART
+// Unified with AboutPage design system
+// ============================================
+
 import { useState } from "react";
 import {
   MapPin,
@@ -6,11 +11,42 @@ import {
   MessageCircle,
   Clock,
   Send,
-  ShieldCheck,
 } from "lucide-react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import ContactSection from "./ContactSection";
+
+const contactItems = [
+  {
+    icon: MapPin,
+    label: "Địa chỉ",
+    value:
+      "Nhà số 01 ngõ Giếng Vàng, Khu phố Phù Lưu, Phường Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
+  },
+  {
+    icon: Phone,
+    label: "Điện thoại",
+    value: "0876 906 668",
+    href: "tel:0876906668",
+  },
+  {
+    icon: MessageCircle,
+    label: "Zalo",
+    value: "0876 906 668",
+    href: "https://zalo.me/0876906668",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "contact@nhatminh.vn",
+    href: "mailto:contact@nhatminh.vn",
+  },
+  {
+    icon: Clock,
+    label: "Thời gian làm việc",
+    value: "08:00 - 18:00, từ thứ Hai đến Chủ nhật",
+  },
+];
 
 const ContactPage = () => {
   const [form, setForm] = useState({
@@ -22,16 +58,24 @@ const ContactPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+
     if (error) setError("");
+    if (success) setSuccess("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setError("");
+    setSuccess("");
 
     if (!form.fullName.trim() || !form.phone.trim()) {
       setError("Vui lòng nhập đầy đủ họ tên và số điện thoại.");
@@ -40,6 +84,7 @@ const ContactPage = () => {
 
     try {
       setLoading(true);
+
       await addDoc(collection(db, "contact_requests"), {
         fullName: form.fullName.trim(),
         phone: form.phone.trim(),
@@ -49,136 +94,281 @@ const ContactPage = () => {
         createdAt: serverTimestamp(),
       });
 
-      setForm({ fullName: "", phone: "", email: "", message: "" });
-      alert("Gửi yêu cầu thành công!");
-    } catch (err) {
-      console.error(err);
-      setError("Có lỗi xảy ra, vui lòng thử lại.");
+      setForm({
+        fullName: "",
+        phone: "",
+        email: "",
+        message: "",
+      });
+
+      setSuccess(
+        "Yêu cầu đã được gửi thành công. Nhật Minh Smart sẽ liên hệ với bạn sớm nhất."
+      );
+    } catch (submitError) {
+      console.error(submitError);
+      setError("Có lỗi xảy ra. Vui lòng thử lại sau.");
     } finally {
       setLoading(false);
     }
   };
 
+  const inputClassName =
+    "w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 outline-none transition duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 md:text-base";
+
   return (
-    <main className="bg-white min-h-screen">
-      <section className="py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-5 grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start">
-          {/* Info */}
-          <div className="bg-slate-50 border border-slate-200 rounded-none p-6 md:p-8">
-            <p className="text-blue-600 font-bold mb-2">
-              LIÊN HỆ
-            </p>
+    <main className="min-h-screen overflow-hidden bg-white text-slate-900">
 
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-6 text-slate-900">
-              Nhật Minh Smart Home
-            </h1>
 
-            <div className="space-y-5 text-slate-700">
-              <div className="flex gap-3">
-                <MapPin className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-                <span>
-                  Nhà số 01 ngõ Giếng Vàng, Khu phố Phù Lưu,
-                  Phường Từ Sơn, Tỉnh Bắc Ninh, Việt Nam
-                </span>
+      {/* CONTACT CONTENT */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-5 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+          {/* CONTACT INFO */}
+          <div className="animate-contact-fade-up">
+            <div className="sticky top-28">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-600 md:text-sm">
+                Thông tin liên hệ
+              </p>
+
+              <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">
+                Nhật Minh Smart Home
+              </h2>
+
+              <p className="mt-4 max-w-lg text-base leading-7 text-slate-600 md:text-lg md:leading-8">
+                Tư vấn, thiết kế và thi công giải pháp nhà thông minh, camera an
+                ninh và kiểm soát ra vào.
+              </p>
+
+              <div className="mt-9 divide-y divide-slate-200 border-y border-slate-200">
+                {contactItems.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      key={item.label}
+                      className="group grid grid-cols-[42px_1fr] gap-4 py-5"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                        <Icon size={19} strokeWidth={1.8} />
+                      </div>
+
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">
+                          {item.label}
+                        </p>
+
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            target={
+                              item.href.startsWith("http")
+                                ? "_blank"
+                                : undefined
+                            }
+                            rel={
+                              item.href.startsWith("http")
+                                ? "noreferrer"
+                                : undefined
+                            }
+                            className="mt-1 block text-sm leading-6 text-slate-600 transition hover:text-blue-600 md:text-base"
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="mt-1 text-sm leading-6 text-slate-600 md:text-base">
+                            {item.value}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
-              <div className="flex gap-3">
-                <Phone className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-                <span>0876 906 668</span>
-              </div>
-
-              <div className="flex gap-3">
-                <MessageCircle className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-                <span>Zalo: 0876 906 668</span>
-              </div>
-
-              <div className="flex gap-3">
-                <Mail className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-                <span>contact@nhatminh.vn</span>
-              </div>
-
-              <div className="flex gap-3">
-                <Clock className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-                <span>08:00 - 18:00</span>
-              </div>
-              
-              <div className="flex gap-3">
-  <ShieldCheck className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-  <span>
-    GPĐKKD: 2301374027 — MST: 2301374027
-  </span>
-</div>
+              <p className="mt-6 text-sm leading-6 text-slate-500">
+                GPĐKKD: 2301374027 · MST: 2301374027
+              </p>
             </div>
           </div>
 
-          {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="border border-slate-200 rounded-none p-6 md:p-8 shadow-sm"
-          >
-            <h2 className="text-2xl md:text-3xl font-extrabold mb-2">
-              Gửi yêu cầu tư vấn
-            </h2>
-
-            <p className="text-slate-500 mb-6">
-              Để lại thông tin, Nhật Minh Smart Home sẽ liên hệ tư vấn sớm nhất.
-            </p>
-
-            {error && (
-              <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-none
- px-4 py-3">
-                {error}
-              </p>
-            )}
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                name="fullName"
-                value={form.fullName}
-                onChange={handleChange}
-                className="border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500"
-                placeholder="Họ và tên"
-              />
-
-              <input
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                className="border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500"
-                placeholder="Số điện thoại"
-              />
-            </div>
-
-            <input
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="border border-slate-200 rounded-xl px-4 py-3 w-full mt-4 outline-none focus:border-blue-500"
-              placeholder="Email"
-            />
-
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              rows={5}
-              className="border border-slate-200 rounded-xl px-4 py-3 w-full mt-4 outline-none focus:border-blue-500 resize-none"
-              placeholder="Nội dung cần tư vấn..."
-            />
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-5 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-semibold transition"
+          {/* CONTACT FORM */}
+          <div className="animate-contact-fade-up contact-delay-150">
+            <form
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9 lg:p-10"
             >
-              {loading ? "Đang gửi..." : "Gửi yêu cầu"}
-              {!loading && <Send size={18} />}
-            </button>
-          </form>
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-600 md:text-sm">
+                  Yêu cầu tư vấn
+                </p>
+
+                <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">
+                  Gửi thông tin cho chúng tôi
+                </h2>
+
+                <p className="mt-4 text-base leading-7 text-slate-600">
+                  Nhật Minh Smart sẽ liên hệ để trao đổi và tư vấn giải pháp
+                  phù hợp trong thời gian sớm nhất.
+                </p>
+              </div>
+
+              {error && (
+                <div
+                  role="alert"
+                  className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-6 text-red-700"
+                >
+                  {error}
+                </div>
+              )}
+
+              {success && (
+                <div
+                  role="status"
+                  className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm leading-6 text-emerald-700"
+                >
+                  {success}
+                </div>
+              )}
+
+              <div className="mt-7 grid gap-5 md:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="fullName"
+                    className="mb-2 block text-sm font-semibold text-slate-800"
+                  >
+                    Họ và tên <span className="text-red-500">*</span>
+                  </label>
+
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    autoComplete="name"
+                    value={form.fullName}
+                    onChange={handleChange}
+                    className={inputClassName}
+                    placeholder="Nhập họ và tên"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="mb-2 block text-sm font-semibold text-slate-800"
+                  >
+                    Số điện thoại <span className="text-red-500">*</span>
+                  </label>
+
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    value={form.phone}
+                    onChange={handleChange}
+                    className={inputClassName}
+                    placeholder="Nhập số điện thoại"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <label
+                  htmlFor="email"
+                  className="mb-2 block text-sm font-semibold text-slate-800"
+                >
+                  Email
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  className={inputClassName}
+                  placeholder="Nhập địa chỉ email"
+                />
+              </div>
+
+              <div className="mt-5">
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-sm font-semibold text-slate-800"
+                >
+                  Nội dung cần tư vấn
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  value={form.message}
+                  onChange={handleChange}
+                  className={`${inputClassName} resize-none`}
+                  placeholder="Ví dụ: Tôi cần tư vấn hệ thống nhà thông minh cho căn hộ 3 phòng ngủ..."
+                />
+              </div>
+
+              <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="max-w-md text-xs leading-5 text-slate-500 md:text-sm">
+                  Thông tin của bạn chỉ được sử dụng để liên hệ tư vấn và hỗ
+                  trợ dịch vụ.
+                </p>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 md:text-base"
+                >
+                  {loading ? "Đang gửi..." : "Gửi yêu cầu"}
+
+                  {!loading && (
+                    <Send
+                      size={17}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
 
       <ContactSection />
+
+      {/* PAGE ANIMATIONS */}
+      <style>{`
+        @keyframes contactFadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(24px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-contact-fade-up {
+          opacity: 0;
+          animation: contactFadeUp 0.75s ease-out forwards;
+        }
+
+        .contact-delay-150 {
+          animation-delay: 150ms;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-contact-fade-up {
+            opacity: 1;
+            animation: none;
+          }
+        }
+      `}</style>
     </main>
   );
 };
