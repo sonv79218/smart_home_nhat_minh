@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import PackageCard from "./aqara/PackageCard";
 import EstimateSummary from "./aqara/EstimateSummary";
+import StaticBanner from "../../features/brand/components/StaticBanner";
 import {
   pricingPackages,
   housingTabs,
@@ -15,7 +16,7 @@ import {
 } from "./aqara/aqaraPricingData";
 
 // ==================== DATA ====================
-const bannerImage = "https://aqaravn.com/opengraph-image";
+const bannerImage = "/images/ecosystem/aqara-banner.webp";
 const requiredInfos = [
   {
     icon: <House className="h-6 w-6" />,
@@ -200,15 +201,8 @@ const AqaraPage = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* ==================== SECTION 1: HERO ==================== */}
-      <section className="relative min-h-[650px] overflow-hidden">
-        {/* Ảnh nền */}
-        <img
-          src={bannerImage}
-          alt="Aqara Smart Home"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      </section>
+      {/* ==================== SECTION 1: BANNER ==================== */}
+      <StaticBanner image={bannerImage} alt="Aqara Smart Home" />
 
       {/* ==================== SECTION 2: GIỚI THIỆU ==================== */}
       <section className="mx-auto max-w-[1000px] px-4 py-16">

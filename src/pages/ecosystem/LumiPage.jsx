@@ -7,12 +7,14 @@ import {
 } from "lucide-react";
 import PackageCard from "./aqara/PackageCard";
 import EstimateSummary from "./aqara/EstimateSummary";
+import StaticBanner from "../../features/brand/components/StaticBanner";
 import {
   pricingPackages,
   housingTabs,
   packageKeys,
   defaultSelection,
 } from "./lumi/lumiPricingData";
+
 
 // ==================== THEME ====================
 const theme = {
@@ -23,7 +25,7 @@ const theme = {
 };
 
 // ==================== DATA ====================
-const bannerImage = "https://sudospaces.com/lumi/2022/02/z3115361986276-ac2b854e53ddd032d71f1dcef3076389-2048x759.jpeg";
+const bannerImage = "/images/ecosystem/lumi-banner.webp";
 const requiredInfos = [
   {
     icon: <Lightbulb className="h-6 w-6" />,
@@ -225,14 +227,8 @@ const LumiPage = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* ==================== SECTION 1: HERO ==================== */}
-      <section className="relative min-h-[650px] overflow-hidden">
-        <img
-          src={bannerImage}
-          alt="Lumi Smart Home"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      </section>
+      {/* ==================== SECTION 1: BANNER ==================== */}
+      <StaticBanner image={bannerImage} alt="Lumi Smart Home" />
 
       {/* ==================== SECTION 2: GIỚI THIỆU ==================== */}
       <section className="mx-auto max-w-[1000px] px-4 py-16">

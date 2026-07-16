@@ -11,6 +11,7 @@ const AqaraPage = () => {
       name="Aqara"
       tagline="Nhà thông minh hàng đầu thế giới"
       description="Hệ sinh thái nhà thông minh với hơn 1.000 thiết bị, hỗ trợ Matter, Apple Home, Google Home, Amazon Alexa và Samsung SmartThings."
+      bannerImage="/images/ecosystem/aqara-banner.webp"
     />
   );
 };

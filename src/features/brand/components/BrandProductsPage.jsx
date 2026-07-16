@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo } from "react";
 import { getProducts } from "../../../services/productService";
 import { getCategories } from "../../../services/categoryService";
 import CategoryProductSection from "../../../features/home/components/category/CategoryProductSection";
+import StaticBanner from "./StaticBanner";
 
 // ---- Helpers ----
 
@@ -92,7 +93,7 @@ const BrandPageSkeleton = () => (
 
 // ---- Component ----
 
-const BrandProductsPage = ({ brandKey, name, tagline, description }) => {
+const BrandProductsPage = ({ brandKey, name, tagline, description, bannerImage }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -193,6 +194,11 @@ const BrandProductsPage = ({ brandKey, name, tagline, description }) => {
 
   return (
     <div className="w-full">
+      {/* Static Banner — matches Homepage BannerSection dimensions */}
+      {bannerImage && (
+        <StaticBanner image={bannerImage} alt={name} />
+      )}
+
       {/* Brand Header */}
       <div className="bg-gradient-to-r from-primary-600 to-accent py-12 md:py-16">
         <div className="mx-auto max-w-[1200px] px-4 md:px-6">

@@ -1,16 +1,11 @@
 // ============================================
-// ABOUT PAGE - NHẬT MINH SMART
-// Minimal, modern and subtle animations
+// ABOUT PAGE - UNIFIED DESIGN SYSTEM
 // ============================================
-
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 const IMAGES = {
-  showroom:
-    "/picture/showroom/show_room.png",
-
-
+  showroom: "/picture/showroom/show_room.png",
 };
 
 const solutions = [
@@ -130,91 +125,91 @@ const process = [
 const AboutPage = () => {
   return (
     <main className="overflow-hidden bg-white text-slate-900">
+
       {/* HERO */}
-      <section className="relative border-b border-slate-100">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-5 md:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-24">
-          <div className="animate-about-fade-up">
-            <p className="mb-4 text-xs font-semibold uppercase  text-blue-600 md:text-sm">
+      <section className="border-b border-slate-100">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:px-5 sm:py-14 md:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-24">
+          {/* Text */}
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-blue-600 sm:text-sm">
               Về Nhật Minh Smart
             </p>
 
-
-            <h2 className="mt-4 text-3xl font-bold  text-slate-950 md:text-4xl">
+            <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl lg:text-5xl">
               Kiến tạo không gian sống thông minh và an toàn
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600 md:text-lg md:leading-8">
+
+            <p className="mt-5 max-w-xl text-sm leading-7 text-slate-600 sm:text-base md:text-lg md:leading-8">
               Nhật Minh Smart cung cấp giải pháp nhà thông minh, camera an
               ninh và kiểm soát ra vào cho nhà ở, biệt thự, căn hộ, văn phòng
               và doanh nghiệp.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-5">
+            <div className="mt-7 flex flex-wrap items-center gap-4 sm:mt-8 sm:gap-5">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20 md:text-base"
+                className="group inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20 sm:px-6 sm:py-3.5 sm:text-base"
               >
                 Nhận tư vấn
                 <ChevronRight
-                  size={18}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1 sm:size-[18px]"
                 />
               </Link>
 
               <Link
                 to="/projects"
-                className="text-sm font-semibold text-slate-700 transition hover:text-blue-600 md:text-base"
+                className="text-sm font-semibold text-slate-700 transition hover:text-blue-600 sm:text-base"
               >
                 Xem công trình
               </Link>
             </div>
           </div>
 
-          <div className="animate-about-fade-up about-delay-150">
-            <div className="group relative overflow-hidden rounded-2xl bg-slate-100">
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={IMAGES.showroom}
-                  alt="Showroom Nhật Minh Smart"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                />
-              </div>
+          {/* Showroom Image */}
+          <div className="group relative overflow-hidden rounded-2xl bg-slate-100">
+            <div className="aspect-[4/3] overflow-hidden">
+              <img
+                src={IMAGES.showroom}
+                alt="Showroom Nhật Minh Smart"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              />
+            </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
 
-              <div className="absolute bottom-0 left-0 right-0 p-5 text-white md:p-7">
-                <p className="text-sm font-medium text-white/80">
-                  Không gian trải nghiệm
-                </p>
-                <p className="mt-1 text-xl font-semibold md:text-2xl">
-                  Showroom Nhật Minh Smart
-                </p>
-              </div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5 md:p-7">
+              <p className="text-xs font-medium text-white/80 sm:text-sm">
+                Không gian trải nghiệm
+              </p>
+              <p className="mt-1 text-lg font-semibold text-white sm:text-xl md:text-2xl">
+                Showroom Nhật Minh Smart
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* INTRODUCTION */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-5 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+      <section className="py-12 md:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-5 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>
-            <p className="text-xs font-semibold uppercase  text-blue-600 md:text-sm">
+            <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 sm:text-sm">
               Chúng tôi là ai
             </p>
-            
 
-            <h2 className="mt-4 text-3xl font-bold  text-slate-950 md:text-4xl">
+            <h2 className="mt-3 text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl">
               Giải pháp phù hợp cho từng không gian
             </h2>
           </div>
 
           <div>
-            <p className="text-lg leading-8 text-slate-700 md:text-xl md:leading-9">
+            <p className="text-base leading-7 text-slate-700 md:text-lg md:leading-8 lg:text-xl lg:leading-9">
               Nhật Minh Smart đồng hành cùng khách hàng từ tư vấn, khảo sát,
               thiết kế đến thi công, cài đặt và bảo hành hệ thống.
             </p>
 
-            <p className="mt-5 text-base leading-7 text-slate-600 md:text-lg md:leading-8">
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base md:text-lg md:leading-8">
               Chúng tôi ưu tiên những giải pháp dễ sử dụng, hoạt động ổn định
               và có khả năng mở rộng theo nhu cầu. Mỗi công trình đều được
               nghiên cứu dựa trên thói quen sinh hoạt, đặc điểm không gian và
@@ -225,27 +220,27 @@ const AboutPage = () => {
       </section>
 
       {/* VALUES */}
-      <section className="border-y border-slate-100 bg-slate-50 py-16 md:py-20">
+      <section className="border-y border-slate-100 bg-slate-50 py-12 md:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-5">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 md:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2 md:grid-cols-3">
             {values.map((item, index) => (
               <article
                 key={item.title}
-                className="group bg-white p-7 transition duration-300 hover:bg-slate-50 md:p-9"
+                className="group bg-white p-6 transition duration-300 hover:bg-slate-50 sm:p-7 md:p-9"
               >
-                <p className="mb-8 text-sm font-semibold text-blue-600">
+                <p className="mb-6 text-sm font-semibold text-blue-600 sm:mb-8">
                   0{index + 1}
                 </p>
 
-                <h3 className="text-xl font-bold text-slate-950">
+                <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
                   {item.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-slate-600 md:text-base">
+                <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
                   {item.description}
                 </p>
 
-                <div className="mt-7 h-px w-10 bg-blue-600 transition-all duration-300 group-hover:w-20" />
+                <div className="mt-5 h-px w-8 bg-blue-600 transition-all duration-300 group-hover:w-16 sm:mt-7" />
               </article>
             ))}
           </div>
@@ -253,54 +248,50 @@ const AboutPage = () => {
       </section>
 
       {/* SOLUTIONS */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-5">
-          <div className="mb-10 max-w-2xl md:mb-14">
-            <p className="text-xs font-semibold uppercase  text-blue-600 md:text-sm">
+          {/* Section Header */}
+          <div className="mb-8 max-w-2xl sm:mb-10 md:mb-14">
+            <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 sm:text-sm">
               Lĩnh vực hoạt động
             </p>
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
               Các giải pháp chính
             </h2>
 
-            <p className="mt-4 text-base leading-7 text-slate-600 md:text-lg">
+            <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base md:text-lg">
               Một hệ thống đồng bộ giúp không gian trở nên tiện nghi, dễ quản
               lý và an toàn hơn.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          {/* Solutions Grid — 2 columns on all screens */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {solutions.map((item) => (
               <article
-                key={item.title}
-                className="group relative min-h-[360px] overflow-hidden rounded-2xl bg-slate-900 md:min-h-[430px]"
+                key={item.number}
+                className="group relative min-h-[180px] overflow-hidden rounded-xl bg-slate-900 sm:min-h-[260px] md:min-h-[360px] lg:min-h-[430px]"
               >
                 <img
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
 
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent" /> */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
 
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
-                  {/* <p className="mb-4 text-sm font-semibold text-blue-300">
-                    {item.number}
-                  </p> */}
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 md:inset-x-5 md:bottom-5">
+                  <div className="rounded-xl bg-black/60 p-3 sm:p-4 md:p-5">
+                    <h3 className="text-[13px] font-bold leading-tight text-white sm:text-base md:text-lg lg:text-xl">
+                      {item.title}
+                    </h3>
 
-<div className="absolute inset-x-4 bottom-4 rounded-xl bg-black/50 p-4 backdrop-blur-sm md:inset-x-6 md:bottom-6 md:p-5">
-
-
-  <h3 className="mt-1 text-xl font-bold leading-tight text-white md:text-2xl">
-    {item.title}
-  </h3>
-
-  <p className="mt-2 text-sm leading-6 text-white/85 md:text-base">
-    {item.description}
-  </p>
-</div>
+                    <p className="mt-1 text-[10px] leading-4 text-white/85 sm:mt-1.5 sm:text-xs sm:leading-5 md:text-sm md:leading-6 lg:text-base">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </article>
             ))}
@@ -309,118 +300,83 @@ const AboutPage = () => {
       </section>
 
       {/* PROCESS */}
-<section className="border-y border-slate-100 bg-white py-16 md:py-24">
-  <div className="mx-auto max-w-7xl px-4 sm:px-5">
-    <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-      <div>
-        <p className="text-xs font-semibold uppercase text-blue-600 md:text-sm">
-          Quy trình làm việc
-        </p>
-
-        <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-slate-950 md:text-4xl">
-          Rõ ràng trong từng giai đoạn
-        </h2>
-
-        <p className="mt-5 max-w-md text-base leading-7 text-slate-600 md:text-lg">
-          Khách hàng được tư vấn và theo dõi toàn bộ quá trình từ khi tiếp nhận
-          nhu cầu đến khi hệ thống được bàn giao.
-        </p>
-      </div>
-
-      <div className="divide-y divide-slate-200 border-y border-slate-200">
-        {process.map((item) => (
-          <article
-            key={item.number}
-            className="group grid gap-4 py-6 transition md:grid-cols-[70px_1fr] md:gap-6 md:py-7"
-          >
-            <p className="text-sm font-semibold text-blue-600">
-              {item.number}
-            </p>
-
+      <section className="border-y border-slate-100 bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-5">
+          <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16 xl:gap-20">
+            {/* Left: Heading */}
             <div>
-              <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-blue-600 md:text-xl">
-                {item.title}
-              </h3>
+              <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 sm:text-sm">
+                Quy trình làm việc
+              </p>
 
-              <p className="mt-2 text-sm leading-6 text-slate-600 md:text-base md:leading-7">
-                {item.description}
+              <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
+                Rõ ràng trong từng giai đoạn
+              </h2>
+
+              <p className="mt-4 max-w-md text-sm leading-7 text-slate-600 sm:text-base md:text-lg">
+                Khách hàng được tư vấn và theo dõi toàn bộ quá trình từ khi tiếp nhận
+                nhu cầu đến khi hệ thống được bàn giao.
               </p>
             </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
 
-{/* COMMITMENT */}
-<section className="">
-  <div className="mx-auto max-w-7xl px-4 sm:px-5">
-    <div className="relative overflow-hidden  bg-white px-6 py-12 text-center ">
+            {/* Right: Steps */}
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
+              {process.map((item) => (
+                <article
+                  key={item.number}
+                  className="group grid grid-cols-[56px_1fr] gap-4 py-5 sm:py-6 md:grid-cols-[70px_1fr] md:gap-5 md:py-7"
+                >
+                  <p className="pt-0.5 text-sm font-semibold text-blue-600 sm:text-base">
+                    {item.number}
+                  </p>
 
+                  <div>
+                    <h3 className="text-base font-semibold text-slate-900 transition-colors group-hover:text-blue-600 sm:text-lg md:text-xl">
+                      {item.title}
+                    </h3>
 
-      <div className="relative mx-auto max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
-          Cam kết của Nhật Minh Smart
-        </p>
+                    <p className="mt-1.5 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+                      {item.description}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl">
-          Không chỉ lắp đặt thiết bị,
-          <br />
-          chúng tôi xây dựng một giải pháp phù hợp và bền vững.
-        </h2>
+      {/* COMMITMENT / CTA */}
+      <section className="py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 sm:text-sm">
+            Cam kết của Nhật Minh Smart
+          </p>
 
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-          Thiết bị chính hãng, phương án rõ ràng, thi công đúng tiêu chuẩn và
-          luôn đồng hành cùng khách hàng trong suốt quá trình sử dụng.
-        </p>
+          <h2 className="mt-4 text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
+            Không chỉ lắp đặt thiết bị,
+            <br />
+            chúng tôi xây dựng một giải pháp phù hợp và bền vững.
+          </h2>
 
-        <Link
-          to="/contact"
-          className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/20 md:text-base"
-        >
-          Gửi yêu cầu tư vấn
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base md:text-lg">
+            Thiết bị chính hãng, phương án rõ ràng, thi công đúng tiêu chuẩn và
+            luôn đồng hành cùng khách hàng trong suốt quá trình sử dụng.
+          </p>
 
-          <ChevronRight
-            size={18}
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          />
-        </Link>
-      </div>
-    </div>
-  </div>
-</section>
+          <Link
+            to="/contact"
+            className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/20 sm:px-6 sm:py-3.5 sm:text-base"
+          >
+            Gửi yêu cầu tư vấn
+            <ChevronRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-1 sm:size-[18px]"
+            />
+          </Link>
+        </div>
+      </section>
 
-      {/* PAGE ANIMATIONS */}
-      <style>{`
-        @keyframes aboutFadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(24px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-about-fade-up {
-          opacity: 0;
-          animation: aboutFadeUp 0.75s ease-out forwards;
-        }
-
-        .about-delay-150 {
-          animation-delay: 150ms;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-about-fade-up {
-            opacity: 1;
-            animation: none;
-          }
-        }
-      `}</style>
     </main>
   );
 };
