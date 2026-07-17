@@ -9,9 +9,9 @@ const PackageCard = ({
   onSelect,
   onToggleDevice,
   theme = {
-    primary: "#2563EB",
-    borderClass: "border-blue-500",
-    accentClass: "accent-blue-600",
+    primary: "#7787B2",
+    borderClass: "border-[#7787B2]",
+    accentClass: "accent-[#7787B2]",
   },
 }) => {
 const cardClass = [

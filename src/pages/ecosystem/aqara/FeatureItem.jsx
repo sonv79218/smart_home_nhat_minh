@@ -1,4 +1,4 @@
-const FeatureItem = ({ text, checked, onToggle, accentClass = "accent-blue-600" }) => (
+const FeatureItem = ({ text, checked, onToggle, accentClass = "accent-[#7787B2]" }) => (
   <label className="flex cursor-pointer items-center gap-3 text-sm text-gray-700 select-none">
     <input
       type="checkbox"

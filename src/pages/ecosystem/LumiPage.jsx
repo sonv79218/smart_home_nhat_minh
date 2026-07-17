@@ -18,11 +18,16 @@ import {
 
 // ==================== THEME ====================
 const theme = {
-  primary: "#0B5ED7",
-  borderClass: "border-blue-600",
-  accentClass: "accent-blue-600",
-  textClass: "text-blue-600",
+  primary: "#0b9759",
+  primaryHover: "#0b9759",
+  primaryDark: "#0b9759",
+  light: "#0b9759",
+  lightText: "#0b9759",
+  gradient: "linear-gradient(135deg, #0b9759 0%, #0b9759 100%)",
+  text: "#1F2937",
+  accentClass: "accent-[#0B9759]",
 };
+
 
 // ==================== DATA ====================
 const bannerImage = "/images/ecosystem/lumi-banner.webp";
@@ -89,22 +94,22 @@ const smartSolutions = [
   {
     title: "Chiếu sáng thông minh",
     desc: "Điều khiển đèn theo ngữ cảnh, lịch trình hoặc cảm biến hiện diện. Tiết kiệm đến 40% chi phí điện.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+    img: "/images/ecosystem/lumi/chieu_sang_lumi.png",
   },
   {
     title: "Rèm cửa tự động",
     desc: "Quản lý ánh sáng tự nhiên, đóng mở rèm bằng app, giọng nói hoặc lịch hẹn thông minh.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+    img: "/images/ecosystem/lumi/rem_cua_lumi.png",
   },
   {
     title: "Điều hòa không khí",
     desc: "Bật tắt điều hòa từ xa, thiết lập nhiệt độ theo thói quen và tối ưu điện năng tiêu thụ.",
-    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80",
+    img: "/images/ecosystem/lumi/dieu_hoa_lumi.png",
   },
   {
     title: "An ninh chống trộm",
     desc: "Kết hợp cảm biến cửa, cảm biến chuyển động, camera và cảnh báo tức thời qua điện thoại.",
-    img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&q=80",
+    img: "/images/ecosystem/lumi/an_ninh_lumi.png",
   },
 ];
 
@@ -260,7 +265,7 @@ const LumiPage = () => {
               >
                 <div
                   className="mb-5 flex h-14 w-14 items-center justify-center rounded-none text-2xl"
-                  style={{ backgroundColor: "#0B5ED7" + "15" }}
+                  style={{ backgroundColor: theme.light }}
                 >
                   {info.icon}
                 </div>
@@ -271,7 +276,7 @@ const LumiPage = () => {
                 <Link
                   to="/contact"
                   className="mt-5 inline-block text-sm font-bold transition hover:underline"
-                  style={{ color: "#0B5ED7" }}
+                  style={{ color: theme.primary }}
                 >
                   Liên hệ ngay →
                 </Link>
@@ -298,7 +303,7 @@ const LumiPage = () => {
                   onClick={() => setActiveTab(tab.key)}
                   className={`rounded-lg px-6 py-2 text-sm font-semibold transition-all duration-200 ${
                     activeTab === tab.key
-                      ? "bg-white text-white shadow-md"
+                      ? "text-white shadow-md"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
                   style={activeTab === tab.key ? { backgroundColor: theme.primary } : {}}
@@ -352,7 +357,7 @@ const LumiPage = () => {
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {whyChooseLumi.features.map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-2">
-                  <span style={{ color: "#10B981" }}>✓</span>
+                  <span style={{ color: theme.primary }}>✓</span>
                   <span className="text-sm text-gray-300">{feature}</span>
                 </div>
               ))}
@@ -360,8 +365,8 @@ const LumiPage = () => {
 
             <button
               type="button"
-              className="mt-8 rounded-none px-6 py-3 text-sm font-bold transition hover:opacity-90"
-              style={{ backgroundColor: "#10B981", color: "white" }}
+              className="mt-8 rounded-none px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
+              style={{ backgroundColor: theme.primary }}
             >
               Xem thêm
             </button>
@@ -369,7 +374,7 @@ const LumiPage = () => {
 
           <div className="relative overflow-hidden rounded-none">
             <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+              src="/images/ecosystem/lumi/nha-thong-minh-lumi-nhat-minh.png"
               alt="Lumi Smart Devices"
               className="h-80 w-full object-cover lg:h-96"
             />
@@ -381,19 +386,19 @@ const LumiPage = () => {
       {/* ==================== SECTION 6: CTA ==================== */}
       <section
         className="py-16"
-        style={{ background: "linear-gradient(135deg, #10B981 0%, #059669 100%)" }}
+        style={{ background: theme.gradient }}
       >
         <div className="mx-auto max-w-4xl px-4 text-center text-white">
           <h2 className="text-2xl font-extrabold md:text-3xl">
             Hẹn lịch tư vấn cùng đội ngũ chuyên gia của Lumi Smarthome
           </h2>
-          <p className="mt-4 text-base text-emerald-100">
+          <p className="mt-4 text-base" style={{ color: theme.lightText }}>
             Đội ngũ kỹ thuật viên giàu kinh nghiệm sẵn sàng hỗ trợ bạn 24/7
           </p>
           <button
             type="button"
             className="mt-8 rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
-            style={{ color: "#10B981" }}
+            style={{ color: theme.primary }}
           >
             Hẹn lịch ngay
           </button>
@@ -401,7 +406,7 @@ const LumiPage = () => {
       </section>
 
       {/* ==================== SECTION 7: DỰ ÁN TIÊU BIỂU ==================== */}
-      <section className="bg-gray-50 py-16">
+      {/* <section className="bg-gray-50 py-16">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
             Dự án tiêu biểu
@@ -420,7 +425,7 @@ const LumiPage = () => {
             <div className="absolute bottom-0 left-0 p-8 text-white">
               <span
                 className="inline-block rounded-none px-3 py-1 text-xs font-bold"
-                style={{ backgroundColor: "#10B981" }}
+                style={{ backgroundColor: "#ffffff", color: theme.primary }}
               >
                 {featuredProject.type}
               </span>
@@ -447,7 +452,7 @@ const LumiPage = () => {
                 <div className="p-5">
                   <span
                     className="text-xs font-semibold"
-                    style={{ color: "#64748B" }}
+                    style={{ color: theme.primaryDark }}
                   >
                     {project.type}
                   </span>
@@ -459,7 +464,7 @@ const LumiPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== SECTION 8: GIẢI PHÁP THÔNG MINH ==================== */}
       <section className="py-16">
@@ -472,20 +477,40 @@ const LumiPage = () => {
             {smartSolutions.map((solution, idx) => (
               <div
                 key={idx}
-                className="group relative h-72 overflow-hidden rounded-none shadow-lg"
+                className="group relative h-72 overflow-hidden "
               >
                 <img
                   src={solution.img}
                   alt={solution.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  // className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6 text-white">
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" /> */}
+                {/* <div className="absolute bottom-0 left-0 p-6 text-white">
                   <h3 className="text-base font-bold">{solution.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-gray-300">
                     {solution.desc}
                   </p>
-                </div>
+                </div> */}
+                <div className="absolute inset-x-0 bottom-0">
+  <div
+    className="
+      bg-gradient-to-t
+      from-black/70
+      via-black/45
+      to-transparent
+      p-6
+      backdrop-blur-[2px]
+    "
+  >
+    <h3 className="text-xl font-bold text-white drop-shadow-md">
+      {solution.title}
+    </h3>
+
+    {/* <p className="mt-2 text-sm leading-relaxed text-gray-100 drop-shadow">
+      {solution.desc}
+    </p> */}
+  </div>
+</div>
               </div>
             ))}
           </div>
@@ -514,20 +539,20 @@ const LumiPage = () => {
       {/* ==================== SECTION 10: CTA CUỐI ==================== */}
       <section
         className="py-20"
-        style={{ background: "linear-gradient(135deg, #0B5ED7 0%, #0F172A 100%)" }}
+        style={{ background: theme.gradient }}
       >
         <div className="mx-auto max-w-4xl px-4 text-center text-white">
           <h2 className="text-2xl font-extrabold md:text-3xl">
             Sẵn sàng nâng cấp ngôi nhà của bạn?
           </h2>
-          <p className="mt-4 text-base text-blue-100">
+          <p className="mt-4 text-base" style={{ color: theme.lightText }}>
             Liên hệ ngay để được tư vấn miễn phí và nhận báo giá chi tiết
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <button
               type="button"
               className="rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
-              style={{ color: "#0B5ED7" }}
+              style={{ color: theme.primary }}
             >
               Nhận báo giá
             </button>

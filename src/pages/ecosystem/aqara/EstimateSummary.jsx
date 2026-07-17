@@ -4,7 +4,7 @@ const EstimateSummary = ({
   pkg,
   selectedDevices,
   total,
-  theme = { primary: "#2563EB", borderClass: "border-blue-500", textClass: "text-blue-600" },
+  theme = { primary: "#7787B2", borderClass: "border-[#7787B2]", textClass: "text-[#7787B2]" },
 }) => (
   <div className={`mx-auto mt-10 max-w-2xl rounded-none border-2 ${theme.borderClass} bg-white p-8 shadow-xl`}>
     <h3 className="text-xl font-extrabold text-gray-900">Dự toán của bạn</h3>

@@ -15,7 +15,7 @@ import {
   ArrowRight,
   Phone,
 } from "lucide-react";
-
+import StaticBanner from "../features/brand/components/StaticBanner";
 // ==================== STATIC DATA ====================
 
 const SOLUTIONS = [
@@ -116,7 +116,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Về nhà'",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+      "/images/smart-home/ve-nha.png",
     actions: [
       "Mở khóa cửa tự động khi về gần",
       "Bật đèn phòng khách với ánh sáng ấm",
@@ -127,7 +127,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Đi ngủ'",
     image:
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80",
+      "/images/smart-home/di-ngu.png",
     actions: [
       "Tắt toàn bộ đèn trong nhà",
       "Rèm đóng hoàn toàn",
@@ -138,7 +138,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Ra khỏi nhà'",
     image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80",
+      "/images/smart-home/ra-khoi-nha.png",
     actions: [
       "Tắt hết đèn và thiết bị không cần thiết",
       "Rèm đóng, điều hòa tắt",
@@ -149,7 +149,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Xem phim'",
     image:
-      "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&q=80",
+      "/images/smart-home/xem-phim.png",
     actions: [
       "Đèn phòng khách dimmer xuống 20%",
       "Rèm đóng hoàn toàn",
@@ -198,7 +198,7 @@ const BRAND_CARDS = [
     colorText: "text-emerald-700",
     colorAccent: "bg-emerald-600",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+      "/images/smart-home/lumi.png",
     productsHref: "/products/lumi",
     ecosystemHref: "/ecosystem/lumi",
   },
@@ -213,7 +213,7 @@ const BRAND_CARDS = [
     colorText: "text-blue-700",
     colorAccent: "bg-blue-600",
     image:
-      "https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&q=80",
+      "/images/smart-home/aqara.png",
     productsHref: "/products/aqara",
     ecosystemHref: "/ecosystem/aqara",
   },
@@ -221,71 +221,7 @@ const BRAND_CARDS = [
 
 // ==================== SECTION COMPONENTS ====================
 
-const SmartHomeHero = () => (
-  <section className="bg-gradient-to-br from-slate-50 via-blue-50 to-sky-50 py-16 md:py-24 lg:py-28 overflow-hidden">
-    <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-        {/* Text */}
-        <div>
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
-            <Zap size={14} />
-            Giải pháp nhà thông minh
-          </div>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight mb-5">
-            Nhà thông minh cho{" "}
-            <span className="text-blue-600">cuộc sống tiện nghi hơn</span>
-          </h1>
-
-          <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8 max-w-lg">
-            Kết nối và điều khiển đèn, rèm cửa, điều hòa, an ninh và mọi thiết bị
-            trong ngôi nhà — chỉ bằng một chạm trên điện thoại hoặc giọng nói.
-          </p>
-
-          <div className="flex flex-wrap gap-3">
-            <a
-              href="#solutions"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-6 py-3 transition-colors duration-200 shadow-sm"
-            >
-              Khám phá giải pháp
-              <ArrowRight size={16} />
-            </a>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-semibold rounded-xl px-6 py-3 border border-slate-200 transition-colors duration-200"
-            >
-              <Phone size={16} />
-              Tư vấn miễn phí
-            </Link>
-          </div>
-        </div>
-
-        {/* Image */}
-        <div className="relative">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-blue-200/50 aspect-[4/3]">
-            <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80"
-              alt="Không gian nhà thông minh hiện đại"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
-          </div>
-
-          {/* Floating badge */}
-          <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-              <CheckCircle2 className="text-blue-600" size={20} />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-800">8+ năm kinh nghiệm</p>
-              <p className="text-xs text-slate-500">1.000+ công trình</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
 
 const WhatIsSmartHome = () => (
   <section className="py-16 md:py-20 bg-white">
@@ -294,7 +230,7 @@ const WhatIsSmartHome = () => (
         {/* Image */}
         <div className="relative rounded-3xl overflow-hidden order-2 lg:order-1">
           <img
-            src="https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=800&q=80"
+            src="/images/smart-home/nha-thong-minh.png"
             alt="Công nghệ nhà thông minh"
             className="w-full aspect-[4/3] object-cover"
           />
@@ -423,15 +359,15 @@ const ScenariosSection = () => (
         {SCENARIOS.map((scenario, i) => (
           <div
             key={i}
-            className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-md transition-shadow duration-200 flex flex-col sm:flex-row"
+            className="bg-white overflow-hidden border border-slate-100 hover:shadow-md transition-shadow duration-200 flex flex-col sm:flex-row"
           >
-            <div className="sm:w-44 h-44 sm:h-auto shrink-0 overflow-hidden">
-              <img
-                src={scenario.image}
-                alt={scenario.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
+<div className="sm:w-52 h-48 sm:h-auto shrink-0 overflow-hidden">
+  <img
+    src={scenario.image}
+    alt={scenario.title}
+    className="w-full h-full object-cover"
+  />
+</div>
             <div className="flex-1 p-5">
               <h3 className="text-base font-bold text-slate-800 mb-3">
                 {scenario.title}
@@ -466,55 +402,59 @@ const BrandsSection = () => (
         className="max-w-2xl mx-auto"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {BRAND_CARDS.map((brand) => (
-          <div
-            key={brand.name}
-            className={`rounded-3xl overflow-hidden border ${brand.colorBorder} ${brand.colorBg} flex flex-col`}
-          >
-            {/* Brand image */}
-            <div className="h-48 overflow-hidden">
-              <img
-                src={brand.image}
-                alt={brand.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex-1 flex flex-col">
-              <div className="mb-1">
-                <span
-                  className={`text-xs font-bold uppercase tracking-wider ${brand.colorText}`}
-                >
-                  {brand.name}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-800 mb-3 leading-tight">
-                {brand.tagline}
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed mb-6 flex-1">
-                {brand.description}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  to={brand.productsHref}
-                  className={`inline-flex items-center gap-2 ${brand.colorAccent} hover:opacity-90 text-white font-semibold rounded-xl px-5 py-2.5 text-sm transition-opacity duration-200`}
-                >
-                  Xem sản phẩm
-                  <ArrowRight size={14} />
-                </Link>
-                <Link
-                  to={brand.ecosystemHref}
-                  className={`inline-flex items-center gap-2 bg-white border ${brand.colorBorder} ${brand.colorText} font-semibold rounded-xl px-5 py-2.5 text-sm transition-colors duration-200 hover:bg-slate-50`}
-                >
-                  Tư vấn — Báo giá
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {BRAND_CARDS.map((brand) => (
+    <div
+      key={brand.name}
+      className={`overflow-hidden border ${brand.colorBorder} ${brand.colorBg} flex flex-col`}
+    >
+      {/* Brand image */}
+      <div className="w-full aspect-[2.4/1] overflow-hidden bg-white">
+        <img
+          src={brand.image}
+          alt={brand.name}
+          className="w-full h-full object-cover object-center"
+        />
       </div>
+
+      {/* Content */}
+      <div className="p-6 flex-1 flex flex-col">
+        <div className="mb-1">
+          <span
+            className={`text-xs font-bold uppercase tracking-wider ${brand.colorText}`}
+          >
+            {brand.name}
+          </span>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-800 mb-3 leading-tight">
+          {brand.tagline}
+        </h3>
+
+        <p className="text-sm text-slate-600 leading-relaxed mb-6 flex-1">
+          {brand.description}
+        </p>
+
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to={brand.productsHref}
+            className={`inline-flex items-center gap-2 ${brand.colorAccent} hover:opacity-90 text-white font-semibold px-5 py-2.5 text-sm transition-opacity duration-200`}
+          >
+            Xem sản phẩm
+            <ArrowRight size={14} />
+          </Link>
+
+          <Link
+            to={brand.ecosystemHref}
+            className={`inline-flex items-center gap-2 bg-white border ${brand.colorBorder} ${brand.colorText} font-semibold px-5 py-2.5 text-sm transition-colors duration-200 hover:bg-slate-50`}
+          >
+            Tư vấn — Báo giá
+          </Link>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   </section>
 );
@@ -608,7 +548,9 @@ const CTASection = () => (
 const SmartHomePage = () => {
   return (
     <div className="min-h-screen">
-      <SmartHomeHero />
+            {/* ==================== SECTION 1: BANNER ==================== */}
+      <StaticBanner image="/images/smart-home/smart-home-banner.png" alt="Nhat Minh Smart Home" />
+
       <WhatIsSmartHome />
       <SolutionsSection />
       <BenefitsSection />

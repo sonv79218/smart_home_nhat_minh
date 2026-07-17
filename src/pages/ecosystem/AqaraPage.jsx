@@ -15,6 +15,16 @@ import {
   defaultSelection,
 } from "./aqara/aqaraPricingData";
 
+
+// ==================== THEME ====================
+const theme = {
+  primary: "#7787B2",
+  borderClass: "border-[#7787B2]",
+  accentClass: "accent-[#7787B2]",
+  textClass: "text-[#7787B2]",
+};
+
+
 // ==================== DATA ====================
 const bannerImage = "/images/ecosystem/aqara-banner.webp";
 const requiredInfos = [
@@ -56,89 +66,57 @@ const whyChooseAqara = {
   ],
 };
 
-const featuredProject = {
-  title: "Công trình Aqara tiêu biểu",
-  type: "Dự án tiêu biểu",
-  img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-};
+// const featuredProject = {
+//   title: "Công trình Aqara tiêu biểu",
+//   type: "Dự án tiêu biểu",
+//   img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+// };
 
-const projects = [
-  {
-    title: "Căn hộ cao cấp Aqara",
-    type: "Căn hộ cao cấp",
-    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
-  },
-  {
-    title: "Biệt thự tự động hóa",
-    type: "Biệt thự",
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
-  },
-  {
-    title: "Văn phòng thông minh",
-    type: "Văn phòng",
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
-  },
-];
+// const projects = [
+//   {
+//     title: "Căn hộ cao cấp Aqara",
+//     type: "Căn hộ cao cấp",
+//     img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
+//   },
+//   {
+//     title: "Biệt thự tự động hóa",
+//     type: "Biệt thự",
+//     img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
+//   },
+//   {
+//     title: "Văn phòng thông minh",
+//     type: "Văn phòng",
+//     img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+//   },
+// ];
 
 const smartSolutions = [
   {
     title: "Chiếu sáng thông minh",
     desc: "Điều khiển đèn theo ngữ cảnh, lịch trình hoặc cảm biến hiện diện. Tích hợp Apple Home và Google Home.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+    img: "/images/ecosystem/aqara/chieu_sang_aqara.png",
   },
   {
     title: "Rèm tự động",
     desc: "Quản lý ánh sáng tự nhiên, đóng mở rèm bằng app, giọng nói hoặc lịch hẹn thông minh.",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
+    img: "/images/ecosystem/aqara/rem_tu_dong_aqara.png",
   },
   {
     title: "Camera Aqara",
     desc: "Giám sát an ninh thông minh với phát hiện chuyển động, nhận diện khuôn mặt và lưu trữ đám mây.",
-    img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&q=80",
+    img: "/images/ecosystem/aqara/camera_aqara.png",
   },
   {
     title: "Khóa cửa thông minh",
     desc: "Mở khóa bằng vân tay, mật khẩu, thẻ hoặc app. Tích hợp chuông cửa và camera trước cửa.",
-    img: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&q=80",
+    img: "/images/ecosystem/aqara/khoa_cua_aqara.png",
   },
 ];
 
 
-// ==================== COMPONENTS ====================
-const FAQItem = ({ faq, isOpen, onToggle }) => (
-  <div className="border-b border-gray-200">
-    <button
-      type="button"
-      onClick={onToggle}
-      className="flex w-full items-center justify-between py-5 text-left"
-    >
-      <span className="text-base font-semibold text-gray-900 md:text-lg">
-        {faq.question}
-      </span>
-      <span
-        className={`ml-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-none bg-gray-100 text-gray-600 transition-transform duration-200 ${
-          isOpen ? "rotate-180" : ""
-        }`}
-      >
-        ▼
-      </span>
-    </button>
-    <div
-      className={`overflow-hidden transition-all duration-300 ${
-        isOpen ? "max-h-96 pb-5" : "max-h-0"
-      }`}
-    >
-      <p className="text-sm leading-relaxed text-gray-600 md:text-base">
-        {faq.answer}
-      </p>
-    </div>
-  </div>
-);
-
 // ==================== MAIN COMPONENT ====================
 const AqaraPage = () => {
   const [activeTab, setActiveTab] = useState(housingTabs[0].key);
-  const [openFaq, setOpenFaq] = useState(null);
 
   // Selection state is keyed by `${housingType}:${packageKey}` so each
   // (loại nhà, gói) combo keeps its own checkbox choices.
@@ -159,10 +137,6 @@ const AqaraPage = () => {
     }
     return initial;
   });
-
-  const handleFaqToggle = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
 
   const toggleDevice = (pkgKey, deviceId) => {
     const key = `${activeTab}:${pkgKey}`;
@@ -229,7 +203,7 @@ const AqaraPage = () => {
               >
                 <div
                   className="mb-5 flex h-14 w-14 items-center justify-center rounded-none text-2xl"
-                  style={{ backgroundColor: "#2563EB" + "15" }}
+                  style={{ backgroundColor: "#7787B2" + "18" }}
                 >
                   {info.icon}
                 </div>
@@ -240,7 +214,7 @@ const AqaraPage = () => {
                 <Link
                   to="/contact"
                   className="mt-5 inline-block text-sm font-bold transition hover:underline"
-                  style={{ color: "#2563EB" }}
+                  style={{ color: theme.primary }}
                 >
                   Liên hệ ngay →
                 </Link>
@@ -267,10 +241,10 @@ const AqaraPage = () => {
                   onClick={() => setActiveTab(tab.key)}
                   className={`rounded-lg px-6 py-2 text-sm font-semibold transition-all duration-200 ${
                     activeTab === tab.key
-                      ? "bg-white text-white shadow-md"
+                      ? "text-white shadow-md"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
-                  style={activeTab === tab.key ? { backgroundColor: "#2563EB" } : {}}
+                  style={activeTab === tab.key ? { backgroundColor: theme.primary } : {}}
                 >
                   {tab.label}
                 </button>
@@ -289,6 +263,7 @@ const AqaraPage = () => {
                 isActive={activePkgKey === pkgKey}
                 onSelect={() => handleSelectPackage(pkgKey)}
                 onToggleDevice={(id) => toggleDevice(pkgKey, id)}
+                theme={theme}
               />
             ))}
           </div>
@@ -298,6 +273,7 @@ const AqaraPage = () => {
             pkg={selectedPkg}
             selectedDevices={selectedDevices}
             total={packageTotals[activePkgKey]}
+            theme={theme}
           />
         </div>
       </section>
@@ -305,7 +281,7 @@ const AqaraPage = () => {
       {/* ==================== SECTION 5: TẠI SAO CHỌN AQARA ==================== */}
       <section
         className="py-16"
-        style={{ backgroundColor: "#1E3A8A" }}
+        style={{ backgroundColor: "#1A1A2E" }}
       >
         <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-8">
           {/* Left */}
@@ -320,7 +296,7 @@ const AqaraPage = () => {
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {whyChooseAqara.features.map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-2">
-                  <span style={{ color: "#3B82F6" }}>✓</span>
+                  <span style={{ color: theme.primary }}>✓</span>
                   <span className="text-sm text-gray-300">{feature}</span>
                 </div>
               ))}
@@ -328,8 +304,8 @@ const AqaraPage = () => {
 
             <button
               type="button"
-              className="mt-8 rounded-none px-6 py-3 text-sm font-bold transition hover:opacity-90"
-              style={{ backgroundColor: "#3B82F6", color: "white" }}
+              className="mt-8 rounded-none px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
+              style={{ backgroundColor: theme.primary }}
             >
               Xem thêm
             </button>
@@ -338,9 +314,9 @@ const AqaraPage = () => {
           {/* Right - Image */}
           <div className="relative overflow-hidden rounded-none">
             <img
-              src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&q=80"
+              src="/images/ecosystem/aqara/nha_thong_minh_aqara_nhat_minh.png"
               alt="Aqara Smart Devices"
-              className="h-80 w-full object-cover lg:h-96"
+              className="h-90 w-full object-cover lg:h-106"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           </div>
@@ -350,19 +326,19 @@ const AqaraPage = () => {
       {/* ==================== SECTION 6: CTA ==================== */}
       <section
         className="py-16"
-        style={{ background: "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)" }}
+        style={{ backgroundColor: theme.primary }}
       >
         <div className="mx-auto max-w-4xl px-4 text-center text-white">
           <h2 className="text-2xl font-extrabold md:text-3xl">
             Trải nghiệm nhà thông minh chuẩn quốc tế với Aqara
           </h2>
-          <p className="mt-4 text-base text-blue-100">
+          <p className="mt-4 text-base" style={{ color: "#E8EBF7" }}>
             Đội ngũ chuyên gia Aqara sẵn sàng tư vấn và triển khai giải pháp phù hợp với ngôi nhà của bạn
           </p>
           <button
             type="button"
             className="mt-8 rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
-            style={{ color: "#2563EB" }}
+            style={{ color: theme.primary }}
           >
             Nhận báo giá
           </button>
@@ -370,13 +346,13 @@ const AqaraPage = () => {
       </section>
 
       {/* ==================== SECTION 7: DỰ ÁN TIÊU BIỂU ==================== */}
-      <section className="bg-gray-50 py-16">
+      {/* <section className="bg-gray-50 py-16">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
             Công trình Aqara tiêu biểu
           </h2>
 
-          {/* Featured project */}
+          
           <Link
             to="/projects"
             className="group relative mb-8 block overflow-hidden rounded-none"
@@ -390,7 +366,7 @@ const AqaraPage = () => {
             <div className="absolute bottom-0 left-0 p-8 text-white">
               <span
                 className="inline-block rounded-none px-3 py-1 text-xs font-bold"
-                style={{ backgroundColor: "#3B82F6" }}
+                style={{ backgroundColor: theme.primary }}
               >
                 {featuredProject.type}
               </span>
@@ -400,7 +376,7 @@ const AqaraPage = () => {
             </div>
           </Link>
 
-          {/* 3 project cards */}
+          
           <div className="grid gap-6 md:grid-cols-3">
             {projects.map((project, idx) => (
               <Link
@@ -418,7 +394,7 @@ const AqaraPage = () => {
                 <div className="p-5">
                   <span
                     className="text-xs font-semibold"
-                    style={{ color: "#64748B" }}
+                    style={{ color: theme.primary }}
                   >
                     {project.type}
                   </span>
@@ -430,7 +406,7 @@ const AqaraPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== SECTION 8: GIẢI PHÁP THÔNG MINH ==================== */}
       <section className="py-16">
@@ -450,38 +426,30 @@ const AqaraPage = () => {
                   alt={solution.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <h3 className="text-base font-bold">{solution.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-gray-300">
-                    {solution.desc}
-                  </p>
-                </div>
+
               </div>
             ))}
           </div>
         </div>
       </section>
 
-
-
       {/* ==================== SECTION 11: CTA CUỐI ==================== */}
       <section
         className="py-20"
-        style={{ background: "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)" }}
+        style={{ backgroundColor: theme.primary }}
       >
         <div className="mx-auto max-w-4xl px-4 text-center text-white">
           <h2 className="text-2xl font-extrabold md:text-3xl">
             Sẵn sàng nâng cấp ngôi nhà cùng Aqara?
           </h2>
-          <p className="mt-4 text-base text-blue-100">
+          <p className="mt-4 text-base" style={{ color: "#E8EBF7" }}>
             Liên hệ ngay để được tư vấn miễn phí và nhận báo giá chi tiết
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <button
               type="button"
               className="rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
-              style={{ color: "#2563EB" }}
+              style={{ color: theme.primary }}
             >
               Nhận báo giá
             </button>

@@ -199,26 +199,7 @@ const BrandProductsPage = ({ brandKey, name, tagline, description, bannerImage }
         <StaticBanner image={bannerImage} alt={name} />
       )}
 
-      {/* Brand Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-accent py-12 md:py-16">
-        <div className="mx-auto max-w-[1200px] px-4 md:px-6">
-          <div className="max-w-2xl">
-            <h1 className="mb-2 text-3xl font-extrabold text-white md:text-4xl lg:text-5xl">
-              {name}
-            </h1>
-            {tagline && (
-              <p className="mb-3 text-base font-medium text-white/80 md:text-lg">
-                {tagline}
-              </p>
-            )}
-            {description && (
-              <p className="text-sm leading-relaxed text-white/70 md:text-base">
-                {description}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
+
 
       {/* Category sections */}
       <div className="w-full">
