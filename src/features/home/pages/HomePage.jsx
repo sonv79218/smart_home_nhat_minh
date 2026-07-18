@@ -170,7 +170,7 @@ const HomePage = () => {
       {/* ABOUT & CONTACT */}
       {/* ============================================ */}
       <AboutPage />
-            <EcosystemSection />
+      <EcosystemSection />
       <SectionDivider />
       <ContactPage />
     </div>

@@ -1,4 +1,5 @@
 import Money from "./Money";
+import { Link } from "react-router-dom";
 
 const EstimateSummary = ({
   pkg,
@@ -42,13 +43,13 @@ const EstimateSummary = ({
       </span>
     </div>
 
-    <button
-      type="button"
-      className="mt-6 w-full rounded-none py-3 text-sm font-bold transition hover:opacity-90"
-      style={{ backgroundColor: theme.primary, color: "white" }}
-    >
-      Nhận báo giá
-    </button>
+<Link
+  to="/contact"
+  className="mt-6 flex w-full items-center justify-center rounded-none py-3 text-sm font-bold text-white transition hover:opacity-90"
+  style={{ backgroundColor: theme.primary }}
+>
+  Nhận báo giá
+</Link>
   </div>
 );
 

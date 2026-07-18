@@ -286,7 +286,7 @@ const AqaraPage = () => {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-8">
           {/* Left */}
           <div className="text-white">
-            <h2 className="text-2xl font-extrabold md:text-3xl">
+            <h2 className="text-2xl font-extrabold md:text-3xl text-gray-300">
               {whyChooseAqara.title}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-gray-300">
@@ -302,13 +302,6 @@ const AqaraPage = () => {
               ))}
             </div>
 
-            <button
-              type="button"
-              className="mt-8 rounded-none px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
-              style={{ backgroundColor: theme.primary }}
-            >
-              Xem thêm
-            </button>
           </div>
 
           {/* Right - Image */}
@@ -335,78 +328,17 @@ const AqaraPage = () => {
           <p className="mt-4 text-base" style={{ color: "#E8EBF7" }}>
             Đội ngũ chuyên gia Aqara sẵn sàng tư vấn và triển khai giải pháp phù hợp với ngôi nhà của bạn
           </p>
-          <button
-            type="button"
-            className="mt-8 rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
-            style={{ color: theme.primary }}
-          >
-            Nhận báo giá
-          </button>
+<Link
+  to="/contact"
+  className="mt-8 inline-block rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
+  style={{ color: theme.primary }}
+>
+  Nhận báo giá
+</Link>
         </div>
       </section>
 
-      {/* ==================== SECTION 7: DỰ ÁN TIÊU BIỂU ==================== */}
-      {/* <section className="bg-gray-50 py-16">
-        <div className="mx-auto max-w-7xl px-4">
-          <h2 className="mb-10 text-center text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
-            Công trình Aqara tiêu biểu
-          </h2>
-
-          
-          <Link
-            to="/projects"
-            className="group relative mb-8 block overflow-hidden rounded-none"
-          >
-            <img
-              src={featuredProject.img}
-              alt={featuredProject.title}
-              className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8 text-white">
-              <span
-                className="inline-block rounded-none px-3 py-1 text-xs font-bold"
-                style={{ backgroundColor: theme.primary }}
-              >
-                {featuredProject.type}
-              </span>
-              <h3 className="mt-3 text-2xl font-extrabold">
-                {featuredProject.title}
-              </h3>
-            </div>
-          </Link>
-
-          
-          <div className="grid gap-6 md:grid-cols-3">
-            {projects.map((project, idx) => (
-              <Link
-                key={idx}
-                to="/projects"
-                className="group overflow-hidden rounded-none bg-white shadow-lg"
-              >
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-5">
-                  <span
-                    className="text-xs font-semibold"
-                    style={{ color: theme.primary }}
-                  >
-                    {project.type}
-                  </span>
-                  <h3 className="mt-1 text-base font-bold text-gray-900">
-                    {project.title}
-                  </h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section> */}
+ 
 
       {/* ==================== SECTION 8: GIẢI PHÁP THÔNG MINH ==================== */}
       <section className="py-16">
@@ -445,21 +377,22 @@ const AqaraPage = () => {
           <p className="mt-4 text-base" style={{ color: "#E8EBF7" }}>
             Liên hệ ngay để được tư vấn miễn phí và nhận báo giá chi tiết
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <button
-              type="button"
-              className="rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
-              style={{ color: theme.primary }}
-            >
-              Nhận báo giá
-            </button>
-            <button
-              type="button"
-              className="rounded-none border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
-            >
-              Liên hệ tư vấn
-            </button>
-          </div>
+  <div className="mt-8 flex flex-wrap justify-center gap-4">
+  <Link
+    to="/contact"
+    className="inline-flex items-center justify-center rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
+    style={{ color: theme.primary }}
+  >
+    Nhận báo giá
+  </Link>
+
+  <Link
+    to="/contact"
+    className="inline-flex items-center justify-center rounded-none border-2 border-white px-8 py-4 text-base font-bold text-white transition hover:bg-white/10"
+  >
+    Liên hệ tư vấn
+  </Link>
+</div>
         </div>
       </section>
     </div>

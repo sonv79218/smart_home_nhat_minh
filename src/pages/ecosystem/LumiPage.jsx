@@ -324,7 +324,7 @@ const LumiPage = () => {
       >
         <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-8">
           <div className="text-white">
-            <h2 className="text-2xl font-extrabold md:text-3xl">
+            <h2 className="text-2xl font-extrabold md:text-3xl text-gray-300">
               {whyChooseLumi.title}
             </h2>
             <p className="mt-5 text-base leading-relaxed text-gray-300">
@@ -340,13 +340,7 @@ const LumiPage = () => {
               ))}
             </div>
 
-            <button
-              type="button"
-              className="mt-8 rounded-none px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
-              style={{ backgroundColor: theme.primary }}
-            >
-              Xem thêm
-            </button>
+  
           </div>
 
           <div className="relative overflow-hidden rounded-none">
@@ -366,19 +360,19 @@ const LumiPage = () => {
         style={{ background: theme.gradient }}
       >
         <div className="mx-auto max-w-4xl px-4 text-center text-white">
-          <h2 className="text-2xl font-extrabold md:text-3xl">
+          <h2 className="text-2xl font-extrabold md:text-3xl text-white">
             Hẹn lịch tư vấn cùng đội ngũ chuyên gia của Lumi Smarthome
           </h2>
-          <p className="mt-4 text-base" style={{ color: theme.lightText }}>
+          <p className="mt-4 text-base text-white">
             Đội ngũ kỹ thuật viên giàu kinh nghiệm sẵn sàng hỗ trợ bạn 24/7
           </p>
-          <button
-            type="button"
-            className="mt-8 rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
-            style={{ color: theme.primary }}
-          >
-            Hẹn lịch ngay
-          </button>
+<Link
+  to="/contact"
+  className="mt-8 inline-block rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50 hover:shadow-xl"
+  style={{ color: theme.primary }}
+>
+  Hẹn lịch ngay
+</Link>
         </div>
       </section>
 
@@ -523,23 +517,23 @@ const LumiPage = () => {
           <h2 className="text-2xl font-extrabold md:text-3xl">
             Sẵn sàng nâng cấp ngôi nhà của bạn?
           </h2>
-          <p className="mt-4 text-base" style={{ color: theme.lightText }}>
+          <p className="mt-4 text-base text-white" >
             Liên hệ ngay để được tư vấn miễn phí và nhận báo giá chi tiết
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <button
-              type="button"
-              className="rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
-              style={{ color: theme.primary }}
-            >
-              Nhận báo giá
-            </button>
-            <button
-              type="button"
-              className="rounded-none border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
-            >
-              Liên hệ ngay
-            </button>
+   <Link
+  to="/contact"
+  className="inline-flex items-center justify-center rounded-none bg-white px-8 py-4 text-base font-bold transition hover:bg-gray-50"
+  style={{ color: theme.primary }}
+>
+  Nhận báo giá
+</Link>
+<Link
+  to="/contact"
+  className="inline-flex items-center justify-center rounded-none border-2 border-white px-8 py-4 text-base font-bold transition hover:bg-white/10"
+>
+  Liên hệ ngay
+</Link>
           </div>
         </div>
       </section>

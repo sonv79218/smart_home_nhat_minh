@@ -284,11 +284,11 @@ const AboutPage = () => {
 
                 <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 md:inset-x-5 md:bottom-5">
                   <div className="rounded-xl bg-black/60 p-3 sm:p-4 md:p-5">
-                    <h3 className="text-[13px] font-bold leading-tight text-white sm:text-base md:text-lg lg:text-xl">
+                    <h3 className="text-[8px] font-bold leading-tight text-white sm:text-base md:text-lg lg:text-xl">
                       {item.title}
                     </h3>
 
-                    <p className="mt-1 text-[10px] leading-4 text-white/85 sm:mt-1.5 sm:text-xs sm:leading-5 md:text-sm md:leading-6 lg:text-base">
+                    <p className="mt-1 text-[5px] leading-3 text-white/85 sm:mt-1.5 sm:text-xs sm:leading-5 md:text-sm md:leading-6 lg:text-base">
                       {item.description}
                     </p>
                   </div>

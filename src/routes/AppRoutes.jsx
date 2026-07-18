@@ -179,13 +179,6 @@ const AppRoutes = () => {
             </MainLayout>
           }
         />
-
-        {/* SOLAR ROUTE — Nhật Minh Solar microsite (own header/footer) */}
-        {/* <Route
-          path="/solar"
-          element={<SolarPage />}
-        /> */}
-
         <Route
           path="/solutions"
           element={
