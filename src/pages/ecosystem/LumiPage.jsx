@@ -8,6 +8,7 @@ import {
 import PackageCard from "./aqara/PackageCard";
 import EstimateSummary from "./aqara/EstimateSummary";
 import StaticBanner from "../../features/brand/components/StaticBanner";
+import LazyImg from "../../components/ui/LazyImg";
 import {
   pricingPackages,
   housingTabs,
@@ -66,50 +67,26 @@ const whyChooseLumi = {
   ],
 };
 
-const featuredProject = {
-  title: "Nhà của sao",
-  type: "Dự án nổi bật",
-  img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-};
-
-const projects = [
-  {
-    title: "Biệt thự phong cách hiện đại",
-    type: "Biệt thự",
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
-  },
-  {
-    title: "Căn hộ cao cấp view thành phố",
-    type: "Chung cư",
-    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
-  },
-  {
-    title: "Nhà phố tối giản",
-    type: "Nhà phố",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
-  },
-];
-
 const smartSolutions = [
   {
     title: "Chiếu sáng thông minh",
     desc: "Điều khiển đèn theo ngữ cảnh, lịch trình hoặc cảm biến hiện diện. Tiết kiệm đến 40% chi phí điện.",
-    img: "/images/ecosystem/lumi/chieu_sang_lumi.png",
+    img: "/images/ecosystem/lumi/chieu_sang_lumi.webp",
   },
   {
     title: "Rèm cửa tự động",
     desc: "Quản lý ánh sáng tự nhiên, đóng mở rèm bằng app, giọng nói hoặc lịch hẹn thông minh.",
-    img: "/images/ecosystem/lumi/rem_cua_lumi.png",
+    img: "/images/ecosystem/lumi/rem_cua_lumi.webp",
   },
   {
     title: "Điều hòa không khí",
     desc: "Bật tắt điều hòa từ xa, thiết lập nhiệt độ theo thói quen và tối ưu điện năng tiêu thụ.",
-    img: "/images/ecosystem/lumi/dieu_hoa_lumi.png",
+    img: "/images/ecosystem/lumi/dieu_hoa_lumi.webp",
   },
   {
     title: "An ninh chống trộm",
     desc: "Kết hợp cảm biến cửa, cảm biến chuyển động, camera và cảnh báo tức thời qua điện thoại.",
-    img: "/images/ecosystem/lumi/an_ninh_lumi.png",
+    img: "/images/ecosystem/lumi/an_ninh_lumi.webp",
   },
 ];
 
@@ -373,10 +350,10 @@ const LumiPage = () => {
           </div>
 
           <div className="relative overflow-hidden rounded-none">
-            <img
-              src="/images/ecosystem/lumi/nha-thong-minh-lumi-nhat-minh.png"
+            <LazyImg
+              src="/images/ecosystem/lumi/nha-thong-minh-lumi-nhat-minh.webp"
               alt="Lumi Smart Devices"
-              className="h-80 w-full object-cover lg:h-96"
+              className="h-80 w-full lg:h-96"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           </div>
@@ -477,12 +454,13 @@ const LumiPage = () => {
             {smartSolutions.map((solution, idx) => (
               <div
                 key={idx}
-                className="group relative h-72 overflow-hidden "
+                className="group relative h-72 overflow-hidden"
               >
-                <img
+                <LazyImg
                   src={solution.img}
                   alt={solution.title}
-                  // className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="absolute inset-0"
+                  style={{ backgroundColor: "#f3f4f6" }}
                 />
                 {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" /> */}
                 {/* <div className="absolute bottom-0 left-0 p-6 text-white">

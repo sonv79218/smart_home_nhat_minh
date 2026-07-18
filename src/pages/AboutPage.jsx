@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 const IMAGES = {
-  showroom: "/picture/showroom/show_room.png",
+  showroom: "/picture/showroom/show_room.webp",
 };
 
 const solutions = [
@@ -14,70 +14,70 @@ const solutions = [
     title: "Chiếu sáng thông minh",
     description:
       "Điều khiển đèn theo ngữ cảnh, hẹn giờ, cảm biến và giọng nói. Tương thích Apple HomeKit, Google Home và các hệ sinh thái nhà thông minh.",
-    image: "/picture/solutions/chieu_sang.png",
+    image: "/picture/solutions/chieu_sang.webp",
   },
   {
     number: "02",
     title: "Khóa cửa thông minh",
     description:
       "Mở cửa bằng vân tay, mã số, thẻ từ, điện thoại hoặc chìa cơ. Quản lý lịch sử ra vào và phân quyền người dùng.",
-    image: "/picture/solutions/khoa_cua.png",
+    image: "/picture/solutions/khoa_cua.webp",
   },
   {
     number: "03",
     title: "Kiểm soát điện, nước",
     description:
       "Giám sát điện năng, lượng nước tiêu thụ và cảnh báo bất thường giúp tiết kiệm chi phí và vận hành an toàn.",
-    image: "/picture/solutions/kiem_soat_dien_nuoc.png",
+    image: "/picture/solutions/kiem_soat_dien_nuoc.webp",
   },
   {
     number: "04",
     title: "Điều hòa thông minh",
     description:
       "Điều khiển điều hòa từ xa, tự động theo nhiệt độ hoặc lịch trình, phù hợp cho điều hòa treo tường và âm trần.",
-    image: "/picture/solutions/dieu_hoa.png",
+    image: "/picture/solutions/dieu_hoa.webp",
   },
   {
     number: "05",
     title: "Điều khiển bình nước nóng",
     description:
       "Bật tắt từ xa, hẹn giờ hoạt động, theo dõi trạng thái và tối ưu điện năng cho bình nước nóng.",
-    image: "/picture/solutions/binh_nuoc_nong.png",
+    image: "/picture/solutions/binh_nuoc_nong.webp",
   },
   {
     number: "06",
     title: "Điều khiển cửa cuốn",
     description:
       "Đóng mở cửa cuốn bằng điện thoại, điều khiển từ xa hoặc tự động hóa theo kịch bản thông minh.",
-    image: "/picture/solutions/cua_cuon.png",
+    image: "/picture/solutions/cua_cuon.webp",
   },
   {
     number: "07",
     title: "Trợ lý ảo & âm thanh đa vùng",
     description:
       "Điều khiển toàn bộ ngôi nhà bằng giọng nói, phát nhạc đa vùng và xây dựng các kịch bản tự động.",
-    image: "/picture/solutions/tro_ly_ao.png",
+    image: "/picture/solutions/tro_ly_ao.webp",
   },
   {
     number: "08",
     title: "Hệ thống mạng WiFi Mesh",
     description:
       "Phủ sóng WiFi toàn bộ ngôi nhà, chuyển vùng liền mạch và đảm bảo kết nối ổn định cho thiết bị thông minh.",
-    image: "/picture/solutions/mesh_wifi.png",
+    image: "/picture/solutions/mesh_wifi.webp",
   },
   {
     number: "09",
     title: "Camera AI & cảm biến",
     description:
       "Giám sát thông minh với AI nhận diện người, phương tiện, cảnh báo xâm nhập và tích hợp cảm biến an ninh.",
-    image: "/picture/solutions/camera_ai.png",
+    image: "/picture/solutions/camera_ai.webp",
   },
   {
     number: "10",
     title: "Rèm cửa thông minh",
     description:
       "Đóng mở rèm theo lịch, theo ánh sáng hoặc điều khiển bằng điện thoại, giọng nói và kịch bản tự động.",
-    image: "/picture/solutions/curtain.png",
+    image: "/picture/solutions/curtain.webp",
   },
 ];
 

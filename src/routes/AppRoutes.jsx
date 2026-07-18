@@ -28,11 +28,8 @@ import BlogDetailPage from "../features/blog/pages/BlogDetailPage";
 // Ecosystem Pages
 import LumiPage from "../pages/LumiPage";
 import AqaraPage from "../pages/AqaraPage";
-import HunonicEcosystemPage from "../pages/ecosystem/HunonicPage";
 import AqaraEcosystemPage from "../pages/ecosystem/AqaraPage";
 import LumiEcosystemPage from "../pages/ecosystem/LumiPage";
-import SolutionsByHousePage from "../pages/projects/ProjectsPage";
-import SolarPage from "../pages/SolarPage";
 
 
 
@@ -164,14 +161,14 @@ const AppRoutes = () => {
             </MainLayout>
           }
         />
-        <Route
+        {/* <Route
           path="/solutions-by-house"
           element={
             <MainLayout>
               <SolutionsByHousePage />
             </MainLayout>
           }
-        />
+        /> */}
 
         {/* SMART HOME OVERVIEW ROUTE */}
         <Route
@@ -184,10 +181,10 @@ const AppRoutes = () => {
         />
 
         {/* SOLAR ROUTE — Nhật Minh Solar microsite (own header/footer) */}
-        <Route
+        {/* <Route
           path="/solar"
           element={<SolarPage />}
-        />
+        /> */}
 
         <Route
           path="/solutions"

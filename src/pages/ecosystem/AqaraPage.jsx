@@ -94,22 +94,22 @@ const smartSolutions = [
   {
     title: "Chiếu sáng thông minh",
     desc: "Điều khiển đèn theo ngữ cảnh, lịch trình hoặc cảm biến hiện diện. Tích hợp Apple Home và Google Home.",
-    img: "/images/ecosystem/aqara/chieu_sang_aqara.png",
+    img: "/images/ecosystem/aqara/chieu_sang_aqara.webp",
   },
   {
     title: "Rèm tự động",
     desc: "Quản lý ánh sáng tự nhiên, đóng mở rèm bằng app, giọng nói hoặc lịch hẹn thông minh.",
-    img: "/images/ecosystem/aqara/rem_tu_dong_aqara.png",
+    img: "/images/ecosystem/aqara/rem_tu_dong_aqara.webp",
   },
   {
     title: "Camera Aqara",
     desc: "Giám sát an ninh thông minh với phát hiện chuyển động, nhận diện khuôn mặt và lưu trữ đám mây.",
-    img: "/images/ecosystem/aqara/camera_aqara.png",
+    img: "/images/ecosystem/aqara/camera_aqara.webp",
   },
   {
     title: "Khóa cửa thông minh",
     desc: "Mở khóa bằng vân tay, mật khẩu, thẻ hoặc app. Tích hợp chuông cửa và camera trước cửa.",
-    img: "/images/ecosystem/aqara/khoa_cua_aqara.png",
+    img: "/images/ecosystem/aqara/khoa_cua_aqara.webp",
   },
 ];
 
@@ -314,7 +314,7 @@ const AqaraPage = () => {
           {/* Right - Image */}
           <div className="relative overflow-hidden rounded-none">
             <img
-              src="/images/ecosystem/aqara/nha_thong_minh_aqara_nhat_minh.png"
+              src="/images/ecosystem/aqara/nha_thong_minh_aqara_nhat_minh.webp"
               alt="Aqara Smart Devices"
               className="h-90 w-full object-cover lg:h-106"
             />

@@ -116,7 +116,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Về nhà'",
     image:
-      "/images/smart-home/ve-nha.png",
+      "/images/smart-home/ve-nha.webp",
     actions: [
       "Mở khóa cửa tự động khi về gần",
       "Bật đèn phòng khách với ánh sáng ấm",
@@ -127,7 +127,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Đi ngủ'",
     image:
-      "/images/smart-home/di-ngu.png",
+      "/images/smart-home/di-ngu.webp",
     actions: [
       "Tắt toàn bộ đèn trong nhà",
       "Rèm đóng hoàn toàn",
@@ -138,7 +138,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Ra khỏi nhà'",
     image:
-      "/images/smart-home/ra-khoi-nha.png",
+      "/images/smart-home/ra-khoi-nha.webp",
     actions: [
       "Tắt hết đèn và thiết bị không cần thiết",
       "Rèm đóng, điều hòa tắt",
@@ -149,7 +149,7 @@ const SCENARIOS = [
   {
     title: "Kịch bản 'Xem phim'",
     image:
-      "/images/smart-home/xem-phim.png",
+      "/images/smart-home/xem-phim.webp",
     actions: [
       "Đèn phòng khách dimmer xuống 20%",
       "Rèm đóng hoàn toàn",
@@ -198,7 +198,7 @@ const BRAND_CARDS = [
     colorText: "text-emerald-700",
     colorAccent: "bg-emerald-600",
     image:
-      "/images/smart-home/lumi.png",
+      "/images/smart-home/lumi.webp",
     productsHref: "/products/lumi",
     ecosystemHref: "/ecosystem/lumi",
   },
@@ -213,7 +213,7 @@ const BRAND_CARDS = [
     colorText: "text-blue-700",
     colorAccent: "bg-blue-600",
     image:
-      "/images/smart-home/aqara.png",
+      "/images/smart-home/aqara.webp",
     productsHref: "/products/aqara",
     ecosystemHref: "/ecosystem/aqara",
   },
@@ -230,7 +230,7 @@ const WhatIsSmartHome = () => (
         {/* Image */}
         <div className="relative rounded-3xl overflow-hidden order-2 lg:order-1">
           <img
-            src="/images/smart-home/nha-thong-minh.png"
+            src="/images/smart-home/nha-thong-minh.webp"
             alt="Công nghệ nhà thông minh"
             className="w-full aspect-[4/3] object-cover"
           />
@@ -549,7 +549,7 @@ const SmartHomePage = () => {
   return (
     <div className="min-h-screen">
             {/* ==================== SECTION 1: BANNER ==================== */}
-      <StaticBanner image="/images/smart-home/smart-home-banner.png" alt="Nhat Minh Smart Home" />
+      <StaticBanner image="/images/smart-home/smart-home-banner.webp" alt="Nhat Minh Smart Home" />
 
       <WhatIsSmartHome />
       <SolutionsSection />
